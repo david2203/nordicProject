@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "results",
+  "info": {
+    "name": "result"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "event_id": {
+      "type": "float"
+    },
+    "home_team": {
+      "type": "string"
+    },
+    "away_team": {
+      "type": "string"
+    },
+    "winner_team": {
+      "type": "string"
+    },
+    "home_goals": {
+      "type": "float"
+    },
+    "away_goals": {
+      "type": "float"
+    }
+  }
+}

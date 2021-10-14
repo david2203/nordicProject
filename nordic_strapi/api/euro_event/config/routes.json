@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/euro_events",
+      "handler": "euro_event.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/euro_events/count",
+      "handler": "euro_event.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/euro_events/:id",
+      "handler": "euro_event.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/euro_events",
+      "handler": "euro_event.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/euro_events/:id",
+      "handler": "euro_event.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/euro_events/:id",
+      "handler": "euro_event.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

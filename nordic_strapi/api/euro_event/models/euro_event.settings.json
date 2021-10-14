@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "euro_events",
+  "info": {
+    "name": "euro_event"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "eventname": {
+      "type": "string"
+    },
+    "grp": {
+      "type": "string"
+    },
+    "eid": {
+      "type": "string"
+    },
+    "eid_sb": {
+      "type": "float"
+    },
+    "eid_xml": {
+      "type": "float"
+    },
+    "odds_1": {
+      "type": "float"
+    },
+    "odds_x": {
+      "type": "float"
+    },
+    "odds_2": {
+      "type": "float"
+    },
+    "home_final": {
+      "type": "float"
+    },
+    "away_final": {
+      "type": "float"
+    },
+    "finalscore": {
+      "type": "float"
+    },
+    "winner": {
+      "type": "float"
+    },
+    "deadline": {
+      "type": "float"
+    },
+    "status": {
+      "type": "float"
+    }
+  }
+}
