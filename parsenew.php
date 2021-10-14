@@ -32,10 +32,11 @@ foreach ($xml->events as $events) {
     foreach ($events->event as $event) {
         $id = $event['id'];
         $name = $event['name'];
-        $date = $event['date'];
-        $status = $event['status'];
-        
-        $sql = "INSERT INTO results_event(id,name,date,status) VALUES ('" . $id . "','" . $name . "','" . $date . "','" . $status . "')";
+        $explodeNames = explode("-", $name);
+        $home_team = $explodeNames[0];
+        $away_team = $explodeNames[1];
+    
+        $sql = "INSERT INTO results(event_id, home_team, away_team) VALUES ('" . $id . "', '" . $home_team. "','" . $away_team . "')";
         
         $result = mysqli_query($conn, $sql);
         
@@ -44,9 +45,6 @@ foreach ($xml->events as $events) {
         } else {
             $error_message = mysqli_error($conn) . "\n";
         }
-        $results = $event->results;
-        print_r($results["participantname"].[]);
-        // echo $results;
         
         foreach ($event->results as $results) {
             $participantid = $results['participantid'];
@@ -61,7 +59,6 @@ foreach ($xml->events as $events) {
             } else {
                 $error_message = mysqli_error($conn) . "\n";
             }
-
 
             foreach ($results->result as $result) {
                 $id = $result['id'];

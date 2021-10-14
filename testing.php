@@ -38,15 +38,15 @@ foreach ($xml->events as $events) {
         $sql = "INSERT INTO results_event(id,name,date,status) VALUES ('" . $id . "','" . $name . "','" . $date . "','" . $status . "')";
         
         $result = mysqli_query($conn, $sql);
+
+        $explodeNames = explode("-", $name);
+        echo "<br>", $explodeNames[1];
         
         if (! empty($result)) {
             $affectedRow ++;
         } else {
             $error_message = mysqli_error($conn) . "\n";
         }
-        $results = $event->results;
-        print_r($results["participantname"].[]);
-        // echo $results;
         
         foreach ($event->results as $results) {
             $participantid = $results['participantid'];

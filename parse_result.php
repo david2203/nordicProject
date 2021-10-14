@@ -16,22 +16,15 @@ $xml = simplexml_load_file("result_filtered.xml") or die("Error: Cannot create o
 
 foreach ($xml->events->event as $event) {
     $id = $event['id'];
-    $sql = "INSERT INTO results(id) VALUES ('" . $id . "')";
-    
-    $result = mysqli_query($conn, $sql);
-    
-    if (! empty($result)) {
-        $affectedRow ++;
-    } else {
-        $error_message = mysqli_error($conn) . "\n";
-    }
+    $name = $event['name'];
+    $explodeNames = explode("-", $name);
+    $home_team = $explodeNames[0];
+    $away_team = $explodeNames[1];
 
-    $results = $events->results;
-    $home_team = $results[0].["participantname"];
-    $sql = "INSERT INTO results(home_team) VALUES ('" . $home_team . "')";
-        
+    $sql = "INSERT INTO results(id, home_team, away_team) VALUES ('" . $id . "', '" . $home_team. "','" . $away_team . "')";
+    
     $result = mysqli_query($conn, $sql);
-        
+    
     if (! empty($result)) {
         $affectedRow ++;
     } else {
