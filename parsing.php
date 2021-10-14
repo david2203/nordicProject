@@ -64,7 +64,8 @@ foreach ($xml->events as $events) {
 
 
             foreach ($results->result as $result) {
-                $id = $result['id'];
+                $id
+                 = $result['id'];
                 $type = $result['type'];
                 $value = $result['value'];
                 
