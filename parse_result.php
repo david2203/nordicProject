@@ -25,19 +25,28 @@ foreach ($xml->events->event as $event) {
     } else {
         $error_message = mysqli_error($conn) . "\n";
     }
-
+    
     $results = $events->results;
-    $home_team = $results[0].["participantname"];
-    $sql = "INSERT INTO results(home_team) VALUES ('" . $home_team . "')";
+    $team = $results["participantname"];
+    echo $team;
+    // $sql = "INSERT INTO results(home_team) VALUES ('" . $team . "')";
+    
         
-    $result = mysqli_query($conn, $sql);
+    foreach ($results->result as $result) {
+        $results = $events->results;
+        $team = $results["participantname"];
+        echo $team;
         
-    if (! empty($result)) {
-        $affectedRow ++;
-    } else {
-        $error_message = mysqli_error($conn) . "\n";
+        $sql = "INSERT INTO results_result(id,type,value) VALUES ('" . $id . "','" . $type . "','" . $value . "')";
+        
+        $result = mysqli_query($conn, $sql);
+        
+        if (! empty($result)) {
+            $affectedRow ++;
+        } else {
+            $error_message = mysqli_error($conn) . "\n";
+        }
     }
-      
 }
 
 
