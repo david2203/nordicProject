@@ -5,13 +5,15 @@ import Game from "./Game";
 
 
 function Games() {
+
+    const instance = axios.create({baseURL: server})
     const [games, setGames] = useState([]);
     const [loadPage, setLoadPage] = useState(3)
 
     useEffect(()=> {
         const fetchGame = async()=>{
             console.log(`${server}Euro_events?_limit{loadPage}`);
-            const response = await axios.get(`http:/localhost:1337/Euro_events`)
+            const response = await instance.get(`Euro_events`)
             setGames(response.data)
         }
         fetchGame()
