@@ -1,4 +1,5 @@
 import React from "react";
+import Games from "./Games"
 
 import {
     BrowserRouter as Router,
@@ -11,6 +12,7 @@ function AppRoute() {
         <>
          
         <Router>
+          <Route path="/games" exact component={Games} />
         </Router>
 
     
