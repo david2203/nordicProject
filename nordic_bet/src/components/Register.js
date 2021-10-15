@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import server from "./config";
 
 import {
     useHistory,
@@ -19,6 +20,7 @@ import {
     const [loggedIn] = useState(false);
     const [error, setError] = useState("");
     const history = useHistory();
+    const instance = axios.create({baseURL: server})
 
     function handleOnChange(e) {
         setRegisterValues({ ...registerValues, [e.target.name]: e.target.value });
@@ -26,7 +28,7 @@ import {
 
     function handleOnSubmit(e) {
         e.preventDefault();
-          axios.post("http://localhost:1337/auth/local/register", {
+          instance.post(`auth/local/register`, {
             username: registerValues.username,
             email: registerValues.email,
             password: registerValues.password,
@@ -36,6 +38,7 @@ import {
           })
           .catch((err)=> {setError(err.response.data.message[0].messages[0].message)})
       }
+      
 
 
 
