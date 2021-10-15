@@ -52,6 +52,10 @@
     },
     "status": {
       "type": "float"
+    },
+    "bets": {
+      "via": "euro_event",
+      "collection": "bets"
     }
   }
 }

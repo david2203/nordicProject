@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bets",
+  "info": {
+    "name": "Bets",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "string"
+    },
+    "homeTeamGoals": {
+      "type": "biginteger"
+    },
+    "winner": {
+      "type": "string"
+    },
+    "user": {
+      "via": "bets",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "euro_event": {
+      "model": "euro_event",
+      "via": "bets"
+    },
+    "bet_outcome": {
+      "model": "bet-outcome"
+    },
+    "awayTeamGoals": {
+      "type": "biginteger"
+    }
+  }
+}

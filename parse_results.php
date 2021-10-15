@@ -26,8 +26,13 @@ foreach ($xml->events as $events) {
         $away_team = $explodeNames[1];
     
         $sql = "INSERT INTO results(event_id, home_team, away_team) VALUES ('" . $event_id . "', '" . $home_team. "','" . $away_team . "')";
-        
         mysqli_query($conn, $sql);
+        $sql_add = "UPDATE euro_events SET home_team = $home_team WHERE eid_xml = $event_id";
+        mysqli_query($conn, $sql_add);
+        $sql_add = "UPDATE euro_events SET away_team = $away_team WHERE eid_xml = $event_id";
+        mysqli_query($conn, $sql_add);
+
+       
         
         if (! empty($result)) {
             $affectedRow ++;
