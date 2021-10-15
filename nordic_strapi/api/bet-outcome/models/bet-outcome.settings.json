@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bet_outcomes",
+  "info": {
+    "name": "Bet_outcome",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "status": {
+      "type": "string"
+    },
+    "bet": {
+      "model": "bets"
+    }
+  }
+}

@@ -5,6 +5,9 @@ function Header() {
     return (
         <>
             <Link to="/Register"> Register</Link>
+            <Link to="/Profile"> Profile</Link>
+            <Link to="/MyBets"> My Bets</Link>
+
 
             <Link to="/Games"> Uppcomming games </Link>
         </>
