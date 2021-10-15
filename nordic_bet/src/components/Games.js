@@ -12,8 +12,7 @@ function Games() {
 
     useEffect(()=> {
         const fetchGame = async()=>{
-            console.log(`${server}Euro_events?_limit{loadPage}`);
-            const response = await instance.get(`Euro_events`)
+            const response = await instance.get(`Euro_events?_limit=${loadPage}`)
             setGames(response.data)
         }
         fetchGame()
