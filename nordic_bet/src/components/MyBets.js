@@ -10,7 +10,7 @@ function MyBets() {
     const [games, setGames] = useState([]);
     const [loadPage, setLoadPage] = useState(3)
     const [bets, setBets] = useState([])
-
+    
     useEffect(()=> {
         const fetchGame = async()=>{
             const response = await instance.get(`Euro_events`)

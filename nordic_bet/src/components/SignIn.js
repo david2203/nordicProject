@@ -46,7 +46,10 @@ export default function SignIn() {
       ).then(response => {
         console.log("user token", response.data.jwt);
         localStorage.setItem("jwt", response.data.jwt);
-    }).catch(showError);
+        localStorage.setItem("user_id", response.data.user.id)
+        window.location.reload()
+    }).catch(err => console.log(err));
+
 };
 
 

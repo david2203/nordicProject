@@ -51,7 +51,7 @@
       "type": "float"
     },
     "status": {
-      "type": "float"
+      "type": "string"
     },
     "bets": {
       "via": "euro_event",
