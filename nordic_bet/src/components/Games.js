@@ -12,9 +12,8 @@ function Games() {
 
     useEffect(()=> {
         const fetchGame = async()=>{
-            const response = await instance.get(`Euro_events?_limit=${loadPage}`)
-            setGames(response.data)
-            console.log(response.data)
+            const response = await instance.get(`Euro_events?status=Not Started&&_limit=${loadPage}`)
+                setGames(response.data)   
         }
         fetchGame()
     }, [loadPage])

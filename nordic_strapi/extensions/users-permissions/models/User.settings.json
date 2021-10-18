@@ -68,6 +68,9 @@
     "bets": {
       "via": "user",
       "collection": "bets"
+    },
+    "Score": {
+      "type": "biginteger"
     }
   }
 }
