@@ -14,7 +14,6 @@ function Header() {
 
 
          <Button variant="contained">   <Link to="/Games"> Uppcomming games </Link> </Button>
-            <Button variant="contained">Hello World</Button>
         </>
     )
 }

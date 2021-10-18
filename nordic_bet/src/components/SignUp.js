@@ -16,7 +16,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import server from "./config";
 import {useHistory} from "react-router-dom";
-import { blue } from '@mui/material/colors';
 
 function Copyright(props) {
   return (
@@ -50,9 +49,11 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
     })
-    .then( (event)=> { if(event.data.user) history.push('/games'); // document.write(<p> Du är nu registrerad.</p>)
+    //.then( (event)=>{if (event.data.user) '<Alert sx={{marginTop: 2, marginLeft: 2, width: '100%'}}severity="success">Uppgifter redan använda, använd annat.</Alert>')})
+
+    // .then( (event)=> { if(event.data.user) history.push('/games'); // document.write(<p> Du är nu registrerad.</p>)
           
-          })
+        //   })
 
           .catch(showError)
   };
@@ -132,7 +133,7 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <br/>{error ? (<Alert sx={{marginTop: 2, marginLeft: 2, width: '100%'}}severity="error">Uppgifter redan använda, använd annat.</Alert>) : (<> </>)}
+              <br/>{error ? (<Alert sx={{marginTop: 2, marginLeft: 2, width: '100%'}}severity="error">Uppgifter redan använda, använd annat.</Alert>) : (<></>)}
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
