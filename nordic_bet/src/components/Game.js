@@ -3,12 +3,12 @@ import axios from "axios";
 import Modal from 'react-modal';
 import server from "./config"
 
-function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
+function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
+    
     const instance = axios.create({baseURL: server})
     const playingTeams = eventname.split("-");
     const home_team = playingTeams[0]
     const away_team = playingTeams[1]
-
     const [game, setGame] = useState()
     const [layBetIsOpen,setLayBetIsOpen] = useState(false);
     // const [gameId, setGameId] = useState()
@@ -16,8 +16,10 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         typeOfBet:"",
         homeTeamGoals:"",
         awayTeamGoals:"",
-        winner:""
+        winner:"",
+        Euro_event:event_id
     }
+  
     const [formValues, setFormValues] = useState(initialValues)
     const customStyles = {
         content : {
@@ -36,6 +38,7 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
       
     function openLayBet(e) {
         setLayBetIsOpen(true);
+        console.log(initialValues.winner.data)
     }
     function closeLayBet(e) {
         setLayBetIsOpen(false);
@@ -43,23 +46,54 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     function clearForm() {
         setFormValues(initialValues)
     }
+    
     function handleOnSubmit() {
-        if(formValues.typeOfBet === "betOnResult") {
+        
+        if(formValues.typeOfBet === "BetOnResult")  {
             instance.post(`bets`,{
                 type:formValues.typeOfBet,
                 homeTeamGoals:formValues.homeTeamGoals,
                 awayTeamGoals:formValues.awayTeamGoals,
-                winner:formValues.winner
+                winner:formValues.winner,
+                Euro_event:formValues.Euro_event
               }).then(
               closeLayBet()
             )
             console.log("success")
+        }
+        else if(formValues.typeOfBet === "BetOnGoals" ) {
+            instance.post(`bets`,{
+                type:formValues.typeOfBet,
+                homeTeamGoals:formValues.homeTeamGoals,
+                awayTeamGoals:formValues.awayTeamGoals,
+                winner:"Not included in this bet",
+                Euro_event:formValues.Euro_event
+              }).then(
+              closeLayBet()
+            )
+            console.log("success")
+        }
+        else if(formValues.typeOfBet === "BetOnWinner") {
+            instance.post(`bets`,{
+                type:formValues.typeOfBet,
+                homeTeamGoals:"Not included in this bet",
+                awayTeamGoals:"Not included in this bet",
+                winner:formValues.winner,
+                Euro_event:formValues.Euro_event
+              }).then(
+              closeLayBet()
+            )
+            console.log("success")
+        }
+        else {
+            console.log("empty fields")
         }
     }
     function handleOnChange(e) {
         console.log(formValues)
         setFormValues({...formValues,[e.target.name]: e.target.value})
         console.log(formValues)
+        console.log(formValues.winner)
     }
     return (
         <>
@@ -98,7 +132,7 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                             {formValues.typeOfBet === "BetOnResult" ? (
                                 <>
                                 <span>{home_team} goals:</span>
-                                <select name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
+                                <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
                                     <option value=""> Choose option </option>
                                     <option value="0"> 0 </option>
                                     <option value="1"> 1 </option>
@@ -111,7 +145,7 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                     <option value="8"> 8 </option>  
                                 </select><br/>
                                 <span>{away_team} goals:</span>
-                                <select name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
+                                <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
                                     <option value=""> Choose option </option>
                                     <option value="0"> 0 </option>
                                     <option value="1"> 1 </option>
@@ -124,10 +158,10 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                     <option value="8"> 8 </option>  
                                 </select><br/>
                                 <span>Winner:</span>
-                                <select name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
+                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
                                     <option value=""> Choose option </option>
-                                    <option value="homeTeam"> {home_team}  </option>
-                                    <option value="awayTeam"> {away_team}  </option> 
+                                    <option value={home_team}> {home_team}  </option>
+                                    <option value={away_team}> {away_team}  </option> 
                                 </select><br/>
                                 </>
                             ) : (
@@ -138,7 +172,7 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                 
                                <>
                                <span>{home_team}  goals:</span>
-                            <select name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
+                            <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
                                 <option value=""> Choose option </option>
                                 <option value="0"> 0 </option>
                                 <option value="1"> 1 </option>
@@ -151,7 +185,7 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                 <option value="8"> 8 </option>  
                             </select><br/>
                             <span>{away_team} goals:</span>
-                            <select name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
+                            <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
                                 <option value=""> Choose option </option>
                                 <option value="0"> 0 </option>
                                 <option value="1"> 1 </option>
@@ -171,10 +205,10 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                             {formValues.typeOfBet === "BetOnWinner" ? (
                                 <>
                                 <span>Winner:</span>
-                                <select name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
+                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
                                     <option value=""> Choose option </option>
-                                    <option value="homeTeam"> {home_team}  </option>
-                                    <option value="awayTeam"> {away_team}  </option> 
+                                    <option value={home_team}> {home_team}  </option>
+                                    <option value={away_team}> {away_team}  </option> 
                                 </select><br/>
                                 </>
                             ) : (

@@ -15,9 +15,6 @@
     "type": {
       "type": "string"
     },
-    "homeTeamGoals": {
-      "type": "biginteger"
-    },
     "winner": {
       "type": "string"
     },
@@ -33,8 +30,11 @@
     "bet_outcome": {
       "model": "bet-outcome"
     },
+    "homeTeamGoals": {
+      "type": "string"
+    },
     "awayTeamGoals": {
-      "type": "biginteger"
+      "type": "string"
     }
   }
 }
