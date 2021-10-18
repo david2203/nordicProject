@@ -12,7 +12,7 @@ function Header() {
     }
     return (
         <>
-            <Link to="/Register"> Register</Link>
+            <Link to="/SignIn"> Login</Link>
             <Link to="/Profile"> Profile</Link>
             <Link to="/MyBets"> My Bets</Link>
             <Link to="/SignIn"> Sign In</Link>

@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+import Alert from '@mui/material/Alert';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -33,6 +34,7 @@ const instance = axios.create({baseURL: server});
 
 export default function SignIn() {
   const [jwt, setJwt] = useState();
+  const [error, setError] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,11 +53,16 @@ export default function SignIn() {
 };
 
 
+function showError(e) {
+    setError(true)
+}
 
   useEffect( ()=>{
     const JWT = localStorage.getItem("jwt")
     setJwt(JWT);
 },[])
+
+
 
   return (
       <>
@@ -113,6 +120,7 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
+              <br/>{error ? (<Alert sx={{marginTop: 2, width: '100%'}}severity="error">Fel Email eller lösenord.</Alert>) : (<></>)}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Kom ihåg mig"
@@ -132,7 +140,7 @@ export default function SignIn() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/SignUp" variant="body2">
                     {"Har du inget konto? Registrera dig"}
                   </Link>
                 </Grid>
