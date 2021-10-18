@@ -2,12 +2,9 @@ import React from "react";
 import Register from "./Register";
 import Games from "./Games"
 import Header from "./Header"
-<<<<<<< HEAD
 import SignUp from "./SignUp";
-=======
 import Profile from "./Profile";
 import MyBets from "./MyBets";
->>>>>>> 65426c5c8b61bf111c999fcce4217c8f410cbbb1
 
 import {
     BrowserRouter as Router,

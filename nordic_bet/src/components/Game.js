@@ -44,15 +44,17 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         setFormValues(initialValues)
     }
     function handleOnSubmit() {
-        instance.post(`bets`,{
-            type:formValues.typeOfBet,
-            homeTeamGoals:formValues.homeTeamGoals,
-            awayTeamGoals:formValues.awayTeamGoals,
-            winner:formValues.winner
-          }).then(
-          closeLayBet()
-        )
-        console.log("success")
+        if(formValues.typeOfBet === "betOnResult") {
+            instance.post(`bets`,{
+                type:formValues.typeOfBet,
+                homeTeamGoals:formValues.homeTeamGoals,
+                awayTeamGoals:formValues.awayTeamGoals,
+                winner:formValues.winner
+              }).then(
+              closeLayBet()
+            )
+            console.log("success")
+        }
     }
     function handleOnChange(e) {
         console.log(formValues)
@@ -95,7 +97,6 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                             </select><br/>
                             {formValues.typeOfBet === "BetOnResult" ? (
                                 <>
-                                
                                 <span>{home_team} goals:</span>
                                 <select name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
                                     <option value=""> Choose option </option>
@@ -134,6 +135,7 @@ function Game({eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                 </>
                             )}
                             {formValues.typeOfBet === "BetOnGoals" ? (
+                                
                                <>
                                <span>{home_team}  goals:</span>
                             <select name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>

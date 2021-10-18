@@ -59,17 +59,15 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-<<<<<<< HEAD
     "fname": {
       "type": "string"
     },
     "lname": {
       "type": "string"
-=======
+    },
     "bets": {
       "via": "user",
       "collection": "bets"
->>>>>>> 65426c5c8b61bf111c999fcce4217c8f410cbbb1
     }
   }
 }
