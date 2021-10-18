@@ -36,18 +36,17 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
+
     instance.post(`auth/local`,{
-        identifier: data.get('email'),
-        password: data.get('password'),
-      }).then(response => {
+        identifier: data.get('identifier'), 
+        password: data.get('password')
+    }
+      ).then(response => {
         console.log("user token", response.data.jwt);
         localStorage.setItem("jwt", response.data.jwt);
-    })
+    }).catch(err => console.log(err));
 
-    
-    
-  };
+};
 
 
 
