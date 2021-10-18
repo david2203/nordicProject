@@ -12,7 +12,6 @@ function Header() {
             <Link to="/Profile"> Profile</Link>
             <Link to="/MyBets"> My Bets</Link>
 
-
          <Button variant="contained">   <Link to="/Games"> Uppcomming games </Link> </Button>
         </>
     )

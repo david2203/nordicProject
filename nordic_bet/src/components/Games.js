@@ -38,6 +38,7 @@ function Games() {
                 (<button onClick={loadMore}>Load more</button>):
                 (<button onClick={showLess}>Show less</button>)
             }
+           
         </div>
     )
 }
