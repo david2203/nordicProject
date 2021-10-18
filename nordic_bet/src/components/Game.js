@@ -57,9 +57,6 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     function closeLayBet(e) {
         setLayBetIsOpen(false);
     }
-    function clearForm() {
-        setFormValues(initialValues)
-    }
     
     function handleOnSubmit() {
         
