@@ -48,7 +48,10 @@ export default function SignUp() {
       username: data.get('användarnamn'),
       email: data.get('email'),
       password: data.get('password'),
-    })
+    }).then(response => {
+      console.log("user token", response.data.jwt);
+      localStorage.setItem("jwt", response.data.jwt);
+  })
     //.then( (event)=>{if (event.data.user) '<Alert sx={{marginTop: 2, marginLeft: 2, width: '100%'}}severity="success">Uppgifter redan använda, använd annat.</Alert>')})
 
     // .then( (event)=> { if(event.data.user) history.push('/games'); // document.write(<p> Du är nu registrerad.</p>)
