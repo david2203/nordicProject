@@ -24,6 +24,9 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         fetchGameId()
     }, [])
    
+    function fixResult() {
+
+    }
 
     function updateGameStatus() {
         const putStatus = async()=>{
@@ -36,6 +39,10 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                 }) 
         }
        putStatus()
+
+       fixResult()
+
+
     }
     return (
         <>
