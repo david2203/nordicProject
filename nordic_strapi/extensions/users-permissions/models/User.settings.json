@@ -71,6 +71,10 @@
     },
     "Score": {
       "type": "biginteger"
+    },
+    "isAdmin": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
