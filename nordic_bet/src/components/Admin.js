@@ -15,6 +15,7 @@ function Admin() {
         fetchGame()
     }, [])
     return (
+        
         <div>
             {games.map((game)=>{
                 return(

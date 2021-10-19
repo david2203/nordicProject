@@ -1,23 +1,16 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import server from "./config";
-import Game from "./Game";
+
 import Bet from "./Bet";
 
 function MyBets() {
 
     const instance = axios.create({baseURL: server})
-    const [games, setGames] = useState([]);
+
     const [loadPage, setLoadPage] = useState(3)
     const [bets, setBets] = useState([])
     
-    useEffect(()=> {
-        const fetchGame = async()=>{
-            const response = await instance.get(`Euro_events`)
-            setGames(response.data)
-        }
-        fetchGame()
-    }, [])
 
     useEffect(()=> {
         const fetchBets = async()=>{

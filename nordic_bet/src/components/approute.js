@@ -23,7 +23,9 @@ function AppRoute() {
         <Router>
         <Header/>
           <Route path="/Register" exact component={Register}/>
+
           <Route path="/Admin" exact component={Admin}/>
+          
           <Route path="/MyBets" exact component={MyBets}/>
           <Route path="/Profile" exact component={Profile}/>
           <Route path="/games" exact component={Games} />
