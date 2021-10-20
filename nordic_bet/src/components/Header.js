@@ -18,11 +18,7 @@ function Header() {
             <Link to="/SignIn"> Sign In</Link>
             <Link to="/SignUp"> Sign Up</Link>
             <Link to="/Admin"> Admin</Link>
-
-            
-
-
-         <Button variant="contained">   <Link to="/Games"> Uppcomming games </Link> </Button>
+            <Link to="/Games"> Upcoming Games </Link>
 
             <br/>
         <Button onClick={signOut}>Sign Out</Button>
