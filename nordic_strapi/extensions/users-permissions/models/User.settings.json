@@ -73,8 +73,7 @@
       "type": "biginteger"
     },
     "isAdmin": {
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     }
   }
 }

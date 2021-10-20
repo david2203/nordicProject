@@ -31,8 +31,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         
         fetchGameId()
     }, [])
-    console.log(gameId)
-    console.log(user_id)
+    
   
     const [formValues, setFormValues] = useState(initialValues)
     const customStyles = {
@@ -74,7 +73,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
               }).then(
               closeLayBet()
             )
-            console.log("success")
+            window.location.reload()
         }
         else if(formValues.typeOfBet === "BetOnGoals" ) {
             instance.post(`bets`,{
@@ -88,7 +87,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
               }).then(
               closeLayBet()
             )
-            console.log("success")
+            window.location.reload()
         }
         else if(formValues.typeOfBet === "BetOnWinner") {
             instance.post(`bets`,{
@@ -102,7 +101,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
               }).then(
               closeLayBet()
             )
-            console.log("success")
+            window.location.reload()
+            
         }
         else {
             console.log("empty fields")
@@ -112,18 +112,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         setFormValues({...formValues,[e.target.name]: e.target.value})   
     }
 
-    function updateGameStatus() {
-        const putStatus = async()=>{
-            await instance.put(`euro_events/${gameId}`, {
-                status:"finished"
-            },{
-                    headers: {
-                        Authorization: `bearer ${token}` 
-                    }
-                }) 
-        }
-       putStatus()
-    }
+    
     return (
         <>
         <div className="game_info">
@@ -137,7 +126,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
             {status}<br/>
             <div>{eventname}<br/></div>
             <button className="bet_btn" onClick={openLayBet}> Lay bet </button><br/>
-            <button onClick={updateGameStatus}> UpdateGameStatus</button>
+            
             
         </div>
 
