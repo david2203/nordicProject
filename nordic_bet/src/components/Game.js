@@ -5,19 +5,16 @@ import server from "./config"
 import Flags from 'country-flag-icons/react/3x2'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Button from '@mui/material/Button';
+
+
+
 
 function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     
@@ -196,6 +193,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     const handleExpandClick = () => {
         setExpanded(!expanded);
       };
+      
 
       
 
@@ -303,11 +301,6 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         setFormValues({...formValues,[e.target.name]: e.target.value})   
     }
 
-    // function flags() {
-    //     if (playingTeams = "Poland") {
-    //         hasFlag('US') === true
-    //     }
-    // }
 
     const HomeFlag = Flags[homeFlag]
     const AwayFlag = Flags[awayFlag]
@@ -328,24 +321,21 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
             <div>{eventname}<br/></div>
             <button className="bet_btn" onClick={openLayBet}> Lay bet </button><br/>
             <Card sx={{ maxWidth: 345 }}>
-    <HomeFlag width="30px" title="United States" className="..."/> 
+    <HomeFlag width="30px" title="HomeFlag" className="..."/> 
       {eventname} 
-    <AwayFlag width="30px" title="United States" className="..."/>
+    <AwayFlag width="30px" title="AwayFlag" className="..."/>
 
       
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          loremlorem
+          loremlormen
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
         <ExpandMore
+        sx={{
+            justifContent: 'center'
+        }}
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -356,17 +346,119 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+        <div>
+                        <div>
+                            <span>Type of bet:</span>
+                            <select name="typeOfBet"  id="type" value={formValues.type} onChange={handleOnChange}>
+                                <option value="empty"> Choose type </option>
+                                <option value="BetOnResult"> Bet on result </option>
+                                <option value="BetOnGoals"> Bet on goals </option>
+                                <option value="BetOnWinner"> Bet on winner </option>  
+                            </select><br/>
+                            {formValues.typeOfBet === "BetOnResult" ? (
+                                <>
+                                <span>{home_team} goals:</span>
+                                <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
+                                    <option value=""> Choose option </option>
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>  
+                                    <option value="4"> 4 </option>  
+                                    <option value="5"> 5 </option>  
+                                    <option value="6"> 6 </option>  
+                                    <option value="7"> 7 </option>
+                                    <option value="8"> 8 </option>  
+                                </select><br/>
+                                <span>{away_team} goals:</span>
+                                <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
+                                    <option value=""> Choose option </option>
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>  
+                                    <option value="4"> 4 </option>  
+                                    <option value="5"> 5 </option>  
+                                    <option value="6"> 6 </option>  
+                                    <option value="7"> 7 </option>
+                                    <option value="8"> 8 </option>  
+                                </select><br/>
+                                <span>Winner:</span>
+                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
+                                    <option value=""> Choose option </option>
+                                    <option value={home_team}> {home_team}  </option>
+                                    <option value={away_team}> {away_team}  </option> 
+                                </select><br/>
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )}
+                            {formValues.typeOfBet === "BetOnGoals" ? (
+                                
+                               <>
+                               <span>{home_team}  goals:</span>
+                            <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
+                                <option value=""> Choose option </option>
+                                <option value="0"> 0 </option>
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>  
+                                <option value="4"> 4 </option>  
+                                <option value="5"> 5 </option>  
+                                <option value="6"> 6 </option>  
+                                <option value="7"> 7 </option>
+                                <option value="8"> 8 </option>  
+                            </select><br/>
+                            <span>{away_team} goals:</span>
+                            <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
+                                <option value=""> Choose option </option>
+                                <option value="0"> 0 </option>
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>  
+                                <option value="4"> 4 </option>  
+                                <option value="5"> 5 </option>  
+                                <option value="6"> 6 </option>  
+                                <option value="7"> 7 </option>
+                                <option value="8"> 8 </option>  
+                            </select><br/>
+                               </>
+                            ) : (
+                                <>
+                                </>
+                            )}
+                            {formValues.typeOfBet === "BetOnWinner" ? (
+                                <>
+                                <span>Winner:</span>
+                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
+                                    <option value=""> Choose option </option>
+                                    <option value={home_team}> {home_team}  </option>
+                                    <option value={away_team}> {away_team}  </option> 
+                                </select><br/>
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )}
+                        </div>
+
+                        <Button variant='text' type="submit">Submit bet</Button>
+                        <br/>
+                        <Button variant='text' onClick={closeLayBet}>Cancel bet</Button>
+                    </div>
+          <Typography paragraph></Typography>
           <Typography paragraph>
  
           </Typography>
           <Typography paragraph>
+
           </Typography>
           <Typography paragraph>
-        
+
           </Typography>
           <Typography>
-
+    
           </Typography>
         </CardContent>
       </Collapse>
@@ -374,7 +466,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
             
         </div>
 
-        <Modal
+        {/* <Modal
           isOpen={layBetIsOpen}
           onRequestClose={closeLayBet}
           style={customStyles}
@@ -487,7 +579,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
 
                 <button onClick={closeLayBet}>Cancel bet</button>
 
-        </Modal>
+        </Modal> */}
         </>
     )
 }
