@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import MyBets from "./MyBets";
 import SignIn from "./SignIn";
 import Admin from "./Admin";
+import Footer from "./Menu";
 
 import {
     BrowserRouter as Router,
@@ -22,10 +23,9 @@ function AppRoute() {
          
         <Router>
         <Header/>
+          <Route path="/" exact component={Footer} />
           <Route path="/Register" exact component={Register}/>
-
           <Route path="/Admin" exact component={Admin}/>
-          
           <Route path="/MyBets" exact component={MyBets}/>
           <Route path="/Profile" exact component={Profile}/>
           <Route path="/games" exact component={Games} />
