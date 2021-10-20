@@ -46,30 +46,33 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     }
 
     function sendBetResults() { 
-        const fetchResults = async()=>{
-            const response = await instance.get(`results?event_id=${event_id}`)
-            setGameResult(response.data[0])
-            
+        const promiseA = new Promise(fetchResults);
+        const promiseB = promiseA.then(loopBets, handleRejected1);
+        console.log(promiseA)
+       function fetchResults() {
+            const response = instance.get(`results?event_id=${event_id}`)
+            setGameResult(response.data)
+        }
+        
+        // fetchResults() 
+        // const fetchBet = async()=>{
+        //     const response = await instance.get(`bets?euro_event.eid_xml=${event_id}`)
+        //     setBetsOnGame(response.data) 
+        // }
+        // fetchBet()
     
-        }
         
-        fetchResults() 
-        const fetchBet = async()=>{
-            const response = await instance.get(`bets?euro_event.eid_xml=${event_id}`)
-            setBetsOnGame(response.data) 
-        }
-        fetchBet()
-        
-        loopBets()
     }
-    
+    function handleRejected1() {
+        console.log("hej")
+    }
     function loopBets() {
-        
+        console.log(betsOnGame)
         // betsOnGame.forEach(bet => {
         //     console.log(bet)
         // });
     }
-    console.log(gameResult)
+   
     return (
         <>
         <div className="game_info">

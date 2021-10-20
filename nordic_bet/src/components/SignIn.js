@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -33,6 +34,7 @@ const theme = createTheme();
 const instance = axios.create({baseURL: server});
 
 export default function SignIn() {
+  const history = useHistory()
   const [jwt, setJwt] = useState();
   const [error, setError] = useState(false);
   const handleSubmit = (event) => {
@@ -47,6 +49,7 @@ export default function SignIn() {
         console.log("user token", response.data.jwt);
         localStorage.setItem("jwt", response.data.jwt);
         localStorage.setItem("user_id", response.data.user.id)
+        history.push("/games")
         window.location.reload()
     }).catch(err => console.log(err));
 
