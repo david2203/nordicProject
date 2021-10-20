@@ -178,7 +178,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
    
     
     useEffect(() => {
-        console.log(betsOnGame);
+        // console.log(betsOnGame);
       }, [betsOnGame]);
   
     function updateGameStatus() {
@@ -200,7 +200,10 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         const fetchResults = async()=>{
             const response = await instance.get(`results?event_id=${event_id}`)
             setGameResult(response.data[0])
-            console.log(gameResult)
+            const resultData = response.data
+            return ( 
+                resultData 
+            )
         }
         fetchResults()
         
@@ -208,17 +211,27 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         const fetchBet = async()=>{
             const response = await instance.get(`bets?euro_event.eid_xml=${event_id}`)
             setBetsOnGame(response.data) 
+            const bets = response.data
+            return (
+                bets
+            )
+              
         }
-        fetchBet()
+        fetchBet().then((resp)=>loopBets(resp))
         
-        loopBets()
     }
     
-    function loopBets() {
-        
-        // betsOnGame.forEach(bet => {
-        //     console.log(bet)
-        // });
+    function loopBets(bets) {
+
+        bets.forEach(bet => {
+            if(bet.type === "BetOnResult") {
+                console.log("result")
+            } else if (bet.type === "BetOnGoals") {
+                console.log("goals")
+            }else if (bet.type === "BetOnWinner") {
+                console.log("winner")
+            }
+        });
     }   
     const HomeFlag = Flags[homeFlag]
     const AwayFlag = Flags[awayFlag]
