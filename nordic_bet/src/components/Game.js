@@ -2,6 +2,24 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Modal from 'react-modal';
 import server from "./config"
+import { hasFlag } from 'country-flag-icons'
+import { countries } from 'country-flag-icons'
+import getUnicodeFlagIcon from 'country-flag-icons/unicode'
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     
@@ -13,6 +31,29 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     const [layBetIsOpen,setLayBetIsOpen] = useState(false);
     const user_id = localStorage.getItem("user_id")
     const token = localStorage.getItem("jwt")
+
+    var US = hasFlag('US') === true
+
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+      };
+
+      
+
+      const ExpandMore = styled((props) => {
+        const { expand, ...other } = props;
+        return <IconButton {...other} />;
+      })(({ theme, expand }) => ({
+        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+          duration: theme.transitions.duration.shortest,
+        }),
+      }));
+
+
     
     // const [gameId, setGameId] = useState()
     const initialValues = {
@@ -112,6 +153,12 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         setFormValues({...formValues,[e.target.name]: e.target.value})   
     }
 
+    // function flags() {
+    //     if (playingTeams = "Poland") {
+    //         hasFlag('US') === true
+    //     }
+    // }
+
     
     return (
         <>
@@ -127,6 +174,47 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
             <div>{eventname}<br/></div>
             <button className="bet_btn" onClick={openLayBet}> Lay bet </button><br/>
             
+            <Card sx={{ maxWidth: 345 }}>
+      {eventname} {US}
+
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          loremlorem
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>
+ 
+          </Typography>
+          <Typography paragraph>
+          </Typography>
+          <Typography paragraph>
+        
+          </Typography>
+          <Typography>
+
+          </Typography>
+        </CardContent>
+      </Collapse>
+    </Card>
             
         </div>
 
