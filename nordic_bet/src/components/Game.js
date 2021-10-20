@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Modal from 'react-modal';
 import server from "./config"
-import { hasFlag } from 'country-flag-icons'
+import Flags from 'country-flag-icons/react/3x2'
+import {hasFlag} from 'country-flag-icons'
 import { countries } from 'country-flag-icons'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
 import { styled } from '@mui/material/styles';
@@ -32,7 +33,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     const user_id = localStorage.getItem("user_id")
     const token = localStorage.getItem("jwt")
 
-    var US = hasFlag('US') === true
+
+    
 
     const [expanded, setExpanded] = React.useState(false);
 
@@ -175,8 +177,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
             <button className="bet_btn" onClick={openLayBet}> Lay bet </button><br/>
             
             <Card sx={{ maxWidth: 345 }}>
-      {eventname} {US}
-
+      {eventname} 
+      <Flags.US title="United States" className="..."/>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           loremlorem
