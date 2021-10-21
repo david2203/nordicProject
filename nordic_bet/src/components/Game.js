@@ -332,20 +332,29 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+         
         <ExpandMore
-        sx={{
-            justifContent: 'center'
-        }}
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          <ExpandMoreIcon
+
+      sx={{ display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            boxShadow: 1
+   
+         }}>
+
+         </ExpandMoreIcon>
+   
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
+           <form onSubmit={handleOnSubmit}>
         <div>
                         <div>
                             <span>Type of bet:</span>
@@ -388,6 +397,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                     <option value=""> Choose option </option>
                                     <option value={home_team}> {home_team}  </option>
                                     <option value={away_team}> {away_team}  </option> 
+                                    
                                 </select><br/>
                                 </>
                             ) : (
@@ -434,19 +444,53 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                 <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
                                     <option value=""> Choose option </option>
                                     <option value={home_team}> {home_team}  </option>
-                                    <option value={away_team}> {away_team}  </option> 
+                                    <option value="X">Draw</option>  
+                                    <option value={away_team}> {away_team}  </option>
                                 </select><br/>
                                 </>
                             ) : (
                                 <>
                                 </>
                             )}
+
+                           {formValues.winner === home_team ? (
+                              <div> 
+                                 Odds, {odds_1}
+                                 </div>
+                           ): (
+
+                              <>
+                              </>
+                           )}
+
+                           {formValues.winner === away_team ? (
+                              <div> 
+                                 Odds, {odds_2}
+                                 </div>
+                           ): (
+
+                              <>
+                              </>
+                           )}
+
+                           {formValues.winner === "X" ? (
+                              <div> 
+                                 Odds, {odds_x}
+                                 </div>
+                           ): (
+
+                              <>
+                              </>
+                           )}
+
                         </div>
 
                         <Button variant='text' type="submit">Submit bet</Button>
                         <br/>
+                        
                         <Button variant='text' onClick={closeLayBet}>Cancel bet</Button>
                     </div>
+                    </form>
           <Typography paragraph></Typography>
           <Typography paragraph>
  
@@ -466,7 +510,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
             
         </div>
 
-        {/* <Modal
+        <Modal
           isOpen={layBetIsOpen}
           onRequestClose={closeLayBet}
           style={customStyles}
@@ -579,7 +623,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
 
                 <button onClick={closeLayBet}>Cancel bet</button>
 
-        </Modal> */}
+        </Modal>
         </>
     )
 }
