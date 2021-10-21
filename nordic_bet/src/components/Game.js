@@ -315,7 +315,10 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     return (
         <>
         <div><br/><br/>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: '100%',
+                        mx: '38%',
+                        width: ['100%', '50%', '25%'],
+                                     }}>
     <HomeFlag width="30px" title="HomeFlag" className="..."/> 
       {eventname} 
     <AwayFlag width="30px" title="AwayFlag" className="..."/>
@@ -348,21 +351,18 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
            <form onSubmit={handleOnSubmit}>
         <div>
                         <div>
-                            <span>Choose Type</span>
-                            <FormControl sx={{ m: 1, minWidth: 80 }}>
+                            <span>Choose Type</span><br/>
+                            <FormControl sx={{ m: 1, minWidth: 200}}>
                             <Select 
                               name="typeOfBet" 
                               id="type" 
                               value={formValues.type} 
                               onChange={handleOnChange}
                               sx={{ 
-                              mx: 5,
                               minWidth: 125,
                               minHeight: 5
                                }}>
-                              
-                               <MenuItem value="">
-                                  </MenuItem>
+                           
                                 <MenuItem value="BetOnResult"> Bet on result </MenuItem>
                                 <MenuItem value="BetOnGoals"> Bet on goals </MenuItem>
                                 <MenuItem value="BetOnWinner"> Bet on winner </MenuItem>  
@@ -519,7 +519,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                     <MenuItem value="X">Draw</MenuItem>  
                                     <MenuItem value={away_team}> {away_team}  </MenuItem>
                                 </Select><br/>
-                                
+
                                 </>
                             ) : (
                                 <>
