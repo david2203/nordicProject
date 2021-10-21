@@ -17,6 +17,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Scoreboard from "./Scoreboard"
 
 
  
@@ -65,6 +66,7 @@ function Games() {
     }
     return (
         <div>
+            <Scoreboard/>
             {games.map((game)=>{
                 return(
                     <Game key={game.eid_xml} event_id={game.eid_xml}  eventname={game.eventname} grp={game.grp}  odds_1={game.odds_1} odds_x={game.odds_x} odds_2={game.odds_2} status={game.status}/>

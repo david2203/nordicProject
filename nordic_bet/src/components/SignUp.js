@@ -51,6 +51,8 @@ export default function SignUp() {
     }).then(response => {
       console.log("user token", response.data.jwt);
       localStorage.setItem("jwt", response.data.jwt);
+      history.push("/games")
+      window.location.reload()
   })
     //.then( (event)=>{if (event.data.user) '<Alert sx={{marginTop: 2, marginLeft: 2, width: '100%'}}severity="success">Uppgifter redan använda, använd annat.</Alert>')})
 

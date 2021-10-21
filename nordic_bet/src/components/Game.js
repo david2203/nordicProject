@@ -288,6 +288,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
 
     return (
         <>
+        
         <div><br/><br/>
             <Card sx={{ maxWidth: 345 }}>
     <HomeFlag width="30px" title="HomeFlag" className="..."/> 

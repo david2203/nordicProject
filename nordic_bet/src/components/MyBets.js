@@ -7,14 +7,14 @@ import Bet from "./Bet";
 function MyBets() {
 
     const instance = axios.create({baseURL: server})
-
+    const user = localStorage.getItem("user_id")  
     const [loadPage, setLoadPage] = useState(3)
     const [bets, setBets] = useState([])
     
 
     useEffect(()=> {
         const fetchBets = async()=>{
-            const response = await instance.get(`bets`)
+            const response = await instance.get(`bets?user=${user}`)
             setBets(response.data)
         }
         fetchBets()
