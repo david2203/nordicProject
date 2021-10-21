@@ -309,17 +309,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
 
     return (
         <>
-        <div className="game_info">
-            
-            Game name: {eid_xml}
-            <div>{eventname}<br/></div>
-            {grp}<br/>
-            {odds_1}<br/>
-            {odds_x}<br/>
-            {odds_2}<br/>
-            {status}<br/>
-            <div>{eventname}<br/></div>
-            <button className="bet_btn" onClick={openLayBet}> Lay bet </button><br/>
+        <div><br/><br/>
             <Card sx={{ maxWidth: 345 }}>
     <HomeFlag width="30px" title="HomeFlag" className="..."/> 
       {eventname} 
@@ -331,8 +321,13 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
           loremlormen
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-         
+      <CardActions disableSpacing
+      sx={{ display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'left',
+            justifyContent: 'center'
+         }}>
+
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -344,8 +339,6 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
       sx={{ display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
-            boxShadow: 1
-   
          }}>
 
          </ExpandMoreIcon>
