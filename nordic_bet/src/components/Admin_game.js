@@ -184,7 +184,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     function updateGameStatus() {
         const putStatus = async()=>{
             await instance.put(`euro_events/${gameId}`, {
-                status:"Not Started"
+                status:"Finished"
             },{
                     headers: {
                         Authorization: `bearer ${token}` 
@@ -206,7 +206,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                 resultData 
             )
         }
-        fetchResults().then((resp)=>fetchBet(resp)).then((resp)=>loopBets(resp))
+        fetchResults().then((resp)=>fetchBet(resp)).then((resp)=>compareBetsWithResult(resp)).then((resp)=>sendScores(resp))
                      
         
         const fetchBet = async(resultData)=>{
@@ -223,52 +223,107 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         
     }
     
-    function loopBets(resp) {
-      const bets = resp[0]
-      const gameResult = resp[1]
+    function compareBetsWithResult(resp) {
+            
+            const bets = resp[0]
+            const gameResult = resp[1]
+            const resultHomeGoals = gameResult[0].home_goals
+            const resultAwayGoals = gameResult[0].away_goals
+            const resultWinner = gameResult[0].winner_team
+            var score = 0;
+            
+            bets.forEach(bet => {
+               if(bet.Active === true) {
 
-      const resultHomeGoals = gameResult[0].home_goals
-      const resultAwayGoals = gameResult[0].away_goals
-      const resultWinner = gameResult[0].winner_team
-
-        bets.forEach(bet => {
-      const bettedHomeGoals = Number(bet.homeTeamGoals)
-      const bettedAwayGoals = Number(bet.awayTeamGoals)
-      const bettedWinner = bet.winner
-console.log(bettedWinner)
-console.log(resultWinner)
-
-           var score = 0;
+               
+            const bettedHomeGoals = Number(bet.homeTeamGoals)
+            const bettedAwayGoals = Number(bet.awayTeamGoals)
+            const bettedWinner = bet.winner
+            const userId = bet.user.id
+               console.log(bettedWinner)
+            console.log(resultWinner)
+            
             if(bet.type === "BetOnResult") {
                if(resultHomeGoals === bettedHomeGoals) {
-                  score =+ 1
-                  
-
+                  score = score +1
                   console.log("Right home goals")
                }
                if(resultAwayGoals === bettedAwayGoals) {
-                  score =+1
-                  console.log(score)
+                  score = score +1
                   console.log("Right away goals")
                }
                if(resultWinner === bettedWinner) {
+                  score = score +3
                   console.log("Right winner")
                }
             } else if (bet.type === "BetOnGoals") {
                if(resultHomeGoals === bettedHomeGoals) {
+                  score = score + 1
+
                   console.log("Right home goals")
                }
                if(resultAwayGoals === bettedAwayGoals) {
+                  score = score + 1
+
                   console.log("Right away goals")
                }
             }else if (bet.type === "BetOnWinner") {
                if(resultWinner === bettedWinner) {
+                  score = score + 3
+
                   console.log("Right winner")
                }
             }
-            console.log(score)
+            }else {
+               return ( 
+                  false
+               )
+            } 
         });
-    }   
+        return (
+         [bets, score, user_id]
+      )
+            
+    }
+    
+    function sendScores(resp) {
+      const score = resp[1]
+      const bets = resp[0]
+      const userId= resp[2]
+      const fetchScore = async()=>{
+         const response = await instance.get(`/users?id=${userId}`)
+         const userScore = response.data[0].Score
+         console.log(response.data[0].Score)
+         return(
+            [userScore, resp]
+            )
+      }
+      fetchScore().then((resp2)=>calcScore(resp2))
+      
+      
+      console.log(userId)
+    }
+    function calcScore(resp2) {
+       
+       const betId= resp2[1][0][0].id
+       const userId = resp2[1][2]
+       const userScore = resp2[0]
+       const scoreToAdd = resp2[1][1]
+       const newScore = Number(userScore) + Number(scoreToAdd)
+
+       const updateScore = async()=>{
+         await instance.put(`users/${userId}`, {
+             Score:newScore
+         })
+         }
+      updateScore()
+      const updateBet = async()=>{
+         await instance.put(`bets/${betId}`, {
+             Active:false
+         })
+         }
+      updateBet()
+    }
     const HomeFlag = Flags[homeFlag]
     const AwayFlag = Flags[awayFlag]
 

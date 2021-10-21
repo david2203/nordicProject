@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import Modal from 'react-modal';
 import server from "./config"
 import Flags from 'country-flag-icons/react/3x2'
 import { styled } from '@mui/material/styles';
@@ -191,11 +190,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
-        setExpanded(!expanded);
-      };
-      
-
-      
+      setExpanded(!expanded);   
+      }; 
 
       const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
@@ -223,28 +219,6 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     
     
     const [formValues, setFormValues] = useState(initialValues)
-    const customStyles = {
-        content : {
-          background : "lightblue",
-          height: "40vw",
-          width:"50vw",
-          margin: "3px",
-          top                   : '50%',
-          left                  : '50%',
-          right                 : 'auto',
-          bottom                : 'auto',
-          marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)'
-        }
-      };
-      
-    function openLayBet(e) {
-        setLayBetIsOpen(true);
-        console.log(initialValues.winner.data)
-    }
-    function closeLayBet(e) {
-        setLayBetIsOpen(false);
-    }
     
     function handleOnSubmit() {
         
@@ -260,7 +234,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                 euro_event:gameId,
                 user:user_id
               }).then(
-              closeLayBet()
+             
             )
             window.location.reload()
         }
@@ -274,7 +248,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                 user:user_id
 
               }).then(
-              closeLayBet()
+              
             )
             window.location.reload()
         }
@@ -288,7 +262,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                 user:user_id
 
               }).then(
-              closeLayBet()
+              
             )
             window.location.reload()
             
@@ -480,10 +454,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
 
                         <Button variant='text' type="submit">Submit bet</Button>
                         <br/>
-                        
-                        <Button variant='text' onClick={closeLayBet}>Cancel bet</Button>
                     </div>
-                    </form>
+                  </form>
           <Typography paragraph></Typography>
           <Typography paragraph>
  
@@ -503,120 +475,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
             
         </div>
 
-        <Modal
-          isOpen={layBetIsOpen}
-          onRequestClose={closeLayBet}
-          style={customStyles}
-          ariaHideApp={false}
-          contentLabel="Example Modal"
-        >
-
-<form onSubmit={handleOnSubmit}>
-            <h1>You have chosen to lay a bet on the game between: <strong>{home_team}</strong> and <strong>{away_team}</strong> </h1>
-                    <div>
-                        <div>
-                            <span>Type of bet:</span>
-                            <select name="typeOfBet"  id="type" value={formValues.type} onChange={handleOnChange}>
-                                <option value="empty"> Choose type </option>
-                                <option value="BetOnResult"> Bet on result </option>
-                                <option value="BetOnGoals"> Bet on goals </option>
-                                <option value="BetOnWinner"> Bet on winner </option>  
-                            </select><br/>
-                            {formValues.typeOfBet === "BetOnResult" ? (
-                                <>
-                                <span>{home_team} goals:</span>
-                                <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value="0"> 0 </option>
-                                    <option value="1"> 1 </option>
-                                    <option value="2"> 2 </option>
-                                    <option value="3"> 3 </option>  
-                                    <option value="4"> 4 </option>  
-                                    <option value="5"> 5 </option>  
-                                    <option value="6"> 6 </option>  
-                                    <option value="7"> 7 </option>
-                                    <option value="8"> 8 </option>  
-                                </select><br/>
-                                <span>{away_team} goals:</span>
-                                <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value="0"> 0 </option>
-                                    <option value="1"> 1 </option>
-                                    <option value="2"> 2 </option>
-                                    <option value="3"> 3 </option>  
-                                    <option value="4"> 4 </option>  
-                                    <option value="5"> 5 </option>  
-                                    <option value="6"> 6 </option>  
-                                    <option value="7"> 7 </option>
-                                    <option value="8"> 8 </option>  
-                                </select><br/>
-                                <span>Winner:</span>
-                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value={home_team}> {home_team}  </option>
-                                    <option value={away_team}> {away_team}  </option> 
-                                </select><br/>
-                                </>
-                            ) : (
-                                <>
-                                </>
-                            )}
-                            {formValues.typeOfBet === "BetOnGoals" ? (
-                                
-                               <>
-                               <span>{home_team}  goals:</span>
-                            <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
-                                <option value=""> Choose option </option>
-                                <option value="0"> 0 </option>
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>  
-                                <option value="4"> 4 </option>  
-                                <option value="5"> 5 </option>  
-                                <option value="6"> 6 </option>  
-                                <option value="7"> 7 </option>
-                                <option value="8"> 8 </option>  
-                            </select><br/>
-                            <span>{away_team} goals:</span>
-                            <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
-                                <option value=""> Choose option </option>
-                                <option value="0"> 0 </option>
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>  
-                                <option value="4"> 4 </option>  
-                                <option value="5"> 5 </option>  
-                                <option value="6"> 6 </option>  
-                                <option value="7"> 7 </option>
-                                <option value="8"> 8 </option>  
-                            </select><br/>
-                               </>
-                            ) : (
-                                <>
-                                </>
-                            )}
-                            {formValues.typeOfBet === "BetOnWinner" ? (
-                                <>
-                                <span>Winner:</span>
-                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value={home_team}> {home_team}  </option>
-                                    <option value={away_team}> {away_team}  </option> 
-                                </select><br/>
-                                </>
-                            ) : (
-                                <>
-                                </>
-                            )}
-                        </div>
-
-                        <button type="submit">Submit bet</button>
-                    </div>
-                </form>
-
-                <button onClick={closeLayBet}>Cancel bet</button>
-
-        </Modal>
+        
         </>
     )
 }

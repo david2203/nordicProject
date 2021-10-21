@@ -70,7 +70,8 @@
       "collection": "bets"
     },
     "Score": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "default": "0"
     },
     "isAdmin": {
       "type": "boolean"

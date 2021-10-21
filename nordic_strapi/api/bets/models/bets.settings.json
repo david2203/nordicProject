@@ -35,6 +35,10 @@
     },
     "awayTeamGoals": {
       "type": "string"
+    },
+    "Active": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
