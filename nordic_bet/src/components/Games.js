@@ -18,12 +18,21 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Scoreboard from "./Scoreboard"
+import { Parallax, Background } from 'react-parallax';
+
 
 
  
 
 function Games() {
+    const [offsetY, setOffsetY] = useState(0);
+  const handleScroll = () => setOffsetY(window.pageYOffset);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
     const instance = axios.create({baseURL: server})
     const [games, setGames] = useState([]);
     const [loadPage, setLoadPage] = useState(3)
@@ -64,8 +73,13 @@ function Games() {
     function showLess() {
         setLoadPage(3)
     }
+    
     return (
-        <div>
+        <>
+        <div className="Parallax__background"
+        style={{ transform: `translateY(-${offsetY * 0.5}px)` }}>
+        </div>
+            <div className="Parallax__content">   
             <Scoreboard/>
             {games.map((game)=>{
                 return(
@@ -80,6 +94,7 @@ function Games() {
 
            
         </div>
+        </>
     )
 }
 

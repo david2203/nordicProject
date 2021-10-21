@@ -4,7 +4,7 @@ function Scorecard({id,username,score}) {
     return (
         <>
             
-            Username:  {username}
+            {username}
             Score:  {score}<br/>
         </>
     )

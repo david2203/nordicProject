@@ -13,7 +13,7 @@ function Scoreboard() {
 
     useEffect( ()=>{
             const fetchUsers= async()=>{
-            const response = await instance.get(`/users`)
+            const response = await instance.get(`/users?_sort=Score:DESC`)
             setUsers(response.data)
             }
             fetchUsers().then(console.log(users))
