@@ -178,8 +178,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
    
     
     useEffect(() => {
-        console.log(betsOnGame);
-      }, [betsOnGame]);
+        console.log(gameResult);
+      }, [gameResult]);
   
     function updateGameStatus() {
         const putStatus = async()=>{
@@ -200,25 +200,74 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         const fetchResults = async()=>{
             const response = await instance.get(`results?event_id=${event_id}`)
             setGameResult(response.data[0])
-            console.log(gameResult)
+            const resultData = response.data
+
+            return ( 
+                resultData 
+            )
         }
-        fetchResults()
+        fetchResults().then((resp)=>fetchBet(resp)).then((resp)=>loopBets(resp))
+                     
         
-        fetchResults() 
-        const fetchBet = async()=>{
+        const fetchBet = async(resultData)=>{
             const response = await instance.get(`bets?euro_event.eid_xml=${event_id}`)
             setBetsOnGame(response.data) 
+            const bets = response.data
+            
+            return (
+                 [bets, resultData]
+            )
+              
         }
-        fetchBet()
         
-        loopBets()
+        
     }
     
-    function loopBets() {
-        
-        // betsOnGame.forEach(bet => {
-        //     console.log(bet)
-        // });
+    function loopBets(resp) {
+      const bets = resp[0]
+      const gameResult = resp[1]
+
+      const resultHomeGoals = gameResult[0].home_goals
+      const resultAwayGoals = gameResult[0].away_goals
+      const resultWinner = gameResult[0].winner_team
+
+        bets.forEach(bet => {
+      const bettedHomeGoals = Number(bet.homeTeamGoals)
+      const bettedAwayGoals = Number(bet.awayTeamGoals)
+      const bettedWinner = bet.winner
+console.log(bettedWinner)
+console.log(resultWinner)
+
+           var score = 0;
+            if(bet.type === "BetOnResult") {
+               if(resultHomeGoals === bettedHomeGoals) {
+                  score =+ 1
+                  
+
+                  console.log("Right home goals")
+               }
+               if(resultAwayGoals === bettedAwayGoals) {
+                  score =+1
+                  console.log(score)
+                  console.log("Right away goals")
+               }
+               if(resultWinner === bettedWinner) {
+                  console.log("Right winner")
+               }
+            } else if (bet.type === "BetOnGoals") {
+               if(resultHomeGoals === bettedHomeGoals) {
+                  console.log("Right home goals")
+               }
+               if(resultAwayGoals === bettedAwayGoals) {
+                  console.log("Right away goals")
+               }
+            }else if (bet.type === "BetOnWinner") {
+               if(resultWinner === bettedWinner) {
+                  console.log("Right winner")
+               }
+            }
+            console.log(score)
+        });
     }   
     const HomeFlag = Flags[homeFlag]
     const AwayFlag = Flags[awayFlag]
