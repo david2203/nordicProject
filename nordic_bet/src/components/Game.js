@@ -12,6 +12,11 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { minHeight } from "@mui/system";
 
 
 
@@ -322,10 +327,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing
-      sx={{ display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'left',
-            justifyContent: 'center'
+      sx={{ display: 'inline-flex',
+            verticalAlign: 'middle'
          }}>
 
         <ExpandMore
@@ -334,12 +337,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon
-
-      sx={{ display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-         }}>
+          <ExpandMoreIcon>
 
          </ExpandMoreIcon>
    
@@ -350,48 +348,95 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
            <form onSubmit={handleOnSubmit}>
         <div>
                         <div>
-                            <span>Type of bet:</span>
-                            <select name="typeOfBet"  id="type" value={formValues.type} onChange={handleOnChange}>
-                                <option value="empty"> Choose type </option>
-                                <option value="BetOnResult"> Bet on result </option>
-                                <option value="BetOnGoals"> Bet on goals </option>
-                                <option value="BetOnWinner"> Bet on winner </option>  
-                            </select><br/>
+                            <span>Choose Type</span>
+                            <FormControl sx={{ m: 1, minWidth: 80 }}>
+                            <Select 
+                              name="typeOfBet" 
+                              id="type" 
+                              value={formValues.type} 
+                              onChange={handleOnChange}
+                              sx={{ 
+                              mx: 5,
+                              minWidth: 125,
+                              minHeight: 5
+                               }}>
+                              
+                               <MenuItem value="">
+                                  </MenuItem>
+                                <MenuItem value="BetOnResult"> Bet on result </MenuItem>
+                                <MenuItem value="BetOnGoals"> Bet on goals </MenuItem>
+                                <MenuItem value="BetOnWinner"> Bet on winner </MenuItem>  
+                            </Select><br/>
                             {formValues.typeOfBet === "BetOnResult" ? (
                                 <>
                                 <span>{home_team} goals:</span>
-                                <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value="0"> 0 </option>
-                                    <option value="1"> 1 </option>
-                                    <option value="2"> 2 </option>
-                                    <option value="3"> 3 </option>  
-                                    <option value="4"> 4 </option>  
-                                    <option value="5"> 5 </option>  
-                                    <option value="6"> 6 </option>  
-                                    <option value="7"> 7 </option>
-                                    <option value="8"> 8 </option>  
-                                </select><br/>
+                                <Select 
+                                required 
+                                name="homeTeamGoals" 
+                                id="homeTeamGoals" 
+                                value={formValues.homeTeamGoals} 
+                                onChange={handleOnChange}
+                                value={formValues.type} 
+                              sx={{ 
+                              mx: 5,
+                              minWidth: 125,
+                              minHeight: 5
+                               }}>
+                                  <MenuItem value="">
+                                  </MenuItem>
+                                    <MenuItem value="0"> 0 </MenuItem>
+                                    <MenuItem value="1"> 1 </MenuItem>
+                                    <MenuItem value="2"> 2 </MenuItem>
+                                    <MenuItem value="3"> 3 </MenuItem>  
+                                    <MenuItem value="4"> 4 </MenuItem>  
+                                    <MenuItem value="5"> 5 </MenuItem>  
+                                    <MenuItem value="6"> 6 </MenuItem>  
+                                    <MenuItem value="7"> 7 </MenuItem>
+                                    <MenuItem value="8"> 8 </MenuItem>  
+                                </Select><br/>
                                 <span>{away_team} goals:</span>
-                                <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value="0"> 0 </option>
-                                    <option value="1"> 1 </option>
-                                    <option value="2"> 2 </option>
-                                    <option value="3"> 3 </option>  
-                                    <option value="4"> 4 </option>  
-                                    <option value="5"> 5 </option>  
-                                    <option value="6"> 6 </option>  
-                                    <option value="7"> 7 </option>
-                                    <option value="8"> 8 </option>  
-                                </select><br/>
+                                <Select 
+                                required 
+                                name="awayTeamGoals" 
+                                id="awayTeamGoals" 
+                                value={formValues.awayTeamGoals} 
+                                onChange={handleOnChange}
+                                sx={{ 
+                                 mx: 5,
+                                 minWidth: 125,
+                                 minHeight: 5
+                                  }}>
+                                  <MenuItem value="">
+                                  </MenuItem>
+                                    <MenuItem value="0"> 0 </MenuItem>
+                                    <MenuItem value="1"> 1 </MenuItem>
+                                    <MenuItem value="2"> 2 </MenuItem>
+                                    <MenuItem value="3"> 3 </MenuItem>  
+                                    <MenuItem value="4"> 4 </MenuItem>  
+                                    <MenuItem value="5"> 5 </MenuItem>  
+                                    <MenuItem value="6"> 6 </MenuItem>  
+                                    <MenuItem value="7"> 7 </MenuItem>
+                                    <MenuItem value="8"> 8 </MenuItem>  
+                                </Select><br/>
                                 <span>Winner:</span>
-                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value={home_team}> {home_team}  </option>
-                                    <option value={away_team}> {away_team}  </option> 
+                                <Select 
+                                required 
+                                name="winner" 
+                                id="winner" 
+                                value={formValues.winner} 
+                                onChange={handleOnChange}
+                                sx={{ 
+                                 mx: 5,
+                                 minWidth: 125,
+                                 minHeight: 5
+                                  }}>
+                                  <MenuItem value="">
+                                  </MenuItem>
+                                    <MenuItem value={home_team}> {home_team}  </MenuItem>
+                                    <MenuItem value="X">Draw</MenuItem> 
+                                    <MenuItem value={away_team}> {away_team}  </MenuItem> 
                                     
-                                </select><br/>
+                                </Select><br/>
                                 </>
                             ) : (
                                 <>
@@ -401,31 +446,54 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                 
                                <>
                                <span>{home_team}  goals:</span>
-                            <select required name="homeTeamGoals" id="homeTeamGoals" value={formValues.homeTeamGoals} onChange={handleOnChange}>
-                                <option value=""> Choose option </option>
-                                <option value="0"> 0 </option>
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>  
-                                <option value="4"> 4 </option>  
-                                <option value="5"> 5 </option>  
-                                <option value="6"> 6 </option>  
-                                <option value="7"> 7 </option>
-                                <option value="8"> 8 </option>  
-                            </select><br/>
+                            <Select 
+                            required 
+                            name="homeTeamGoals" 
+                            id="homeTeamGoals" 
+                            value={formValues.homeTeamGoals} 
+                            onChange={handleOnChange}
+                            sx={{ 
+                              mx: 5,
+                              minWidth: 125,
+                              minHeight: 5
+                               }}>
+                                  <MenuItem value="">
+                                  </MenuItem>
+                                <MenuItem value="0"> 0 </MenuItem>
+                                <MenuItem value="1"> 1 </MenuItem>
+                                <MenuItem value="2"> 2 </MenuItem>
+                                <MenuItem value="3"> 3 </MenuItem>  
+                                <MenuItem value="4"> 4 </MenuItem>  
+                                <MenuItem value="5"> 5 </MenuItem>  
+                                <MenuItem value="6"> 6 </MenuItem>  
+                                <MenuItem value="7"> 7 </MenuItem>
+                                <MenuItem value="8"> 8 </MenuItem>  
+                            </Select><br/>
+
                             <span>{away_team} goals:</span>
-                            <select required name="awayTeamGoals" id="awayTeamGoals" value={formValues.awayTeamGoals} onChange={handleOnChange}>
-                                <option value=""> Choose option </option>
-                                <option value="0"> 0 </option>
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>  
-                                <option value="4"> 4 </option>  
-                                <option value="5"> 5 </option>  
-                                <option value="6"> 6 </option>  
-                                <option value="7"> 7 </option>
-                                <option value="8"> 8 </option>  
-                            </select><br/>
+                            <Select 
+                            required 
+                            name="awayTeamGoals" 
+                            id="awayTeamGoals" 
+                            value={formValues.awayTeamGoals} 
+                            onChange={handleOnChange}
+                            sx={{ 
+                              mx: 5,
+                              minWidth: 125,
+                              minHeight: 5
+                               }}>
+                                  <MenuItem value="">
+                                  </MenuItem>
+                                <MenuItem value="0"> 0 </MenuItem>
+                                <MenuItem value="1"> 1 </MenuItem>
+                                <MenuItem value="2"> 2 </MenuItem>
+                                <MenuItem value="3"> 3 </MenuItem>  
+                                <MenuItem value="4"> 4 </MenuItem>  
+                                <MenuItem value="5"> 5 </MenuItem>  
+                                <MenuItem value="6"> 6 </MenuItem>  
+                                <MenuItem value="7"> 7 </MenuItem>
+                                <MenuItem value="8"> 8 </MenuItem>  
+                            </Select><br/>
                                </>
                             ) : (
                                 <>
@@ -434,12 +502,24 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                             {formValues.typeOfBet === "BetOnWinner" ? (
                                 <>
                                 <span>Winner:</span>
-                                <select required name="winner" id="winner" value={formValues.winner} onChange={handleOnChange}>
-                                    <option value=""> Choose option </option>
-                                    <option value={home_team}> {home_team}  </option>
-                                    <option value="X">Draw</option>  
-                                    <option value={away_team}> {away_team}  </option>
-                                </select><br/>
+                                <Select 
+                                required 
+                                name="winner" 
+                                id="winner" 
+                                value={formValues.winner} 
+                                onChange={handleOnChange}
+                                sx={{ 
+                                 mx: 5,
+                                 minWidth: 125,
+                                 minHeight: 5
+                                  }}>
+                                     <MenuItem value="">
+                                     </MenuItem>
+                                    <MenuItem value={home_team}> {home_team}  </MenuItem>
+                                    <MenuItem value="X">Draw</MenuItem>  
+                                    <MenuItem value={away_team}> {away_team}  </MenuItem>
+                                </Select><br/>
+                                
                                 </>
                             ) : (
                                 <>
@@ -476,6 +556,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                               </>
                            )}
 
+                           </FormControl>
                         </div>
 
                         <Button variant='text' type="submit">Submit bet</Button>
