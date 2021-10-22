@@ -76,7 +76,7 @@ function Scoreboard() {
     return (
         <>
             Top 10 <br/>
-    <div style={{ height: 400, width: '28%', marginLeft:"36.5%"  }}>
+    <div style={{ height: 400, width: '28%', marginLeft:"36.5%"}}>
       <DataGrid
         rows={state}
         columns={columns}
