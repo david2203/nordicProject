@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import server from "./config";
+import server from "../Global/config";
 import Game from "./Game";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -17,9 +17,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Scoreboard from "./Scoreboard"
-import { Parallax, Background } from 'react-parallax';
-
+import Scoreboard from "../Scoreboard";
+import { Parallax, Background } from "react-parallax";
 
 
  
@@ -71,12 +70,26 @@ function Games() {
     function showLess() {
         setLoadPage(3)
     }
-    
+
+    const image1 =
+    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80";
+
+    const insideStyles = {
+  background: "white",
+  padding: 20,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)"
+};
+
     return (
-        <>
-        <Scoreboard/>
+        <div>
+            <Parallax bgImage={image1} strength={500}>
+      <div style={{ height: 'auto' }}>
         
-        {games.map((game)=>{
+      <Scoreboard/>
+            {games.map((game)=>{
                 return(
                     <Game key={game.eid_xml} event_id={game.eid_xml}  eventname={game.eventname} grp={game.grp}  odds_1={game.odds_1} odds_x={game.odds_x} odds_2={game.odds_2} status={game.status}/>
                 )
@@ -85,13 +98,11 @@ function Games() {
             { loadPage <= games.length ? 
                 (<button onClick={loadMore}>Load more</button>):
                 (<button onClick={showLess}>Show less</button>)
-            } 
-        
-   
-           
-          
-       
-        </>
+            }
+      </div>
+
+</Parallax>
+        </div>
     )
 }
 

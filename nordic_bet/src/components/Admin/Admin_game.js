@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import server from "./config"
+import server from "../Global/config"
 import Flags from 'country-flag-icons/react/3x2'
 
 function Game({event_id,eventname,status}) {

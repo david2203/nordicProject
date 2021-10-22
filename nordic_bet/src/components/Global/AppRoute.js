@@ -1,12 +1,11 @@
 import React from "react";
-import Register from "./Register";
-import Games from "./Games"
+import Games from "../Game/Games"
 import Header from "./Header"
-import SignUp from "./SignUp";
-import Profile from "./Profile";
-import MyBets from "./MyBets";
-import SignIn from "./SignIn";
-import Admin from "./Admin";
+import SignUp from "../Users/SignUp";
+import Profile from "../Users/Profile";
+import MyBets from "../Game/MyBets";
+import SignIn from "../Users/SignIn";
+import Admin from "../Admin/Admin";
 import Footer from "./Menu";
 
 import {
@@ -25,13 +24,13 @@ function AppRoute() {
         <Router>
         <Header/>
           <Route path="/" exact component={Footer} />
-          <Route path="/Register" exact component={Register}/>
           <Route path="/Admin" exact component={Admin}/>
           <Route path="/MyBets" exact component={MyBets}/>
           <Route path="/Profile" exact component={Profile}/>
           <Route path="/games" exact component={Games} />
           <Route path="/SignUp" exact component={SignUp} />
           <Route path="/SignIn" exact component={SignIn} />
+
           
         </Router>
 

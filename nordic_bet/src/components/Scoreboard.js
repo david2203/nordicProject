@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import server from "./config";
-import Scorecard from "./Scorecard";
+import server from "./Global/config";
 import { DataGrid } from '@mui/x-data-grid';
 import { borderRight, textAlign } from "@mui/system";
 
@@ -76,7 +75,7 @@ function Scoreboard() {
     return (
         <>
             Top 10 <br/>
-    <div style={{ height: 400, width: '28%', marginLeft:"36.5%"}}>
+    <div style={{ backgroundColor: 'white', height: 400, width: '28%', marginLeft:"36.5%"  }}>
       <DataGrid
         rows={state}
         columns={columns}
