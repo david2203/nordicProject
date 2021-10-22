@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import server from "./config";
+import server from "../Global/config";
 
 function Profile() {
 

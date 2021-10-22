@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import server from "./config";
+import server from "../Global/config";
 import Game from "./Game";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -17,14 +17,21 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Scoreboard from "./Scoreboard";
+import Scoreboard from "../Scoreboard";
 import { Parallax, Background } from "react-parallax";
 
 
  
 
 function Games() {
+    const [offsetY, setOffsetY] = useState(0);
+  const handleScroll = () => setOffsetY(window.pageYOffset);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
     const instance = axios.create({baseURL: server})
     const [games, setGames] = useState([]);
     const [loadPage, setLoadPage] = useState(3)
@@ -33,9 +40,7 @@ function Games() {
     const handleExpandClick = () => {
         setExpanded(!expanded);
       };
-
-      
-
+    
       const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
         return <IconButton {...other} />;

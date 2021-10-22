@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import server from "./config";
+import server from "../Global/config";
 import {useHistory} from "react-router-dom";
 
 function Copyright(props) {

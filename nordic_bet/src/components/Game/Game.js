@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import server from "./config"
+import server from "../Global/config"
 import Flags from 'country-flag-icons/react/3x2'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
