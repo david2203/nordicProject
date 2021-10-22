@@ -32,6 +32,7 @@ function AppRoute() {
           <Route path="/games" exact component={Games} />
           <Route path="/SignUp" exact component={SignUp} />
           <Route path="/SignIn" exact component={SignIn} />
+
           
         </Router>
 

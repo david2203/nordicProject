@@ -4,19 +4,18 @@ import server from "./config";
 
 function Profile() {
 
-    const [userId, setUserId] = useState(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("user_id");
     const [username, setUsername] = useState("");
     const instance = axios.create({baseURL: server});
 
     useEffect( ()=> {
         const fetchUsername = async () => {
-            const response = await instance.get (`auth/local/users/${userId}`);
+            const response = await instance.get (`users?id`);
             
             console.log(response);
 
-            setUsername(response.data[0].username);
-            setUserId(response.data[0].username);
-            console.log(response.data[0].username);
+
+ 
         };
         fetchUsername();
     })

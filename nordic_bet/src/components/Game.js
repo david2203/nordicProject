@@ -15,7 +15,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { minHeight } from "@mui/system";
 
 
 
@@ -283,27 +282,34 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
 
     const HomeFlag = Flags[homeFlag]
     const AwayFlag = Flags[awayFlag]
-
+    
     
 
     return (
         <>
-        
         <div><br/><br/>
-            <Card sx={{ maxWidth: '100%',
+            <Card container spacing={3} sx={{ maxWidth: '100%',
                         mx: '38%',
                         width: ['100%', '50%', '25%'],
+                        
                                      }}>
-    <HomeFlag width="30px" title="HomeFlag" className="..."/> 
-      {eventname} 
-    <AwayFlag width="30px" title="AwayFlag" className="..."/>
+
 
       
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          loremlormen
+         </CardContent>
+         
+                               
+        <Typography variant="body2" color="text.secondary"
+        sx={{ fontSize: 20,
+              
+                                     }}>
+        <HomeFlag width="40px" title="HomeFlag" className="..."/> 
+      {eventname} 
+    <AwayFlag width="40px" title="AwayFlag" className="..."/>
         </Typography>
-      </CardContent>
+        
+
       <CardActions disableSpacing
       sx={{ display: 'inline-flex',
             verticalAlign: 'middle'
