@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import server from "./config";
-
 import Bet from "./Bet";
+import Scoreboard from "./Scoreboard"
 
 function MyBets() {
 
@@ -31,23 +31,17 @@ function MyBets() {
     }
     return (
         <>
-        <div>
-        {/* {games.map((game)=>{
-            return(
-                <Game key={game.xml_eid} eventname={game.eventname} grp={game.grp}  odds_1={game.odds_1} odds_x={game.odds_x} odds_2={game.odds_2} status={game.status}/>
-            )
-        })} */}
+        <Scoreboard/>
         {bets.map((bet)=>{
             return(
                 <Bet key={bet.id} type={bet.type} grp={bet.grp}  homeTeamGoals={bet.homeTeamGoals} awayTeamGoals={bet.awayTeamGoals} winner={bet.winner}/>
             )
         })}
         {/* pagination function */}
-        { loadPage <= bets.length ? 
+        {/* { loadPage <= bets.length ? 
             (<button onClick={loadMore}>Load more</button>):
             (<button onClick={showLess}>Show less</button>)
-        }
-    </div>
+        } */}
         </>
     )
 }

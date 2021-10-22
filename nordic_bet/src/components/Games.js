@@ -41,9 +41,7 @@ function Games() {
     const handleExpandClick = () => {
         setExpanded(!expanded);
       };
-
-      
-
+    
       const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
         return <IconButton {...other} />;
@@ -76,12 +74,9 @@ function Games() {
     
     return (
         <>
-        <div className="Parallax__background"
-        style={{ transform: `translateY(-${offsetY * 0.5}px)` }}>
-        </div>
-            <div className="Parallax__content">   
-            <Scoreboard/>
-            {games.map((game)=>{
+        <Scoreboard/>
+        
+        {games.map((game)=>{
                 return(
                     <Game key={game.eid_xml} event_id={game.eid_xml}  eventname={game.eventname} grp={game.grp}  odds_1={game.odds_1} odds_x={game.odds_x} odds_2={game.odds_2} status={game.status}/>
                 )
@@ -90,10 +85,12 @@ function Games() {
             { loadPage <= games.length ? 
                 (<button onClick={loadMore}>Load more</button>):
                 (<button onClick={showLess}>Show less</button>)
-            }
-
+            } 
+        
+   
            
-        </div>
+          
+       
         </>
     )
 }
