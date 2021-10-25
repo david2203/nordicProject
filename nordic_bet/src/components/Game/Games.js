@@ -3,20 +3,7 @@ import axios from "axios";
 import server from "../Global/config";
 import Game from "./Game";
 import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Scoreboard from "../Scoreboard";
 import { Parallax, Background } from "react-parallax";
 import Footer from "../Global/Footer";
@@ -86,6 +73,7 @@ function Games() {
 };
 
     return (
+      <>
         <div>
             <Parallax bgImage={image1} strength={500}>
       <div style={{ height: 'auto' }}>
@@ -98,14 +86,16 @@ function Games() {
             })}
             {/* pagination function */}
             { loadPage <= games.length ? 
-                (<button onClick={loadMore}>Load more</button>):
-                (<button onClick={showLess}>Show less</button>)
+                (<button onClick={loadMore} className="mt-5 mb-5">Load more</button>):
+                (<button onClick={showLess} className="mt-5 mb-5">Show less</button>)
             }
       </div>
 
 </Parallax>
 <Footer/>
         </div>
+        {/* <Footer/> */}
+        </>
     )
 }
 
