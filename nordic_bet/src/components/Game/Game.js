@@ -15,6 +15,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 
 
@@ -288,7 +291,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     return (
         <>
         <div><br/><br/>
-            <Card container spacing={3} sx={{ maxWidth: '100%',
+            <Card className="bg-light" container spacing={3} sx={{ maxWidth: '100%',
                         mx: '38%',
                         width: ['100%', '50%', '25%'],
                         
