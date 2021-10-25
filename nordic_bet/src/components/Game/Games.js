@@ -19,6 +19,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Scoreboard from "../Scoreboard";
 import { Parallax, Background } from "react-parallax";
+import Footer from "../Global/Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
  
@@ -102,6 +104,7 @@ function Games() {
       </div>
 
 </Parallax>
+<Footer/>
         </div>
     )
 }

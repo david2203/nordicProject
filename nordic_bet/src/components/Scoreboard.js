@@ -19,11 +19,13 @@ function Scoreboard() {
         { id: 10, Username: "", score : ""},   
     ]
     const [state, setState] = useState(rowsEmpty)
-    const [userArray2, setUserArray2] = useState([["0","test"]])
-    const userArray = [["0","test"],["1","david"]]
+    const [userArray2, setUserArray2] = useState([])
+    const userArray = [["0","test"],["1","newuser"]]
+
     useEffect( ()=>{
             const fetchUsers= async()=>{
             const response = await instance.get(`/users?_sort=Score:DESC`)
+            console.log(response)
             const users = response.data
             return (
                 users
@@ -33,9 +35,15 @@ function Scoreboard() {
 
             function mapUsers(users) {
                 users.forEach(user => {
+                    Object.values(user)
+                    console.log(Object.values(user))
                     const username = user.username
                     const score= user.Score
-                    setUserArray2(...userArray2, userArray2.push([score, username]))
+                    setUserArray2(Array.prototype.push.apply(userArray2,[username, score]))
+                    console.log(userArray2[0])
+                    console.log(user.username)
+                    //Hitta alternativ lösning för spread. 
+                    //Spread är problemet (...)
 
                   })
             }
@@ -50,13 +58,16 @@ function Scoreboard() {
           
         
         function fillRows() {
+            console.log(...userArray2)
+            console.log(Object.keys(userArray2))
             console.log(userArray2)
+
             const rows = [
                 
-                { id: 1, Rank: 1, Username: userArray2[0][1], score : "userArray[1][0]"},
+                { id: 1, Rank: 1, Username: userArray2[1], score : userArray2,},
                 // { id: 2, Rank: 2, Username: userArray[2][1], score : userArray[2][0]},
                 { id: 3, Rank: 3, Username: "david", score : 5},
-                { id: 4, Rank: 4, Username: "", score : ""},
+                { id: 4, Rank: 4, Username: userArray2, score : ""},
                 { id: 5, Rank: 5, Username: "", score : ""},
                 { id: 6, Rank: 6, Username: "", score : ""},
                 { id: 7, Rank: 7, Username: "", score : ""},
@@ -69,8 +80,7 @@ function Scoreboard() {
             ]
             setState(rows)
         }
-        
-          
+    
     
     return (
         <>
