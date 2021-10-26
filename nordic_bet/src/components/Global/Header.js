@@ -41,7 +41,7 @@ function Header() {
                 <>
                 <Link to="/Profile" className="nav-link "> Profile </Link>
                 <Link to="/MyBets" className="nav-link "> My Bets</Link>
-                <Link to="/Brackets" className="nav-link "> Brackets </Link>
+                <Link to="/Euro" className="nav-link "> Brackets </Link>
                 { isAdmin ?(
                     <Link to="/Admin" className="nav-link"> Admin</Link>
                 
