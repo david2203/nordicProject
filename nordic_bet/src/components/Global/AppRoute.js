@@ -7,6 +7,7 @@ import MyBets from "../Game/MyBets";
 import SignIn from "../Users/SignIn";
 import Admin from "../Admin/Admin";
 import Footer from "./Menu";
+import Brackets from "../Game/Brackets"
 
 import {
     BrowserRouter as Router,
@@ -24,6 +25,7 @@ function AppRoute() {
         <Router>
         <Header/>
           <Route path="/" exact component={Footer} />
+          <Route path="/brackets" exact component={Brackets}/>
           <Route path="/Admin" exact component={Admin}/>
           <Route path="/MyBets" exact component={MyBets}/>
           <Route path="/Profile" exact component={Profile}/>

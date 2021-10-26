@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import server from "./Global/config";
-import { DataGrid } from '@mui/x-data-grid';
-import { borderRight, textAlign } from "@mui/system";
 import Scorecard from "./Scorecard";
 
 
