@@ -47,14 +47,17 @@ export default function SignIn() {
     }
       ).then(response => {
         console.log("user token", response.data.jwt);
+        console.log(response.data.user.fname)
+        localStorage.setItem("firstname", response.data.user.fname)
         localStorage.setItem("jwt", response.data.jwt);
         localStorage.setItem("user_id", response.data.user.id)
         localStorage.setItem("username", response.data.user.username)
         history.push("/games")
-        window.location.reload()
     }).catch(err => console.log(err));
+    
 
 };
+
   
 
 function showError(e) {

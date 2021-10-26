@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 function Brackets() {
+
+    // useEffect(()=> {
+    //     const fetchGame = async()=>{
+    //         const response = await instance.get(`Euro_events?status=Not Started&&_limit=${loadPage}`)
+    //             setGames(response.data)   
+    //     }
+    //     fetchGame()
+    // }, [loadPage])
+
+
+
     return (
         <>
         
-        <div/>
+
          <head/>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -18,7 +29,7 @@ function Brackets() {
 
 	<title>Uefa Euro 2016</title>
 <head/>
-<body/>
+<body>
 	<header className="hero">
     <div className="hero-wrap">
      <p className="intro" id="intro">Nordic Bet</p>
@@ -29,7 +40,7 @@ function Brackets() {
 	</header>
 
 
-	<section id="bracket"/>
+	<section id="bracket">
 	<div className="container">
 	<div className="split split-one">
 		<div className="round round-one current">
@@ -119,15 +130,16 @@ function Brackets() {
 	<div className="split split-two">
 	</div>
 	</div>
-	<section/>
+    <div/>
+	</section>
 	<section className="share">
 			<div className="share-wrap">
 				<a className="share-icon" href="https://twitter.com/_joebeason"><i className="fa fa-twitter"></i></a>
 				<a className="share-icon" href="#"><i className="fa fa-facebook"></i></a>
 				<a className="share-icon" href="#"><i className="fa fa-envelope"></i></a>
 			</div>
-	<section/>
-        <div/>
+	</section>
+        </body>
         </>
     )
 }
