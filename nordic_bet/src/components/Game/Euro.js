@@ -8,12 +8,15 @@ function Euro() {
     const initialValues = {
         typeOfView:"",
     } 
-    
+   
     const [formValues, setFormValues] = useState(initialValues)
     function handleOnChange(e) {
-        setFormValues({...formValues,[e.target.name]: e.target.value})   
-        console.log(formValues)
+        setFormValues({...formValues,[e.target.name]: e.target.value})
+        
     }
+    useEffect(()=> {
+        console.log(formValues)
+    }, [formValues])
 
     return (
         <>
