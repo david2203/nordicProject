@@ -41,6 +41,8 @@ function Profile() {
           }
         ).then(window.location.reload());
 
+        console.log(response)
+
       }
       editUserValues();
     }
@@ -113,7 +115,7 @@ function Profile() {
                           <div className="col">
                             <div className="form-group">
                               <label>Förnamn</label>
-                              <input className="form-control" type="text" name="name" value={getFirstname} onChange=""/>
+                              <input className="form-control" type="text" name="name" value={editUserValue.getFirstname} onChange={onChangeUser}/>
                             </div>
                           </div>
                           <div className="col">
