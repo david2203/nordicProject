@@ -8,39 +8,52 @@ import Group from "./Group"
 
 function Groups() {
 
-    const [gamesD, setGames] = useState([]);
-    const notInitialRender = useRef(false)
-    useEffect(()=> {
-        const gamesArray = []
-        const groups = ["EURO Grp. A","EURO Grp. B","EURO Grp. C","EURO Grp. D","EURO Grp. E","EURO Grp. F"]
-        const instance = axios.create({baseURL: server})
-        for(let i = 0; i < groups.length; i++) {
-            const fetchGame = async()=>{
-                const response = await instance.get(`Euro_events?grp=${groups[i]}`)
-                gamesArray.push(response.data)
-                    
+    const useGetGames = () => {
+        const [gamesArray, setGamesArray] = useState([]);
+        const [loading, setLoading] = useState(true);
+      
+        const groups = [
+          'EURO Grp. A',
+          'EURO Grp. B',
+          'EURO Grp. C',
+          'EURO Grp. D',
+          'EURO Grp. E',
+          'EURO Grp. F',
+        ];
+      
+        const instance = axios.create({ baseURL: server });
+      
+        const fetchGames = async() => {
+          try {
+            for (let i = 0; i < groups.length; i++) {
+              const { data } = await instance.get(`Euro_events?grp=${groups[i]}`);
+              setGamesArray((games) => [...games, ...data]);
             }
-            fetchGame().then(setGames(gamesArray))
-        }
-    },[])
-    useEffect(()=>{
-        
-        if (notInitialRender.current) {
-            const timer = setTimeout(()=>{
-                console.log(gamesD[0][0].eventname)
-               }, 100)
-               return () => clearTimeout(timer);
-            
-        }else {
-            notInitialRender.current = true
-        }  
-    },[gamesD])
-    
+          } catch (err) {
+            console.log(err);
+          }
+      
+          setLoading(false);
+        };
+      
+        useEffect(() => {
+          fetchGames();
+        }, []);
+      
+        return { loading, gamesArray };
+      };
 
-    function logEventsArray(el) {
-        console.log("games")
-    }
+      const { loading, gamesArray } = useGetGames()
 
+      if (!loading) {
+          const chunked = []
+          // All data should be available
+          console.log(gamesArray)
+          for (let i = 0;  i < gamesArray.length; i += 5) {
+            chunked.push(gamesArray.slice(i, i + 5))
+          }
+          console.log(chunked)
+      }
     return (
         <div>
              <table className="table table-hover w-25 border bg-light mt-3 mx-auto">
@@ -52,19 +65,11 @@ function Groups() {
   </thead>
   <tbody>
 
-        {gamesD.map((games)=>{
-            return(
-                
-                games.map((game)=>{
-                  return (
-                    <Group key={game.id} eventname={game.eventname} status={game.status}/>
-                  )
-                }) 
-            )
-       })}
-    
-    
-  
+        {gamesArray.map((game)=>{
+            return (
+                <Group key={game.id} eventname={game.eventname} status={game.status}/>
+              )
+        })}
   </tbody>
 </table>
         </div>
