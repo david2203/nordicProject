@@ -3,30 +3,51 @@ import axios from "axios";
 import server from "../Global/config";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const instance = axios.create({baseURL: server});
+
 
 function Profile() {
 
-  const editValues = {
-    firstname: "",
-    lastname: "",
-    adress: "",
-    city: "",
-    zipcode: "",
-    town : "",
-    country: "",
-    language: "",
-    timezone: "",
-    email: "",
-    currentPassword: "",
-    newPassword: "",
-    confirmNewPassword: ""
-  };
-    const [editUserValue, setEditValue] = useState(editValues);
     const getUsername = localStorage.getItem("username");
-    const getFirstname = localStorage.getItem("firstname")
     const [userId, setUserId] = useState(localStorage.getItem("user_id"))
+    const [fname, setFname] = useState()
     const instance = axios.create({baseURL: server});
+
+    useEffect( ()=> {
+      
+      const getUserValues = async () => {
+
+        const response = await instance.get(
+          `Users?id=${userId}`
+
+        )
+          setFname(response.data[0].fname)
+          console.log(response.data[0].lname)
+      }
+      getUserValues();
+    },[])
+
+
+
+    const editValues = {
+      firstname: fname,
+      lastname: "",
+      adress: "",
+      city: "",
+      zipcode: "",
+      town : "",
+      country: "",
+      language: "",
+      timezone: "",
+      email: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: ""
+    };
+
+    const [editUserValue, setEditValue] = useState(editValues);
+
+
+    console.log(fname)
 
     function editUser(e) {
       e.preventDefault();
@@ -50,6 +71,7 @@ function Profile() {
     function onChangeUser(e) {
       setEditValue({...editUserValue, [e.target.name]: e.target.value });
     }
+    console.log(editUserValue)
 
     useEffect( ()=> {
         const fetchUsername = async () => {
@@ -115,7 +137,7 @@ function Profile() {
                           <div className="col">
                             <div className="form-group">
                               <label>Förnamn</label>
-                              <input className="form-control" type="text" name="name" value={editUserValue.getFirstname} onChange={onChangeUser}/>
+                              <input className="form-control" type="text" name="firstname" value={editUserValue.firstname} onChange={onChangeUser}/>
                             </div>
                           </div>
                           <div className="col">
