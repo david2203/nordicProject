@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "euro_events",
   "info": {
-    "name": "euro_event"
+    "name": "euro_event",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -44,9 +45,6 @@
     "finalscore": {
       "type": "float"
     },
-    "winner": {
-      "type": "float"
-    },
     "deadline": {
       "type": "float"
     },
@@ -56,6 +54,13 @@
     "bets": {
       "via": "euro_event",
       "collection": "bets"
+    },
+    "winner": {
+      "type": "string"
+    },
+    "score_given": {
+      "type": "string",
+      "default": "no"
     }
   }
 }

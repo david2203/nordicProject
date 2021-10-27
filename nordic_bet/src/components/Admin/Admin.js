@@ -36,7 +36,7 @@ function Admin() {
             <div>
             {games.map((game)=>{
                 return(
-                    <AdminGame key={game.eid_xml} event_id={game.eid_xml}  eventname={game.eventname} grp={game.grp}  odds_1={game.odds_1} odds_x={game.odds_x} odds_2={game.odds_2} status={game.status} />
+                    <AdminGame key={game.eid_xml} event_id={game.eid_xml}  eventname={game.eventname} grp={game.grp}  odds_1={game.odds_1} odds_x={game.odds_x} odds_2={game.odds_2} status={game.status} score_given={game.score_given} />
                 )
             })}
             </div>

@@ -42,13 +42,35 @@ function Groups() {
   };
 
   const { loading, gamesArray } = useGetGames();
-
+  
   if (!loading) {
     // All data should be available
     console.log(gamesArray);
     for (let i = 0; i < gamesArray.length; i += 6) {
+        //chunked is an array with all groups as arrays inside
       chunked.push(gamesArray.slice(i, i + 6));
     }
+
+    
+    
+    for(let i = 0; i < chunked[0].length; i++) {
+       
+        if(chunked[0][i].status === "Finished"){
+            const playingTeams = chunked[0][i].eventname.split("-")
+            const home_team = playingTeams[0]
+            const away_team = playingTeams[1]
+            if (chunked[0][i].winner === home_team) {
+                //give home team 3 points and away team 0 points and set active to false
+                
+            } else if(chunked[0][i].winner === away_team){
+                //give away team 3 points and home team 0 points and set active to false
+            } else {
+                //give both teams 1 point and set active to false
+            }
+            
+        }
+    }
+		
   }
   return (
     <div>
@@ -56,7 +78,15 @@ function Groups() {
           const team12 = games[0].eventname.split("-")
           const team34 = games[1].eventname.split("-")
             team12.push(team34[0],team34[1])
-            console.log(team12)
+           
+            const instance = axios.create({ baseURL: server });
+            //Function for putting all teams into strapi
+        // team12.forEach((team)=>{
+        //     instance.post(`Countries`,{
+        //         name:team
+
+        //       })
+        // })
         return (
             <>
             <table className="table table-hover w-25 border bg-light mt-3 mx-auto">

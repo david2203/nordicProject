@@ -3,7 +3,7 @@ import axios from "axios";
 import server from "../Global/config"
 import Flags from 'country-flag-icons/react/3x2'
 
-function Game({event_id,eventname,status}) {
+function Game({event_id,eventname,status,score_given}) {
     
     const instance = axios.create({baseURL: server})
     const playingTeams = eventname.split("-");
@@ -196,8 +196,82 @@ function Game({event_id,eventname,status}) {
     function sendBetResults() { 
         const fetchResults = async()=>{
             const response = await instance.get(`results?event_id=${event_id}`)
-            console.log(response.data)
+   
+            
+            const home_goals = response.data[0].home_goals
+            const away_goals = response.data[0].away_goals
+            const winner = response.data[0].winner_team
+            const playingTeams = eventname.split("-");
+            const home_team = playingTeams[0]
+            const away_team = playingTeams[1]
+            const response2 = await instance.get(`countries?name=${home_team}`)
+            const home_id = response2.data[0].id
+            const home_score = Number(response2.data[0].group_score)
+            const response3 = await instance.get(`countries?name=${away_team}`)
+            const away_id = response3.data[0].id
+            const away_score = Number(response3.data[0].group_score)
+            
+            
+
+
             setGameResult(response.data[0])
+            
+            if(score_given !== "yes" ) {
+               if (winner === home_team) {
+                  //give home team 3 points and away team 0 points and set active to false
+                  const putPoints = async()=>{
+                     await instance.put(`countries/${home_id}`, {
+                         group_score: home_score + 3
+                     })
+                  }
+                  putPoints()
+              } else if(winner === away_team ){
+                  //give away team 3 points and home team 0 points and set active to false
+                  const putPoints = async()=>{
+                     await instance.put(`countries/${away_id}`, {
+                         group_score: away_score + 3
+                     })
+                  }
+                  putPoints()
+              } else if(winner === "X") {
+                  //give both teams 1 point and set active to false
+                  const putHomePoints = async()=>{
+                     await instance.put(`countries/${home_id}`, {
+                         group_score: home_score + 1
+                     })
+                  }
+                  putHomePoints()
+                  const putAwayPoints = async()=>{
+                     await instance.put(`countries/${away_id}`, {
+                         group_score: away_score + 1
+                     })
+                  }
+                  putAwayPoints()
+              }
+              const putInactive = async()=>{
+               await instance.put(`euro_events/${gameId}`, {
+                   score_given:"yes"
+               })
+            }
+            putInactive()
+            }else {
+               // doesnt send points
+            }
+            
+            const putResult = async()=>{
+               await instance.put(`euro_events/${gameId}`, {
+                   winner:winner,
+                   home_final:home_goals,
+                   away_final:away_goals,
+               },{
+                       headers: {
+                           Authorization: `bearer ${token}` 
+                       }
+                   }) 
+           }
+           putResult()
+            
+            
             const resultData = response.data
             return ( 
                 resultData 

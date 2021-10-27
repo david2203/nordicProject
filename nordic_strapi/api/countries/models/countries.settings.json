@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "countries",
+  "info": {
+    "name": "Countries",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "group_score": {
+      "type": "biginteger"
+    },
+    "group_goals": {
+      "type": "biginteger"
+    }
+  }
+}
