@@ -20,6 +20,7 @@ function Game({event_id,eventname,status}) {
     useEffect(()=> {
         const fetchGameId = async()=>{
             const response = await instance.get(`Euro_events?eid_xml=${event_id}`)
+
             setGameId(response.data[0].id)
             
         }
@@ -188,17 +189,16 @@ function Game({event_id,eventname,status}) {
                     }
                 }) 
         }
-       putStatus()
+       putStatus().then(sendBetResults())
 
-       sendBetResults()
     }
 
     function sendBetResults() { 
         const fetchResults = async()=>{
             const response = await instance.get(`results?event_id=${event_id}`)
+            console.log(response.data)
             setGameResult(response.data[0])
             const resultData = response.data
-
             return ( 
                 resultData 
             )
@@ -209,10 +209,15 @@ function Game({event_id,eventname,status}) {
         const fetchBet = async(resultData)=>{
             const response = await instance.get(`bets?euro_event.eid_xml=${event_id}`)
             const bets = response.data
-            
-            return (
-                 [bets, resultData]
-            )
+            if (bets.length === 0) {
+               return(
+                  false
+               )
+            }else{
+               return (
+                  [bets, resultData]
+             )
+            }
               
         }
         
@@ -220,8 +225,12 @@ function Game({event_id,eventname,status}) {
     }
     
     function compareBetsWithResult(resp) {
-            
-            const bets = resp[0]
+            if (resp === false ){
+               return (
+                  false
+               )
+            } else {
+               const bets = resp[0]
             const gameResult = resp[1]
             const resultHomeGoals = gameResult[0].home_goals
             const resultAwayGoals = gameResult[0].away_goals
@@ -278,10 +287,17 @@ function Game({event_id,eventname,status}) {
         return (
          [bets, score, betOwner]
       )
-            
+          
+            }
+               
     }
     
     function sendScores(resp) {
+      if (resp === false ){
+         return (
+            alert("No bets on this game")
+         )
+      } else {
       const score = resp[1]
       const bets = resp[0]
       const userBetId= resp[2]
@@ -294,7 +310,7 @@ function Game({event_id,eventname,status}) {
             )
       }
       fetchScore().then((resp2)=>calcScore(resp2))
-      
+   }
     }
     function calcScore(resp2) {
        

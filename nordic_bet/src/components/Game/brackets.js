@@ -53,19 +53,23 @@ function Brackets() {
   
 	if (!loading) {
 	  // All data should be available
-	  console.log(gamesArray);
+	  
 	  for (let i = 0; i < gamesArray.length; i += 6) {
 		chunked.push(gamesArray.slice(i, i + 6));
 	  }
-	}
-	console.log(chunked)
-	const counter = 0
-	for(let i = 0; i < chunked[0]; i++) {
-		if(chunked[0][i].status === "Finished"){
-			counter = counter ++
+	  
+	  var counter = 0
+		for(let i = 0; i < chunked[0].length; i++) {
+			console.log(chunked[0][i])
+			if(chunked[0][i].status === "Finished"){
+				counter ++
+			}
+		}
+		if (counter === 6){
+		// Code for comparing results
 		}
 	}
-	console.log(counter)
+	
 
 
     return (
@@ -73,8 +77,8 @@ function Brackets() {
         
 
          <head/>
-	<meta charset="utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta charSet="utf-8"/>
+	<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 	<link href='https://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'/>
