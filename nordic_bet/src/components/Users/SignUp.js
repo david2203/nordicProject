@@ -46,8 +46,12 @@ export default function SignUp() {
       fname: data.get('förnamn'),
       lname: data.get('efternamn'),
       username: data.get('användarnamn'),
+      adress: data.get('adress'),
+      city: data.get('stad'),
+      zipcode: data.get('postnr'),
+      country: data.get('land'),
       email: data.get('email'),
-      password: data.get('password'),
+      password: data.get('password')
     }).then(response => {
       console.log("user token", response.data.jwt);
       localStorage.setItem("jwt", response.data.jwt);
@@ -114,6 +118,47 @@ export default function SignUp() {
                   id="username"
                   label="Användarnamn"
                   name="användarnamn"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="adress"
+                  label="Adress"
+                  name="adress"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="city"
+                  label="Stad"
+                  name="stad"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="zipcode"
+                  label="Postnummer"
+                  type="number"
+                  name="postnr"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="country"
+                  label="Land"
+                  name="land"
                   autoComplete="family-name"
                 />
               </Grid>

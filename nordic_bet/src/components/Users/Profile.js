@@ -5,39 +5,29 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 
-function Profile() {
+function Profile({firstname, lastname}) {
+
+  console.log(lastname)
 
     const getUsername = localStorage.getItem("username");
     const [userId, setUserId] = useState(localStorage.getItem("user_id"))
     const [fname, setFname] = useState()
     const instance = axios.create({baseURL: server});
 
-    useEffect( ()=> {
-      
-      const getUserValues = async () => {
 
-        const response = await instance.get(
-          `Users?id=${userId}`
-
-        )
-          setFname(response.data[0].fname)
-          console.log(response.data[0].lname)
-      }
-      getUserValues();
-    },[])
+   
+    
 
 
 
-    const editValues = {
-      firstname: fname,
-      lastname: "",
+    var editValues = {
+      firstname: firstname,
+      lastname: lastname,
       adress: "",
       city: "",
       zipcode: "",
       town : "",
       country: "",
-      language: "",
-      timezone: "",
       email: "",
       currentPassword: "",
       newPassword: "",
@@ -45,9 +35,12 @@ function Profile() {
     };
 
     const [editUserValue, setEditValue] = useState(editValues);
+    console.log(editUserValue)
+    
+     
 
 
-    console.log(fname)
+
 
     function editUser(e) {
       e.preventDefault();
@@ -73,17 +66,17 @@ function Profile() {
     }
     console.log(editUserValue)
 
-    useEffect( ()=> {
-        const fetchUsername = async () => {
-            const response = await instance.get (`users?id`);
+    // useEffect( ()=> {
+    //     const fetchUsername = async () => {
+    //         const response = await instance.get (`users?id`);
             
-            console.log(response);
+    //         console.log(response);
 
 
  
-        };
-        fetchUsername();
-    })
+    //     };
+    //     fetchUsername();
+    // })
     
     return (
         <>
@@ -143,7 +136,7 @@ function Profile() {
                           <div className="col">
                             <div className="form-group">
                               <label>Efternamn</label>
-                              <input className="form-control" type="text" name="username" placeholder="johnny.s"/>
+                              <input className="form-control" type="text" name="lastname" value={editUserValue.lastname} onChange={onChangeUser}/>
                             </div>
                           </div>
                         </div>

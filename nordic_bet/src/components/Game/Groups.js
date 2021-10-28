@@ -79,6 +79,7 @@ function Groups() {
           const team34 = games[1].eventname.split("-")
             team12.push(team34[0],team34[1])
            
+            
             const instance = axios.create({ baseURL: server });
             //Function for putting all teams into strapi
         // team12.forEach((team)=>{
