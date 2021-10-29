@@ -84,7 +84,7 @@ function Groups() {
     //       }
     //       teamsArray.push(teams)
     //       console.log(teamsArray)
-
+    //     })
     //----------------------Function for putting all teams into strapi (only works with above function modified)
     // mapTeams.forEach((team)=>{
     //     instance.post(`Countries`,{
