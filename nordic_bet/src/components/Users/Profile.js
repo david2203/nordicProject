@@ -9,103 +9,65 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
 
   console.log(lastname)
 
-  const getUsername = localStorage.getItem("username");
+    const getUsername = localStorage.getItem("username");
+    const [userId, setUserId] = useState(localStorage.getItem("user_id"))
+    const [fname, setFname] = useState()
+    const instance = axios.create({baseURL: server});
 
-  const [userId, setUserId] = useState(localStorage.getItem("user_id"))
-  
-  const [fname, setFname] = useState()
-  
-  const instance = axios.create({baseURL: server});
-  
-  var editValues = {
-  username: username,
-  firstname: firstname,
-  lastname: lastname,
-  adress: adress,
-  city: city,
-  zipcode: zipcode,
-  country: country,
-  email: email,
-  currentPassword: "",
-  newPassword: "",
-  confirmNewPassword: ""
-  };
-  
-  
-  
-  const [editUserValue, setEditValue] = useState(editValues);
-  
-  console.log(editUserValue)
-  
-  
-  
-  
-  
-  
-  function editUser(e) {
-  
-  e.preventDefault();
-  
-  
-  
-  const editUserValues = async () => {
-  
-  
-  
-  const response = await instance.put(
-  
-  `Users?id=${userId}`,
-  
-  {
-  
-  firstname: editUserValue.firstname,
-  
-  lastname: editUserValue.lastname,
-  
-  }
-  
-  ).then(window.location.reload());
-  
-  
-  
-  console.log(response)
-  
-  
-  
-  }
-  
-  editUserValues();
-  
-  }
-  
-  
-  
-  function onChangeUser(e) {
-  
-  setEditValue({...editUserValue, [e.target.name]: e.target.value });
-  
-  }
-  
-  console.log(editUserValue)
-  
-  
-  
-  // useEffect( ()=> {
-  
-  // const fetchUsername = async () => {
-  
-  // const response = await instance.get (`users?id`);
-  
-  // console.log(response);
-  
-  
-  
-  
-  // };
-  
-  // fetchUsername();
-  
-  // })
+    var editValues = {
+      username: username,
+      firstname: firstname,
+      lastname: lastname,
+      adress: adress,
+      city: city,
+      zipcode: zipcode,
+      country: country,
+      email: email,
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: ""
+    };
+
+    const [editUserValue, setEditValue] = useState(editValues);
+    console.log(editUserValue)
+    
+     
+    function editUser(e) {
+      e.preventDefault();
+
+      const editUserValues = async () => {
+
+        const response = await instance.put(
+          `Users?id=${userId}`,
+          {
+            firstname: editUserValue.firstname,
+            lastname: editUserValue.lastname,
+          }
+        ).then(window.location.reload());
+
+        console.log(response)
+
+      }
+      editUserValues();
+    }
+
+    function onChangeUser(e) {
+      setEditValue({...editUserValue, [e.target.name]: e.target.value });
+    }
+    console.log(editUserValue)
+
+    // useEffect( ()=> {
+    //     const fetchUsername = async () => {
+    //         const response = await instance.get (`users?id`);
+            
+    //         console.log(response);
+
+
+ 
+    //     };
+    //     fetchUsername();
+    // })
+    
     return (
         <>
 
@@ -131,8 +93,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                 </div>
                 <div className="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                   <div className="text-center text-sm-left mb-2 mb-sm-0">
-                    <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">För-Efternamn</h4>
-                    <p className="mb-0">{getUsername}</p>
+                    <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">{firstname} {lastname}</h4>
+                    <p className="mb-0">Användarnamn: {username}</p>
                     <div className="mt-2">
                       <button className="btn btn-primary" type="button">
                         <i className="fa fa-fw fa-camera"></i>
@@ -146,7 +108,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                 </div>
               </div>
               <ul className="nav nav-tabs">
-                <li className="nav-item"><a href="" className="active nav-link">Settings</a></li>
+                <li className="nav-item"><a href="" className="active nav-link">Inställningar</a></li>
               </ul>
               <div className="tab-content pt-3">
                 <div className="tab-pane active">
@@ -175,13 +137,13 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Adress</label>
-                              <input className="form-control" type="text" name="name" placeholder="John Smith"/>
+                              <input className="form-control" type="text" name="adress" value={editUserValue.adress} onChange={onChangeUser}/>
                             </div>
                           </div>
                           <div className="col">
                             <div className="form-group">
                               <label>Stad</label>
-                              <input className="form-control" type="text" name="username" placeholder="johnny.s"/>
+                              <input className="form-control" type="text" name="city" value={editUserValue.city} onChange={onChangeUser}/>
                             </div>
                           </div>
                         </div>
@@ -192,39 +154,24 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Postnr</label>
-                              <input className="form-control" type="number" name="name" placeholder="John Smith"/>
+                              <input className="form-control" type="number" name="zipcode" value={editUserValue.zipcode} onChange={onChangeUser}/>
                             </div>
                           </div>
                           <div className="col">
                             <div className="form-group">
                               <label>Land</label>
-                              <input className="form-control" type="text" name="username" placeholder="johnny.s"/>
+                              <input className="form-control" type="text" name="country" value={editUserValue.country} onChange={onChangeUser}/>
                             </div>
                           </div>
                         </div>
 
                            {/* Postnr & land ovan */}
 
-                           <div className="row">
-                          <div className="col">
-                            <div className="form-group">
-                              <label>Språk</label>
-                              <input className="form-control" type="text" name="name" placeholder="Svenska"/>
-                            </div>
-                          </div>
-                          <div className="col">
-                            <div className="form-group">
-                              <label>Tidzon</label>
-                              <input className="form-control" type="text" name="username" placeholder="CET"/>
-                            </div>
-                          </div>
-                        </div>
-
                         <div className="row">
                           <div className="col">
                             <div className="form-group">
                               <label>E-postadress</label>
-                              <input className="form-control" type="text" placeholder="user@example.com"/>
+                              <input className="form-control" type="text" name="email" value={editUserValue.email} onChange={onChangeUser}/>
                             </div>
                           </div>
                         </div>
@@ -239,7 +186,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Nuvarande Lösenord</label>
-                              <input className="form-control" type="password" placeholder="••••••"/>
+                              <input className="form-control" type="password" />
                             </div>
                           </div>
                         </div>
@@ -247,7 +194,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Nytt Lösenord</label>
-                              <input className="form-control" type="password" placeholder="••••••"/>
+                              <input className="form-control" type="password" />
                             </div>
                           </div>
                         </div>
@@ -255,7 +202,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Bekräfta <span className="d-none d-xl-inline">Lösenord</span></label>
-                              <input className="form-control" type="password" placeholder="••••••"/></div>
+                              <input className="form-control" type="password" /></div>
                           </div>
                         </div>
                       </div>
