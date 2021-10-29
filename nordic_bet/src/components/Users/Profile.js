@@ -5,108 +5,107 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 
-function Profile() {
+function Profile({username, firstname, lastname, adress, city, zipcode, country, email}) {
 
-    const getUsername = localStorage.getItem("username");
-    const [userId, setUserId] = useState(localStorage.getItem("user_id"))
-    const [fname, setFname] = useState()
-    const instance = axios.create({baseURL: server});
-    const [loading, setLoading] = useState(true);
+  console.log(lastname)
 
-    useEffect( ()=> {
-      const getUserValues = async () => {
-        const response = await instance.get(
-          `Users?id=${userId}`
-        )
-          setFname(response.data[0].fname)
-          console.log(response.data[0].lname)
-          setLoading(false)
-      }
-      if (loading) {
-        getUserValues();
-      }
+  const getUsername = localStorage.getItem("username");
 
-      return (
-        loading
-      )
-    },[])
-
-   
-    const [editUserValue, setEditValue] = useState({
-      firstname: "",
-      lastname: "",
-      adress: "",
-      city: "",
-      zipcode: "",
-      town : "",
-      country: "",
-      language: "",
-      timezone: "",
-      email: "",
-      currentPassword: "",
-      newPassword: "",
-      confirmNewPassword: ""
-    });
-
-    if (!loading) {
-     
-    setEditValue({
-      firstname: fname,
-      lastname: "",
-      adress: "",
-      city: "",
-      zipcode: "",
-      town : "",
-      country: "",
-      language: "",
-      timezone: "",
-      email: "",
-      currentPassword: "",
-      newPassword: "",
-      confirmNewPassword: ""
-     })
-    }
-
-
-
-
-
-    function editUser(e) {
-      e.preventDefault();
-
-      const editUserValues = async () => {
-
-        const response = await instance.put(
-          `Users?id=${userId}`,
-          {
-            firstname: editUserValue.firstname,
-            lastname: editUserValue.lastname,
-          }
-        ).then(window.location.reload());
-
-        console.log(response)
-
-      }
-      editUserValues();
-    }
-
-    function onChangeUser(e) {
-      setEditValue({...editUserValue, [e.target.name]: e.target.value });
-    }
-    console.log(editUserValue)
-
-    useEffect( ()=> {
-        const fetchUsername = async () => {
-            const response = await instance.get (`users?id`);
-            
-            console.log(response);
-
-
- 
-        };
-        fetchUsername();
-    }, [])
-    
+  const [userId, setUserId] = useState(localStorage.getItem("user_id"))
+  
+  const [fname, setFname] = useState()
+  
+  const instance = axios.create({baseURL: server});
+  
+  var editValues = {
+  username: username,
+  firstname: firstname,
+  lastname: lastname,
+  adress: adress,
+  city: city,
+  zipcode: zipcode,
+  country: country,
+  email: email,
+  currentPassword: "",
+  newPassword: "",
+  confirmNewPassword: ""
+  };
+  
+  
+  
+  const [editUserValue, setEditValue] = useState(editValues);
+  
+  console.log(editUserValue)
+  
+  
+  
+  
+  
+  
+  function editUser(e) {
+  
+  e.preventDefault();
+  
+  
+  
+  const editUserValues = async () => {
+  
+  
+  
+  const response = await instance.put(
+  
+  `Users?id=${userId}`,
+  
+  {
+  
+  firstname: editUserValue.firstname,
+  
+  lastname: editUserValue.lastname,
+  
+  }
+  
+  ).then(window.location.reload());
+  
+  
+  
+  console.log(response)
+  
+  
+  
+  }
+  
+  editUserValues();
+  
+  }
+  
+  
+  
+  function onChangeUser(e) {
+  
+  setEditValue({...editUserValue, [e.target.name]: e.target.value });
+  
+  }
+  
+  console.log(editUserValue)
+  
+  
+  
+  // useEffect( ()=> {
+  
+  // const fetchUsername = async () => {
+  
+  // const response = await instance.get (`users?id`);
+  
+  // console.log(response);
+  
+  
+  
+  
+  // };
+  
+  // fetchUsername();
+  
+  // })
     return (
         <>
 
@@ -165,7 +164,7 @@ function Profile() {
                           <div className="col">
                             <div className="form-group">
                               <label>Efternamn</label>
-                              <input className="form-control" type="text" name="username" placeholder="johnny.s"/>
+                              <input className="form-control" type="text" name="lastname" value={editUserValue.lastname} onChange={onChangeUser}/>
                             </div>
                           </div>
                         </div>
