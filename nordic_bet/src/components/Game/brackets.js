@@ -4,9 +4,13 @@ import server from "../Global/config";
 import axios from "axios";
 
 function Brackets() {
-	const chunked = [];
+	const chunkedGames = [];
+	const chunkedCountries = [];
+
 	const useGetGames = () => {
 	  const [gamesArray, setGamesArray] = useState([]);
+	  const [countriesArray, setCountriesArray] = useState([]);
+
 	  const [loading, setLoading] = useState(true);
   
 	  const groups = [
@@ -20,6 +24,15 @@ function Brackets() {
   
 	  const instance = axios.create({ baseURL: server });
   
+	  const fetchCountries = async () => {
+		  try {
+			  const data2 = await instance.get(`countries?_sort=group:ASC`);
+			  setCountriesArray(data2.data);
+
+		  } catch (err) {
+			  console.log(err)
+		  }
+	  }
 	  const fetchGames = async () => {
 		try {
 		  for (let i = 0; i < groups.length; i++) {
@@ -34,32 +47,65 @@ function Brackets() {
 	  };
   
 	  useEffect(() => {
+		fetchCountries();
 		fetchGames();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	  }, []);
   
-	  return { loading, gamesArray };
+	  return { loading, gamesArray, countriesArray };
 	};
   
-	const { loading, gamesArray } = useGetGames();
+	const { loading, gamesArray, countriesArray } = useGetGames();
   
 	if (!loading) {
 	  // All data should be available
-	  
+	  const instance = axios.create({ baseURL: server });
+	  console.log(countriesArray)
 	  for (let i = 0; i < gamesArray.length; i += 6) {
-		chunked.push(gamesArray.slice(i, i + 6));
+		chunkedGames.push(gamesArray.slice(i, i + 6));
 	  }
-	  
-	  var counter = 0
-		for(let i = 0; i < chunked[0].length; i++) {
-			console.log(chunked[0][i])
-			if(chunked[0][i].status === "Finished"){
+	  for (let i = 0; i < countriesArray.length; i += 4) {
+		chunkedCountries.push(countriesArray.slice(i, i + 4));
+	  }
+	  for (let j = 0; j < chunkedGames.length; j++){
+		var counter = 0
+		for(let i = 0; i < chunkedGames[j].length; i++) {
+			if(chunkedGames[j][i].status === "Finished"){
 				counter ++
 			}
 		}
 		if (counter === 6){
-		// Code for comparing results
+			console.log(chunkedCountries[j])
+			const sendTo = chunkedCountries[j][0].group
+			console.log(sendTo)
+			const teamArray = []
+			const team1 = { "country":chunkedCountries[j][0].name, "score":chunkedCountries[j][0].group_score}
+			const team2= { "country":chunkedCountries[j][1].name, "score":chunkedCountries[j][1].group_score}
+			const team3= { "country":chunkedCountries[j][2].name, "score":chunkedCountries[j][2].group_score}
+			const team4= { "country":chunkedCountries[j][3].name, "score":chunkedCountries[j][3].group_score}
+			teamArray.push(team1,team2,team3,team4)
+			console.log(teamArray)
+			teamArray.sort(function(a, b) {
+				return b.score - a.score;
+			  });
+			  
+			const winner = teamArray[0].country
+			const secondPlace = teamArray[1].country
+
+
+			console.log(winner, secondPlace)
+
+
+
+			// const updateBracket = async()=>{
+			// 	await instance.put(`euro_Events/${userBetId}`, {
+			// 		Score:newScore
+			// 	})
+			// 	}
+			//  updateBracket()
 		}
+	  }
+	  
 	}
 	
 

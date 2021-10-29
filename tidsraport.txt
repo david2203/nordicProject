@@ -1,0 +1,14 @@
+
+105 timmar / 3 veckor
+
+1 Veckan 
+databashantering/struktur 
+3 dagar ( 21 hr var ) - 6 x 2 var (meetings) : 15 hr
+
+2 Veckan 
+React start/ koppla strapi och mysql med react. Lätta funktioner (jsx) /hämta ut tabell datta / login / register 
+5 dagar ( 35 hr var) - 8 x2 var (meetings mm) : 27 hr 
+
+3 Veckan 
+Svårare funktioner / requests / hämta och skicka data för games och profiler 
+5 dagar ( 35 hr var) - 5 x2 var(meetings mm) : 30 hr

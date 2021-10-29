@@ -53,6 +53,7 @@ export default function SignIn() {
         localStorage.setItem("user_id", response.data.user.id)
         localStorage.setItem("username", response.data.user.username)
         history.push("/games")
+        window.location.reload()
     }).catch(err => console.log(err));
     
 
