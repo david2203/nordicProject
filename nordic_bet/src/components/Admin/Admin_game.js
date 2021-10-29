@@ -13,7 +13,6 @@ function Game({event_id,eventname,status,score_given}) {
     const [gameResult, setGameResult] = useState()
     const [homeFlag, setHomeFlag] = useState("AQ")
     const [awayFlag, setAwayFlag] = useState("AQ")
-    const user_id = localStorage.getItem("user_id")
     const token = localStorage.getItem("jwt")
  
 
@@ -172,6 +171,7 @@ function Game({event_id,eventname,status,score_given}) {
          else if (away_team === "Austria") {
             setAwayFlag("AT");
          }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
    
     
@@ -372,8 +372,7 @@ function Game({event_id,eventname,status,score_given}) {
             alert("No bets on this game")
          )
       } else {
-      const score = resp[1]
-      const bets = resp[0]
+      
       const userBetId= resp[2]
       const fetchScore = async()=>{
          const response = await instance.get(`/users?id=${userBetId}`)

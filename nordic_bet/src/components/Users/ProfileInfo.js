@@ -19,6 +19,7 @@ function ProfileInfo() {
               setUserInfo(response.data)
         }
         fetchUserInfo()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
 

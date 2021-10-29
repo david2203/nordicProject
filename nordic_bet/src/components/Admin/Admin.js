@@ -4,11 +4,12 @@ import server from "../Global/config";
 import AdminGame from "./Admin_game";
 
 function Admin() {
-    const instance = axios.create({baseURL: server})
+    
     const [games, setGames] = useState([]);
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect( ()=>{
+        const instance = axios.create({baseURL: server})
         const userId = localStorage.getItem('user_id');
         if(userId!==null){
 
@@ -22,6 +23,7 @@ function Admin() {
     },[])
 
     useEffect(()=> {
+        const instance = axios.create({baseURL: server})
         const fetchGame = async()=>{
             const response = await instance.get(`Euro_events`)
                 setGames(response.data)   

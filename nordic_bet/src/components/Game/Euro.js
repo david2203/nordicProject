@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import axios from "axios";
-import server from "../Global/config"
+// import axios from "axios";
+// import server from "../Global/config"
 import Groups from "./Groups"
 import Brackets from "./Brackets"
 import Groupsinfo from "./Groupsinfo"
@@ -16,7 +16,6 @@ function Euro() {
         
     }
     useEffect(()=> {
-        console.log(formValues)
     }, [formValues])
 
     return (
