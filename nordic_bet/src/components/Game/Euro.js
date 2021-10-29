@@ -3,6 +3,7 @@ import axios from "axios";
 import server from "../Global/config"
 import Groups from "./Groups"
 import Brackets from "./Brackets"
+import Groupsinfo from "./Groupsinfo"
 
 function Euro() {
     const initialValues = {
@@ -33,8 +34,9 @@ function Euro() {
                 <option value="GroupView"> Group View </option>
                 <option value="EliminationView"> Elimination View </option> 
             </select><br/>
-            { formValues.typeOfView === "GroupView" ? ( <Groups/>) : (<></>)}
+            { formValues.typeOfView === "GroupView" ? ( <><Groupsinfo/> <Groups/></>) : (<></>)}
             { formValues.typeOfView === "EliminationView" ? ( <Brackets/>) : (<></>)}
+            
 
         </>
     )

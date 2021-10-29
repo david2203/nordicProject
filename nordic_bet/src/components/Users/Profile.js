@@ -11,24 +11,46 @@ function Profile() {
     const [userId, setUserId] = useState(localStorage.getItem("user_id"))
     const [fname, setFname] = useState()
     const instance = axios.create({baseURL: server});
+    const [loading, setLoading] = useState(true);
 
     useEffect( ()=> {
-      
       const getUserValues = async () => {
-
         const response = await instance.get(
           `Users?id=${userId}`
-
         )
           setFname(response.data[0].fname)
           console.log(response.data[0].lname)
+          setLoading(false)
       }
-      getUserValues();
+      if (loading) {
+        getUserValues();
+      }
+
+      return (
+        loading
+      )
     },[])
 
+   
+    const [editUserValue, setEditValue] = useState({
+      firstname: "",
+      lastname: "",
+      adress: "",
+      city: "",
+      zipcode: "",
+      town : "",
+      country: "",
+      language: "",
+      timezone: "",
+      email: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: ""
+    });
 
-
-    const editValues = {
+    if (!loading) {
+     
+    setEditValue({
       firstname: fname,
       lastname: "",
       adress: "",
@@ -42,12 +64,12 @@ function Profile() {
       currentPassword: "",
       newPassword: "",
       confirmNewPassword: ""
-    };
+     })
+    }
 
-    const [editUserValue, setEditValue] = useState(editValues);
 
 
-    console.log(fname)
+
 
     function editUser(e) {
       e.preventDefault();
@@ -83,7 +105,7 @@ function Profile() {
  
         };
         fetchUsername();
-    })
+    }, [])
     
     return (
         <>

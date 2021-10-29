@@ -5,9 +5,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import { borderRight, textAlign } from "@mui/system";
 
 function Scorecard({id,username,score, row}) {
-    
-   console.log({row})
-
     return (
         <>
     <tr>

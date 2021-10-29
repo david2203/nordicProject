@@ -4,15 +4,6 @@ import server from "../Global/config";
 import axios from "axios";
 
 function Brackets() {
-
-    // useEffect(()=> {
-    //     const fetchGame = async()=>{
-    //         const response = await instance.get(`Euro_events?status=Not Started&&_limit=${loadPage}`)
-    //             setGames(response.data)   
-    //     }
-    //     fetchGame()
-    // }, [loadPage])
-
 	const chunked = [];
 	const useGetGames = () => {
 	  const [gamesArray, setGamesArray] = useState([]);

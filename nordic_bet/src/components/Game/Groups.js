@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import server from "../Global/config";
-import Brackets from "./Brackets";
 
 
 function Groups() {
@@ -42,92 +41,91 @@ function Groups() {
   };
 
   const { loading, gamesArray } = useGetGames();
-  
+  console.log(gamesArray);
+  const teamsArray = [];
   if (!loading) {
     // All data should be available
     console.log(gamesArray);
     for (let i = 0; i < gamesArray.length; i += 6) {
-        //chunked is an array with all groups as arrays inside
+      //chunked is an array with all groups as arrays inside
       chunked.push(gamesArray.slice(i, i + 6));
     }
 
-    
-    
-    for(let i = 0; i < chunked[0].length; i++) {
-       
-        if(chunked[0][i].status === "Finished"){
-            const playingTeams = chunked[0][i].eventname.split("-")
-            const home_team = playingTeams[0]
-            const away_team = playingTeams[1]
-            if (chunked[0][i].winner === home_team) {
-                //give home team 3 points and away team 0 points and set active to false
-                
-            } else if(chunked[0][i].winner === away_team){
-                //give away team 3 points and home team 0 points and set active to false
-            } else {
-                //give both teams 1 point and set active to false
-            }
-            
-        }
-    }
-		
+    //----------------------Function for setting group names to the countries and at the same time putting the score of each group to 0 (reset function aswell)
+
+    // chunked.forEach((games)=>{
+    //   console.log(games)
+    //     const instance = axios.create({ baseURL: server });
+    //     const mapTeams = []
+    //     const teams = [{"name":"","score":0},{"name":"","score":0},{"name":"","score":0},{"name":"","score":0},]
+    //     const team12 = games[0].eventname.split("-")
+    //     const team34 = games[1].eventname.split("-")
+    //     const grp = games[0].grp
+    //     mapTeams.push(team12[0],team12[1],team34[0],team34[1],)
+    //     teams[0].name=team12[0]
+    //     teams[1].name=team12[1]
+    //     teams[2].name=team34[0]
+    //     teams[3].name=team34[1]
+    //     console.log(teams)
+    //       for (let i = 0; i < mapTeams.length ; i++) {
+    //         const fetchId = async() => {
+    //           const response = await instance.get(`countries?name=${mapTeams[i]}`)
+    //           const countryId = response.data[0].id
+    //           const putGrp = async() => {
+    //             await instance.put(`countries/${countryId}`, {
+    //               group:grp,
+    //               group_score:0
+    //           })
+    //           }
+    //           putGrp()
+    //         }
+    //         fetchId()
+
+    //       }
+    //       teamsArray.push(teams)
+    //       console.log(teamsArray)
+
+    //----------------------Function for putting all teams into strapi (only works with above function modified)
+    // mapTeams.forEach((team)=>{
+    //     instance.post(`Countries`,{
+    //         name:team
+    //       })
+    // })
+
+    // })
   }
+
   return (
     <div>
       {chunked.map((games) => {
-          const team12 = games[0].eventname.split("-")
-          const team34 = games[1].eventname.split("-")
-            team12.push(team34[0],team34[1])
-           
-            const instance = axios.create({ baseURL: server });
-            //Function for putting all teams into strapi
-        // team12.forEach((team)=>{
-        //     instance.post(`Countries`,{
-        //         name:team
-
-        //       })
-        // })
         return (
-            <>
-            <table className="table table-hover w-25 border bg-light mt-3 mx-auto">
-            <thead>
-              <tr>
-                <th scope="col"> Participating teams in {games[0].grp}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {team12.map((game) => {
-                  
-                return (
+          <>
+            <table className="table table-hover w-50 border bg-light mt-3 mx-auto">
+              <thead>
+                <tr>
+                  <th scope="col"> {games[0].grp} Games</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Home goals </th>
+                  <th scope="col">Home goals </th>
+                  <th scope="col">Winner </th>
+                </tr>
+              </thead>
+              <tbody>
+                {games.map((game) => {
+                  return (
                     <tr>
-                    <td>{game}</td>
-                
-                  </tr> 
-                );
-              })}
-            </tbody>
-          </table>
-          <table className="table table-hover w-25 border bg-light mt-3 mx-auto">
-            <thead>
-              <tr>
-                <th scope="col">Games {games[0].grp}</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {games.map((game) => {
-                return (
-                    <tr>
-                    <td>{game.eventname}</td>
-                    <td>{game.status}</td>   
-                  </tr> 
-                );
-              })}
-            </tbody>
-          </table>
-          <br/>
-          <br/>
-
+                      <td>{game.eventname}</td>
+                      <td>{game.status}</td>
+                      <td>{game.home_final}</td>
+                      <td>{game.away_final}</td>
+                      <td>{game.winner}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <br />
+            <br />
           </>
         );
       })}

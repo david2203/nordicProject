@@ -20,6 +20,9 @@
     },
     "group_goals": {
       "type": "biginteger"
+    },
+    "group": {
+      "type": "string"
     }
   }
 }
