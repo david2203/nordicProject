@@ -8,6 +8,7 @@ import Admin from "../Admin/Admin";
 import Footer from "./Footer";
 import Euro from "../Game/Euro"
 import ProfileInfo from "../Users/ProfileInfo";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import {
     BrowserRouter as Router,

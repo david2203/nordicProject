@@ -28,7 +28,7 @@ function ProfileInfo() {
         <>  
         {userInfo.map((userinfo)=>{
             return (
-                <Profile key={userinfo.Id} username={userinfo.username} firstname={userinfo.fname} lastname={userinfo.lname} adress={userinfo.adress} city={userinfo.city} zipcode={userinfo.zipcode} country={userinfo.country} email={userinfo.email}  />
+                <Profile key={userinfo.Id} username={userinfo.username} firstname={userinfo.fname} lastname={userinfo.lname} adress={userinfo.adress} city={userinfo.city} zipcode={userinfo.zipcode} country={userinfo.country} email={userinfo.email} created={userinfo.created_at}  />
             )
         })}
             

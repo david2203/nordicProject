@@ -6,13 +6,22 @@ import { useHistory } from "react-router";
 
 
 
-function Profile({username, firstname, lastname, adress, city, zipcode, country, email}) {
+function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created}) {
 
-  console.log(lastname)
+
 
     const [userId, setUserId] = useState(localStorage.getItem("user_id"))
     const history = useHistory();
     const instance = axios.create({baseURL: server});
+    const [isChanging, setIsChanging] = useState(false);
+
+
+    const changePassword = {
+        password: "",
+        oldPassword: "",
+        confirmPassword: ""
+    }
+
 
     var editValues = {
       username: username,
@@ -30,6 +39,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
 
     const [editUserValue, setEditValue] = useState(editValues);
     console.log(editUserValue)
+
+
     
      
     function editUser(e) {
@@ -38,40 +49,37 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
       const editUserValues = async () => {
 
         const response = await instance.put(
-          `Users?id=${userId}`,
+          `Users/${userId}`,
           {
-            firstname: editUserValue.firstname,
-            lastname: editUserValue.lastname,
+            fname: editUserValue.firstname,
+            lname: editUserValue.lastname,
             adress: editUserValue.adress,
             city: editUserValue.city,
             zipcode: editUserValue.zipcode,
             country: editUserValue.country,
             email: editUserValue.email
           }
-        ).then(window.location.reload());
+        ).then(window.location.reload())
 
         console.log(response)
-
+          
       }
       editUserValues();
     }
 
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     function onChangeUser(e) {
-      setEditValue({...editUserValue, [e.target.name]: e.target.value });
+      setEditValue({...editUserValue, [e.target.name]: capitalizeFirstLetter(e.target.value) });
+      
     }
     console.log(editUserValue)
+    console.log(editUser)
+    
 
-    // useEffect( ()=> {
-    //     const fetchUsername = async () => {
-    //         const response = await instance.get (`users?id`);
-            
-    //         console.log(response);
-
-
- 
-    //     };
-    //     fetchUsername();
-    // })
+  
     
     return (
         <>
@@ -108,7 +116,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                     </div>
                   </div>
                   <div className="text-center text-sm-right">
-                    <div className="text-muted"><small>Joined 09 Dec 2017</small></div>
+                    <div className="text-muted"><small>Konto skapat <br/>{created}</small></div>
                   </div>
                 </div>
               </div>
@@ -117,7 +125,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
               </ul>
               <div className="tab-content pt-3">
                 <div className="tab-pane active">
-                  <form className="form" novalidate="">
+                  <form className="form" noValidate="">
                     <div className="row">
                       <div className="col">
 
@@ -191,7 +199,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Nuvarande Lösenord</label>
-                              <input className="form-control" type="password" />
+                              <input className="form-control" type="password" name="currentPassword" />
                             </div>
                           </div>
                         </div>
@@ -199,7 +207,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Nytt Lösenord</label>
-                              <input className="form-control" type="password" />
+                              <input className="form-control" type="password" name="newPassword" />
                             </div>
                           </div>
                         </div>
@@ -207,7 +215,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                           <div className="col">
                             <div className="form-group">
                               <label>Bekräfta <span className="d-none d-xl-inline">Nytt Lösenord</span></label>
-                              <input className="form-control" type="password" /></div>
+                              <input className="form-control" type="password" name="confirmNewPassword"/></div>
                           </div>
                         </div>
                       </div>
@@ -223,7 +231,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
  <br/>
 
  <div className="col d-flex justify-content-end">
-                        <button className="btn btn-primary" type="submit" onSubmit={onChangeUser}>Spara inställningar</button>
+                        <button className="btn btn-primary" type="submit" onClick={editUser}>Spara inställningar</button>
                       </div>
  <br/>
 
