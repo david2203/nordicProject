@@ -14,12 +14,6 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
     const [fname, setFname] = useState()
     const instance = axios.create({baseURL: server});
 
-
-   
-    
-
-
-
     var editValues = {
       username: username,
       firstname: firstname,
@@ -38,10 +32,6 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
     console.log(editUserValue)
     
      
-
-
-
-
     function editUser(e) {
       e.preventDefault();
 
