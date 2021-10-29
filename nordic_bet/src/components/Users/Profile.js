@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import server from "../Global/config";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useHistory } from "react-router";
 
 
 
@@ -9,9 +10,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
 
   console.log(lastname)
 
-    const getUsername = localStorage.getItem("username");
     const [userId, setUserId] = useState(localStorage.getItem("user_id"))
-    const [fname, setFname] = useState()
+    const history = useHistory();
     const instance = axios.create({baseURL: server});
 
     var editValues = {
@@ -42,6 +42,11 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
           {
             firstname: editUserValue.firstname,
             lastname: editUserValue.lastname,
+            adress: editUserValue.adress,
+            city: editUserValue.city,
+            zipcode: editUserValue.zipcode,
+            country: editUserValue.country,
+            email: editUserValue.email
           }
         ).then(window.location.reload());
 
@@ -181,7 +186,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                     </div>
                     <div className="row">
                       <div className="col-12 col-sm-6 mb-3">
-                        <div className="mb-2"><b>Byt lösenord</b></div>
+                        <div className="mb-2"><b>Ändra lösenord</b></div>
                         <div className="row">
                           <div className="col">
                             <div className="form-group">
@@ -201,48 +206,38 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                         <div className="row">
                           <div className="col">
                             <div className="form-group">
-                              <label>Bekräfta <span className="d-none d-xl-inline">Lösenord</span></label>
+                              <label>Bekräfta <span className="d-none d-xl-inline">Nytt Lösenord</span></label>
                               <input className="form-control" type="password" /></div>
                           </div>
                         </div>
                       </div>
-                      <div className="col-12 col-sm-5 offset-sm-1 mb-3">
+
                         <div className="mb-2"><b>Keeping in Touch</b></div>
                         <div className="row">
-                          <div className="col">
-                            <label>Email Notifications</label>
-                            <div className="custom-controls-stacked px-2">
-                              <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="notifications-blog" checked=""/>
-                                <label className="custom-control-label" for="notifications-blog">Blog posts</label>
-                              </div>
-                              <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="notifications-news" checked=""/>
-                                <label className="custom-control-label" for="notifications-news">Newsletter</label>
-                              </div>
-                              <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="notifications-offers" checked=""/>
-                                <label className="custom-control-label" for="notifications-offers">Personal Offers</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="col d-flex justify-content-start">
+                        <button className="btn btn-secondary" type="submit">
+                        <i className="bi bi-gear-wide fa-lg"></i>
+                        <span> Ändra lösenord</span>
+                        </button>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="col d-flex justify-content-end">
-                        <button className="btn btn-primary" type="submit">Spara inställningar</button>
+ <br/>
+
+ <div className="col d-flex justify-content-end">
+                        <button className="btn btn-primary" type="submit" onSubmit={onChangeUser}>Spara inställningar</button>
                       </div>
  <br/>
 
 
-                      <div className="col d-flex justify-content-start">
+                      <div className="col d-flex justify-content-end´">
                         <button className="btn btn-outline-danger" type="submit">
                         <i className="bi bi-person-x-fill fa-lg"></i>
                           <span> Radera konto</span>
                         </button>
                       </div>
-                    </div>
+                        </div>
+                      </div>
+
+
                   </form>
 
                 </div>
