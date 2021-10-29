@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import Euro from "../Game/Euro"
 import ProfileInfo from "../Users/ProfileInfo";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Flags from "../Game/Flags"
 
 import {
     BrowserRouter as Router,
@@ -24,7 +25,6 @@ function AppRoute() {
         <>
         <Router>
         <Header/>
-          <Route path="/" exact component={Footer} />
           <Route path="/euro" exact component={Euro}/>
           <Route path="/Admin" exact component={Admin}/>
           <Route path="/MyBets" exact component={MyBets}/>
@@ -32,6 +32,9 @@ function AppRoute() {
           <Route path="/games" exact component={Games} />
           <Route path="/SignUp" exact component={SignUp} />
           <Route path="/SignIn" exact component={SignIn} />
+          <Route path="/Flags" exact component={Flags} />
+
+
         <Footer/>
         </Router>
         </>
