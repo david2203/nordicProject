@@ -8,6 +8,7 @@ import Admin from "../Admin/Admin";
 import Footer from "./Footer";
 import Euro from "../Game/Euro"
 import ProfileInfo from "../Users/ProfileInfo";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
     BrowserRouter as Router,
@@ -21,7 +22,6 @@ import {
 function AppRoute() {
       return (
         <>
-         
         <Router>
         <Header/>
           <Route path="/" exact component={Footer} />
@@ -32,12 +32,8 @@ function AppRoute() {
           <Route path="/games" exact component={Games} />
           <Route path="/SignUp" exact component={SignUp} />
           <Route path="/SignIn" exact component={SignIn} />
-
         <Footer/>
         </Router>
-
-    
-
         </>
       )
   }
