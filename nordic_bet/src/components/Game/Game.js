@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -29,9 +28,8 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     const home_team = playingTeams[0]
     const away_team = playingTeams[1]
     const [gameId, setGameId] = useState()
-    const [layBetIsOpen,setLayBetIsOpen] = useState(false);
     const user_id = localStorage.getItem("user_id")
-    const token = localStorage.getItem("jwt")
+   //  const token = localStorage.getItem("jwt")
     const [homeFlag, setHomeFlag] = useState("AQ")
     const [awayFlag, setAwayFlag] = useState("AQ")
 
@@ -190,7 +188,7 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
          else if (away_team === "Austria") {
             setAwayFlag("AT");
          }
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
 
@@ -360,7 +358,6 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
                                 id="homeTeamGoals" 
                                 value={formValues.homeTeamGoals} 
                                 onChange={handleOnChange}
-                                value={formValues.type} 
                               sx={{ 
                               mx: 5,
                               minWidth: 125,

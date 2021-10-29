@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
@@ -16,24 +17,12 @@ function Footer() {
     </div>
 
     <div>
-      <a href="" className="me-4 text-reset">
-        <i className="fab fa-facebook-f"></i>
-      </a>
-      <a href="" className="me-4 text-reset">
-        <i className="fab fa-twitter"></i>
-      </a>
-      <a href="" className="me-4 text-reset">
-        <i className="fab fa-google"></i>
-      </a>
-      <a href="" className="me-4 text-reset">
-        <i className="fab fa-instagram"></i>
-      </a>
-      <a href="" className="me-4 text-reset">
-        <i className="fab fa-linkedin"></i>
-      </a>
-      <a href="" className="me-4 text-reset">
-        <i className="fab fa-github"></i>
-      </a>
+    <Link to="/" className="me-4 text-reset"> <i className="fab fa-facebook-f"></i></Link>
+    <Link to="/" className="me-4 text-reset"> <i className="fab fa-twitter"></i></Link>
+    <Link to="/" className="me-4 text-reset"> <i className="fab fa-google"></i></Link>
+    <Link to="/" className="me-4 text-reset"> <i className="fab fa-instagram"></i></Link>
+    <Link to="/" className="me-4 text-reset"> <i className="fab fa-linkedin"></i></Link>
+    <Link to="/" className="me-4 text-reset">  <i className="fab fa-github"></i></Link>
     </div>
 
   </section>

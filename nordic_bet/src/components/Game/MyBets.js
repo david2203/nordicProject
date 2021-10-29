@@ -14,10 +14,11 @@ function MyBets() {
 
     useEffect(()=> {
         const fetchBets = async()=>{
-            const response = await instance.get(`bets?user=${user}`)
+            const response = await instance.get(`bets?user=${user}&&_limit=${loadPage}`)
             setBets(response.data)
         }
         fetchBets()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadPage])
 
 
@@ -38,10 +39,10 @@ function MyBets() {
             )
         })}
         {/* pagination function */}
-        {/* { loadPage <= bets.length ? 
+        { loadPage <= bets.length ? 
             (<button onClick={loadMore}>Load more</button>):
             (<button onClick={showLess}>Show less</button>)
-        } */}
+        }
         </>
     )
 }
