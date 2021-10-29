@@ -35,6 +35,7 @@ function Brackets() {
   
 	  useEffect(() => {
 		fetchGames();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	  }, []);
   
 	  return { loading, gamesArray };
@@ -186,8 +187,8 @@ function Brackets() {
 	<section className="share">
 			<div className="share-wrap">
 				<a className="share-icon" href="https://twitter.com/_joebeason"><i className="fa fa-twitter"></i></a>
-				<a className="share-icon" href="#"><i className="fa fa-facebook"></i></a>
-				<a className="share-icon" href="#"><i className="fa fa-envelope"></i></a>
+				{/* <a className="share-icon" href="#"><i className="fa fa-facebook"></i></a> */}
+				{/* <a className="share-icon" href="#"><i className="fa fa-envelope"></i></a> */}
 			</div>
 	</section>
         </body>

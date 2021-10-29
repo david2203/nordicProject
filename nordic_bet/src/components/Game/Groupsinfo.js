@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import server from "../Global/config";
 
@@ -22,6 +22,7 @@ function Groupsinfo() {
     };
     useEffect(() => {
       fetchTeams();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return { loading, teamsArray };
   };

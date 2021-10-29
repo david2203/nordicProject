@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import server from "../Global/config";
 
@@ -35,6 +35,7 @@ function Groups() {
 
     useEffect(() => {
       fetchGames();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return { loading, gamesArray };
@@ -42,7 +43,7 @@ function Groups() {
 
   const { loading, gamesArray } = useGetGames();
   console.log(gamesArray);
-  const teamsArray = [];
+  
   if (!loading) {
     // All data should be available
     console.log(gamesArray);
@@ -82,8 +83,8 @@ function Groups() {
     //         fetchId()
 
     //       }
-    //       teamsArray.push(teams)
-    //       console.log(teamsArray)
+    //       
+    //})
 
     //----------------------Function for putting all teams into strapi (only works with above function modified)
     // mapTeams.forEach((team)=>{
