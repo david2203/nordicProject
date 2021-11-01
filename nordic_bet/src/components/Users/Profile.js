@@ -9,6 +9,7 @@ import ModalTitle from 'react-bootstrap/ModalTitle'
 import ModalHeader from 'react-bootstrap/ModalHeader'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
+import { Parallax } from "react-parallax";
 
 
 
@@ -158,14 +159,17 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
 }
 
     
+    const image1 =
+    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80";
 
   
     
     return (
         <>
-
+  <Parallax bgImage={image1} strength={500}>
+          <div style={{ height: "auto" }}></div>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-<div className="container">
+<div className="container mt-3">
 <div className="row flex-lg-nowrap">
   <div className="col-12 col-lg-auto mb-3" style={{width: "50px"}}>
   </div>
@@ -339,6 +343,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
         onHide={() => setModalShow(false)}
       />
 
+</Parallax>
         </>
     )
 }

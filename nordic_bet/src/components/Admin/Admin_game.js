@@ -270,7 +270,7 @@ function Game({event_id,eventname,status,score_given}) {
     
     return (
         <>
-        <div className="game_info">
+        <div className="game_info mt-3 bg-light w-25 center ">
             <HomeFlag width="30px" title="United States" className="..."/> 
             {eventname}
             <AwayFlag width="30px" title="United States" className="..."/>

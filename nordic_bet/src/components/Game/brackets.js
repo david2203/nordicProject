@@ -2,150 +2,41 @@ import React, {useState, useEffect} from 'react'
 import "../Brackets.css"
 import server from "../Global/config";
 import axios from "axios";
-
 function Brackets() {
-	const chunkedGames = [];
-	const chunkedCountries = [];
 
 	const useGetGames = () => {
 	  const [gamesArray, setGamesArray] = useState([]);
-	  const [countriesArray, setCountriesArray] = useState([]);
-
 	  const [loading, setLoading] = useState(true);
-  
-	  const groups = [
-		"EURO Grp. A",
-		"EURO Grp. B",
-		"EURO Grp. C",
-		"EURO Grp. D",
-		"EURO Grp. E",
-		"EURO Grp. F",
-	  ];
-  
 	  const instance = axios.create({ baseURL: server });
   
 	  const fetchCountries = async () => {
 		  try {
-			  const data2 = await instance.get(`countries?_sort=group:ASC`);
-			  setCountriesArray(data2.data);
+			  const data = await instance.get(`euro_events?grp=Euro 1/8 finals`);
+			  setGamesArray(data.data)
 
 		  } catch (err) {
 			  console.log(err)
 		  }
-	  }
-	  const fetchGames = async () => {
-		try {
-		  for (let i = 0; i < groups.length; i++) {
-			const { data } = await instance.get(`Euro_events?grp=${groups[i]}`);
-			setGamesArray((games) => [...games, ...data]);
-		  }
-		} catch (err) {
-		  console.log(err);
-		}
+	  
   
 		setLoading(false);
 	  };
   
 	  useEffect(() => {
 		fetchCountries();
-		fetchGames();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	  }, []);
   
-	  return { loading, gamesArray, countriesArray };
+	  return { loading, gamesArray};
 	};
-  
-	const { loading, gamesArray, countriesArray } = useGetGames();
-  
-	if (!loading) {
-	  // All data should be available
-	  const instance = axios.create({ baseURL: server });
-	  console.log(countriesArray)
-	  for (let i = 0; i < gamesArray.length; i += 6) {
-		chunkedGames.push(gamesArray.slice(i, i + 6));
-	  }
-	  for (let i = 0; i < countriesArray.length; i += 4) {
-		chunkedCountries.push(countriesArray.slice(i, i + 4));
-	  }
-	  for (let j = 0; j < chunkedGames.length; j++){
-		var counter = 0
-		for(let i = 0; i < chunkedGames[j].length; i++) {
-			if(chunkedGames[j][i].status === "Finished"){
-				counter ++
-			}
-		}
-		if (counter === 6){
-			console.log(chunkedCountries[j])
-			const sendTo = chunkedCountries[j][0].group
-			console.log(sendTo)
-			const teamArray = []
-			const team1 = { "country":chunkedCountries[j][0].name, "score":chunkedCountries[j][0].group_score, "grp":chunkedCountries[j][0].group}
-			const team2= { "country":chunkedCountries[j][1].name, "score":chunkedCountries[j][1].group_score,"grp":chunkedCountries[j][0].group}
-			const team3= { "country":chunkedCountries[j][2].name, "score":chunkedCountries[j][2].group_score,"grp":chunkedCountries[j][0].group}
-			const team4= { "country":chunkedCountries[j][3].name, "score":chunkedCountries[j][3].group_score,"grp":chunkedCountries[j][0].group}
-			teamArray.push(team1,team2,team3,team4)
-			console.log(teamArray)
-			teamArray.sort(function(a, b) {
-				return b.score - a.score;
-			  });
-			  
-			const winner = teamArray[0].country
-			const secondPlace = teamArray[1].country
-
-			  if(teamArray[0].grp === "EURO Grp. A"){
-				  
-				const fetchGame1a = async () => {
-					try {
-						const response = await instance.get(`euro_events?eventname=1A-3CDE`);
-						const id1a = response.data[0].id
-						return id1a;
-					} catch (err) {
-						console.log(err)
-					}
-				}
-				fetchGame1a().then((resp) => putWinner(resp))
-				const putWinner = async (id) =>{
-					await instance.put(`euro_events/${id}`, {
-						home_team:winner,
-					}
-					)}
-				
-				
-					const fetchGame2a = async () => {
-						try {
-							const response = await instance.get(`euro_events?eventname=2A-2C`);
-							const id2a = response.data[0].id
-							return id2a;
-						} catch (err) {
-							console.log(err)
-						}
-					}
-					fetchGame2a().then((resp) => putSecond(resp))
-					const putSecond = async (id) =>{
-						await instance.put(`euro_events/${id}`, {
-							home_team:secondPlace,
-						}
-						)}
-				
-			  }
-			  
-			console.log(winner, secondPlace)
 
 
+	const { loading, gamesArray } = useGetGames();
+	if(!loading) {
+		console.log(gamesArray)
 
-			// const updateBracket = async()=>{
-			// 	await instance.put(`euro_Events/${userBetId}`, {
-			// 		Score:newScore
-			// 	})
-			// 	}
-			//  updateBracket()
-		}
-	  }
-	  
 	}
 	
-
-
     return (
         <>
         
@@ -179,38 +70,16 @@ function Brackets() {
 	<div className="split split-one">
 		<div className="round round-one current">
 			<div className="round-details">Åttondelsfinal<br/><span className="date">"DATE"</span></div>
-			<ul className="matchup">
-				<li className="team team-top">1A<span className="score">1 (4)</span></li>
-				<li className="team team-bottom">3CDE<span className="score">1 (5)</span></li>
-			</ul>
-			<ul className="matchup">
-				<li className="team team-top">1B<span className="score">0</span></li>
-				<li className="team team-bottom">3ACD<span className="score">1</span></li>
-			</ul>
-			<ul className="matchup">
-				<li className="team team-top">1C<span className="score">1</span></li>
-				<li className="team team-bottom">3ABF<span className="score">0</span></li>
-			</ul>
-			<ul className="matchup">
-				<li className="team team-top">1D<span className="score">0</span></li>
-				<li className="team team-bottom">3BEF<span className="score">4</span></li>
-			</ul>			
-			<ul className="matchup">
-				<li className="team team-top">1E<span className="score">3</span></li>
-				<li className="team team-bottom">2D<span className="score">0</span></li>
-			</ul>	
-			<ul className="matchup">
-				<li className="team team-top">1F<span className="score">2</span></li>
-				<li className="team team-bottom">2E<span className="score">0</span></li>
-			</ul>	
-			<ul className="matchup">
-				<li className="team team-top">2A<span className="score">2</span></li>
-				<li className="team team-bottom">2C<span className="score">1</span></li>
-			</ul>
-			<ul className="matchup">
-				<li className="team team-top">2B<span className="score">1</span></li>
-				<li className="team team-bottom">2F<span className="score">2</span></li>
-			</ul>										
+
+			{gamesArray.map((game)=>{
+				return (
+					<ul className="matchup">
+						<li className="team team-top">{game.home_team}<span className="score">{game.home_final}</span></li>
+						<li className="team team-bottom">{game.away_team}<span className="score">{game.away_final}</span></li>
+					</ul>
+				)
+			})}
+											
 		</div>	
         {/* <!-- END ROUND ONE --> */}
 
@@ -246,7 +115,7 @@ function Brackets() {
 				<li className="team team-bottom">&nbsp;<span className="score">&nbsp;</span></li>
 			</ul>										
 		</div>	
-        {/* <!-- END ROUND THREE -->		 */}
+        {/* <!-- END ROUND THREE -->		 */} 
 	</div> 
 
 <div className="champion">

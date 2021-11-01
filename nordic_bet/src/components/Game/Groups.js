@@ -3,7 +3,7 @@ import axios from "axios";
 import server from "../Global/config";
 import setTeamFlag from "./Flags"
 import Flags from 'country-flag-icons/react/3x2'
-
+import { Parallax } from "react-parallax";
 
 function Groups() {
   const chunked = [];
@@ -98,6 +98,7 @@ function Groups() {
     // })
   }
 
+  
   return (
     <div>
       {chunked.map((games) => {
