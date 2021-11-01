@@ -61,6 +61,12 @@
     "score_given": {
       "type": "string",
       "default": "no"
+    },
+    "home_team": {
+      "type": "string"
+    },
+    "away_team": {
+      "type": "string"
     }
   }
 }
