@@ -17,6 +17,7 @@ import axios from 'axios';
 import server from "../Global/config";
 import {useHistory} from "react-router-dom";
 
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -34,14 +35,13 @@ const theme = createTheme();
 const instance = axios.create({baseURL: server});
 
 
-
 export default function SignUp() {
     const history = useHistory();
     const [error, setError] = useState(false);
     const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
+    
     instance.post(`auth/local/register`,{
       fname: data.get('förnamn'),
       lname: data.get('efternamn'),

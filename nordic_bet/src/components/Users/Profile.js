@@ -3,6 +3,12 @@ import axios from "axios";
 import server from "../Global/config";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useHistory } from "react-router";
+import ModalBody from 'react-bootstrap/ModalBody';
+import ModalFooter from 'react-bootstrap/ModalFooter'
+import ModalTitle from 'react-bootstrap/ModalTitle'
+import ModalHeader from 'react-bootstrap/ModalHeader'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button';
 import { Parallax } from "react-parallax";
 
 
@@ -15,6 +21,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
     const history = useHistory();
     const instance = axios.create({baseURL: server});
     const [isChanging, setIsChanging] = useState(false);
+    const [token] = useState(localStorage.getItem('jwt'));
+    const [modalShow, setModalShow] = React.useState(false);
 
 
     const changePassword = {
@@ -60,7 +68,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
             country: editUserValue.country,
             email: editUserValue.email
           }
-        ).then(window.location.reload())
+        ) .then(window.location) 
+        
 
         console.log(response)
           
@@ -78,6 +87,77 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
     }
     console.log(editUserValue)
     console.log(editUser)
+
+
+    function deleteUser() {
+
+
+      const deletePerson = async () => {
+
+        const response = await instance.delete(
+          `Users/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(
+          localStorage.clear(),
+          history.push('/SignIn')
+          
+          );
+        console.log(response);
+      };
+      deletePerson();
+    }
+
+
+    function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Du är påväg att radera ditt konto
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>
+          Är du helt säker på att du vill radera ditt konto?
+          <br/>
+          Detta kommer resultera i att ditt konto försvinner helt från<br/>
+          vår databas och du kommer inte att kunna återställa detta konto. 
+          <br/>
+          <br/>
+          ∼ <i>Nordic Bet</i>
+        </p>
+      </Modal.Body>
+      <Modal.Footer
+      style={{
+        display: "flex",
+        justifyContent: "center"
+      }}
+      >
+
+        <button onClick={props.onHide} className="btn btn-secondary" type="submit">
+                        <i className="bi bi-x"></i>
+                        <span> Tillbaka</span>
+                        </button>
+        <button className="btn btn-outline-danger"  onClick={deleteUser}>
+                        <i className="bi bi-person-x-fill fa-lg"></i>
+                          <span> Radera</span>
+                        </button>
+
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
     
     const image1 =
     "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80";
@@ -91,10 +171,10 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
 <div className="container mt-3">
 <div className="row flex-lg-nowrap">
-  <div className="col-12 col-lg-auto mb-3" style={{width: "200px"}}>
+  <div className="col-12 col-lg-auto mb-3" style={{width: "50px"}}>
   </div>
 
-  <div className="col">
+  <div className="col" style={{ width: '40vw'}}>
     <div className="row">
       <div className="col mb-3">
         <div className="card">
@@ -225,34 +305,29 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                       </div>
 
                         <div className="mb-2"><b>Keeping in Touch</b></div>
-                        <div className="row">
-                      <div className="col d-flex justify-content-start">
-                        <button className="btn btn-secondary" type="submit">
-                        <i className="bi bi-gear-wide fa-lg"></i>
-                        <span> Ändra lösenord</span>
-                        </button>
-                      </div>
- <br/>
-
- <div className="col d-flex justify-content-end">
-                        <button className="btn btn-primary" type="submit" onClick={editUser}>Spara inställningar</button>
-                      </div>
- <br/>
-
-
-                      <div className="col d-flex justify-content-end´">
-                        <button className="btn btn-outline-danger" type="submit">
-                        <i className="bi bi-person-x-fill fa-lg"></i>
-                          <span> Radera konto</span>
-                        </button>
-                      </div>
-                        </div>
                       </div>
 
 
                   </form>
 
                 </div>
+                <div className="col d-flex justify-content-between">
+                <button className="btn btn-secondary" type="submit">
+                        <i className="bi bi-gear-wide fa-lg"></i>
+                        <span> Ändra lösenord</span>
+                        </button>
+                        <button className="btn btn-primary" type="submit" onClick={editUser}>Spara inställningar</button>
+                      
+
+
+
+
+  
+<button className="btn btn-outline-danger" onClick={() => setModalShow(true)}>
+<i className="bi bi-person-x-fill fa-lg"></i>
+<span> Radera konto</span>
+      </button>
+      </div>
               </div>
             </div>
           </div>
@@ -262,6 +337,12 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
 
   </div>
 </div>
+
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+
 </Parallax>
         </>
     )
