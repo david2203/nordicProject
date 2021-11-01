@@ -79,10 +79,10 @@ function Brackets() {
 			const sendTo = chunkedCountries[j][0].group
 			console.log(sendTo)
 			const teamArray = []
-			const team1 = { "country":chunkedCountries[j][0].name, "score":chunkedCountries[j][0].group_score}
-			const team2= { "country":chunkedCountries[j][1].name, "score":chunkedCountries[j][1].group_score}
-			const team3= { "country":chunkedCountries[j][2].name, "score":chunkedCountries[j][2].group_score}
-			const team4= { "country":chunkedCountries[j][3].name, "score":chunkedCountries[j][3].group_score}
+			const team1 = { "country":chunkedCountries[j][0].name, "score":chunkedCountries[j][0].group_score, "grp":chunkedCountries[j][0].group}
+			const team2= { "country":chunkedCountries[j][1].name, "score":chunkedCountries[j][1].group_score,"grp":chunkedCountries[j][0].group}
+			const team3= { "country":chunkedCountries[j][2].name, "score":chunkedCountries[j][2].group_score,"grp":chunkedCountries[j][0].group}
+			const team4= { "country":chunkedCountries[j][3].name, "score":chunkedCountries[j][3].group_score,"grp":chunkedCountries[j][0].group}
 			teamArray.push(team1,team2,team3,team4)
 			console.log(teamArray)
 			teamArray.sort(function(a, b) {
@@ -92,7 +92,43 @@ function Brackets() {
 			const winner = teamArray[0].country
 			const secondPlace = teamArray[1].country
 
-
+			  if(teamArray[0].grp === "EURO Grp. A"){
+				  
+				const fetchGame1a = async () => {
+					try {
+						const response = await instance.get(`euro_events?eventname=1A-3CDE`);
+						const id1a = response.data[0].id
+						return id1a;
+					} catch (err) {
+						console.log(err)
+					}
+				}
+				fetchGame1a().then((resp) => putWinner(resp))
+				const putWinner = async (id) =>{
+					await instance.put(`euro_events/${id}`, {
+						home_team:winner,
+					}
+					)}
+				
+				
+					const fetchGame2a = async () => {
+						try {
+							const response = await instance.get(`euro_events?eventname=2A-2C`);
+							const id2a = response.data[0].id
+							return id2a;
+						} catch (err) {
+							console.log(err)
+						}
+					}
+					fetchGame2a().then((resp) => putSecond(resp))
+					const putSecond = async (id) =>{
+						await instance.put(`euro_events/${id}`, {
+							home_team:secondPlace,
+						}
+						)}
+				
+			  }
+			  
 			console.log(winner, secondPlace)
 
 
