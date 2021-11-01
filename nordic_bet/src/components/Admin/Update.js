@@ -90,217 +90,301 @@ function Update() {
 			const thirdPlace = teamArray[2]
 			thirdPlaceArray.push(thirdPlace)
 			
-
-			  if(teamArray[0].grp === "EURO Grp. A"){
-				  
-				const fetchGame1a = async () => {
+			const groupsObject = {
+				"EURO Grp. A" : {
+					games: ["1A-3CDE","2A-2C"],
+					side: ["home","home"],
+					place: [winner,secondPlace]
+				}, 
+				"EURO Grp. B" : {
+					games: ["1B-ACD","2B-2F"],
+					side: ["home","home"],
+					place: [winner,secondPlace]
+				},
+				"EURO Grp. C" : {
+					games: ["1A-3CDE","2A-2C"],
+					side: ["home","home"],
+					place: [winner,secondPlace]
+				},
+				"EURO Grp. D" : {
+					games: ["1A-3CDE","2A-2C"],
+					side: ["home","home"],
+					place: [winner,secondPlace]
+				}, 
+				"EURO Grp. E" : {
+					games: ["1A-3CDE","2A-2C"],
+					side: ["home","home"],
+					place: [winner,secondPlace]
+				}, 
+				"EURO Grp. F" : {
+					games: ["1A-3CDE","2A-2C"],
+					side: ["home","home"],
+					place: [winner,secondPlace]
+				} 
+			}
+			const groupname = teamArray[0].grp;
+			if(groupsObject.hasOwnProperty(groupname)){
+				const fetchGame1a = async (gamename) => {
 					try {
-						const response = await instance.get(`euro_events?eventname=1A-3CDE`);
+						const response = await instance.get(`euro_events?eventname=${gamename}`);
 						const id1a = response.data[0].id
 						return id1a;
 					} catch (err) {
 						console.log(err)
 					}
 				}
-				fetchGame1a().then((resp) => putWinner(resp))
-				const putWinner = async (id) =>{
+				//Lägg till team i event
+				//fetchGame1a().then((resp) => putWinner(resp))
+				const putWinner = async (id, side, place) =>{
+					
+					if (side === "home") {
 					await instance.put(`euro_events/${id}`, {
-						home_team:winner,
-					}
-					)}
-				
-				
-					const fetchGame2a = async () => {
-						try {
-							const response = await instance.get(`euro_events?eventname=2A-2C`);
-							const id2a = response.data[0].id
-							return id2a;
-						} catch (err) {
-							console.log(err)
-						}
-					}
-					fetchGame2a().then((resp) => putSecond(resp))
-					const putSecond = async (id) =>{
+						home_team:place,
+					} 
+					)} else if (side === "away") {
 						await instance.put(`euro_events/${id}`, {
-							home_team:secondPlace,
-						}
-						)}
-			  }
-			  if(teamArray[0].grp === "EURO Grp. B"){
-				  
-				const fetchGame1a = async () => {
-					try {
-						const response = await instance.get(`euro_events?eventname=1B-3ACD`);
-						const id1b = response.data[0].id
-						return id1b;
-					} catch (err) {
-						console.log(err)
+							away_team:place,
+						} 
+						)
 					}
 				}
-				fetchGame1a().then((resp) => putWinner(resp))
-				const putWinner = async (id) =>{
-					await instance.put(`euro_events/${id}`, {
-						home_team:winner,
-					}
-					)}
-				
-				
-					const fetchGame2a = async () => {
-						try {
-							const response = await instance.get(`euro_events?eventname=2B-2F`);
-							const id2b = response.data[0].id
-							return id2b;
-						} catch (err) {
-							console.log(err)
-						}
-					}
-					fetchGame2a().then((resp) => putSecond(resp))
-					const putSecond = async (id) =>{
-						await instance.put(`euro_events/${id}`, {
-							home_team:secondPlace,
-						}
-						)}
-			  }
-			  if(teamArray[0].grp === "EURO Grp. C"){
-				  
-				const fetchGame1a = async () => {
-					try {
-						const response = await instance.get(`euro_events?eventname=1C-3ABF`);
-						const id1c = response.data[0].id
-						return id1c;
-					} catch (err) {
-						console.log(err)
-					}
+				if (groupsObject[groupname].games.length  && groupsObject[groupname].side.length) {
+					groupsObject[groupname].games.forEach((game,index) => {
+						fetchGame1a(game)
+								.then(id => putWinner(id, groupsObject[groupname].side[index], groupsObject[groupname].place[index]))
+					});
+
 				}
-				fetchGame1a().then((resp) => putWinner(resp))
-				const putWinner = async (id) =>{
-					await instance.put(`euro_events/${id}`, {
-						home_team:winner,
-					}
-					)}
+				//Hämta game id
+				 
 				
 				
-					const fetchGame2a = async () => {
-						try {
-							const response = await instance.get(`euro_events?eventname=2A-2C`);
-							const id2c = response.data[0].id
-							return id2c;
-						} catch (err) {
-							console.log(err)
-						}
-					}
-					fetchGame2a().then((resp) => putSecond(resp))
-					const putSecond = async (id) =>{
-						await instance.put(`euro_events/${id}`, {
-							away_team:secondPlace,
-						}
-						)}
+					// const fetchGame2a = async () => {
+					// 	try {
+					// 		const response = await instance.get(`euro_events?eventname=2A-2C`);
+					// 		const id2a = response.data[0].id
+					// 		return id2a;
+					// 	} catch (err) {
+					// 		console.log(err)
+					// 	}
+					// }
+					// fetchGame2a().then((resp) => putSecond(resp))
+					// const putSecond = async (id) =>{
+					// 	await instance.put(`euro_events/${id}`, {
+					// 		home_team:secondPlace,
+					// 	}
+					// 	)}
 			  }
-			  if(teamArray[0].grp === "EURO Grp. D"){
+			//   if(teamArray[0].grp === "EURO Grp. A"){
 				  
-				const fetchGame1a = async () => {
-					try {
-						const response = await instance.get(`euro_events?eventname=1D-3BEF`);
-						const id1d = response.data[0].id
-						return id1d;
-					} catch (err) {
-						console.log(err)
-					}
-				}
-				fetchGame1a().then((resp) => putWinner(resp))
-				const putWinner = async (id) =>{
-					await instance.put(`euro_events/${id}`, {
-						home_team:winner,
-					}
-					)}
+			// 	const fetchGame1a = async () => {
+			// 		try {
+			// 			const response = await instance.get(`euro_events?eventname=1A-3CDE`);
+			// 			const id1a = response.data[0].id
+			// 			return id1a;
+			// 		} catch (err) {
+			// 			console.log(err)
+			// 		}
+			// 	}
+			// 	fetchGame1a().then((resp) => putWinner(resp))
+			// 	const putWinner = async (id) =>{
+			// 		await instance.put(`euro_events/${id}`, {
+			// 			home_team:winner,
+			// 		}
+			// 		)}
 				
 				
-					const fetchGame2a = async () => {
-						try {
-							const response = await instance.get(`euro_events?eventname=1E-2D`);
-							const id2d = response.data[0].id
-							return id2d;
-						} catch (err) {
-							console.log(err)
-						}
-					}
-					fetchGame2a().then((resp) => putSecond(resp))
-					const putSecond = async (id) =>{
-						await instance.put(`euro_events/${id}`, {
-							away_team:secondPlace,
-						}
-						)}
-			  }
-			  if(teamArray[0].grp === "EURO Grp. E"){
+			// 		const fetchGame2a = async () => {
+			// 			try {
+			// 				const response = await instance.get(`euro_events?eventname=2A-2C`);
+			// 				const id2a = response.data[0].id
+			// 				return id2a;
+			// 			} catch (err) {
+			// 				console.log(err)
+			// 			}
+			// 		}
+			// 		fetchGame2a().then((resp) => putSecond(resp))
+			// 		const putSecond = async (id) =>{
+			// 			await instance.put(`euro_events/${id}`, {
+			// 				home_team:secondPlace,
+			// 			}
+			// 			)}
+			//   }
+			//   if(teamArray[0].grp === "EURO Grp. B"){
 				  
-				const fetchGame1a = async () => {
-					try {
-						const response = await instance.get(`euro_events?eventname=1E-2D`);
-						const id1e = response.data[0].id
-						return id1e;
-					} catch (err) {
-						console.log(err)
-					}
-				}
-				fetchGame1a().then((resp) => putWinner(resp))
-				const putWinner = async (id) =>{
-					await instance.put(`euro_events/${id}`, {
-						home_team:winner,
-					}
-					)}
+			// 	const fetchGame1a = async () => {
+			// 		try {
+			// 			const response = await instance.get(`euro_events?eventname=1B-3ACD`);
+			// 			const id1b = response.data[0].id
+			// 			return id1b;
+			// 		} catch (err) {
+			// 			console.log(err)
+			// 		}
+			// 	}
+			// 	fetchGame1a().then((resp) => putWinner(resp))
+			// 	const putWinner = async (id) =>{
+			// 		await instance.put(`euro_events/${id}`, {
+			// 			home_team:winner,
+			// 		}
+			// 		)}
 				
 				
-					const fetchGame2a = async () => {
-						try {
-							const response = await instance.get(`euro_events?eventname=1F-2E`);
-							const id2e = response.data[0].id
-							return id2e;
-						} catch (err) {
-							console.log(err)
-						}
-					}
-					fetchGame2a().then((resp) => putSecond(resp))
-					const putSecond = async (id) =>{
-						await instance.put(`euro_events/${id}`, {
-							away_team:secondPlace,
-						}
-						)}
-			  }
-			  if(teamArray[0].grp === "EURO Grp. F"){
+			// 		const fetchGame2a = async () => {
+			// 			try {
+			// 				const response = await instance.get(`euro_events?eventname=2B-2F`);
+			// 				const id2b = response.data[0].id
+			// 				return id2b;
+			// 			} catch (err) {
+			// 				console.log(err)
+			// 			}
+			// 		}
+			// 		fetchGame2a().then((resp) => putSecond(resp))
+			// 		const putSecond = async (id) =>{
+			// 			await instance.put(`euro_events/${id}`, {
+			// 				home_team:secondPlace,
+			// 			}
+			// 			)}
+			//   }
+			//   if(teamArray[0].grp === "EURO Grp. C"){
 				  
-				const fetchGame1a = async () => {
-					try {
-						const response = await instance.get(`euro_events?eventname=1F-2E`);
-						const id1f = response.data[0].id
-						return id1f;
-					} catch (err) {
-						console.log(err)
-					}
-				}
-				fetchGame1a().then((resp) => putWinner(resp))
-				const putWinner = async (id) =>{
-					await instance.put(`euro_events/${id}`, {
-						home_team:winner,
-					}
-					)}
+			// 	const fetchGame1a = async () => {
+			// 		try {
+			// 			const response = await instance.get(`euro_events?eventname=1C-3ABF`);
+			// 			const id1c = response.data[0].id
+			// 			return id1c;
+			// 		} catch (err) {
+			// 			console.log(err)
+			// 		}
+			// 	}
+			// 	fetchGame1a().then((resp) => putWinner(resp))
+			// 	const putWinner = async (id) =>{
+			// 		await instance.put(`euro_events/${id}`, {
+			// 			home_team:winner,
+			// 		}
+			// 		)}
 				
 				
-					const fetchGame2a = async () => {
-						try {
-							const response = await instance.get(`euro_events?eventname=2B-2F`);
-							const id2f = response.data[0].id
-							return id2f;
-						} catch (err) {
-							console.log(err)
-						}
-					}
-					fetchGame2a().then((resp) => putSecond(resp))
-					const putSecond = async (id) =>{
-						await instance.put(`euro_events/${id}`, {
-							away_team:secondPlace,
-						}
-						)}
-			  }
+			// 		const fetchGame2a = async () => {
+			// 			try {
+			// 				const response = await instance.get(`euro_events?eventname=2A-2C`);
+			// 				const id2c = response.data[0].id
+			// 				return id2c;
+			// 			} catch (err) {
+			// 				console.log(err)
+			// 			}
+			// 		}
+			// 		fetchGame2a().then((resp) => putSecond(resp))
+			// 		const putSecond = async (id) =>{
+			// 			await instance.put(`euro_events/${id}`, {
+			// 				away_team:secondPlace,
+			// 			}
+			// 			)}
+			//   }
+			//   if(teamArray[0].grp === "EURO Grp. D"){
+				  
+			// 	const fetchGame1a = async () => {
+			// 		try {
+			// 			const response = await instance.get(`euro_events?eventname=1D-3BEF`);
+			// 			const id1d = response.data[0].id
+			// 			return id1d;
+			// 		} catch (err) {
+			// 			console.log(err)
+			// 		}
+			// 	}
+			// 	fetchGame1a().then((resp) => putWinner(resp))
+			// 	const putWinner = async (id) =>{
+			// 		await instance.put(`euro_events/${id}`, {
+			// 			home_team:winner,
+			// 		}
+			// 		)}
+				
+				
+			// 		const fetchGame2a = async () => {
+			// 			try {
+			// 				const response = await instance.get(`euro_events?eventname=1E-2D`);
+			// 				const id2d = response.data[0].id
+			// 				return id2d;
+			// 			} catch (err) {
+			// 				console.log(err)
+			// 			}
+			// 		}
+			// 		fetchGame2a().then((resp) => putSecond(resp))
+			// 		const putSecond = async (id) =>{
+			// 			await instance.put(`euro_events/${id}`, {
+			// 				away_team:secondPlace,
+			// 			}
+			// 			)}
+			//   }
+			//   if(teamArray[0].grp === "EURO Grp. E"){
+				  
+			// 	const fetchGame1a = async () => {
+			// 		try {
+			// 			const response = await instance.get(`euro_events?eventname=1E-2D`);
+			// 			const id1e = response.data[0].id
+			// 			return id1e;
+			// 		} catch (err) {
+			// 			console.log(err)
+			// 		}
+			// 	}
+			// 	fetchGame1a().then((resp) => putWinner(resp))
+			// 	const putWinner = async (id) =>{
+			// 		await instance.put(`euro_events/${id}`, {
+			// 			home_team:winner,
+			// 		}
+			// 		)}
+				
+				
+			// 		const fetchGame2a = async () => {
+			// 			try {
+			// 				const response = await instance.get(`euro_events?eventname=1F-2E`);
+			// 				const id2e = response.data[0].id
+			// 				return id2e;
+			// 			} catch (err) {
+			// 				console.log(err)
+			// 			}
+			// 		}
+			// 		fetchGame2a().then((resp) => putSecond(resp))
+			// 		const putSecond = async (id) =>{
+			// 			await instance.put(`euro_events/${id}`, {
+			// 				away_team:secondPlace,
+			// 			}
+			// 			)}
+			//   }
+			//   if(teamArray[0].grp === "EURO Grp. F"){
+				  
+			// 	const fetchGame1a = async () => {
+			// 		try {
+			// 			const response = await instance.get(`euro_events?eventname=1F-2E`);
+			// 			const id1f = response.data[0].id
+			// 			return id1f;
+			// 		} catch (err) {
+			// 			console.log(err)
+			// 		}
+			// 	}
+			// 	fetchGame1a().then((resp) => putWinner(resp))
+			// 	const putWinner = async (id) =>{
+			// 		await instance.put(`euro_events/${id}`, {
+			// 			home_team:winner,
+			// 		}
+			// 		)}
+				
+				
+			// 		const fetchGame2a = async () => {
+			// 			try {
+			// 				const response = await instance.get(`euro_events?eventname=2B-2F`);
+			// 				const id2f = response.data[0].id
+			// 				return id2f;
+			// 			} catch (err) {
+			// 				console.log(err)
+			// 			}
+			// 		}
+			// 		fetchGame2a().then((resp) => putSecond(resp))
+			// 		const putSecond = async (id) =>{
+			// 			await instance.put(`euro_events/${id}`, {
+			// 				away_team:secondPlace,
+			// 			}
+			// 			)}
+			//   }
 
 
 
