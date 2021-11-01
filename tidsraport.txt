@@ -12,3 +12,8 @@ React start/ koppla strapi och mysql med react. Lätta funktioner (jsx) /hämta 
 3 Veckan 
 Svårare funktioner / requests / hämta och skicka data för games och profiler 
 5 dagar ( 35 hr var) - 5 x2 var(meetings mm) : 30 hr
+
+4 Veckan
+Månad 1 Nov:
+förmiddag försöka få in bcrypt react för hash när user registrerar sig. Visar sig att strapi redan har en förinställd bcrypt för när user
+registrerar sig. - 4h.....
