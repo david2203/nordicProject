@@ -111,7 +111,7 @@ function Groups() {
                   <th scope="col"></th>
                   <th scope="col">Status</th>
                   <th scope="col">Home goals </th>
-                  <th scope="col">Home goals </th>
+                  <th scope="col">Away goals </th>
                   <th scope="col">Winner </th>
                 </tr>
               </thead>
