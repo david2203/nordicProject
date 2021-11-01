@@ -64,15 +64,13 @@ import Flags from 'country-flag-icons/react/3x2'
     }
     return flag;
 }
-console.log(getTeamFlag("Hungary"))
+
 function setTeamFlag(side, team) {
     if (side === 'away') {
-        console.log(`setting away flag to ${getTeamFlag(team)}`)
         return(
             getTeamFlag(team)
         )
     } else if (side === 'home') {
-        console.log(`setting home flag to ${getTeamFlag(team)}`)
         return(
             getTeamFlag(team)
         )

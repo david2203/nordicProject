@@ -22,7 +22,7 @@ import setTeamFlag from "./Flags"
 
 
 
-function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
+function ElimGame({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     
     const instance = axios.create({baseURL: server})
     const playingTeams = eventname.split("-");
@@ -427,4 +427,4 @@ function Game({event_id,eid_xml,eventname,grp,odds_1,odds_x,odds_2,status}) {
     )
 }
 
-export default Game
+export default ElimGame
