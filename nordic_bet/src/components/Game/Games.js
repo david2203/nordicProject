@@ -6,6 +6,7 @@ import Scoreboard from "../Scoreboard";
 import { Parallax } from "react-parallax";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 function Games() {
   
   const instance = axios.create({ baseURL: server });
