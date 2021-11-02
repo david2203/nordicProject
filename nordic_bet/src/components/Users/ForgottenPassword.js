@@ -5,8 +5,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import Paper from '@mui/material/Paper';
@@ -33,28 +31,25 @@ function Copyright(props) {
 const theme = createTheme();
 const instance = axios.create({baseURL: server});
 
-export default function SignIn() {
+export default function RequestPassword() {
   const history = useHistory()
   const [jwt, setJwt] = useState();
   const [error, setError] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    instance.post(`auth/local`,{
-        identifier: data.get('identifier'), 
-        password: data.get('password')
-    }
-      ).then(response => {
-        console.log("user token", response.data.jwt);
-        console.log(response.data.user.fname)
-        localStorage.setItem("firstname", response.data.user.fname)
-        localStorage.setItem("jwt", response.data.jwt);
-        localStorage.setItem("user_id", response.data.user.id)
-        localStorage.setItem("username", response.data.user.username)
-        history.push("/games")
-        window.location.reload()
-    }).catch(err => console.log(err));
+console.log(data.get("identifier"))
+    instance.post('/auth/forgot-password', {
+        email: data.get('identifier'), // user's email
+      })
+      .then(response => {
+        console.log('Your user received an email');
+      })
+      .catch(error => {
+        console.log('An error occurred:', error);
+      });
+    
+      
     
 
 };
@@ -104,12 +99,14 @@ function showError(e) {
           >
             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             </Avatar>
-            <Typography component="h1" variant="h5">
-              Logga in
+            <Typography component="h1" variant="h5" sx={{ mb: 3}} >
+                You have requested a password reset <br/>
+            Please submit the email connected to your account:
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              
-              <TextField
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1}}>
+            <Grid container spacing={2}>
+            <Grid  sm={100}>
+            <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -119,39 +116,26 @@ function showError(e) {
                 autoComplete="email"
                 autoFocus
               />
-              
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Lösenord"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
+              </Grid>
+              </Grid>
+
               <br/>{error ? (<Alert sx={{marginTop: 2, width: '100%'}}severity="error">Fel Email eller lösenord.</Alert>) : (<></>)}
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Kom ihåg mig"
-              />
+             
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Logga in
+                Request password
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="/ForgottenPassword" variant="body2">
-                    Glömt lösenord?
-                  </Link>
+                  
                 </Grid>
                 <Grid item>
-                  <Link href="/SignUp" variant="body2">
-                    {"Har du inget konto? Registrera dig"}
+                  <Link href="/SignIn" variant="body2">
+                    {"Suddenly remember your password? Click here!"}
                   </Link>
                 </Grid>
               </Grid>

@@ -12,6 +12,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Flags from "../Game/Flags"
 import FileInput from "../Users/ChangeImg";
+import ForgottenPassword from "../Users/ForgottenPassword";
+import ResetPassword from "../Users/ResetPassword";
+
 
 import {
     BrowserRouter as Router,
@@ -36,6 +39,10 @@ function AppRoute() {
           <Route path="/SignIn" exact component={SignIn} />
           <Route path="/Flags" exact component={Flags} />
           <Route path="/ChangeImg" exact component={FileInput}/>
+          <Route path="/ForgottenPassword" exact component={ForgottenPassword} />
+          <Route path="/ResetPassword" exact component={ResetPassword} />
+
+
 
 
         <Footer/>
