@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -32,20 +32,24 @@ const theme = createTheme();
 const instance = axios.create({baseURL: server});
 
 export default function ResetPassword() {
+    const search = useLocation().search;
+    const code = new URLSearchParams(search).get('code');
+    
   const history = useHistory()
   const [jwt, setJwt] = useState();
   const [error, setError] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-console.log(data.get("identifier"))
+
     instance.post('/auth/reset-password', {
-        code: 'privateCode', // code contained in the reset link of step 3.
-        password: 'userNewPassword',
-        passwordConfirmation: 'userNewPassword',
+        code: code, // code contained in the reset link of step 3.
+        password: data.get('NewPassword'),
+        passwordConfirmation: data.get('Confirm'),
       })
       .then(response => {
         console.log("Your user's password has been reset.");
+        history.push("./signin")
       })
       .catch(error => {
         console.log('An error occurred:', error.response);
@@ -102,7 +106,7 @@ function showError(e) {
             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ mb: 3}} >
-               Insert code and so on
+               Please choose a new password:
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1}}>
             <Grid container spacing={2}>
@@ -111,11 +115,22 @@ function showError(e) {
                 margin="normal"
                 required
                 fullWidth
-                id="identifier"
-                label="Email Adress"
-                name="identifier"
-                autoComplete="email"
+                id="NewPassword"
+                label="New Password"
+                name="NewPassword"
+                autoComplete="NewPassword"
                 autoFocus
+              />
+              
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="Confirm"
+                label="Confirm Password"
+                type="Confirm"
+                id="Confirm"
+                autoComplete="current-password"
               />
               </Grid>
               </Grid>
@@ -128,16 +143,14 @@ function showError(e) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Request password
+                Change password
               </Button>
               <Grid container>
                 <Grid item xs>
                   
                 </Grid>
                 <Grid item>
-                  <Link href="/SignIn" variant="body2">
-                    {"Suddenly remember your password? Click here!"}
-                  </Link>
+                  
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
