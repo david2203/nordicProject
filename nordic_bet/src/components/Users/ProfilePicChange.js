@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 const Button = styled.button`
-  /* Insert your favorite CSS code to style a button */
+
 `;
+
 const FileUploader = props => {
   const hiddenFileInput = React.useRef(null);
   
@@ -15,8 +16,6 @@ const FileUploader = props => {
   };
 
   const profileImg ='https://gravatar.com/avatar/daaa57535a70b34bc8674de53d02dc25?s=200&d=mp&r=pg'
-
-  
 
  let imageHandler = (e) => {
     const reader = new FileReader();
@@ -35,8 +34,9 @@ const FileUploader = props => {
                         <i className="fa fa-fw fa-camera"></i>
         Byt bild
       </Button>
-      <input type="file" accept="image/*" id="input" onChange={imageHandler}
+      <input type="file" accept="image/*" id="input"
              ref={hiddenFileInput}
+             onChange={handleChange}
              style={{display:'none'}} 
       /> 
     </>

@@ -11,6 +11,7 @@ import ProfileInfo from "../Users/ProfileInfo";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Flags from "../Game/Flags"
+import FileInput from "../Users/ChangeImg";
 
 import {
     BrowserRouter as Router,
@@ -34,6 +35,7 @@ function AppRoute() {
           <Route path="/SignUp" exact component={SignUp} />
           <Route path="/SignIn" exact component={SignIn} />
           <Route path="/Flags" exact component={Flags} />
+          <Route path="/ChangeImg" exact component={FileInput}/>
 
 
         <Footer/>
