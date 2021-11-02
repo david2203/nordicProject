@@ -10,6 +10,7 @@ import ModalHeader from 'react-bootstrap/ModalHeader'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import { Parallax } from "react-parallax";
+import FileUploader from "./ProfilePicChange"
 
 
 
@@ -68,7 +69,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
             country: editUserValue.country,
             email: editUserValue.email
           }
-        ) .then(window.location) 
+        ).then(window.location.reload()) 
         
 
         console.log(response)
@@ -104,7 +105,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
         )
         .then(
           localStorage.clear(),
-          history.push('/SignIn')
+          history.push('/SignIn'),
+          window.location.reload()
           
           );
         console.log(response);
@@ -162,7 +164,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
     const image1 =
     "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80";
 
-  
+
+      const profileImg ='https://gravatar.com/avatar/daaa57535a70b34bc8674de53d02dc25?s=200&d=mp&r=pg'
     
     return (
         <>
@@ -183,7 +186,12 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
               <div className="row">
                 <div className="col-12 col-sm-auto mb-3">
                   <div className="mx-auto" style={{width: "140px"}}>
-                    <div className="d-flex justify-content-center align-items-center rounded" style={{height: "140px"}}/>
+                    <div className="d-flex justify-content-center align-items-center rounded" style={{height: "20px"}}/>
+                    <img
+  src={profileImg}
+  class="img-fluid rounded-pill"
+  alt=""
+/>
                       <span style={{color: "rgb(166, 168, 170)"}}>140x140</span>
                     </div>
                   </div>
@@ -193,10 +201,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                     <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">{firstname} {lastname}</h4>
                     <p className="mb-0">Användarnamn: {username}</p>
                     <div className="mt-2">
-                      <button className="btn btn-primary" type="button">
-                        <i className="fa fa-fw fa-camera"></i>
-                        <span>Change Photo</span>
-                      </button>
+                      
+                      <FileUploader/>
                     </div>
                   </div>
                   <div className="text-center text-sm-right">
