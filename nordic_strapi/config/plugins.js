@@ -24,12 +24,26 @@ module.exports = ({ env }) => ({
       },
     },
     upload: {
+      providerOptions: {
+        localServer: {
+          maxage: 300000
+        }
+      },
         breakpoints: {
           xlarge: 1920,
           large: 1000,
           medium: 750,
           small: 500,
           xsmall: 64
+        }
+      },
+      settings: {
+        parser: {
+          enabled: true,
+          multipart: true,
+          formidable: {
+            maxFileSize: 200 * 1024 * 1024 // Defaults to 200mb
+          }
         }
       },
     // ...
