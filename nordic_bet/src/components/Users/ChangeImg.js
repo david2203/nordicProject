@@ -31,13 +31,17 @@ const FileInput = () => {
   //     }
   //     putAvatar()
   // }
-
   const [files,setFiles] = useState()
+ 
+
+  
+  function handleOnChange(e) {
+    setFiles(e.target.files[0])
+  }
+  
 
   if(files){
     const uploadImage = async () => {
-      
-
       const formData = new FormData()
 
       formData.append('files', files)
@@ -49,7 +53,8 @@ const FileInput = () => {
         const imageId = response.data[0].id
 
         instance.put(`/users/${userId}`,{profilepicture:imageId}).then((response)=>{
-        console.log(response)
+        
+        console.log(files)
         }).catch((error)=>{
             console.log(error)
           })
@@ -57,7 +62,7 @@ const FileInput = () => {
           //handle error
       })
   }
-  uploadImage()
+  uploadImage().then(setFiles())
   }
         
 
@@ -74,7 +79,7 @@ const FileInput = () => {
         type="file"
         id="select-image"
         style={{ display: 'none' }}
-        onChange={e => setFiles(e.target.files[0])}
+        onChange={handleOnChange}
       />
       <label htmlFor="select-image">
         <Button variant="contained" color="primary" component="span">
