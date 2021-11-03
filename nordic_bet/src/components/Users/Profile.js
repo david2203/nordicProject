@@ -189,13 +189,13 @@ console.log(url)
                 <div className="col-12 col-sm-auto mb-3">
                   <div className="mx-auto" style={{width: "140px"}}>
                     <div className="d-flex justify-content-center align-items-center" style={{height: "20px"}}/>
+                    <div className="pb-100 overflow-hidden position-relative">
                     <img
-  src={url}
-  sx={{objectFit:"cover"}}
-  className="w-25 "
-  alt=""
-/>
-                    
+                      src={url}
+                      className=" w-70 h-70 "
+                      alt=""
+                    />
+                    </div>
                     </div>
                   </div>
                 </div>
