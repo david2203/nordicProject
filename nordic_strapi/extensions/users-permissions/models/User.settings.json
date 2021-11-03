@@ -97,7 +97,8 @@
       "via": "related",
       "allowedTypes": [
         "files",
-        "images"
+        "images",
+        "videos"
       ],
       "plugin": "upload",
       "required": false,

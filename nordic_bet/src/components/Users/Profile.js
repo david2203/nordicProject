@@ -11,6 +11,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import { Parallax } from "react-parallax";
 import FileUploader from "./ProfilePicChange"
+import ChangeImg from "./ChangeImg";
 
 
 
@@ -202,7 +203,8 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
                     <p className="mb-0">Användarnamn: {username}</p>
                     <div className="mt-2">
                       
-                      <FileUploader/>
+                      {/* <FileUploader/> */}
+                      <ChangeImg/>
                     </div>
                   </div>
                   <div className="text-center text-sm-right">
