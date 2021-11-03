@@ -3,24 +3,24 @@ import axios from "axios";
 import server from "../Global/config";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useHistory } from "react-router";
-import ModalBody from 'react-bootstrap/ModalBody';
-import ModalFooter from 'react-bootstrap/ModalFooter'
-import ModalTitle from 'react-bootstrap/ModalTitle'
-import ModalHeader from 'react-bootstrap/ModalHeader'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { Parallax } from "react-parallax";
-import FileUploader from "./ProfilePicChange"
 import ChangeImg from "./ChangeImg";
-import { Block } from "@material-ui/icons";
+
 
 
 
 function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created, profilepicture}) {
+  console.log(profilepicture)
+ const [url, setUrl] = useState('https://gravatar.com/avatar/a0310ba74bcd933a1f4a3cb00de31fea?s=400&d=mp&r=x')
+useEffect(() => {
+  if(profilepicture) {
+    const profilePicUrl = profilepicture.formats.small.url
+  setUrl(server + profilePicUrl)
+  }
+}, [])
 
 
-const profilePicUrl = profilepicture.formats.small.url
-const url = server + profilePicUrl
 console.log(url)
     const userId = localStorage.getItem("user_id");
     const history = useHistory();

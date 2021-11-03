@@ -17,6 +17,7 @@ function ProfileInfo() {
                 `Users?id=${userId}`
               )  
               setUserInfo(response.data)
+              
         }
         fetchUserInfo()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -27,6 +28,7 @@ function ProfileInfo() {
     return (
         <>  
         {userInfo.map((userinfo)=>{
+            console.log(userinfo.profilepicture)
             return (
                 <Profile key={userinfo.Id} username={userinfo.username} firstname={userinfo.fname} lastname={userinfo.lname} adress={userinfo.adress} city={userinfo.city} zipcode={userinfo.zipcode} country={userinfo.country} email={userinfo.email} created={userinfo.created_at} profilepicture={userinfo.profilepicture}  />
             )
