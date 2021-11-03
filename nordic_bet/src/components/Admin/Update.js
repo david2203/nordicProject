@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Brackets.css";
 import server from "../Global/config";
 import axios from "axios";
+
 function Update() {
   const chunkedGames = [];
   const chunkedCountries = [];
@@ -149,7 +150,7 @@ function Update() {
               console.log(err);
             }
           };
-          //Lägg till team i event
+          //Add team to event.
           //fetchGame1a().then((resp) => putWinner(resp))
           const putWinner = async (id, side, place) => {
             if (side === "home") {

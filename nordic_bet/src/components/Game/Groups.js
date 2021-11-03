@@ -1,9 +1,8 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
-import setTeamFlag from "./Flags"
-import Flags from 'country-flag-icons/react/3x2'
-import { Parallax } from "react-parallax";
+import setTeamFlag from "./Flags";
+import Flags from "country-flag-icons/react/3x2";
 
 function Groups() {
   const chunked = [];
@@ -45,7 +44,7 @@ function Groups() {
 
   const { loading, gamesArray } = useGetGames();
   console.log(gamesArray);
-  
+
   if (!loading) {
     // All data should be available
     console.log(gamesArray);
@@ -85,7 +84,7 @@ function Groups() {
     //         fetchId()
 
     //       }
-    //       
+    //
     //})
 
     //----------------------Function for putting all teams into strapi (only works with above function modified)
@@ -98,7 +97,6 @@ function Groups() {
     // })
   }
 
-  
   return (
     <div>
       {chunked.map((games) => {
@@ -107,7 +105,7 @@ function Groups() {
             <table className="table table-hover w-75 border bg-light mt-3 mx-auto">
               <thead>
                 <tr>
-                <th scope="col"></th>
+                  <th scope="col"></th>
                   <th scope="col"> {games[0].grp} Games</th>
                   <th scope="col"></th>
                   <th scope="col">Status</th>
@@ -118,17 +116,21 @@ function Groups() {
               </thead>
               <tbody>
                 {games.map((game) => {
-                  const playingTeams = game.eventname.split("-")
-                  const home_team = playingTeams[0]
-                  const away_team = playingTeams[1]
-                  const HomeFlag = Flags[setTeamFlag("home", home_team)]
-                  const AwayFlag = Flags[setTeamFlag("away", away_team)]
+                  const playingTeams = game.eventname.split("-");
+                  const home_team = playingTeams[0];
+                  const away_team = playingTeams[1];
+                  const HomeFlag = Flags[setTeamFlag("home", home_team)];
+                  const AwayFlag = Flags[setTeamFlag("away", away_team)];
 
                   return (
                     <tr>
-                      <td><HomeFlag width="30px"/></td>
+                      <td>
+                        <HomeFlag width="30px" />
+                      </td>
                       <td>{game.eventname}</td>
-                      <td><AwayFlag width="40px"/></td>
+                      <td>
+                        <AwayFlag width="40px" />
+                      </td>
                       <td>{game.status}</td>
                       <td>{game.home_final}</td>
                       <td>{game.away_final}</td>

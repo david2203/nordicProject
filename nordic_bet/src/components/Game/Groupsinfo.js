@@ -1,17 +1,15 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
-import {getTeamFlag} from "./Flags"
-import Flags from 'country-flag-icons/react/3x2'
-
+import { getTeamFlag } from "./Flags";
+import Flags from "country-flag-icons/react/3x2";
 
 function Groupsinfo() {
   const chunked = [];
-  
+
   const useGetGames = () => {
     const [teamsArray, setTeamsArray] = useState([]);
     const [loading, setLoading] = useState(true);
-    
 
     const instance = axios.create({ baseURL: server });
 
@@ -36,10 +34,8 @@ function Groupsinfo() {
       //chunked is an array with all groups as arrays inside
       chunked.push(teamsArray.slice(i, i + 4));
     }
-    
-    
   }
-  
+
   return (
     <div>
       {chunked.map((groups) => {
@@ -55,10 +51,12 @@ function Groupsinfo() {
               </thead>
               <tbody>
                 {groups.map((country) => {
-                   const CountryFlag = Flags[getTeamFlag(country.name)]
+                  const CountryFlag = Flags[getTeamFlag(country.name)];
                   return (
                     <tr>
-                      <td><CountryFlag width="40px"/></td>
+                      <td>
+                        <CountryFlag width="40px" />
+                      </td>
                       <td> {country.name}</td>
                       <td>{country.group_score} </td>
                     </tr>

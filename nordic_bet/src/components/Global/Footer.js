@@ -1,6 +1,6 @@
-import React from 'react'
-import {Link} from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Footer() {
     return (
@@ -112,4 +112,4 @@ function Footer() {
     )
 }
 
-export default Footer
+export default Footer;
