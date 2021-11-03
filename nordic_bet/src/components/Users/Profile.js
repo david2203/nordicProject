@@ -12,13 +12,16 @@ import Button from 'react-bootstrap/Button';
 import { Parallax } from "react-parallax";
 import FileUploader from "./ProfilePicChange"
 import ChangeImg from "./ChangeImg";
+import { Block } from "@material-ui/icons";
 
 
 
-function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created}) {
+function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created, profilepicture}) {
 
 
-
+const profilePicUrl = profilepicture.formats.small.url
+const url = server + profilePicUrl
+console.log(url)
     const userId = localStorage.getItem("user_id");
     const history = useHistory();
     const instance = axios.create({baseURL: server});
@@ -187,13 +190,19 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
               <div className="row">
                 <div className="col-12 col-sm-auto mb-3">
                   <div className="mx-auto" style={{width: "140px"}}>
-                    <div className="d-flex justify-content-center align-items-center rounded" style={{height: "20px"}}/>
+                    <div className="d-flex justify-content-center align-items-center " style={{height: "20px"}}/>
                     <img
-  src={profileImg}
-  class="img-fluid rounded-pill"
+  src={url}
+  style={{width: '150px',
+          height: '150px',
+          backgroundSize: 'cover',
+          display: 'block',
+          objectFit: 'cover'
+          }}
+          className='rounded-circle'
   alt=""
 />
-                      <span style={{color: "rgb(166, 168, 170)"}}>140x140</span>
+                    
                     </div>
                   </div>
                 </div>

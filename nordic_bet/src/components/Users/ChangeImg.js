@@ -53,7 +53,7 @@ useEffect(() =>{
       const imageId = response.data[0].id
 
       instance.put(`/users/${userId}`,{profilepicture:imageId}).then((response)=>{
-      
+      response = window.location.reload()
       console.log(files)
       }).catch((error)=>{
           console.log(error)
