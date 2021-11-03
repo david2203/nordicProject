@@ -18,7 +18,7 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
 
 
 
-    const [userId, setUserId] = useState(localStorage.getItem("user_id"))
+    const userId = localStorage.getItem("user_id");
     const history = useHistory();
     const instance = axios.create({baseURL: server});
     const [isChanging, setIsChanging] = useState(false);
