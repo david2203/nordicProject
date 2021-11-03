@@ -19,12 +19,12 @@ const FileInput = () => {
 
   if (imageUrl !== null) {
       let formData = new FormData();
-      formData.append("file", imageUrl)
+      formData.append("imageUrl", imageUrl[0])
       const stringed = JSON.stringify(selectedImage)
       console.log(selectedImage)
       const putAvatar = async() => {
-            const response = await instance.put (
-                `Users/${userId}`,{
+            const response = await instance.post (
+                `/upload`,{
                     profilepicture: selectedImage
                 }
             ).then((resp)=>console.log(resp))
