@@ -16,11 +16,24 @@ import { Block } from "@material-ui/icons";
 
 
 
-function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created, profilepicture}) {
+function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created, profilepicture, score}) {
 
+  console.log(profilepicture)
+
+const [url, setUrl] = useState('https://gravatar.com/avatar/a0310ba74bcd933a1f4a3cb00de31fea?s=400&d=mp&r=x')
+
+useEffect(() => {
+
+if(profilepicture) {
 
 const profilePicUrl = profilepicture.formats.small.url
-const url = server + profilePicUrl
+
+setUrl(server + profilePicUrl)
+
+}
+
+}, [])
+
 console.log(url)
     const userId = localStorage.getItem("user_id");
     const history = useHistory();
@@ -210,6 +223,11 @@ console.log(url)
                   <div className="text-center text-sm-left mb-2 mb-sm-0">
                     <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">{firstname} {lastname}</h4>
                     <p className="mb-0">Användarnamn: {username}</p>
+                    {score ? (<p className="mb-0">Poäng: {score}</p>):(
+                      <p className="mb-0">Poäng: 0</p>
+                    )}
+                    
+
                     <div className="mt-2">
                       
                       {/* <FileUploader/> */}

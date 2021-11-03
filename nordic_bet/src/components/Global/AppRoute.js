@@ -30,6 +30,7 @@ function AppRoute() {
         <>
         <Router>
         <Header/>
+          <Route path="/" exact component={Euro}/>
           <Route path="/euro" exact component={Euro}/>
           <Route path="/Admin" exact component={Admin}/>
           <Route path="/MyBets" exact component={MyBets}/>
@@ -41,7 +42,35 @@ function AppRoute() {
           <Route path="/ChangeImg" exact component={FileInput}/>
           <Route path="/ForgottenPassword" exact component={ForgottenPassword} />
           <Route path="/ResetPassword" exact component={ResetPassword} />
-
+          <Route path='/facebook' component={() => { 
+              window.location.href = 'https://facebook.com'; 
+              return null;
+          }}/>
+          <Route path='/twitter' component={() => { 
+              window.location.href = 'https://twitter.com'; 
+              return null;
+          }}/>
+          <Route path='/google' component={() => { 
+              window.location.href = 'https://google.com'; 
+              return null;
+          }}/>
+          <Route path='/instagram' component={() => { 
+              window.location.href = 'https://instagram.com'; 
+              return null;
+          }}/>
+          <Route path='/linkedin' component={() => { 
+              window.location.href = 'https://linkedin.com'; 
+              return null;
+          }}/>
+          <Route path='/github' component={() => { 
+              window.location.href = 'https://github.com'; 
+              return null;
+          }}/>
+          <Route path='/stödlinjen' component={() => { 
+              window.location.href = 'https://www.stodlinjen.se/#!/'; 
+              return null;
+          }}/>
+          
 
 
 

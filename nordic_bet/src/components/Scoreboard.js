@@ -29,18 +29,20 @@ function Scoreboard() {
 
     return (
         <> 
-            <table className="table table-hover w-25 border bg-light mt-3 mx-auto">
+        <h3>Topplista</h3>
+            <table className="table table-hover w-50 border bg-light mt-3 mx-auto">
   <thead>
     <tr>
-      <th scope="col"># Rank</th>
-      <th scope="col">Username</th>
-      <th scope="col">Score</th>
+      <th scope="col">#Rank</th>
+      <th scope="col"></th>
+      <th scope="col">Användarnamn</th>
+      <th scope="col">Poäng</th>
     </tr>
   </thead>
   <tbody>
   {users.map((user,i)=>{
             return(
-                <Scorecard key={user.id} id={user.id}  username={user.username} score={user.Score} row={i}/>
+                <Scorecard key={user.id} id={user.id}  username={user.username} score={user.Score} avatar={user.profilepicture} row={i}/>
             )
         })}
   </tbody>
