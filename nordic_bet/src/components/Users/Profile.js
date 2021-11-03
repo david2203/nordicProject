@@ -14,10 +14,12 @@ import FileUploader from "./ProfilePicChange"
 
 
 
-function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created}) {
+function Profile({username, firstname, lastname, adress, city, zipcode, country, email, created, profilepicture}) {
 
 
-
+const profilePicUrl = profilepicture.formats.small.url
+const url = server + profilePicUrl
+console.log(url)
     const userId = localStorage.getItem("user_id");
     const history = useHistory();
     const instance = axios.create({baseURL: server});
@@ -186,13 +188,14 @@ function Profile({username, firstname, lastname, adress, city, zipcode, country,
               <div className="row">
                 <div className="col-12 col-sm-auto mb-3">
                   <div className="mx-auto" style={{width: "140px"}}>
-                    <div className="d-flex justify-content-center align-items-center rounded" style={{height: "20px"}}/>
+                    <div className="d-flex justify-content-center align-items-center" style={{height: "20px"}}/>
                     <img
-  src={profileImg}
-  class="img-fluid rounded-pill"
+  src={url}
+  sx={{objectFit:"cover"}}
+  className="w-25 "
   alt=""
 />
-                      <span style={{color: "rgb(166, 168, 170)"}}>140x140</span>
+                    
                     </div>
                   </div>
                 </div>
