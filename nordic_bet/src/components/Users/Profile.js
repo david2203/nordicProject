@@ -11,6 +11,8 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import { Parallax } from "react-parallax";
 import FileUploader from "./ProfilePicChange"
+import ChangeImg from "./ChangeImg";
+import { Block } from "@material-ui/icons";
 
 
 
@@ -188,14 +190,19 @@ console.log(url)
               <div className="row">
                 <div className="col-12 col-sm-auto mb-3">
                   <div className="mx-auto" style={{width: "140px"}}>
-                    <div className="d-flex justify-content-center align-items-center" style={{height: "20px"}}/>
-                    <div className="pb-100 overflow-hidden position-relative">
+                    <div className="d-flex justify-content-center align-items-center " style={{height: "20px"}}/>
                     <img
-                      src={url}
-                      className=" w-70 h-70 "
-                      alt=""
-                    />
-                    </div>
+  src={url}
+  style={{width: '150px',
+          height: '150px',
+          backgroundSize: 'cover',
+          display: 'block',
+          objectFit: 'cover'
+          }}
+          className='rounded-circle'
+  alt=""
+/>
+                    
                     </div>
                   </div>
                 </div>
@@ -205,7 +212,8 @@ console.log(url)
                     <p className="mb-0">Användarnamn: {username}</p>
                     <div className="mt-2">
                       
-                      <FileUploader/>
+                      {/* <FileUploader/> */}
+                      <ChangeImg/>
                     </div>
                   </div>
                   <div className="text-center text-sm-right">
