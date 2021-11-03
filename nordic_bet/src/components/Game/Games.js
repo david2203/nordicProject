@@ -6,15 +6,10 @@ import Scoreboard from "../Scoreboard";
 import { Parallax } from "react-parallax";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 function Games() {
-  
   const instance = axios.create({ baseURL: server });
   const [games, setGames] = useState([]);
   const [loadPage, setLoadPage] = useState(3);
-  
-
-
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -37,8 +32,6 @@ function Games() {
 
   const image1 =
     "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80";
-
-  
 
   return (
     <>
