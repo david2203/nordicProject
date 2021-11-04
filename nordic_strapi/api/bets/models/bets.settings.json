@@ -27,9 +27,6 @@
       "via": "bets",
       "model": "euro_event"
     },
-    "bet_outcome": {
-      "model": "bet-outcome"
-    },
     "homeTeamGoals": {
       "type": "string"
     },

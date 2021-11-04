@@ -5,7 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Profile from "./Profile";
 
 function ProfileInfo() {
-  const [userId, setUserId] = useState(localStorage.getItem("user_id"));
+  const userId = localStorage.getItem("user_id");
   const [userInfo, setUserInfo] = useState([]);
   const instance = axios.create({ baseURL: server });
 
@@ -15,6 +15,7 @@ function ProfileInfo() {
       setUserInfo(response.data);
     };
     fetchUserInfo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
     useEffect(()=> {

@@ -94,18 +94,38 @@ function Brackets() {
                 </div>
 
                 {gamesArray.map((game) => {
-                  return (
-                    <ul className="matchup">
-                      <li className="team team-top">
-                        {game.home_team}
-                        <span className="score">{game.home_final}</span>
-                      </li>
-                      <li className="team team-bottom">
-                        {game.away_team}
-                        <span className="score">{game.away_final}</span>
-                      </li>
-                    </ul>
-                  );
+                  const teams = game.eventname.split("-")
+                  const home = teams[0]
+                  const away = teams[1]
+
+                  if(game.home_team !== ""){
+                    return (
+                      <ul className="matchup">
+                        <li className="team team-top">
+                          {game.home_team}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {game.away_team}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                  }else {
+                    return (
+                      <ul className="matchup">
+                        <li className="team team-top">
+                          {home}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {away}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                  }
+                  
                 })}
               </div>
               {/* <!-- END ROUND ONE --> */}

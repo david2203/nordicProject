@@ -6,7 +6,7 @@ function Footer() {
     return (
         <>
 
-<footer className="text-center text-lg-start p-3 mb-2 bg-light ">
+<footer className="text-center text-lg-start p-3 mb-2 bg-light">
 
   <section
     className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"

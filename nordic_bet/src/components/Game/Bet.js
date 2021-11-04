@@ -7,16 +7,20 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import server from "../Global/config";
 
 import { styled } from "@mui/material/styles";
 
-function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner }) {
+function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event }) {
   const [expanded, setExpanded] = React.useState(false);
-
+  const instance = axios.create({ baseURL: server });
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  const teams = euro_event.eventname.split("-")
+  const home_name = teams[0]
+  const away_name = teams[1]
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -37,7 +41,19 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner }) {
     score = +3;
   }
 
-  function handleOnSubmit() {}
+  function handleOnSubmit() {
+    const deleteBet = async () => {
+      const response = await instance
+        .delete(`bets/${id}`, {
+          
+        })
+        .then(
+          window.location.reload()
+        );
+      console.log(response);
+    };
+    deleteBet();
+  }
 
   return (
     <>
@@ -47,19 +63,22 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner }) {
         >
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              Type of bet: {type}
+             <strong> Event: </strong> {euro_event.eventname}<br/>
+              <strong>Type of bet:</strong> {type} <br/> <br/>
+              
+              <strong>Bet:</strong>
               {homeTeamGoals !== "Not included in this bet" ? (
                 <>
-                  <div> Home goals: {homeTeamGoals} </div>
-                  <br />
+                  <div> {home_name} goals: {homeTeamGoals} </div>
+                  
                 </>
               ) : (
                 <></>
               )}
               {awayTeamGoals !== "Not included in this bet" ? (
                 <>
-                  <div> Away goals: {awayTeamGoals} </div>
-                  <br />
+                  <div> {away_name} goals: {awayTeamGoals} </div>
+                 
                 </>
               ) : (
                 <></>
@@ -67,12 +86,13 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner }) {
               {winner !== "Not included in this bet" ? (
                 <>
                   <div> Winner: {winner} </div>
-                  <br />
+                  
                 </>
               ) : (
                 <></>
               )}
-              Maximum points for this bet: {score}
+              <br/>
+              <strong>Maximum points for this bet: </strong>{score}
             </Typography>
           </CardContent>
           <CardActions
@@ -90,15 +110,15 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner }) {
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <form onSubmit={handleOnSubmit}>
+              
                 <div>
                   Delete bet ?
-                  <Button variant="text" type="submit">
+                  <Button variant="text" onClick={handleOnSubmit}>
                     Yes
                   </Button>
                   <br />
                 </div>
-              </form>
+              
               <Typography paragraph></Typography>
               <Typography paragraph></Typography>
               <Typography paragraph></Typography>

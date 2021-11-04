@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
 import Game from "./Game";
-import Scoreboard from "../Scoreboard";
+
 import { Parallax } from "react-parallax";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Games() {
   const instance = axios.create({ baseURL: server });
   const [games, setGames] = useState([]);
-  const [loadPage, setLoadPage] = useState(3);
+  const [loadPage, setLoadPage] = useState(5);
 
   useEffect(() => {
     const fetchGame = async () => {
       const response = await instance.get(
-        `Euro_events?status=Not Started&&_limit=${loadPage}&&grp_contains=EURO Grp.`
+        `Euro_events?status=Not Started&&_limit=${loadPage}`
       );
+      // &&grp_contains=EURO Grp.
       setGames(response.data);
     };
     fetchGame();
@@ -23,11 +24,11 @@ function Games() {
   }, [loadPage]);
 
   function loadMore() {
-    let dynamicPage = loadPage + 2;
+    let dynamicPage = loadPage + 3;
     setLoadPage(dynamicPage);
   }
   function showLess() {
-    setLoadPage(3);
+    setLoadPage(5);
   }
 
   const image1 =
@@ -38,7 +39,7 @@ function Games() {
       <div>
         <Parallax bgImage={image1} strength={500}>
           <div style={{ height: "auto" }}>
-            <Scoreboard />
+            
             {games.map((game) => {
               return (
                 <Game

@@ -14,8 +14,9 @@ import Flags from "../Game/Flags";
 import FileInput from "../Users/ChangeImg";
 import ForgottenPassword from "../Users/ForgottenPassword";
 import ResetPassword from "../Users/ResetPassword";
-
+import Reset from "../Admin/Reset"
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Scoreboard from "../Scoreboard";
 
 function AppRoute() {
       return (
@@ -34,6 +35,10 @@ function AppRoute() {
           <Route path="/ChangeImg" exact component={FileInput}/>
           <Route path="/ForgottenPassword" exact component={ForgottenPassword} />
           <Route path="/ResetPassword" exact component={ResetPassword} />
+          <Route path="/Reset" exact component={Reset} />
+          <Route path="/Scoreboard" exact component={Scoreboard} />
+
+
           <Route path='/facebook' component={() => { 
               window.location.href = 'https://facebook.com'; 
               return null;

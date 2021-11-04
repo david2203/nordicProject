@@ -6,9 +6,9 @@ import server from "./config";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-import * as ReactBootstrap from "react-bootstrap";
+
 import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
-import { red } from "@mui/material/colors";
+
 
 function Header() {
   const history = useHistory();
@@ -47,6 +47,7 @@ function Header() {
       <Nav.Link href="/MyBets">Mina bets</Nav.Link>
       <Nav.Link href="/Euro">Brackets</Nav.Link>
       <Nav.Link href="/Games">Spel</Nav.Link>
+      <Nav.Link href="/Scoreboard">Topplista</Nav.Link>
       
       {/* {isAdmin ? ( 
       <Nav.Link href="/Admin">Admin</Nav.Link>
@@ -57,7 +58,7 @@ function Header() {
       {isAdmin ? ( 
       <NavDropdown title="Adminpanel" id="collasible-nav-dropdown">
         <NavDropdown.Item href="/Admin">Rätta spel</NavDropdown.Item>
-        <NavDropdown.Item href="/Reset">Nollställ event</NavDropdown.Item>
+        <NavDropdown.Item href="/Reset" style={{color: 'red'}}> <i class="bi bi-exclamation-triangle"></i> Nollställ event</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>

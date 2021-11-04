@@ -138,13 +138,16 @@ function Update() {
           },
         };
         const groupname = teamArray[0].grp;
+        console.log(teamArray[0].grp)
         if (groupsObject.hasOwnProperty(groupname)) {
           const fetchGame1a = async (gamename) => {
             try {
               const response = await instance.get(
                 `euro_events?eventname=${gamename}`
               );
+              console.log(response.data[0])
               const id1a = response.data[0].id;
+              
               return id1a;
             } catch (err) {
               console.log(err);
@@ -250,6 +253,23 @@ function Update() {
           away_team: thirdFourth,
         });
       };
+
+      
+
+      // const putHomeAway = async() => {
+      //   const fetchRoundOf16 = async () => {
+      //     try {
+      //       const response = await instance.get(`euro_events?grp_contains=EURO 1/8 finals`);
+      //       return(
+      //         response
+      //       )
+      //     } catch (err) {
+      //       console.log(err);
+      //     }
+      //   };
+      //   fetchRoundOf16().then()
+      // }
+      // putHomeAway()
     }
   }
   return <div>{console.log("updated games")}</div>;
