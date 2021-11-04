@@ -5,6 +5,11 @@ import axios from "axios";
 import server from "./config";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
+import * as ReactBootstrap from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
+import { red } from "@mui/material/colors";
+
 function Header() {
   const history = useHistory();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -28,72 +33,69 @@ function Header() {
   }
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light mx-auto">
-        <Link to="/Games" className="navbar-brand ms-5">
-          {" "}
-          Nordic Bet
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
 
-        <div className="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul className="navbar-nav ">
-            {token ? (
-              <>
-                <Link to="/Profile" className="nav-link ">
-                  {" "}
-                  Profile{" "}
-                </Link>
-                <Link to="/MyBets" className="nav-link ">
-                  {" "}
-                  My Bets
-                </Link>
-                <Link to="/Euro" className="nav-link ">
-                  {" "}
-                  Brackets{" "}
-                </Link>
-                {isAdmin ? (
-                  <Link to="/Admin" className="nav-link">
-                    {" "}
-                    Admin
-                  </Link>
-                ) : (
-                  <></>
-                )}
-                <Link to="/Games" className="nav-link ">
-                  {" "}
-                  Uppcomming games{" "}
-                </Link>
-                <Button onClick={signOut} className="nav-link ">
-                  Sign Out
-                </Button>
-              </>
+
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" className="py-4">
+  <Container fluid>
+  <Navbar.Brand href="/Games">Nordic Bet </Navbar.Brand>
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    
+    {token ? (
+        <>  
+        <Nav className="me-auto">    
+      <Nav.Link href="/MyBets">Mina bets</Nav.Link>
+      <Nav.Link href="/Euro">Brackets</Nav.Link>
+      <Nav.Link href="/Games">Spel</Nav.Link>
+      
+      {/* {isAdmin ? ( 
+      <Nav.Link href="/Admin">Admin</Nav.Link>
+      ) : (
+       <></>
+      )} */}
+      
+      {isAdmin ? ( 
+      <NavDropdown title="Adminpanel" id="collasible-nav-dropdown">
+        <NavDropdown.Item href="/Admin">Rätta spel</NavDropdown.Item>
+        <NavDropdown.Item href="/Reset">Nollställ event</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+      </NavDropdown>
+       ) : (
+        <></>
+       )}
+      </Nav>
+      <Nav >    
+
+      <Nav.Link href="/Profile">Profil</Nav.Link>
+      <Nav.Link eventKey={2} onClick={signOut}>
+        Logga ut
+      </Nav.Link>
+    </Nav>
+      </>
+    
             ) : (
               <>
-                <Link to="/SignIn" className="nav-link">
-                  {" "}
-                  Login
-                </Link>
-                <Link to="/SignUp" className="nav-link">
-                  {" "}
-                  Sign Up
-                </Link>
-              </>
-            )}
-          </ul>
-        </div>
-      </nav>
-    </>
-  );
-}
+              <Nav className="me-auto" >
+                </Nav>
+        <Nav >    
+
+      <Nav.Link href="/SignIn">Login</Nav.Link>
+      <Nav.Link eventKey={2} href="/SignUp">
+        Registrera
+      </Nav.Link>
+    </Nav>
+  
+</>)}
+
+);
+</Navbar.Collapse>
+  </Container>
+</Navbar>
+</>
+     
+   
+  )}
 
 export default Header;

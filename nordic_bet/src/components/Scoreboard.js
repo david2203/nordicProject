@@ -30,7 +30,7 @@ function Scoreboard() {
     return (
         <> 
         <h3>Topplista</h3>
-            <table className="table table-hover w-50 border bg-light mt-3 mx-auto">
+            <table className="table table-hover w-25 border bg-light mt-3 mx-auto">
   <thead>
     <tr>
       <th scope="col">#Rank</th>
