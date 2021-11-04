@@ -4,6 +4,7 @@ import server from "./Global/config";
 import Scorecard from "./Scorecard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import gif from "./img/confetti.gif"
+import { Parallax } from "react-parallax";
 
 
 function Scoreboard() {
@@ -59,19 +60,21 @@ function Scoreboard() {
             
   
 
-    
+    const image1 = "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80"
     
 
     return (
         <> 
+        <Parallax bgImage={image1} strength={500}>
+         
         <div className="min-vh-100">
         <span>
             <span className="d-flex justify-content-center">
-        <img alt="" src={gif} style={{position: 'absolute', zIndex: '3', width: '80%' }}/>
+        <img alt="" src={gif} style={{position: 'absolute', zIndex: '3', width: '100%' }}/>
         </span>
         </span>
         <div className="mt-5">
-        <img src="https://cdn-icons-png.flaticon.com/512/4489/4489657.png" width="50px" alt=""/>
+        <img src="https://cdn-icons-png.flaticon.com/512/4489/4489657.png" width="100px" alt=""/>
         <h3 className=" bg-light w-25 border mx-auto mt-3">Topplista </h3>
             <table className="table table-hover w-50 border bg-light mt-3 mx-auto">
   <thead>
@@ -111,6 +114,7 @@ function Scoreboard() {
 </div>
 
 </div>
+</Parallax>
         </>
         
     )
