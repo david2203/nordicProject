@@ -38,7 +38,7 @@ function Groupsinfo() {
 
   return (
     <div>
-      {chunked.map((groups) => {
+      {chunked.map((groups, index) => {
         groups.sort(function (a, b) {
           return b.group_score - a.group_score;
         });
@@ -47,7 +47,7 @@ function Groupsinfo() {
           <>
             <table className="table table-hover w-50 border bg-light mt-3 mx-auto  ">
               <thead>
-                <tr>
+                <tr key={index}>
                   <th scope="col"></th>
                   <th scope="col"> {groups[0].group} </th>
                   <th scope="col">Score</th>
@@ -57,7 +57,7 @@ function Groupsinfo() {
                 {groups.map((country) => {
                   const CountryFlag = Flags[getTeamFlag(country.name)];
                   return (
-                    <tr>
+                    <tr key={country.id}>
                       <td>
                         <CountryFlag width="40px" />
                       </td>
