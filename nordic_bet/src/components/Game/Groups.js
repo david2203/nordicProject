@@ -43,11 +43,10 @@ function Groups() {
   };
 
   const { loading, gamesArray } = useGetGames();
-  console.log(gamesArray);
-
+  
   if (!loading) {
     // All data should be available
-    console.log(gamesArray);
+    
     for (let i = 0; i < gamesArray.length; i += 6) {
       //chunked is an array with all groups as arrays inside
       chunked.push(gamesArray.slice(i, i + 6));
@@ -109,8 +108,8 @@ function Groups() {
                   <th scope="col"> {games[0].grp} Games</th>
                   <th scope="col"></th>
                   <th scope="col">Status</th>
-                  <th scope="col">Home goals </th>
-                  <th scope="col">Away goals </th>
+                  <th scope="col">Live Home goals </th>
+                  <th scope="col">Live Away goals </th>
                   <th scope="col">Winner </th>
                 </tr>
               </thead>
@@ -125,7 +124,7 @@ function Groups() {
                   return (
                     <tr>
                       <td>
-                        <HomeFlag width="30px" />
+                        <HomeFlag width="40px" />
                       </td>
                       <td>{game.eventname}</td>
                       <td>

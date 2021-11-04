@@ -58,7 +58,7 @@ function Profile({
     e.preventDefault();
 
     const editUserValues = async () => {
-      const response = await instance
+      await instance
         .put(`Users/${userId}`, {
           fname: editUserValue.firstname,
           lname: editUserValue.lastname,

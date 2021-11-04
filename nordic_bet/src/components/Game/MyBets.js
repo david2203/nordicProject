@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
 import Bet from "./Bet";
-import Scoreboard from "../Scoreboard";
+
+import { Parallax } from "react-parallax";
 
 function MyBets() {
   const instance = axios.create({ baseURL: server });
@@ -28,18 +29,23 @@ function MyBets() {
   function showLess() {
     setLoadPage(3);
   }
+
+  const image1 =
+  "https://images.unsplash.com/photo-1561034645-e6f28dfddd2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80";
   return (
     <>
-      <Scoreboard />
+      
       {bets.map((bet) => {
         return (
           <Bet
             key={bet.id}
+            id={bet.id}
             type={bet.type}
             grp={bet.grp}
             homeTeamGoals={bet.homeTeamGoals}
             awayTeamGoals={bet.awayTeamGoals}
             winner={bet.winner}
+            euro_event={bet.euro_event}
           />
         );
       })}

@@ -29,7 +29,8 @@ function Scoreboard() {
 
     return (
         <> 
-        <h3>Topplista</h3>
+        <img src="https://cdn-icons-png.flaticon.com/512/4489/4489657.png" width="50px" alt=""/>
+        <h3 className=" bg-light w-25 border mx-auto mt-3">Topplista </h3>
             <table className="table table-hover w-50 border bg-light mt-3 mx-auto">
   <thead>
     <tr>

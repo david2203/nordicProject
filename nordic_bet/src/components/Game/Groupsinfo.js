@@ -39,6 +39,10 @@ function Groupsinfo() {
   return (
     <div>
       {chunked.map((groups) => {
+        groups.sort(function (a, b) {
+          return b.group_score - a.group_score;
+        });
+       
         return (
           <>
             <table className="table table-hover w-50 border bg-light mt-3 mx-auto  ">
