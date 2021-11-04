@@ -37,8 +37,8 @@ function Games() {
   return (
     <>
       <div>
-        <Parallax bgImage={image1} strength={500}>
-          <div style={{ height: "auto" }}>
+        <Parallax bgImage={image1} strength={500} >
+          <div style={{ height: "auto" }} className="min-vh-100">
             
             {games.map((game) => {
               return (
