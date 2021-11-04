@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import server from "../Global/config";
 import axios from "axios";
+import { Button } from 'react-bootstrap'
 function Reset() {
+  const [message, setMessage] = useState("")
     const useGetGames = () => {
     const [countryArray,setCountryArray] = useState([]) 
     const [betsArray,setBetsArray] = useState([]) 
@@ -64,8 +66,8 @@ function Reset() {
   };
   const { loading, gamesArray, betsArray , countryArray, usersArray} = useGetGames()
   
+  
   function resetEvent2016() {
-
 
   if(!loading) {
     
@@ -75,7 +77,8 @@ function Reset() {
       const countryIdArray =[]
       const usersIdArray =[]
       const roundOf16 = []
-
+      const msg = "EM 2016 ÄR ÅTERSTÄLLT"
+      setMessage("EM blir återställt... Vänligen lämna inte detta fönster!")
       //reset user score
       for(let i = 0; i<usersArray.length;i++){
         usersIdArray.push(usersArray[i].id)
@@ -137,15 +140,29 @@ function Reset() {
         const resetBets = async ()=> {
           await instance.delete(`Bets/${betsIdArray[i]}`)
         }
+        
         resetBets()
+        .then(setMsg)
+        function setMsg() {
+          setMessage(msg)
+          // window.location.reload()
+        }
+        
     }
       
   }
 }
     return (
-        <div className="min-vh-100">
-            
+      <>
+        <div className="min-vh-100 d-flex flex-column" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Button variant="danger" size="lg" onClick={resetEvent2016}>
+      Återställ EM 2016 
+      
+    </Button>{' '}
+    <h2 className="mt-5">{message}</h2>
         </div>
+
+        </>
     )
 }
 
