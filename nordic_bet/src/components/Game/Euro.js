@@ -19,7 +19,11 @@ function Euro() {
 
   return (
     <>
-      <select
+      
+      {formValues.typeOfView === "" ? (
+        <Parallax bgImage={image1} className="min-vh-100"  strength={500}>
+          <select
+          className="mt-3 mb-3"
         name="typeOfView"
         id="view"
         value={formValues.view}
@@ -34,18 +38,56 @@ function Euro() {
         <option value="EliminationView"> Elimination View </option>
       </select>
       <br />
-      {formValues.typeOfView === "" ? "Insert something cool " : <></>}
-      {formValues.typeOfView === "GroupView" ? (
+      <h3 className=" bg-light w-25 border mx-auto mt-3">Välkommen! Vänligen välj om du vill se grupperna eller om du vill se Knockout-stage </h3>
+        </Parallax>
+      ) : (
+        <></>
+      )}
+      {formValues.typeOfView === "GroupView" ? 
         <>
           <Parallax bgImage={image1} strength={1500}>
+          <select
+          className="mt-3 mb-3"
+        name="typeOfView"
+        id="view"
+        value={formValues.view}
+        onChange={handleOnChange}
+        sx={{
+          minWidth: 125,
+          minHeight: 5,
+        }}
+      >
+        <option value="GroupView"> Group View </option>
+        <option value="EliminationView"> Elimination View </option>
+      </select>
+      <br />
             <div cstyle={{ height: "auto" }}></div>
             <Groupsinfo /> <Groups />
           </Parallax>
         </>
-      ) : (
+       : 
         <></>
-      )}
-      {formValues.typeOfView === "EliminationView" ? <Brackets /> : <></>}
+      }
+      {formValues.typeOfView === "EliminationView" ? 
+      <>
+      <select
+      className="mt-3 mb-3"
+      name="typeOfView"
+      id="view"
+      value={formValues.view}
+      onChange={handleOnChange}
+      sx={{
+        minWidth: 125,
+        minHeight: 5,
+      }}
+    >
+      <option value="EliminationView"> Elimination View </option> 
+      <option value="GroupView"> Group View </option>
+      
+    </select>
+    <br />
+      <Brackets />
+      </> : <></>}
     </>
   );
 }

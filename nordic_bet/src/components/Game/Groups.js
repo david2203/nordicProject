@@ -98,12 +98,14 @@ function Groups() {
 
   return (
     <div>
-      {chunked.map((games) => {
+      {chunked.map((games, index) => {
+        console.log(index)
         return (
           <>
             <table className="table table-hover w-75 border bg-light mt-3 mx-auto">
               <thead>
-                <tr>
+                
+              <tr key={index}>
                   <th scope="col"></th>
                   <th scope="col"> {games[0].grp} Games</th>
                   <th scope="col"></th>
@@ -122,7 +124,7 @@ function Groups() {
                   const AwayFlag = Flags[setTeamFlag("away", away_team)];
 
                   return (
-                    <tr>
+                    <tr key={game.id}>
                       <td>
                         <HomeFlag width="40px" />
                       </td>
