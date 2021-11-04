@@ -36,6 +36,9 @@
     "Active": {
       "type": "boolean",
       "default": true
+    },
+    "odds_multiplier": {
+      "type": "decimal"
     }
   }
 }

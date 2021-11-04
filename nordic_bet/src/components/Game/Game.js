@@ -76,7 +76,16 @@ function Game({
   const [formValues, setFormValues] = useState(initialValues);
 
   function handleOnSubmit() {
+    let oddsMulti = 1
+      if(formValues.winner === home_team){
+        oddsMulti = odds_1
+      }else if(formValues.winner === away_team){
+        oddsMulti = odds_2
+      }else if(formValues.winner === "X"){
+        oddsMulti = odds_x
+      }
     if (formValues.typeOfBet === "BetOnResult") {
+      
       instance.get(`bets`, {});
       instance
         .post(`bets`, {
@@ -86,6 +95,8 @@ function Game({
           winner: formValues.winner,
           euro_event: gameId,
           user: user_id,
+          odds_multiplier: oddsMulti
+
         })
         .then();
       window.location.reload();
@@ -98,6 +109,7 @@ function Game({
           winner: "Not included in this bet",
           euro_event: gameId,
           user: user_id,
+          odds_multiplier:1
         })
         .then();
       window.location.reload();
@@ -110,6 +122,8 @@ function Game({
           winner: formValues.winner,
           euro_event: gameId,
           user: user_id,
+          odds_multiplier: oddsMulti
+
         })
         .then();
       window.location.reload();
