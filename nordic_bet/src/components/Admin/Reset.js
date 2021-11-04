@@ -64,7 +64,11 @@ function Reset() {
   };
   const { loading, gamesArray, betsArray , countryArray, usersArray} = useGetGames()
   
+  function resetEvent2016() {
+
+
   if(!loading) {
+    
      const instance = axios.create({ baseURL: server });
      const betsIdArray =[]
       const eventIdArray =[]
@@ -137,8 +141,9 @@ function Reset() {
     }
       
   }
+}
     return (
-        <div>
+        <div className="min-vh-100">
             
         </div>
     )

@@ -7,12 +7,12 @@ import gif from "./img/confetti.gif";
 import { Parallax } from "react-parallax";
 
 function Scoreboard() {
-  const instance = axios.create({ baseURL: server });
+ 
   const userId = Number(localStorage.getItem("user_id"));
   const current = [];
   const currentRank = [];
   const useGetGames = () => {
-    const [rowcount, setRowcount] = useState();
+    
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -22,7 +22,7 @@ function Scoreboard() {
       try {
         const response = await instance.get(`/users?_sort=Score:DESC`);
         setUsers(response.data);
-        setRowcount(response.data.length);
+        
       } catch (err) {
         console.log(err);
       }
@@ -35,10 +35,10 @@ function Scoreboard() {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { users, loading, rowcount };
+    return { users, loading};
   };
 
-  const { users, loading, rowcount } = useGetGames();
+  const { users, loading} = useGetGames();
 
   if (!loading) {
     for (let i = 0; i < users.length; i++) {
