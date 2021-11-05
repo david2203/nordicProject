@@ -31,13 +31,14 @@ function Profile({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
+  const splitCreated = created.split("T")
   const userId = localStorage.getItem("user_id");
   const history = useHistory();
   const instance = axios.create({ baseURL: server });
   const [token] = useState(localStorage.getItem("jwt"));
   const [modalShow, setModalShow] = React.useState(false);
 
+  console.log(splitCreated[0])
   var editValues = {
     username: username,
     firstname: firstname,
@@ -200,21 +201,21 @@ function Profile({
                             <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">
                               {firstname} {lastname}
                             </h4>
-                            <p className="mb-0">Användarnamn: {username}</p>
+                            <p className="mb-0">{username}</p>
                     {score ? (<p className="mb-0">Poäng: {score}</p>):(
                       <p className="mb-0">Poäng: 0</p>
                     )}
-                            <div className="mt-2">
+                            <br/><div className="mt-2">
                               {/* <FileUploader/> */}
                               <ChangeImg />
                             </div>
                           </div>
-                          <div className="text-center text-sm-right">
-                            <div className="text-muted">
-                              <small>
+                          <div className="text-center text-sm-right fs-6">
+                            <div className="font-monospace">
+
                                 Konto skapat <br />
-                                {created}
-                              </small>
+                                {splitCreated[0]}
+
                             </div>
                           </div>
                         </div>
@@ -335,65 +336,11 @@ function Profile({
                                 <br />
                               </div>
                             </div>
-                            <div className="row">
-                              <div className="col-12 col-sm-6 mb-3">
-                                <div className="mb-2">
-                                  <b>Ändra lösenord</b>
-                                </div>
-                                <div className="row">
-                                  <div className="col">
-                                    <div className="form-group">
-                                      <label>Nuvarande Lösenord</label>
-                                      <input
-                                        className="form-control"
-                                        type="password"
-                                        name="currentPassword"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col">
-                                    <div className="form-group">
-                                      <label>Nytt Lösenord</label>
-                                      <input
-                                        className="form-control"
-                                        type="password"
-                                        name="newPassword"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col">
-                                    <div className="form-group">
-                                      <label>
-                                        Bekräfta{" "}
-                                        <span className="d-none d-xl-inline">
-                                          Nytt Lösenord
-                                        </span>
-                                      </label>
-                                      <input
-                                        className="form-control"
-                                        type="password"
-                                        name="confirmNewPassword"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="mb-2">
-                                <b>Keeping in Touch</b>
-                              </div>
-                            </div>
+                           
                           </form>
                         </div>
                         <div className="col d-flex justify-content-between">
-                          <button className="btn btn-secondary" type="submit">
-                            <i className="bi bi-gear-wide fa-lg"></i>
-                            <span> Ändra lösenord</span>
-                          </button>
+
                           <button
                             className="btn btn-primary"
                             type="submit"

@@ -144,7 +144,7 @@ function Game({
         <br />
         <br />
         <Card
-          className="bg-light"
+          className="bg-secondary opacity-100"
           container
           spacing={6}
           sx={{ maxWidth: "100%", mx: "38%", width: ["100%", "50%", "25%"] }}
