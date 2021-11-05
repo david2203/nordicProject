@@ -145,7 +145,7 @@ function Reset() {
         .then(setMsg)
         function setMsg() {
           setMessage(msg)
-          // window.location.reload()
+          console.log(msg)
         }
         
     }

@@ -79,26 +79,55 @@ function Update() {
           country: chunkedCountries[j][0].name,
           score: chunkedCountries[j][0].group_score,
           grp: chunkedCountries[j][0].group,
+          goals: chunkedCountries[j][0].group_goals,
         };
         const team2 = {
           country: chunkedCountries[j][1].name,
           score: chunkedCountries[j][1].group_score,
+          goals: chunkedCountries[j][1].group_goals,
           grp: chunkedCountries[j][0].group,
         };
         const team3 = {
           country: chunkedCountries[j][2].name,
           score: chunkedCountries[j][2].group_score,
+          goals: chunkedCountries[j][2].group_goals,
           grp: chunkedCountries[j][0].group,
         };
         const team4 = {
           country: chunkedCountries[j][3].name,
           score: chunkedCountries[j][3].group_score,
+          goals: chunkedCountries[j][3].group_goals,
           grp: chunkedCountries[j][0].group,
         };
         teamArray.push(team1, team2, team3, team4);
+        console.log(teamArray)
+        let returnValue;
         teamArray.sort(function (a, b) {
-          return b.score - a.score;
+          returnValue = (b.score - a.score);
+          if(b.score === a.score){
+            let matchOne = `${a.country}-${b.country}`
+            let matchTwo = `${b.country}-${a.country}`
+            returnValue = (b.goals - a.goals)
+            console.log(matchTwo)
+            console.log(chunkedGames[j])
+            chunkedGames[j].forEach((game) => {
+              if (game.eventname === matchOne || game.eventname === matchTwo) {
+                if (game.winner === a.country) {
+                    console.log(`Winner found: ${game.winner}`)
+                    returnValue = -1
+                  }
+                } else if(game.winner === b.country){
+                  returnValue = -1
+                }
+              }
+            )
+            // if (matchOne === chunkedGames[j])
+            // console.log(chunkedGames[j])
+          }
+          return returnValue;
         });
+        console.log(teamArray)
+
 
         const winner = teamArray[0].country;
         const secondPlace = teamArray[1].country;
@@ -112,7 +141,7 @@ function Update() {
             place: [winner, secondPlace],
           },
           "EURO Grp. B": {
-            games: ["1B-ACD", "2B-2F"],
+            games: ["1B-3ACD", "2B-2F"],
             side: ["home", "home"],
             place: [winner, secondPlace],
           },
@@ -138,14 +167,14 @@ function Update() {
           },
         };
         const groupname = teamArray[0].grp;
-        console.log(teamArray[0].grp)
+       
         if (groupsObject.hasOwnProperty(groupname)) {
           const fetchGame1a = async (gamename) => {
             try {
               const response = await instance.get(
                 `euro_events?eventname=${gamename}`
               );
-              console.log(response.data[0])
+  
               const id1a = response.data[0].id;
               
               return id1a;
@@ -184,27 +213,98 @@ function Update() {
       }
     }
     if (thirdPlaceArray.length === 6) {
+      const letterArray= []
+      const lineup16 = {
+        "ABCD": {
+          games: ["1A-3C", "1B-3D","1C-3A", "1D-3B"]
+        },
+        "ABCE": {
+          games: ["1A-3C", "1B-3A","1C-3B", "1D-3E"]
+        },
+        "ABCF": {
+          games: ["1A-3C", "1B-3A","1C-3B", "1D-3F"]
+        },
+        "ABDE": {
+          games: ["1A-3D", "1B-3A","1C-3B", "1D-3E"]
+        },
+        "ABDF": {
+          games: ["1A-3D", "1B-3A","1C-3B", "1D-3F"]
+        },
+        "ABEF": {
+          games: ["1A-3E", "1B-3A","1C-3B", "1D-3F"]
+        },
+        "ACDE": {
+          games: ["1A-3C", "1B-3D","1C-3A", "1D-3E"]
+        },
+        "ACDF": {
+          games: ["1A-3C", "1B-3D","1C-3A", "1D-3F"]
+        },
+        "ACEF": {
+          games: ["1A-3C", "1B-3A","1C-3F", "1D-3E"]
+        },
+        "ADEF": {
+          games: ["1A-3D", "1B-3A","1C-3F", "1D-3E"]
+        },
+        "BCDE": {
+          games: ["1A-3C", "1B-3D","1C-3B", "1D-3E"]
+        },
+        "BCDF": {
+          games: ["1A-3C", "1B-3D","1C-3B", "1D-3F"]
+        },
+        "BCEF": {
+          games: ["1A-3E", "1B-3C","1C-3B", "1D-3F"]
+        },
+        "BDEF": {
+          games: ["1A-3E", "1B-3D","1C-3B", "1D-3F"]
+        },
+        "CDEF": {
+          games: ["1A-3C", "1B-3D","1C-3F", "1D-3E"]
+        },
+      }
+      let letter = ""
+      
       thirdPlaceArray.sort(function (a, b) {
+        if(b.score === a.score) {
+          return b.goals - a.goals
+        }
         return b.score - a.score;
       });
-      const thirdWinner = thirdPlaceArray[0].country;
-      const thirdSecond = thirdPlaceArray[1].country;
-      const thirdThird = thirdPlaceArray[2].country;
-      const thirdFourth = thirdPlaceArray[3].country;
+      
+      for (let i = 0; i< thirdPlaceArray.length-2; i++) {
+        letter = thirdPlaceArray[i].grp.split("Grp. ")[1]
+        letterArray.push(letter)
+      }
+      letterArray.sort()
+      const joined = letterArray.join('')
+      
+      
+      
 
       const fetchGame1 = async () => {
         try {
           const response = await instance.get(`euro_events?eventname=1A-3CDE`);
           const id31 = response.data[0].id;
-          return id31;
+          const sync = lineup16[joined].games[0].split("3")[1]
+          let sendCountry = ""
+          for(let i = 0; i<thirdPlaceArray.length; i++){
+            const grp = thirdPlaceArray[i].grp.split(". ")[1]
+            
+            if(grp === sync){
+              sendCountry = thirdPlaceArray[i].country
+            }
+          }
+          return ({id31, sendCountry});
         } catch (err) {
           console.log(err);
         }
       };
+
       fetchGame1().then((resp) => putWinner(resp));
-      const putWinner = async (id) => {
-        await instance.put(`euro_events/${id}`, {
-          away_team: thirdWinner,
+      const putWinner = async (resp) => {
+       
+
+        await instance.put(`euro_events/${resp.id31}`, {
+          away_team: resp.sendCountry,
         });
       };
 
@@ -212,45 +312,72 @@ function Update() {
         try {
           const response = await instance.get(`euro_events?eventname=1B-3ACD`);
           const id32 = response.data[0].id;
-          return id32;
+          const sync = lineup16[joined].games[1].split("3")[1]
+          let sendCountry = ""
+          for(let i = 0; i<thirdPlaceArray.length; i++){
+            const grp = thirdPlaceArray[i].grp.split(". ")[1]
+            if(grp === sync){
+              sendCountry = thirdPlaceArray[i].country
+            }
+          }
+          return ({id32, sendCountry});
         } catch (err) {
           console.log(err);
         }
       };
       fetchGame2().then((resp) => putSecond(resp));
-      const putSecond = async (id) => {
-        await instance.put(`euro_events/${id}`, {
-          away_team: thirdSecond,
+      const putSecond = async (resp) => {
+        
+        await instance.put(`euro_events/${resp.id32}`, {
+          away_team: resp.sendCountry,
         });
       };
       const fetchGame3 = async () => {
         try {
           const response = await instance.get(`euro_events?eventname=1C-3ABF`);
           const id33 = response.data[0].id;
-          return id33;
+          const sync = lineup16[joined].games[2].split("3")[1]
+          let sendCountry = ""
+          for(let i = 0; i<thirdPlaceArray.length; i++){
+            const grp = thirdPlaceArray[i].grp.split(". ")[1]
+            
+            if(grp === sync){
+              sendCountry = thirdPlaceArray[i].country
+            }
+          }
+          return ({id33, sendCountry});
         } catch (err) {
           console.log(err);
         }
       };
       fetchGame3().then((resp) => putThird(resp));
-      const putThird = async (id) => {
-        await instance.put(`euro_events/${id}`, {
-          away_team: thirdThird,
+      const putThird = async (resp) => {
+        await instance.put(`euro_events/${resp.id33}`, {
+          away_team: resp.sendCountry,
         });
       };
       const fetchGame4 = async () => {
         try {
           const response = await instance.get(`euro_events?eventname=1D-3BEF`);
           const id34 = response.data[0].id;
-          return id34;
+          const sync = lineup16[joined].games[3].split("3")[1]
+          let sendCountry = ""
+          for(let i = 0; i<thirdPlaceArray.length; i++){
+            const grp = thirdPlaceArray[i].grp.split(". ")[1]
+            
+            if(grp === sync){
+              sendCountry = thirdPlaceArray[i].country
+            }
+          }
+          return ({id34, sendCountry});
         } catch (err) {
           console.log(err);
         }
       };
       fetchGame4().then((resp) => putFourth(resp));
-      const putFourth = async (id) => {
-        await instance.put(`euro_events/${id}`, {
-          away_team: thirdFourth,
+      const putFourth = async (resp) => {
+        await instance.put(`euro_events/${resp.id34}`, {
+          away_team: resp.sendCountry,
         });
       };
 

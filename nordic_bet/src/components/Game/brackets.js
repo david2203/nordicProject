@@ -100,7 +100,7 @@ function Brackets() {
 
                   if(game.home_team !== ""){
                     return (
-                      <ul className="matchup">
+                      <ul key={game.id} className="matchup">
                         <li className="team team-top">
                           {game.home_team}
                           <span className="score">{game.home_final}</span>

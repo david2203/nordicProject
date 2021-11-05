@@ -9,6 +9,8 @@ function Groupsinfo() {
 
   const useGetGames = () => {
     const [teamsArray, setTeamsArray] = useState([]);
+    const [gamesArray, setGamesArray] = useState([]);
+
     const [loading, setLoading] = useState(true);
 
     const instance = axios.create({ baseURL: server });
@@ -22,14 +24,28 @@ function Groupsinfo() {
       }
       setLoading(false);
     };
+    const fetchGames = async () => {
+      try {
+        
+          const { data } = await instance.get(`Euro_events`);
+          setGamesArray((games) => [...games, ...data]);
+       
+      } catch (err) {
+        console.log(err);
+      }
+
+      setLoading(false);
+    };
     useEffect(() => {
       fetchTeams();
+      fetchGames();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    return { loading, teamsArray };
+    return { loading, teamsArray,gamesArray };
   };
-  const { loading, teamsArray } = useGetGames();
+  const { loading, teamsArray, gamesArray } = useGetGames();
   if (!loading) {
+    console.log(gamesArray)
     for (let i = 0; i < teamsArray.length; i += 4) {
       //chunked is an array with all groups as arrays inside
       chunked.push(teamsArray.slice(i, i + 4));
@@ -40,6 +56,9 @@ function Groupsinfo() {
     <div>
       {chunked.map((groups, index) => {
         groups.sort(function (a, b) {
+          if(b.group_score === a.group_score){
+            return(b.group_goals-a.group_goals)
+          }
           return b.group_score - a.group_score;
         });
        
@@ -51,6 +70,7 @@ function Groupsinfo() {
                   <th scope="col"></th>
                   <th scope="col"> {groups[0].group} </th>
                   <th scope="col">Score</th>
+                  <th scope="col">Total Group Goals</th>
                 </tr>
               </thead>
               <tbody>
@@ -63,6 +83,7 @@ function Groupsinfo() {
                       </td>
                       <td> {country.name}</td>
                       <td>{country.group_score} </td>
+                      <td>{country.group_goals} </td>
                     </tr>
                   );
                 })}

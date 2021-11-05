@@ -156,10 +156,18 @@ function Game({
             color="text.secondary"
             sx={{ fontSize: 20 }}
           >
+            <strong>{grp} </strong><br/>
+            <span> </span>
+            {odds_1}
+            <span> </span>
             <HomeFlag width="40px" title="HomeFlag" className="..." />
-
+           
+                <span> </span>
             {eventname}
+            <span> </span>
             <AwayFlag width="40px" title="AwayFlag" className="..." />
+            <span> </span>
+            {odds_2}
           </Typography>
 
           <CardActions

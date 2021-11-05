@@ -62,9 +62,11 @@ function Game({ event_id, eventname, status, score_given }) {
       const away_team = playingTeams[1];
       const response2 = await instance.get(`countries?name=${home_team}`);
       const home_id = response2.data[0].id;
+      const grpGoalsHome = Number(response2.data[0].group_goals)
       const home_score = Number(response2.data[0].group_score);
       const response3 = await instance.get(`countries?name=${away_team}`);
       const away_id = response3.data[0].id;
+      const grpGoalsAway = Number(response3.data[0].group_goals)
       const away_score = Number(response3.data[0].group_score);
 
       setGameResult(response.data[0]);
@@ -72,31 +74,47 @@ function Game({ event_id, eventname, status, score_given }) {
       if (score_given !== "yes") {
         if (winner === home_team) {
           //give home team 3 points and away team 0 points and set active to false
-          const putPoints = async () => {
+          const putHomePoints = async () => {
             await instance.put(`countries/${home_id}`, {
               group_score: home_score + 3,
+              group_goals: grpGoalsHome + home_goals
             });
           };
-          putPoints();
+          putHomePoints();
+          const putAwayPoints = async () => {
+            await instance.put(`countries/${away_id}`, {
+              group_goals: grpGoalsAway + away_goals
+            });
+          };
+          putAwayPoints();
         } else if (winner === away_team) {
           //give away team 3 points and home team 0 points and set active to false
-          const putPoints = async () => {
-            await instance.put(`countries/${away_id}`, {
-              group_score: away_score + 3,
+          const putHomePoints = async () => {
+            await instance.put(`countries/${home_id}`, {
+              group_goals: grpGoalsHome + home_goals
             });
           };
-          putPoints();
+          putHomePoints();
+          const putAwayPoints = async () => {
+            await instance.put(`countries/${away_id}`, {
+              group_score: away_score + 3,
+              group_goals: grpGoalsAway + away_goals
+            });
+          };
+          putAwayPoints();
         } else if (winner === "X") {
           //give both teams 1 point and set active to false
           const putHomePoints = async () => {
             await instance.put(`countries/${home_id}`, {
               group_score: home_score + 1,
+              group_goals: grpGoalsHome + home_goals
             });
           };
           putHomePoints();
           const putAwayPoints = async () => {
             await instance.put(`countries/${away_id}`, {
               group_score: away_score + 1,
+              group_goals: grpGoalsAway + away_goals
             });
           };
           putAwayPoints();
@@ -209,7 +227,7 @@ function Game({ event_id, eventname, status, score_given }) {
 
   function sendScores(resp) {
     if (resp === false) {
-      return alert("No bets on this game");
+      // return alert("No bets on this game");
     } else {
       const userBetId = resp[2];
       const fetchScore = async () => {
