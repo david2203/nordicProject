@@ -3,6 +3,7 @@ import Groups from "./Groups";
 import Brackets from "./Brackets";
 import Groupsinfo from "./Groupsinfo";
 import { Parallax } from "react-parallax";
+import { FloatingLabel, Form, Row, Col } from "react-bootstrap";
 function Euro() {
   const initialValues = {
     typeOfView: "",
@@ -19,75 +20,119 @@ function Euro() {
 
   return (
     <>
-      
       {formValues.typeOfView === "" ? (
-        <Parallax bgImage={image1} className="min-vh-100"  strength={500}>
+        <Parallax
+          bgImage={image1}
+          className="min-vh-100 opacity-75"
+          strength={500}
+        >
           <select
-          className="mt-3 mb-3"
-        name="typeOfView"
-        id="view"
-        value={formValues.view}
-        onChange={handleOnChange}
-        sx={{
-          minWidth: 125,
-          minHeight: 5,
-        }}
-      >
-        <option value=""> Chose view </option>
-        <option value="GroupView"> Group View </option>
-        <option value="EliminationView"> Elimination View </option>
-      </select>
-      <br />
-      <h3 className=" bg-light w-25 border mx-auto mt-3">Välkommen! Vänligen välj om du vill se grupperna eller om du vill se Knockout-stage </h3>
+            className="mt-3 mb-3"
+            name="typeOfView"
+            id="view"
+            value={formValues.view}
+            onChange={handleOnChange}
+            sx={{
+              minWidth: 125,
+              minHeight: 5,
+            }}
+          >
+            <option value=""> Chose view </option>
+            <option value="GroupView"> Group View </option>
+            <option value="EliminationView"> Elimination View </option>
+          </select>
+          <div>
+            <Row className="g-2 mt-3">
+              <Col md></Col>
+              <Col md></Col>
+
+              <Col md>
+                <FloatingLabel controlId="floatingSelectGrid" label="Välj">
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    className="opacity-75"
+                    name="typeOfView"
+                    id="view"
+                    value={formValues.view}
+                    onChange={handleOnChange}
+                  >
+                    <option>Öppna alternativ</option>
+                    <option value="GroupView">Grupper</option>
+                    <option value="EliminationView">Utslags-turnering</option>
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
+              <Col md></Col>
+              <Col md></Col>
+            </Row>
+          </div>
+          <br />
+          <div className="mt-5" style={{}}>
+            <h1
+              className="text-white mt-5"
+              style={{ fontSize: "6vw", marginRight: "50%" }}
+            >
+              Välkommen!
+            </h1>
+            <h3
+              className="text-white"
+              style={{ fontSize: "3vw", marginTop: "15%" }}
+            >
+              Vänligen välj om du vill se grupperna eller
+              <br /> om du vill se utslags-turneringen{" "}
+            </h3>
+          </div>
         </Parallax>
       ) : (
         <></>
       )}
-      {formValues.typeOfView === "GroupView" ? 
+      {formValues.typeOfView === "GroupView" ? (
         <>
           <Parallax bgImage={image1} strength={1500}>
-          <select
-          className="mt-3 mb-3"
-        name="typeOfView"
-        id="view"
-        value={formValues.view}
-        onChange={handleOnChange}
-        sx={{
-          minWidth: 125,
-          minHeight: 5,
-        }}
-      >
-        <option value="GroupView"> Group View </option>
-        <option value="EliminationView"> Elimination View </option>
-      </select>
-      <br />
+            <select
+              className="mt-3 mb-3"
+              name="typeOfView"
+              id="view"
+              value={formValues.view}
+              onChange={handleOnChange}
+              sx={{
+                minWidth: 125,
+                minHeight: 5,
+              }}
+            >
+              <option value="GroupView"> Group View </option>
+              <option value="EliminationView"> Elimination View </option>
+            </select>
+            <br />
             <div cstyle={{ height: "auto" }}></div>
             <Groupsinfo /> <Groups />
           </Parallax>
         </>
-       : 
+      ) : (
         <></>
-      }
-      {formValues.typeOfView === "EliminationView" ? 
-      <>
-      <select
-      className="mt-3 mb-3"
-      name="typeOfView"
-      id="view"
-      value={formValues.view}
-      onChange={handleOnChange}
-      sx={{
-        minWidth: 125,
-        minHeight: 5,
-      }}
-    >
-      <option value="EliminationView"> Elimination View </option> 
-      <option value="GroupView"> Group View </option>
-      
-    </select>
-    <br />
-      <Brackets />
-      </> : <></>}
+      )}
+      {formValues.typeOfView === "EliminationView" ? (
+        <>
+          <select
+            className="mt-3 mb-3"
+            name="typeOfView"
+            id="view"
+            value={formValues.view}
+            onChange={handleOnChange}
+            sx={{
+              minWidth: 125,
+              minHeight: 5,
+            }}
+          >
+            <option value="EliminationView"> Elimination View </option>
+            <option value="GroupView"> Group View </option>
+          </select>
+          <br />
+          <Brackets />
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
