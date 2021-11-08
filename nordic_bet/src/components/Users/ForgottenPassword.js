@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -36,6 +37,10 @@ const theme = createTheme();
 const instance = axios.create({ baseURL: server });
 
 export default function RequestPassword() {
+  
+  const history = useHistory();
+
+  const [requested,setRequested] = useState(false)
   const [jwt, setJwt] = useState();
   const [error, setError] = useState(false);
   const handleSubmit = (event) => {
@@ -48,10 +53,9 @@ export default function RequestPassword() {
       })
       .then((response) => {
         console.log("Your user received an email");
+        setRequested(true)
       })
-      .catch((error) => {
-        console.log("An error occurred:", error);
-      });
+      .catch(showError);
   };
 
   function showError(e) {
@@ -62,7 +66,17 @@ export default function RequestPassword() {
     const JWT = localStorage.getItem("jwt");
     setJwt(JWT);
   }, []);
-
+  const [email, setEmail] = useState()
+  function handleOnChange(event) {
+    
+    const mail = event.currentTarget.value;
+    console.log(mail)
+    setEmail(mail)
+  }
+  function pushLogin(){
+    setRequested(false)
+    history.push("./SignIn")
+  }
   return (
     <>
       {jwt ? (
@@ -96,6 +110,7 @@ export default function RequestPassword() {
               elevation={6}
               square
             >
+              {!requested ? 
               <Box
                 sx={{
                   my: 8,
@@ -106,9 +121,10 @@ export default function RequestPassword() {
                 }}
               >
                 <Avatar sx={{ m: 1, bgcolor: "primary.main" }}></Avatar>
+                
                 <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
-                  You have requested a password reset <br />
-                  Please submit the email connected to your account:
+                  Du har efterfrågat ett <strong>lösenords byte</strong>. <br />
+                  Vänligen skriv in den E-mail som är kopplat till dit konto: 
                 </Typography>
                 <Box
                   component="form"
@@ -117,8 +133,9 @@ export default function RequestPassword() {
                   sx={{ mt: 1 }}
                 >
                   <Grid container spacing={2}>
-                    <Grid sm={100}>
+                    <Grid sm={20}>
                       <TextField
+                        className="col"
                         margin="normal"
                         required
                         fullWidth
@@ -127,6 +144,7 @@ export default function RequestPassword() {
                         name="identifier"
                         autoComplete="email"
                         autoFocus
+                        onChange={handleOnChange}
                       />
                     </Grid>
                   </Grid>
@@ -149,19 +167,55 @@ export default function RequestPassword() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Request password
+                    Efterfråga lösenord
                   </Button>
                   <Grid container>
                     <Grid item xs></Grid>
                     <Grid item>
                       <Link href="/SignIn" variant="body2">
-                        {"Suddenly remember your password? Click here!"}
+                        {"Kommer du ihåg ditt lösen? Klicka här!"}
                       </Link>
                     </Grid>
                   </Grid>
                   <Copyright sx={{ mt: 5 }} />
                 </Box>
               </Box>
+              : 
+              <Box
+                sx={{
+                  my: 8,
+                  mx: 4,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+              <Box
+                sx={{
+                  my: 8,
+                  mx: 4,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: "primary.main" }}></Avatar>
+                
+                <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
+                  Vi har nu skickat ett E-mail till <strong>{email}</strong><br/>
+                  Följ instruktionerna i mailet för att välja ett nytt lösenord
+                </Typography>
+                <Button
+                    onClick={pushLogin}
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Till login
+                  </Button>
+             
+              </Box> 
+              </Box> 
+                  }
             </Grid>
           </Grid>
         </ThemeProvider>

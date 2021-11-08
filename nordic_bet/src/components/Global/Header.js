@@ -1,6 +1,6 @@
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
+
 import axios from "axios";
 import server from "./config";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -58,9 +58,9 @@ function Header() {
       {isAdmin ? ( 
       <NavDropdown title="Adminpanel" id="collasible-nav-dropdown">
         <NavDropdown.Item href="/Admin">Rätta spel</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Item href="/Update">Updatera elimination</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="/Reset" style={{color: 'red'}}> <i class="bi bi-exclamation-triangle"></i> Nollställ event</NavDropdown.Item>
+        <NavDropdown.Item href="/Reset" style={{color: 'red'}}> <i className="bi bi-exclamation-triangle"></i> Nollställ event</NavDropdown.Item>
       </NavDropdown>
        ) : (
         <></>

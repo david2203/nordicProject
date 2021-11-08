@@ -61,7 +61,7 @@ export default function SignIn() {
         history.push("/games");
         window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch(showError);
   };
 
   function showError(e) {
@@ -73,6 +73,18 @@ export default function SignIn() {
     setJwt(JWT);
   }, []);
 
+  const [visibility, setVisibility] = useState(false)
+function handleToggle() {
+  
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+    setVisibility(true)
+  } else {
+    x.type = "password";
+    setVisibility(false)
+  }
+}
   return (
     <>
       {jwt ? (
@@ -141,11 +153,15 @@ export default function SignIn() {
                     required
                     fullWidth
                     name="password"
-                    label="Lösenord"
+                    label={"Lösenord"}
                     type="password"
                     id="password"
                     autoComplete="current-password"
                   />
+                  {!  visibility ?  <i style={{cursor:'pointer'}} className="bi bi-eye-slash" onClick={handleToggle}> Visa lösen</i>
+              :
+              <i  style={{cursor:'pointer'}}className="bi bi-eye" onClick={handleToggle}> Döljlösen</i>
+              }
                   <br />
                   {error ? (
                     <Alert

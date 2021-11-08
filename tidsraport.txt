@@ -17,3 +17,6 @@ Svårare funktioner / requests / hämta och skicka data för games och profiler
 Månad 1 Nov:
 förmiddag försöka få in bcrypt react för hash när user registrerar sig. Visar sig att strapi redan har en förinställd bcrypt för när user
 registrerar sig. - 4h.....
+
+Styling av olika komponenter, utvecklande funktioner till existerande komponenter, kod formatering, förbättringar av existent kod.
+4 dagar (28 hr var) - 4 x 2 var (helg dag) : 24 hr

@@ -53,7 +53,7 @@ function Euro() {
                     className="opacity-75"
                     name="typeOfView"
                     id="view"
-                    value={formValues.view}
+                    value={formValues.typeOfView}
                     onChange={handleOnChange}
                   >
                     <option>Öppna alternativ</option>

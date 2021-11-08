@@ -61,12 +61,6 @@ export default function SignUp() {
         console.log("user token", response.data.jwt);
         history.push("/SignIn");
       })
-      //.then( (event)=>{if (event.data.user) '<Alert sx={{marginTop: 2, marginLeft: 2, width: '100%'}}severity="success">Uppgifter redan använda, använd annat.</Alert>')})
-
-      // .then( (event)=> { if(event.data.user) history.push('/games'); // document.write(<p> Du är nu registrerad.</p>)
-
-      //   })
-
       .catch(showError);
   };
 
@@ -74,6 +68,18 @@ export default function SignUp() {
     setError(true);
   }
 
+  const [visibility, setVisibility] = useState(false)
+  function handleToggle() {
+    
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+      setVisibility(true)
+    } else {
+      x.type = "password";
+      setVisibility(false)
+    }
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -189,7 +195,12 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+                {!  visibility ?  <i style={{cursor:'pointer'}} className="bi bi-eye-slash" onClick={handleToggle}> Visa lösen</i>
+              :
+              <i  style={{cursor:'pointer'}}className="bi bi-eye" onClick={handleToggle}> Döljlösen</i>
+              }
               </Grid>
+
               <br />
               {error ? (
                 <Alert

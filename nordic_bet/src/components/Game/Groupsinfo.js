@@ -22,8 +22,9 @@ function Groupsinfo() {
       } catch (err) {
         console.log(err);
       }
-      setLoading(false);
+      
     };
+    
     const fetchGames = async () => {
       try {
         
@@ -51,15 +52,30 @@ function Groupsinfo() {
       chunked.push(teamsArray.slice(i, i + 4));
     }
   }
+  let returnValue;
 
   return (
     <div>
       {chunked.map((groups, index) => {
         groups.sort(function (a, b) {
+          returnValue = (b.group_score - a.group_score);
           if(b.group_score === a.group_score){
-            return(b.group_goals-a.group_goals)
+            let matchOne = `${a.country}-${b.country}`
+            let matchTwo = `${b.country}-${a.country}`
+            returnValue = (b.group_goals - a.group_goals)
+            for(let i = 0; i < gamesArray.length; i++) {
+              if(gamesArray[i].eventname === matchOne || gamesArray[i].eventname === matchTwo) {
+                if(gamesArray[i].winner === a.country){
+                  returnValue = -1
+                }else if(gamesArray[i].winner === a.country){
+                  returnValue = -1
+                }
+              }
+            }
           }
-          return b.group_score - a.group_score;
+         
+          return returnValue;
+          
         });
        
         return (

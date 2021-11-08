@@ -10,15 +10,18 @@ function Game({ event_id, eventname, status, score_given }) {
   const home_team = playingTeams[0];
   const away_team = playingTeams[1];
   const [gameId, setGameId] = useState();
+  const [gameGrp, setGameGrp] = useState();
+
   const [gameResult, setGameResult] = useState();
   const [homeFlag, setHomeFlag] = useState("AQ");
   const [awayFlag, setAwayFlag] = useState("AQ");
   const token = localStorage.getItem("jwt");
+  const [render, setRender] =useState()
 
   useEffect(() => {
     const fetchGameId = async () => {
       const response = await instance.get(`Euro_events?eid_xml=${event_id}`);
-
+      setGameGrp(response.data[0].grp)
       setGameId(response.data[0].id);
     };
     fetchGameId();
@@ -27,12 +30,12 @@ function Game({ event_id, eventname, status, score_given }) {
     setAwayFlag(setTeamFlag("away", away_team));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [render]);
 
   useEffect(() => {
-    console.log(gameResult);
+    
   }, [gameResult]);
-
+  
   function updateGameStatus() {
     const putStatus = async () => {
       await instance.put(
@@ -46,6 +49,7 @@ function Game({ event_id, eventname, status, score_given }) {
           },
         }
       );
+      
     };
     putStatus().then(sendBetResults());
   }
@@ -71,7 +75,7 @@ function Game({ event_id, eventname, status, score_given }) {
 
       setGameResult(response.data[0]);
 
-      if (score_given !== "yes") {
+      if (score_given === "no" && gameGrp.includes("Grp.")) {
         if (winner === home_team) {
           //give home team 3 points and away team 0 points and set active to false
           const putHomePoints = async () => {
@@ -257,21 +261,21 @@ function Game({ event_id, eventname, status, score_given }) {
         Active: false,
       });
     };
-    updateBet();
+    updateBet().then(window.location.reload());
   }
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
 
   return (
     <>
-      <div className="game_info mt-3 bg-light w-25 center ">
+      <div className="game_info mt-3 mb-3 bg-light w-25 center ">
         <HomeFlag width="30px" title="United States" className="..." />
         {eventname}
         <AwayFlag width="30px" title="United States" className="..." />
         <br />
         {status}
         <br />
-        {status === "Not started" || "Finished" ? (
+        {status === "Not Started" ? (
           <>
             {" "}
             <button onClick={updateGameStatus}>

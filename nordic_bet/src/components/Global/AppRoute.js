@@ -5,6 +5,8 @@ import SignUp from "../Users/SignUp";
 import MyBets from "../Game/MyBets";
 import SignIn from "../Users/SignIn";
 import Admin from "../Admin/Admin";
+import Result16 from "../Admin/Results_postGroup";
+
 import Footer from "./Footer";
 import Euro from "../Game/Euro";
 import ProfileInfo from "../Users/ProfileInfo";
@@ -17,6 +19,8 @@ import ResetPassword from "../Users/ResetPassword";
 import Reset from "../Admin/Reset"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Scoreboard from "../Scoreboard";
+import Update from "../Admin/Update";
+
 
 function AppRoute() {
       return (
@@ -37,6 +41,10 @@ function AppRoute() {
           <Route path="/ResetPassword" exact component={ResetPassword} />
           <Route path="/Reset" exact component={Reset} />
           <Route path="/Scoreboard" exact component={Scoreboard} />
+          <Route path="/Result16" exact component={Result16} />
+          <Route path="/Update" exact component={Update} />
+
+
 
 
           <Route path='/facebook' component={() => { 

@@ -11,7 +11,7 @@ function Brackets() {
 
     const fetchCountries = async () => {
       try {
-        const data = await instance.get(`euro_events?grp=Euro 1/8 finals`);
+        const data = await instance.get(`euro_events?grp=EURO 1/8 finals`);
         setGamesArray(data.data);
       } catch (err) {
         console.log(err);

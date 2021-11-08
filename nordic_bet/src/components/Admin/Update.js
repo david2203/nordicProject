@@ -118,6 +118,9 @@ function Update() {
                   }
                 } else if(game.winner === b.country){
                   returnValue = -1
+                }else if( game.winner === "X") {
+                  console.log(`no winner ${game.winner}`)
+                  returnValue = (b.goals - a.goals)
                 }
               }
             )

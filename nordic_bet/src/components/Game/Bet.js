@@ -33,6 +33,7 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
 
     setHomeFlag(setTeamFlag("home", home_name));
     setAwayFlag(setTeamFlag("away", away_name));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   const handleExpandClick = () => {
     setExpanded(!expanded);

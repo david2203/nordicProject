@@ -15,21 +15,6 @@ if ($conn->connect_errno) {
 $data16 = new stdClass;
 $data16 ->
 
-$data16 = {
-    Round of 16
-
-(37) Jun/25 15:00   Switzerland  4-5 pen. 1-1 a.e.t. (0-0)  Poland            @ Stade Geoffroy-Guichard, Saint-Étienne
-(38) Jun/25 18:00   Wales        1-0                  Northern Ireland  @ Parc des Princes, Paris
-(39) Jun/25 21:00   Croatia      0-1 a.e.t. (0-0)    Portugal          @ Stade Bollaert-Delelis, Lens
-
-(40) Jun/26 15:00   France       2-1              Ireland           @ Parc Olympique Lyonnais, Lyon
-(41) Jun/26 18:00   Germany      3-0              Slovakia          @ Stade Pierre-Mauroy, Lille
-(42) Jun/26 21:00   Hungary      0-4              Belgium           @ Stadium Municipal, Toulouse
-
-(43) Jun/27 18:00   Italy        2-0              Spain             @ Stade de France, Saint-Denis
-(44) Jun/27 21:00   England      1-2              Iceland           @ Allianz Riviera, Nice
-
-}
 
 $dataQuarter = {
     Quarter-finals

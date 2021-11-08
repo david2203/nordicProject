@@ -127,7 +127,8 @@ function Reset() {
       for(let i =0; i<countryIdArray.length;i++) {
           const resetCountryScore = async ()=> {
             await instance.put(`Countries/${countryIdArray[i]}`, {
-                group_score: "0"
+                group_score: 0,
+                group_goals: 0
             })
           }
           resetCountryScore()

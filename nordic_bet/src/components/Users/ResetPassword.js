@@ -51,13 +51,7 @@ export default function ResetPassword() {
         console.log("Your user's password has been reset.");
         history.push("./signin")
       })
-      .catch(error => {
-        console.log('An error occurred:', error.response);
-      });
-    
-      
-    
-
+      .catch(showError);
 };
 
   
@@ -71,10 +65,22 @@ function showError(e) {
     setJwt(JWT);
 },[])
 
-
+const [visibility, setVisibility] = useState(false)
+function handleToggle() {
+  
+  var x = document.getElementById("NewPassword");
+  if (x.type === "password") {
+    x.type = "text";
+    setVisibility(true)
+  } else {
+    x.type = "password";
+    setVisibility(false)
+  }
+}
 
   return (
       <>
+
       {jwt ? <div>token {jwt}</div>:
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -106,7 +112,7 @@ function showError(e) {
             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ mb: 3}} >
-               Please choose a new password:
+              Vänligen välj ett nytt lösenord:
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1}}>
             <Grid container spacing={2}>
@@ -116,8 +122,9 @@ function showError(e) {
                 required
                 fullWidth
                 id="NewPassword"
-                label="New Password"
+                label="Nytt lösenord"
                 name="NewPassword"
+                type="password"
                 autoComplete="NewPassword"
                 autoFocus
               />
@@ -127,11 +134,16 @@ function showError(e) {
                 required
                 fullWidth
                 name="Confirm"
-                label="Confirm Password"
-                type="Confirm"
+                label="Bekräfta lösenord"
+                type="password"
                 id="Confirm"
                 autoComplete="current-password"
               />
+              {!  visibility ?  <i  style={{cursor:'pointer'}} className="bi bi-eye-slash" onClick={handleToggle}> Visa lösen</i>
+              :
+              <i style={{cursor:'pointer'}} className="bi bi-eye" onClick={handleToggle}> Dölj lösen</i>
+              }
+             
               </Grid>
               </Grid>
 
@@ -143,7 +155,7 @@ function showError(e) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Change password
+                Byt lösenord
               </Button>
               <Grid container>
                 <Grid item xs>
