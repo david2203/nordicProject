@@ -73,6 +73,7 @@ function Brackets() {
             <p className="intro" id="intro">
               Nordic Bet
             </p>
+            <br/>
             <h2 className="intro" id="intro">
               Presenterar...
             </h2>
