@@ -42,7 +42,7 @@ function Groupsinfo() {
       fetchGames();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    return { loading, teamsArray,gamesArray };
+    return { loading, teamsArray, gamesArray };
   };
   const { loading, teamsArray, gamesArray } = useGetGames();
   if (!loading) {
@@ -73,7 +73,7 @@ function Groupsinfo() {
               }
             }
           }
-         
+         console.log(groups)
           return returnValue;
           
         });
@@ -87,19 +87,34 @@ function Groupsinfo() {
                   <th scope="col"> {groups[0].group} </th>
                   <th scope="col">Score</th>
                   <th scope="col">Total Group Goals</th>
+                  <th scope="col">Status</th>
+
+
                 </tr>
               </thead>
               <tbody>
                 {groups.map((country) => {
                   const CountryFlag = Flags[getTeamFlag(country.name)];
+                  console.log(groups[1])
+                  console.log(country)
+                  let color = 'bg-danger'
+                  if (country.name === groups[0].name|| country.name === groups[1].name) {
+                    color = 'bg-success'
+                  }
+                  else if(country.name === groups[2].name) {
+                    color = 'bg-warning'
+                  }
+                  
                   return (
-                    <tr key={country.id}>
+                    <tr key={country.id} >
                       <td>
                         <CountryFlag width="40px" />
                       </td>
                       <td> {country.name}</td>
                       <td>{country.group_score} </td>
                       <td>{country.group_goals} </td>
+                      <td className={` text-light ${color}`}> </td>
+
                     </tr>
                   );
                 })}
