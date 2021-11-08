@@ -26,21 +26,6 @@ function Euro() {
           className="min-vh-100 opacity-75"
           strength={500}
         >
-          <select
-            className="mt-3 mb-3"
-            name="typeOfView"
-            id="view"
-            value={formValues.view}
-            onChange={handleOnChange}
-            sx={{
-              minWidth: 125,
-              minHeight: 5,
-            }}
-          >
-            <option value=""> Chose view </option>
-            <option value="GroupView"> Group View </option>
-            <option value="EliminationView"> Elimination View </option>
-          </select>
           <div>
             <Row className="g-2 mt-3">
               <Col md></Col>
@@ -89,21 +74,32 @@ function Euro() {
       {formValues.typeOfView === "GroupView" ? (
         <>
           <Parallax bgImage={image1} strength={1500}>
-            <select
-              className="mt-3 mb-3"
-              name="typeOfView"
-              id="view"
-              value={formValues.view}
-              onChange={handleOnChange}
-              sx={{
-                minWidth: 125,
-                minHeight: 5,
-              }}
-            >
-              <option value="GroupView"> Group View </option>
-              <option value="EliminationView"> Elimination View </option>
-            </select>
             <br />
+                      <div style={{paddingBottom: '5%'}}>
+            <Row className="g-2 mt-3">
+              <Col md></Col>
+              <Col md></Col>
+
+              <Col md>
+                <FloatingLabel controlId="floatingSelectGrid" label="Välj">
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    className="opacity-75"
+                    name="typeOfView"
+                    id="view"
+                    value={formValues.view}
+                    onChange={handleOnChange}
+                  >
+
+                    <option value="GroupView">Grupper</option>
+                    <option value="EliminationView">Utslags-turnering</option>
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
+              <Col md></Col>
+              <Col md></Col>
+            </Row>
+          </div>
             <div cstyle={{ height: "auto" }}></div>
             <Groupsinfo /> <Groups />
           </Parallax>
@@ -113,22 +109,35 @@ function Euro() {
       )}
       {formValues.typeOfView === "EliminationView" ? (
         <>
-          <select
-            className="mt-3 mb-3"
-            name="typeOfView"
-            id="view"
-            value={formValues.view}
-            onChange={handleOnChange}
-            sx={{
-              minWidth: 125,
-              minHeight: 5,
-            }}
-          >
-            <option value="EliminationView"> Elimination View </option>
-            <option value="GroupView"> Group View </option>
-          </select>
+        <Parallax bgImage={image1} strength={1500}>
+        <br/>
+        <div style={{paddingBottom: '5%'}}>
+            <Row className="g-2 mt-3">
+              <Col md></Col>
+              <Col md></Col>
+
+              <Col md>
+                <FloatingLabel controlId="floatingSelectGrid" label="Välj">
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    className="opacity-75"
+                    name="typeOfView"
+                    id="view"
+                    value={formValues.view}
+                    onChange={handleOnChange}
+                  >
+                    <option value="EliminationView">Utslags-turnering</option>
+                    <option value="GroupView">Grupper</option>
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
+              <Col md></Col>
+              <Col md></Col>
+            </Row>
+          </div>
           <br />
           <Brackets />
+          </Parallax>
         </>
       ) : (
         <></>
