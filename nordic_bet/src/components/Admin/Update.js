@@ -9,6 +9,8 @@ function Update() {
 
   const useGetGames = () => {
     const [gamesArray, setGamesArray] = useState([]);
+    const [array16, setArray16] = useState([]);
+
     const [countriesArray, setCountriesArray] = useState([]);
 
     const [loading, setLoading] = useState(true);
@@ -32,11 +34,23 @@ function Update() {
         console.log(err);
       }
     };
-    const fetchGames = async () => {
+    const fetchGroupGames = async () => {
       try {
         for (let i = 0; i < groups.length; i++) {
           const { data } = await instance.get(`Euro_events?grp=${groups[i]}`);
           setGamesArray((games) => [...games, ...data]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+
+      
+    };
+    const fetch16Games = async () => {
+      try {
+        for (let i = 0; i < groups.length; i++) {
+          const { data } = await instance.get(`Euro_events?grp=EURO 1/8 finals`);
+          setArray16(data);
         }
       } catch (err) {
         console.log(err);
@@ -47,14 +61,15 @@ function Update() {
 
     useEffect(() => {
       fetchCountries();
-      fetchGames();
+      fetchGroupGames();
+      fetch16Games();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { loading, gamesArray, countriesArray };
+    return { loading, gamesArray, countriesArray, array16 };
   };
 
-  const { loading, gamesArray, countriesArray } = useGetGames();
+  const { loading, gamesArray, countriesArray , array16 } = useGetGames();
   function uppdateElim() {
     if (!loading) {
       // All data should be available
@@ -404,7 +419,45 @@ function Update() {
     }
   }
   
-  return <div><button onClick={uppdateElim}> Uppdate Elimination Brackets</button></div>;
+
+  function uppdateElim16(){
+    const   quarterLineup = {
+      "2A/2C": {
+        game:"Winner 2A/2C-Winner 1D/3BEF",
+        side:"home" 
+      },
+      "1D/3BEF": {
+        game:"Winner 2A/2C-Winner 1D/3BEF",
+        side:"away"
+      },
+      // "1B/3ACD-1F/2E": {
+      //   games: ["1C-3ABF", "2A-2C"],
+      //   side: ["home", "away"], 
+      // },
+      // "1A/3CDE-2B/2F": {
+      //   games: ["1D-3BEF", "1E-2D"],
+      //   side: ["home", "away"],
+      // },
+      
+    };
+    for(let i = 0; i<array16.length; i++){  
+      const instance = axios.create({ baseURL: server });
+      if(array16[i].status === "Finished"){
+        
+        const winner = array16[i].winner
+        console.log(array16[i])
+        // const sendWinner = async() =>{
+        //     await instance.put(``, {
+
+        //     })
+        // }
+        // sendWinner()
+      }
+    }
+   
+  }
+  return <div><button onClick={uppdateElim}> Update from group to elim </button> <br/><br/>
+  <button onClick={uppdateElim16}> Update from round of 16 to quarterfinals</button></div> ;
 }
 
 export default Update;
