@@ -5,14 +5,25 @@ import axios from "axios";
 
 function Brackets() {
   const useGetGames = () => {
-    const [gamesArray, setGamesArray] = useState([]);
+    const [games16Array, set16GamesArray] = useState([]);
+    const [gamesQuarter, setGamesQuarter] = useState([]);
+    const [gamesSemi, setGamesSemi] = useState([])
+    const [gamesFinal, setGamesFinal] = useState([])
+
     const [loading, setLoading] = useState(true);
     const instance = axios.create({ baseURL: server });
 
     const fetchCountries = async () => {
       try {
         const data = await instance.get(`euro_events?grp=EURO 1/8 finals`);
-        setGamesArray(data.data);
+        set16GamesArray(data.data);
+        const data2 = await instance.get(`euro_events?grp=EURO Quarter finals`);
+        setGamesQuarter(data2.data);
+        const data3 = await instance.get(`euro_events?grp=EURO Semi finals`);
+        setGamesSemi(data3.data);
+        const data4 = await instance.get(`euro_events?grp=EURO Final`);
+        setGamesFinal(data4.data);
+
       } catch (err) {
         console.log(err);
       }
@@ -25,12 +36,12 @@ function Brackets() {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { loading, gamesArray };
+    return { loading, games16Array, gamesQuarter, gamesSemi, gamesFinal };
   };
 
-  const { loading, gamesArray } = useGetGames();
+  const { loading, games16Array, gamesQuarter, gamesSemi, gamesFinal } = useGetGames();
   if (!loading) {
-    console.log(gamesArray);
+    console.log(games16Array);
   }
 
   return (
@@ -94,11 +105,11 @@ function Brackets() {
                   <span className="date">"DATE"</span>
                 </div>
 
-                {gamesArray.map((game) => {
+                {games16Array.map((game) => {
                   const teams = game.eventname.split("-")
                   const home = teams[0]
                   const away = teams[1]
-
+                  
                   if(game.home_team !== ""){
                     return (
                       <ul key={game.id} className="matchup">
@@ -137,38 +148,44 @@ function Brackets() {
                   <br />
                   <span className="date">"DATE"</span>
                 </div>
-                <ul className="matchup">
-                  <li className="team team-top">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                  <li className="team team-bottom">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                </ul>
-                <ul className="matchup">
-                  <li className="team team-top">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                  <li className="team team-bottom">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                </ul>
-                <ul className="matchup">
-                  <li className="team team-top">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                  <li className="team team-bottom">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                </ul>
-                <ul className="matchup">
-                  <li className="team team-top">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                  <li className="team team-bottom">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                </ul>
+                {gamesQuarter.map((game) => {
+                  
+                  const home = game.home_team
+                  const away = game.away_team
+                  const teams = game.eventname.split("-")
+                  const home_pre = teams[0]
+                  const away_pre = teams[1]
+
+                  if(game.home_team !== ""){
+                    return (
+                      <ul key={game.id} className="matchup">
+                        <li className="team team-top">
+                          {home}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {away}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                  }
+                  else {
+                    return (
+                      <ul className="matchup">
+                        <li className="team team-top">
+                          {home_pre}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {away_pre}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                    }
+                })
+                } 
               </div>
               {/* !-- END ROUND TWO --> */}
 
@@ -178,22 +195,46 @@ function Brackets() {
                   <br />
                   <span className="date">"DATE"</span>
                 </div>
-                <ul className="matchup">
-                  <li className="team team-top">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                  <li className="team team-bottom">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                </ul>
-                <ul className="matchup">
-                  <li className="team team-top">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                  <li className="team team-bottom">
-                    &nbsp;<span className="score">&nbsp;</span>
-                  </li>
-                </ul>
+                {gamesSemi.map((game) => {
+                   const home = game.home_team
+                   const away = game.away_team
+                   const teams = game.eventname.split("-")
+                   const home_pre = teams[0]
+                   const away_pre = teams[1]
+ 
+                  
+                 
+                   if(game.home_team !== ""){
+                    return (
+                      <ul key={game.id} className="matchup">
+                        <li className="team team-top">
+                          {home}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {away}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                  }
+                  else {
+                    return (
+                      <ul className="matchup">
+                        <li className="team team-top">
+                          {home_pre}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {away_pre}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                    }
+                })
+                } 
+               
               </div>
               {/* <!-- END ROUND THREE -->		 */}
             </div>
@@ -205,17 +246,67 @@ function Brackets() {
                   Final <br />
                   <span className="date">"DATE"</span>
                 </div>
-                <ul className="matchup championship">
-                  <li className="team team-top">
-                    &nbsp;<span className="vote-count">&nbsp;</span>
-                  </li>
-                  <li className="team team-bottom">
-                    &nbsp;<span className="vote-count">&nbsp;</span>
-                  </li>
-                </ul>
+                {gamesFinal.map((game) => {
+                   const home = game.home_team
+                   const away = game.away_team
+                   const teams = game.eventname.split("-")
+                   const home_pre = teams[0]
+                   const away_pre = teams[1]
+ 
+                  
+                 
+                   if(game.home_team !== ""){
+                    return (
+                      <ul key={game.id} className="matchup">
+                        <li className="team team-top">
+                          {home}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {away}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                  }
+                  else {
+                    return (
+                      <ul className="matchup">
+                        <li className="team team-top">
+                          {home_pre}
+                          <span className="score">{game.home_final}</span>
+                        </li>
+                        <li className="team team-bottom">
+                          {away_pre}
+                          <span className="score">{game.away_final}</span>
+                        </li>
+                      </ul>
+                    );
+                    }
+                })
+                } 
               </div>
             </div>
-
+            {gamesFinal.map((game) => {
+             const winner = game.winner
+              if(game.winner !== "") {
+                return (
+                  <><ul className="matchup">
+                  <li className="team team-top">
+                   Winner : {winner}
+                  </li>
+                  </ul>
+                 
+                  </>
+                )
+              }else {
+                return (
+                  <>
+                  </>
+                )
+              }
+            })
+            }
             <div className="split split-two"></div>
           </div>
           <div />

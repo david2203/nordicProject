@@ -275,7 +275,7 @@ function Game({ event_id, eventname, status, score_given }) {
         <br />
         {status}
         <br />
-        {status === "Not Started" ? (
+        {status === "Not Started"? (
           <>
             {" "}
             <button onClick={updateGameStatus}>
