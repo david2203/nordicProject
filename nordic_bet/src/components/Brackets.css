@@ -109,7 +109,7 @@
 
 .champion i {
     color: #c7b40d;
-    font-size: 45px;
+    font-size: 75px;
     padding: 10px 0;
 }
 
@@ -150,6 +150,11 @@
     font-size: 22px;
 }
 
+.flag {
+    position: absolute;
+    left: 5px;
+}
+
 .score {
     font-size: 11px;
     text-transform: uppercase;
@@ -169,17 +174,21 @@
     white-space: nowrap;
     overflow: hidden;
     position: relative;
+    padding-top: 1%;
 }
 
 .round-two .matchup .team {
+    padding-top: 2.5%;
     height: 45px;
 }
 
 .round-three .matchup .team {
     height: 55px;
+    padding-top: 5%;
 }
 .final .matchup .team {
     height: 65px;
+    padding-top: 5%;
 }
 
 .round-two .matchup {
@@ -264,7 +273,7 @@
 
 .final {
     padding-left: 10%;
-    margin: -8.5em 0;
+    margin: -10em 0;
     position: absolute;
 }
 
@@ -327,6 +336,12 @@
     color: #3F915F;
 }
 
+@media screen and (min-width:1100 ) and (max-width: 1459) {
+    .final {
+        width: 10%;
+        position: absolute;
+    }
+}
 
 
 @media screen and (min-width: 981px) and (max-width: 1099px) {
