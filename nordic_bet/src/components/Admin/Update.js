@@ -10,6 +10,11 @@ function Update() {
   const useGetGames = () => {
     const [gamesArray, setGamesArray] = useState([]);
     const [array16, setArray16] = useState([]);
+    const [arrayQuarter, setArrayQuarter] = useState([]);
+    const [arraySemi, setArraySemi] =useState([])
+    const [arrayFinal, setArrayFinal] =useState([])
+
+
 
     const [countriesArray, setCountriesArray] = useState([]);
 
@@ -43,15 +48,43 @@ function Update() {
       } catch (err) {
         console.log(err);
       }
-
-      
+    };
+    const fetchFinal = async () => {
+      try {
+        
+          const { data } = await instance.get(`Euro_events?grp=EURO Final`);
+          setArrayFinal(data);
+        
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    const fetchSemiGames = async () => {
+      try {
+        
+          const { data } = await instance.get(`Euro_events?grp=EURO Semi finals`);
+          setArraySemi(data);
+        
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    const fetchQuarterGames = async () => {
+      try {
+        
+          const { data } = await instance.get(`Euro_events?grp=EURO Quarter finals`);
+          setArrayQuarter(data);
+        
+      } catch (err) {
+        console.log(err);
+      }
     };
     const fetch16Games = async () => {
       try {
-        for (let i = 0; i < groups.length; i++) {
+        
           const { data } = await instance.get(`Euro_events?grp=EURO 1/8 finals`);
           setArray16(data);
-        }
+        
       } catch (err) {
         console.log(err);
       }
@@ -60,16 +93,19 @@ function Update() {
     };
 
     useEffect(() => {
+      fetchFinal();
+      fetchSemiGames();
+      fetchQuarterGames();
       fetchCountries();
       fetchGroupGames();
       fetch16Games();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { loading, gamesArray, countriesArray, array16 };
+    return { loading, gamesArray, countriesArray, array16, arrayQuarter, arraySemi, arrayFinal};
   };
 
-  const { loading, gamesArray, countriesArray , array16 } = useGetGames();
+  const { loading, gamesArray, countriesArray , array16, arrayQuarter, arraySemi, arrayFinal} = useGetGames();
   function uppdateElim() {
     if (!loading) {
       // All data should be available
@@ -420,44 +456,222 @@ function Update() {
   }
   
 
-  function uppdateElim16(){
+  function updateElim16(){
     const   quarterLineup = {
-      "2A/2C": {
+      "2A-2C": {
         game:"Winner 2A/2C-Winner 1D/3BEF",
         side:"home" 
       },
-      "1D/3BEF": {
+      "1D-3BEF": {
         game:"Winner 2A/2C-Winner 1D/3BEF",
         side:"away"
       },
-      // "1B/3ACD-1F/2E": {
-      //   games: ["1C-3ABF", "2A-2C"],
-      //   side: ["home", "away"], 
-      // },
-      // "1A/3CDE-2B/2F": {
-      //   games: ["1D-3BEF", "1E-2D"],
-      //   side: ["home", "away"],
-      // },
+      "1B-3ACD": {
+        game:"Winner 1B/3ACD-Winner 1F/2E",
+        side:"home"
+      },
+      "1F-2E": {
+        game:"Winner 1B/3ACD-Winner 1F/2E",
+        side:"away"
+      },
+      "1C-3ABF": {
+        game:"Winner 1C/3ABF-Winner 1E/2D",
+        side:"home"
+      },
+      "1E-2D": {
+        game:"Winner 1C/3ABF-Winner 1E/2D",
+        side:"away"
+      },
+      "1A-3CDE": {
+        game:"Winner 1A/3CDE-Winner 2B/2F",
+        side:"home"
+      },
+      "2B-2F": {
+        game:"Winner 1A/3CDE-Winner 2B/2F",
+        side:"away"
+      },
       
     };
     for(let i = 0; i<array16.length; i++){  
       const instance = axios.create({ baseURL: server });
       if(array16[i].status === "Finished"){
-        
+        const eventname = array16[i].eventname
         const winner = array16[i].winner
-        console.log(array16[i])
-        // const sendWinner = async() =>{
-        //     await instance.put(``, {
+        const event = quarterLineup[eventname].game
+        console.log(eventname)
+        if(quarterLineup.hasOwnProperty(eventname)){
+          const getEventId = async() =>{
+            const response = await instance.get(`euro_events?eventname=${event}`)
+            
+            const eventId = response.data[0].id
+            return (
+              eventId
+            )
+        }
+        getEventId().then((resp)=>sendToQuarter(resp))
+         function sendToQuarter(resp) {
+           console.log(resp)
+           console.log("hej")
+          const side = quarterLineup[eventname].side
+          if(side === "home"){
+            const sendWinner = async() =>{
+              await instance.put(`euro_events/${resp}`, {
+                home_team:winner
+              })
+          }
+          sendWinner()
+          }else if (side === "away"){
+            const sendWinner = async() =>{
+              await instance.put(`euro_events/${resp}`, {
+                away_team:winner
+              })
+          }
+          sendWinner()
+          }
+         } 
+          
 
-        //     })
-        // }
-        // sendWinner()
+          
+        }
+       
       }
     }
    
   }
+
+  function updateQuarter() {
+    const   semiLineup = {
+      "Winner 2A/2C-Winner 1D/3BEF": {
+        game:"Winner QF 1-Winner QF 2",
+        side:"home" 
+      },
+      "Winner 1B/3ACD-Winner 1F/2E": {
+        game:"Winner QF 1-Winner QF 2",
+        side:"away"
+      },
+      "Winner 1C/3ABF-Winner 1E/2D": {
+        game:"Winner QF 3-Winner QF 4",
+        side:"home"
+      },
+      "Winner 1A/3CDE-Winner 2B/2F": {
+        game:"Winner QF 3-Winner QF 4",
+        side:"away"
+      }
+      
+    };
+    for(let i = 0; i<arrayQuarter.length; i++){  
+      const instance = axios.create({ baseURL: server });
+      if(arrayQuarter[i].status === "Finished"){
+        console.log(arrayQuarter[i])
+        const eventname = arrayQuarter[i].eventname
+        console.log(eventname)
+        const winner = arrayQuarter[i].winner
+        const event = semiLineup[eventname].game
+        
+        if(semiLineup.hasOwnProperty(eventname)){
+          const getEventId = async() =>{
+            const response = await instance.get(`euro_events?eventname=${event}`)
+            
+            const eventId = response.data[0].id
+            return (
+              eventId
+            )
+        }
+        getEventId().then((resp)=>sendToSemi(resp))
+         function sendToSemi(resp) {
+           console.log(resp)
+          const side = semiLineup[eventname].side
+          if(side === "home"){
+            const sendWinner = async() =>{
+              await instance.put(`euro_events/${resp}`, {
+                home_team:winner
+              })
+          }
+          sendWinner()
+          }else if (side === "away"){
+            const sendWinner = async() =>{
+              await instance.put(`euro_events/${resp}`, {
+                away_team:winner
+              })
+          }
+          sendWinner()
+          }
+         } 
+          
+      
+          
+        }
+       
+      }
+    }
+  }
+  function updateSemi() {
+    const   finalLineup = {
+      "Winner QF 1-Winner QF 2": {
+        game:"Winner SF 1-Winner SF 2",
+        side:"home" 
+      },
+      "Winner QF 3-Winner QF 4": {
+        game:"Winner SF 1-Winner SF 2",
+        side:"away"
+      }
+      
+    };
+    console.log(arraySemi)
+    for(let i = 0; i<arraySemi.length; i++){  
+      
+      const instance = axios.create({ baseURL: server });
+      if(arraySemi[i].status === "Finished"){
+        
+        const eventname = arraySemi[i].eventname
+        const winner = arraySemi[i].winner
+        const event = finalLineup[eventname].game
+        
+        if(finalLineup.hasOwnProperty(eventname)){
+          const getEventId = async() =>{
+            const response = await instance.get(`euro_events?eventname=${event}`)
+            
+            const eventId = response.data[0].id
+            return (
+              eventId
+            )
+        }
+        getEventId().then((resp)=>sendToFinal(resp))
+         function sendToFinal(resp) {
+           console.log(resp)
+          const side = finalLineup[eventname].side
+          if(side === "home"){
+            const sendWinner = async() =>{
+              await instance.put(`euro_events/${resp}`, {
+                home_team:winner
+              })
+          }
+          sendWinner()
+          }else if (side === "away"){
+            const sendWinner = async() =>{
+              await instance.put(`euro_events/${resp}`, {
+                away_team:winner
+              })
+          }
+          sendWinner()
+          }
+         } 
+          
+      
+          
+        }
+       
+      }
+    }
+  }
   return <div><button onClick={uppdateElim}> Update from group to elim </button> <br/><br/>
-  <button onClick={uppdateElim16}> Update from round of 16 to quarterfinals</button></div> ;
+  <button onClick={updateElim16}> Update from round of 16 to quarterfinals</button>
+  <button onClick={updateQuarter}> Update from quarter to semi finals</button>
+  <button onClick={updateSemi}> Update from semi to final</button>
+  </div> ;
+
+
+
 }
 
 export default Update;

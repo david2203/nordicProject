@@ -77,6 +77,9 @@ function Reset() {
       const countryIdArray =[]
       const usersIdArray =[]
       const roundOf16 = []
+      const quarter = []
+      const semi = []
+      const final = []
       const msg = "EM 2016 ÄR ÅTERSTÄLLT"
       setMessage("EM blir återställt... Vänligen lämna inte detta fönster!")
       //reset user score
@@ -98,6 +101,16 @@ function Reset() {
         if(gamesArray[i].grp === "EURO 1/8 finals"){
             roundOf16.push(gamesArray[i].id)
         }
+        if(gamesArray[i].grp === "EURO Quarter finals"){
+          quarter.push(gamesArray[i].id)
+        }
+        if(gamesArray[i].grp === "EURO Semi finals"){
+          semi.push(gamesArray[i].id)
+        }
+        if(gamesArray[i].grp === "EURO Final"){
+          final.push(gamesArray[i].id)
+        }
+        
       }
       for(let i =0; i<eventIdArray.length;i++) {
           const resetEvents = async ()=> {
@@ -115,10 +128,41 @@ function Reset() {
         const resetRoundOf16 = async ()=> {
           await instance.put(`Euro_events/${roundOf16[i]}`, {
               home_team: "",
-              away_team: ""
+              away_team: "",
+            
           })
         }
         resetRoundOf16()
+    }
+    for(let i = 0; i<quarter.length; i++) {
+      const resetQuarter = async ()=> {
+        await instance.put(`Euro_events/${quarter[i]}`, {
+            home_team: "",
+            away_team: "",
+          
+        })
+      }
+      resetQuarter()
+    }
+    for(let i = 0; i<semi.length; i++) {
+      const resetSemi = async ()=> {
+        await instance.put(`Euro_events/${semi[i]}`, {
+            home_team: "",
+            away_team: "",
+          
+        })
+      }
+      resetSemi()
+    }
+    for(let i = 0; i<final.length; i++) {
+      const resetFinal = async ()=> {
+        await instance.put(`Euro_events/${final[i]}`, {
+            home_team: "",
+            away_team: "",
+          
+        })
+      }
+      resetFinal()
     }
       //reset country score(group)
       for(let i = 0; i<countryArray.length;i++){

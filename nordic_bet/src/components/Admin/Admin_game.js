@@ -302,7 +302,7 @@ function Game({ event_id, eventname, status, score_given }) {
         
         <h3>{status}</h3>
         <br />
-        {status === "Not Started" ? (
+        {status === "Not Started"? (
           <>
             {" "}
             <button onClick={updateGameStatus} className="btn btn-success mt-4">
