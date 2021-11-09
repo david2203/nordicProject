@@ -167,13 +167,14 @@ function Update() {
                       console.log(`Winner found: ${game.winner}`)
                       returnValue = -1
                     }
-                  } else if(game.winner === b.country){
+                   else if(game.winner === b.country){
                     returnValue = -1
-                  }else if( game.winner === "X") {
+                  }else if(game.winner === "X") {
                     console.log(`no winner ${game.winner}`)
                     returnValue = (b.goals - a.goals)
                   }
                 }
+              }
               )
               // if (matchOne === chunkedGames[j])
               // console.log(chunkedGames[j])

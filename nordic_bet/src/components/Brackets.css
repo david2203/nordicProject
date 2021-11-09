@@ -281,6 +281,16 @@
     padding-bottom: 30%;
 }
 
+.homeOpacity {
+    opacity: 0.2;
+    color: red;
+}
+
+.awayOpacity {
+    opacity: 0.2;
+    color: red;
+}
+
 @-webkit-keyframes pulse {
     0% {
         -webkit-transform: scale(1);

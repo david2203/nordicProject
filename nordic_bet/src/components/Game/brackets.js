@@ -19,6 +19,7 @@ function Brackets() {
       try {
         const data = await instance.get(`euro_events?grp=EURO 1/8 finals`);
         set16GamesArray(data.data);
+        console.log(data.data)
         const data2 = await instance.get(`euro_events?grp=EURO Quarter finals`);
         setGamesQuarter(data2.data);
         const data3 = await instance.get(`euro_events?grp=EURO Semi finals`);
@@ -42,8 +43,36 @@ function Brackets() {
 
   const { loading, games16Array, gamesQuarter, gamesSemi, gamesFinal } =
     useGetGames();
+
+  const bracket16Sort = {
+    "2A-2C":1,
+    "1D-3BEF":2,
+    "1B-3ACD":3,
+    "1F-2E":4,
+    "1C-3ABF":5,
+    "1E-2D":6,
+    "1A-3CDE":7,
+    "2B-2F":8,
+  }
+
+  const sorted16 = []
   if (!loading) {
-    console.log(games16Array);
+
+
+    for(let i=0; i<games16Array.length; i++) {
+      if(bracket16Sort.hasOwnProperty(games16Array[i].eventname)){
+        sorted16.push({teaminfo:games16Array[i],teamsort:bracket16Sort[games16Array[i].eventname]})
+        
+      }
+    }
+    sorted16.sort(function(a,b ){
+      return (a.teamsort - b.teamsort)
+    })
+    // games16Array.sort(function (a, b) {
+      
+    // })
+
+    console.log(sorted16);
   }
 
   return (
@@ -107,34 +136,41 @@ function Brackets() {
                   <span className="date">"DATE"</span>
                 </div>
 
-                {games16Array.map((game) => {
+                {sorted16.map((game) => {
                   let homeOpacity = ""
                   let awayOpacity = ""
 
-                  const teams = game.eventname.split("-")
+                  const teams = game.teaminfo.eventname.split("-")
                   const home = teams[0]
                   const away = teams[1]
-                  const HomeFlag = Flags[getTeamFlag(game.home_team)];
-                  const AwayFlag = Flags[getTeamFlag(game.away_team)];
-                  if(game.winner === game.home_team){
-                    homeOpacity = "homeOpacity"
-                  }else if(game.winner === game.away_team) {
+                  const HomeFlag = Flags[getTeamFlag(game.teaminfo.home_team)];
+                  const AwayFlag = Flags[getTeamFlag(game.teaminfo.away_team)];
+                  console.log(game.teaminfo.winner)
+                  console.log(game.teaminfo.home_team)
+                  console.log(game.teaminfo)
+                  console.log("----------")
+                  if(game.teaminfo.winner === game.teaminfo.home_team){
                     awayOpacity = "awayOpacity"
+                  }else if(game.teaminfo.winner === game.teaminfo.away_team) {
+                    homeOpacity = "homeOpacity"
                   }
-                  if(game.home_team !== "" && game.away_team !== ""){
+                  if(game.teaminfo.home_team !== "" && game.teaminfo.away_team !== ""){
                     return (
-                      <ul key={game.id} className="matchup"> 
+                      <ul key={game.teaminfo.id} className="matchup"> 
                         <li className={`team team-top ${homeOpacity}`}>
-                        <HomeFlag width="40px" />
-                        <span>  </span>
-                          {game.home_team}
-                          <span className="score">{game.home_final}</span>
+                          
+                        <span className="flag">
+                            <HomeFlag width="40px" />
+                          </span>
+                          {game.teaminfo.home_team}
+                          <span className="score">{game.teaminfo.home_final}</span>
                         </li>
                         <li className={`team team-bottom ${awayOpacity}`}>
-                        <AwayFlag width="40px" />
-                        <span>  </span>
-                          {game.away_team}
-                          <span className="score">{game.away_final}</span>
+                        <span className="flag">
+                            <AwayFlag width="40px" />
+                          </span>
+                          {game.teaminfo.away_team}
+                          <span className="score">{game.teaminfo.away_final}</span>
                         </li>
                       </ul>
                     );
@@ -143,11 +179,11 @@ function Brackets() {
                       <ul className="matchup">
                         <li className="team team-top">
                           {home}
-                          <span className="score">{game.home_final}</span>
+                          <span className="score">{game.teaminfo.home_final}</span>
                         </li>
                         <li className="team team-bottom">
                           {away}
-                          <span className="score">{game.away_final}</span>
+                          <span className="score">{game.teaminfo.away_final}</span>
                         </li>
                       </ul>
                     );
