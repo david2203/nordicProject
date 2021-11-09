@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../Brackets.css";
 import server from "../Global/config";
 import axios from "axios";
+import Flags from "country-flag-icons/react/3x2";
+import { getTeamFlag } from "./Flags";
+
 
 function Brackets() {
   const useGetGames = () => {
@@ -106,18 +109,27 @@ function Brackets() {
                 </div>
 
                 {games16Array.map((game) => {
+                  
                   const teams = game.eventname.split("-")
                   const home = teams[0]
                   const away = teams[1]
-                  
+                  const HomeFlag = Flags[getTeamFlag(game.home_team)];
+                  const AwayFlag = Flags[getTeamFlag(game.away_team)];
+
                   if(game.home_team !== ""){
                     return (
                       <ul key={game.id} className="matchup">
+                        
+
                         <li className="team team-top">
+                        <HomeFlag width="40px" />
+                        <span>  </span>
                           {game.home_team}
                           <span className="score">{game.home_final}</span>
                         </li>
                         <li className="team team-bottom">
+                        <AwayFlag width="40px" />
+                        <span>  </span>
                           {game.away_team}
                           <span className="score">{game.away_final}</span>
                         </li>
@@ -155,15 +167,20 @@ function Brackets() {
                   const teams = game.eventname.split("-")
                   const home_pre = teams[0]
                   const away_pre = teams[1]
-
+                  const HomeFlag = Flags[getTeamFlag(home)];
+                  const AwayFlag = Flags[getTeamFlag(away)];
                   if(game.home_team !== ""){
                     return (
                       <ul key={game.id} className="matchup">
                         <li className="team team-top">
+                        <HomeFlag width="40px" />
+                        <span>  </span>
                           {home}
                           <span className="score">{game.home_final}</span>
                         </li>
                         <li className="team team-bottom">
+                        <AwayFlag width="40px" />
+                        <span>  </span>
                           {away}
                           <span className="score">{game.away_final}</span>
                         </li>
@@ -201,6 +218,8 @@ function Brackets() {
                    const teams = game.eventname.split("-")
                    const home_pre = teams[0]
                    const away_pre = teams[1]
+                   const HomeFlag = Flags[getTeamFlag(home)];
+                  const AwayFlag = Flags[getTeamFlag(away)];
  
                   
                  
@@ -208,10 +227,14 @@ function Brackets() {
                     return (
                       <ul key={game.id} className="matchup">
                         <li className="team team-top">
+                        <HomeFlag width="40px" />
+                        <span>  </span>
                           {home}
                           <span className="score">{game.home_final}</span>
                         </li>
                         <li className="team team-bottom">
+                        <AwayFlag width="40px" />
+                        <span>  </span>
                           {away}
                           <span className="score">{game.away_final}</span>
                         </li>
@@ -252,17 +275,22 @@ function Brackets() {
                    const teams = game.eventname.split("-")
                    const home_pre = teams[0]
                    const away_pre = teams[1]
- 
+                   const HomeFlag = Flags[getTeamFlag(home)];
+                   const AwayFlag = Flags[getTeamFlag(away)];
                   
                  
                    if(game.home_team !== ""){
                     return (
                       <ul key={game.id} className="matchup">
                         <li className="team team-top">
+                        <HomeFlag width="40px" />
+                        <span>  </span>
                           {home}
                           <span className="score">{game.home_final}</span>
                         </li>
                         <li className="team team-bottom">
+                        <AwayFlag width="40px" />
+                        <span>  </span>
                           {away}
                           <span className="score">{game.away_final}</span>
                         </li>
@@ -288,11 +316,15 @@ function Brackets() {
               </div>
             </div>
             {gamesFinal.map((game) => {
+
              const winner = game.winner
+             const WinnerFlag = Flags[getTeamFlag(winner)];
               if(game.winner !== "") {
                 return (
                   <><ul className="matchup">
                   <li className="team team-top">
+                  <WinnerFlag width="40px" />
+                  <span>  </span>
                    Winner : {winner}
                   </li>
                   </ul>
