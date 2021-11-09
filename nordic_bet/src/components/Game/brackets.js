@@ -108,28 +108,31 @@ function Brackets() {
                 </div>
 
                 {games16Array.map((game) => {
-                  const teams = game.eventname.split("-");
-                  const home = teams[0];
-                  const away = teams[1];
+                  let homeOpacity = ""
+                  let awayOpacity = ""
+
+                  const teams = game.eventname.split("-")
+                  const home = teams[0]
+                  const away = teams[1]
                   const HomeFlag = Flags[getTeamFlag(game.home_team)];
                   const AwayFlag = Flags[getTeamFlag(game.away_team)];
-
-                  if (game.home_team !== "") {
+                  if(game.winner === game.home_team){
+                    homeOpacity = "homeOpacity"
+                  }else if(game.winner === game.away_team) {
+                    awayOpacity = "awayOpacity"
+                  }
+                  if(game.home_team !== "" && game.away_team !== ""){
                     return (
-                      <ul key={game.id} className="matchup">
-                        <li className="team team-top">
-                          <span className="flag">
-                            <HomeFlag width="40px" />
-                          </span>
-                          <span> </span>
+                      <ul key={game.id} className="matchup"> 
+                        <li className={`team team-top ${homeOpacity}`}>
+                        <HomeFlag width="40px" />
+                        <span>  </span>
                           {game.home_team}
                           <span className="score">{game.home_final}</span>
                         </li>
-                        <li className="team team-bottom">
-                          <span className="flag">
-                            <AwayFlag width="40px" />
-                          </span>
-                          <span> </span>
+                        <li className={`team team-bottom ${awayOpacity}`}>
+                        <AwayFlag width="40px" />
+                        <span>  </span>
                           {game.away_team}
                           <span className="score">{game.away_final}</span>
                         </li>
