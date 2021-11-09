@@ -77,17 +77,6 @@ function Results_postGroup() {
            
     ]
 
-//     45) Jun/30 21:00   Poland       3-5 pen. 1-1 a.e.t. (0-0)   Portugal          @ Stade Vélodrome, Marseille
-// (46) Jul/01 21:00   Wales        3-1              Belgium           @ Stade Pierre-Mauroy, Lille
-// (47) Jul/02 21:00   Germany      6-5 pen. 1-1 a.e.t. (0-0)   Italy             @ Nouveau Stade de Bordeaux, Bordeaux
-// (48) Jul/03 21:00   France       5-2              Iceland           @ Stade de France, Saint-Denis
-// }
-// $dataSemi = {
-//     Semi-finals
-
-// (49) Jul/06 21:00   Portugal     2-0              Wales             @ Parc Olympique Lyonnais, Lyon
-// (50) Jul/07 21:00   Germany      0-2              France            @ Stade Vélodrome, Marseille
-
     const dataQuarter = [
          
         {event:{

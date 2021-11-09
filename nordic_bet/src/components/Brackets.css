@@ -164,11 +164,22 @@
 .team {
     padding: 0 100px;
     margin: 3px 0;
-    height: 25px;
+    height: 35px;
     line-height: 25px;
     white-space: nowrap;
     overflow: hidden;
     position: relative;
+}
+
+.round-two .matchup .team {
+    height: 45px;
+}
+
+.round-three .matchup .team {
+    height: 55px;
+}
+.final .matchup .team {
+    height: 65px;
 }
 
 .round-two .matchup {
@@ -252,8 +263,8 @@
 }
 
 .final {
-    padding-left: 2.5%;
-    margin: -5.5em 0;
+    padding-left: 10%;
+    margin: -8.5em 0;
     position: absolute;
 }
 
@@ -350,6 +361,8 @@
         -webkit-flex-direction: column;
         -moz-flex-direction: column;
         flex-direction: column;
+        width: 33%;
+        margin-left: 0;
     }
 
     .split,

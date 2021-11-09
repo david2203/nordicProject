@@ -3,6 +3,7 @@ import axios from "axios";
 import server from "../Global/config";
 import Flags from "country-flag-icons/react/3x2";
 import setTeamFlag from "../Game/Flags";
+import Styled from "styled-components";
 
 function Game({ event_id, eventname, status, score_given }) {
   const instance = axios.create({ baseURL: server });
@@ -17,6 +18,28 @@ function Game({ event_id, eventname, status, score_given }) {
   const [awayFlag, setAwayFlag] = useState("AQ");
   const token = localStorage.getItem("jwt");
   const [render, setRender] =useState()
+  const MediaQgames = Styled.span
+  `
+  font-size: 30px;
+  @media (max-width: 1030px ) {
+    font-size: 20px;
+  }
+  @media (max-width: 825px ) {
+    font-size: 10px;
+    font-weight: 900;
+  }
+  @media (max-width: 637px ) {
+    content: '.';
+    display: inline-block;
+    width: 100%;
+  }
+  @media (max-width: 375px ) {
+    content: '.';
+    display: inline-block;
+    width: 100%;
+  }
+
+  `;
 
   useEffect(() => {
     const fetchGameId = async () => {
@@ -268,19 +291,23 @@ function Game({ event_id, eventname, status, score_given }) {
 
   return (
     <>
-      <div className="game_info mt-3 mb-3 bg-light w-25 center ">
-        <HomeFlag width="30px" title="United States" className="..." />
-        {eventname}
-        <AwayFlag width="30px" title="United States" className="..." />
-        <br />
-        {status}
+      <div className="game_info mt-3 mb-3 bg-secondary w-50 center" style={{ backgroundColor: 'rgba(52, 52, 52, 0.8)', border: '2px solid black', color: 'white', padding: '35px',}}>
+
+
+        <HomeFlag width="60px" title="United States" className="..."/>
+
+        <MediaQgames> {eventname} </MediaQgames>
+        <AwayFlag width="60px" title="United States" className="..." />
+
+        
+        <h3>{status}</h3>
         <br />
         {status === "Not Started"? (
           <>
             {" "}
-            <button onClick={updateGameStatus}>
+            <button onClick={updateGameStatus} className="btn btn-success mt-4">
               {" "}
-              UpdateGameStatus
+              Update Game Status
             </button> <br />{" "}
           </>
         ) : (
