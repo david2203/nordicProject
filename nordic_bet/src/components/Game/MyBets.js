@@ -9,27 +9,46 @@ function MyBets() {
   const username = localStorage.getItem("username")
   const instance = axios.create({ baseURL: server });
   const user = localStorage.getItem("user_id");
-  const [loadPage, setLoadPage] = useState(3);
-  const [bets, setBets] = useState([]);
+  const [activeLoadPage, setActiveLoadPage] = useState(3);
+  const [finishedLoadPage, setFinishedLoadPage] = useState(3);
+
+  const [activeBets, setActiveBets] = useState([]);
+  const [finishedBets, setFinishedBets] = useState([]);
+
 
   useEffect(() => {
-    const fetchBets = async () => {
+    const fetchActiveBets = async () => {
       const response = await instance.get(
-        `bets?user=${user}&&_limit=${loadPage}`
+        `bets?user=${user}&&_limit=${activeLoadPage}&&Active=true`
       );
-      setBets(response.data);
+      setActiveBets(response.data);
     };
-    fetchBets();
+    fetchActiveBets();
+    const fetchFinishedBets = async () => {
+      const response = await instance.get(
+        `bets?user=${user}&&_limit=${finishedLoadPage}&&Active=false`
+      );
+      setFinishedBets(response.data);
+    };
+    fetchFinishedBets();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadPage]);
-
-  function loadMore() {
-    let dynamicPage = loadPage + 2;
-    setLoadPage(dynamicPage);
+  }, [activeLoadPage,finishedLoadPage]);
+  
+  function loadMoreActive() {
+    let dynamicPage = activeLoadPage + 2;
+    setActiveLoadPage(dynamicPage);
   }
-  function showLess() {
-    setLoadPage(3);
+  function loadMoreFinished() {
+    let dynamicPage = finishedLoadPage + 2;
+    setFinishedLoadPage(dynamicPage);
   }
+  function showLessActive() {
+    setActiveLoadPage(3);
+  }
+  function showLessFinished() {
+    setFinishedLoadPage(3);
+  }
+  
 
   const image1 =
   "https://images.unsplash.com/photo-1561034645-e6f28dfddd2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80";
@@ -38,13 +57,21 @@ function MyBets() {
         
        <Parallax bgImage={image1} strength={500}>
          <div className="min-vh-100">
-       <h2 className=" bg-light w-25 border mx-auto mt-3">Välkommen {username}! <br/> Här är dina aktiva bets: </h2>
-      {bets.map((bet) => {
+
+           
        
+       <div className="d-flex justify-content-between"> 
+       <div className="activeBets ml-0 " style={{width:"1000px"}}>
+       <h2 className=" bg-light w-50 border mx-auto mt-3"> Här är dina aktiva bets: </h2>
+       <div className="w-100">
+      {activeBets.map((bet) => {
+      
         return (
           <>
           <br/>
-          <Bet
+          
+          
+          <Bet 
             key={bet.id}
             id={bet.id}
             type={bet.type}
@@ -54,18 +81,77 @@ function MyBets() {
             winner={bet.winner}
             euro_event={bet.euro_event}
             status={bet.Active}
+            points_recieved={bet.recieved_points}
           />
+        
+         
           <br/>
           </>
-        );
+        )
+ 
+      })}
+      </div>
+      {/* pagination function */}
+      {activeLoadPage <= activeBets.length ? (
+        <button onClick={loadMoreActive}>Load more</button>
+      ) : (
+        activeLoadPage > activeBets.length && activeLoadPage > 3? (
+          <button onClick={showLessActive}>Show less</button>     
+        ) :
+        (
+          <>
+          </>
+        )
+        
+      )
+      }
+      </div>
+      <div className="finishedBets" style={{width:"1000px"}}>
+      <h2 className=" bg-light w-50 border mx-auto mt-3"> Här är dina slutförda bets: </h2>
+      {finishedBets.map((bet) => {
+        return (
+          <>
+          <br/>
+          
+          
+          <Bet 
+            key={bet.id}
+            id={bet.id}
+            type={bet.type}
+            grp={bet.grp}
+            homeTeamGoals={bet.homeTeamGoals}
+            awayTeamGoals={bet.awayTeamGoals}
+            winner={bet.winner}
+            euro_event={bet.euro_event}
+            status={bet.Active}
+            points_recieved={bet.recieved_points}
+          />
+        
+         
+          <br/>
+          </>
+        )
+       
+        
       })}
       {/* pagination function */}
-      {loadPage <= bets.length ? (
-        <button onClick={loadMore}>Load more</button>
+      {finishedLoadPage <= finishedBets.length  ? (
+        <button onClick={loadMoreFinished}>Load more</button>
       ) : (
-        <button onClick={showLess}>Show less</button>
-      )}
+        finishedLoadPage > finishedBets.length && finishedLoadPage > 3? (
+          <button onClick={showLessFinished}>Show less</button>     
+        ) :
+        (
+          <>
+          </>
+        )
+        
+      )
+      }
       </div>
+      </div>
+      </div>
+
       </Parallax>
      
     </>

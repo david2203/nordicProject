@@ -186,6 +186,7 @@ function Game({ event_id, eventname, status, score_given }) {
         `bets?euro_event.eid_xml=${event_id}`
       );
       const bets = response.data;
+      console.log(bets)
       if (bets.length === 0) {
         return false;
       } else {
@@ -282,6 +283,7 @@ function Game({ event_id, eventname, status, score_given }) {
     const updateBet = async () => {
       await instance.put(`bets/${betId}`, {
         Active: false,
+        recieved_points:scoreToAdd
       });
     };
     updateBet().then(window.location.reload());

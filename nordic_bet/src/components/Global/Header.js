@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -13,6 +13,9 @@ import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 function Header() {
   const history = useHistory();
   const [isAdmin, setIsAdmin] = useState(false);
+  const active = useState("active")
+  const [activeBets, setActiveBets] = useState(false)
+
   const instance = axios.create({ baseURL: server });
   useEffect(() => {
     const userId = localStorage.getItem("user_id");
@@ -31,11 +34,16 @@ function Header() {
     history.push("/signin");
     window.location.reload();
   }
+
+  function activeMyBets() {
+    setActiveBets(true)
+  }
+   
   return (
     <>
 
 
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" className="py-4">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" className="py-4 ">
   <Container fluid>
   <Navbar.Brand href="/Games">Nordic Bet </Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -43,24 +51,27 @@ function Header() {
     
     {token ? (
         <>  
-        <Nav className="me-auto">    
-      <Nav.Link href="/MyBets">Mina bets</Nav.Link>
-      <Nav.Link href="/Euro">Brackets</Nav.Link>
-      <Nav.Link href="/Games">Spel</Nav.Link>
-      <Nav.Link href="/Scoreboard">Topplista</Nav.Link>
+        <Nav className="me-auto "> 
+        {activeBets? <Link to="/MyBets" className={active} onClick={activeMyBets}>Mina bets</Link> :
+         <Link to="/MyBets" className="" onClick={activeMyBets}>Mina bets</Link>
+         }   
+     
+      <Link to="/Euro">Brackets</Link>
+      <Link to="/Games">Spel</Link>
+      <Link to="/Scoreboard">Topplista</Link>
       
       {/* {isAdmin ? ( 
-      <Nav.Link href="/Admin">Admin</Nav.Link>
+      <Link to="/Admin">Admin</Link>
       ) : (
        <></>
       )} */}
       
       {isAdmin ? ( 
       <NavDropdown title="Adminpanel" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="/Admin">Rätta spel</NavDropdown.Item>
-        <NavDropdown.Item href="/Update">Updatera elimination</NavDropdown.Item>
+        <Link to="/Admin">Rätta spel</Link><br/>
+        <Link to="/Update">Updatera elimination</Link>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="/Reset" style={{color: 'red'}}> <i className="bi bi-exclamation-triangle"></i> Nollställ event</NavDropdown.Item>
+        <Link to="/Reset" style={{color: 'red'}}> <i className="bi bi-exclamation-triangle"></i> Nollställ event</Link>
       </NavDropdown>
        ) : (
         <></>
@@ -68,10 +79,10 @@ function Header() {
       </Nav>
       <Nav >    
 
-      <Nav.Link href="/Profile">Profil</Nav.Link>
-      <Nav.Link eventKey={2} onClick={signOut}>
+      <Link to="/Profile">Profil</Link>
+      <Link eventKey={2} onClick={signOut}>
         Logga ut
-      </Nav.Link>
+      </Link>
     </Nav>
       </>
     
@@ -81,10 +92,10 @@ function Header() {
                 </Nav>
         <Nav >    
 
-      <Nav.Link href="/SignIn">Login</Nav.Link>
-      <Nav.Link eventKey={2} href="/SignUp">
+      <Link to="/SignIn">Login</Link>
+      <Link eventKey={2} to="/SignUp">
         Registrera
-      </Nav.Link>
+      </Link>
     </Nav>
   
 </>)}
