@@ -104,7 +104,7 @@
     margin-top: -15px;
     text-align: center;
     padding: 230px 0\9;
-    padding-left: 30%;
+    padding-left: 10vw;
 }
 
 .champion i {
@@ -144,6 +144,7 @@
     height: 90px;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
+    
 }
 
 .matchup .score {
@@ -235,7 +236,7 @@
 .round li {
     background-color: #fff;
     box-shadow: none;
-    opacity: 0.45;
+    /* opacity: 0.45; */
 }
 
 .current li {
@@ -245,7 +246,6 @@
 .current li.team {
     background-color: #fff;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    opacity: 90%;
     border: solid black 1px;
 }
 
@@ -282,13 +282,21 @@
 }
 
 .homeOpacity {
-    opacity: 0.2;
     color: red;
+    text-decoration: line-through;
 }
 
 .awayOpacity {
-    opacity: 0.2;
     color: red;
+    text-decoration: line-through;
+}
+
+.matchup .homeOpacity {
+    opacity: 70%;
+}
+
+.matchup .awayOpacity {
+    opacity: 70%;
 }
 
 @-webkit-keyframes pulse {
@@ -393,7 +401,8 @@
     .split,
     .champion {
         width: 90%;
-        margin: 35px 5%;
+        margin: 150px 50px 0;
+
     }
 
     .champion {
@@ -402,11 +411,10 @@
         -ms-flex-order: 3;
         -webkit-order: 3;
         order: 0;
-        padding-right: 60%;
+       padding-left: 50%;
     }
 
     .split {
-        border-bottom: 1px solid #b6b6b6;
         padding-bottom: 20px;
         margin: 50px;
         margin-top: 40px;
@@ -424,6 +432,39 @@
 
     .hero p {
         font-size: 1em;
+    }
+    .final {
+        
+    }
+    .final .round-details .matchup .team{
+        
+    }
+
+
+
+}
+
+@media screen and (max-width: 743px) {
+    .split {
+        flex-direction: column;
+    }
+    .container {
+        width: 100%;
+    }
+
+    .final {
+        margin-left: -290px;
+    }
+    .team {
+        padding-top: 0.5%;
+    }
+    
+    .round-two .matchup .team {
+        padding-top: 1.5%;
+    }
+    
+    .round-three .matchup .team {
+        padding-top: 2.5%;
     }
 }
 
@@ -467,6 +508,10 @@
     .hero p.year {
         margin: 5px 0 10px;
         font-size: 18px;
+    }
+
+    .round .round-one .current {
+        width: 20%;
     }
 
 }
