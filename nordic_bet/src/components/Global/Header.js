@@ -13,8 +13,22 @@ import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 function Header() {
   const history = useHistory();
   const [isAdmin, setIsAdmin] = useState(false);
-  const active = useState("active")
   const [activeBets, setActiveBets] = useState(false)
+  const [activeBrackets, setActiveBrackets] = useState(false)
+  const [activeGames, setActiveGames] = useState(false)
+  const [activeAdmin, setActiveAdmin] = useState(false)
+  const [activeLogin, setActiveLogin] = useState(false)
+  const [activeScore, setActiveScore] = useState(false)
+  const [activeUpdate, setActiveUpdate] = useState(false)
+  const [activeReset, setActiveReset] = useState(false)
+  const [activeProfile, setActiveProfile] = useState(false)
+
+
+
+
+
+
+
 
   const instance = axios.create({ baseURL: server });
   useEffect(() => {
@@ -34,11 +48,57 @@ function Header() {
     history.push("/signin");
     window.location.reload();
   }
-
+function setAllFalse() {
+  setActiveBets(false)
+  setActiveBrackets(false)
+  setActiveGames(false)
+  setActiveAdmin(false)
+  setActiveLogin(false)
+  setActiveScore(false)
+  setActiveUpdate(false)
+  setActiveReset(false)
+  setActiveProfile(false)
+}
   function activeMyBets() {
+    setAllFalse()
     setActiveBets(true)
+    
+  }
+  function activeMyBrackets() {
+    setAllFalse()
+    setActiveBrackets(true)
+   
+  }
+  function activeMyGames() {
+    setAllFalse()
+    setActiveGames(true)
+  }
+  function activeMyAdmin() {
+    setAllFalse()
+    setActiveAdmin(true)
+    
+  }
+  function activeMyScore() {
+    setAllFalse()
+    setActiveScore(true)
+    
+  }
+  function activeMyUpdate() {
+    setAllFalse()
+    setActiveUpdate(true)
+    
   }
    
+  function activeMyReset() {
+    setAllFalse()
+    setActiveReset(true)
+    
+  }
+  function activeMyProfile() {
+    setAllFalse()
+    setActiveProfile(true)
+    
+  }
   return (
     <>
 
@@ -52,13 +112,18 @@ function Header() {
     {token ? (
         <>  
         <Nav className="me-auto "> 
-        {activeBets? <Link to="/MyBets" className={active} onClick={activeMyBets}>Mina bets</Link> :
-         <Link to="/MyBets" className="" onClick={activeMyBets}>Mina bets</Link>
+        {activeBets? <Link to="/MyBets" className="active" onClick={activeMyBets}>Mina bets</Link> :
+         <Link to="/MyBets" className="text-decoration-none " onClick={activeMyBets}>Mina bets</Link>
          }   
-     
-      <Link to="/Euro">Brackets</Link>
-      <Link to="/Games">Spel</Link>
-      <Link to="/Scoreboard">Topplista</Link>
+        {activeBrackets? <Link to="/Euro" className="active" onClick={activeMyBrackets} >Brackets</Link> :
+        <Link to="/Euro" className="text-decoration-none pl-3 ml-3" onClick={activeMyBrackets}>Brackets</Link>
+        }
+        {activeGames? <Link to="/Games" className="active" onClick={activeMyGames} >Spel</Link> :
+        <Link to="/Games" className="text-decoration-none pl-3 ml-3" onClick={activeMyGames}>Spel</Link>
+        }
+        {activeScore? <Link to="/Scoreboard" className="active" onClick={activeMyScore} >Top-lista</Link> :
+        <Link to="/Scoreboard" className="text-decoration-none pl-3 ml-3" onClick={activeMyScore}>Top-lista</Link>
+        }
       
       {/* {isAdmin ? ( 
       <Link to="/Admin">Admin</Link>
@@ -68,19 +133,30 @@ function Header() {
       
       {isAdmin ? ( 
       <NavDropdown title="Adminpanel" id="collasible-nav-dropdown">
-        <Link to="/Admin">Rätta spel</Link><br/>
-        <Link to="/Update">Updatera elimination</Link>
+        {activeAdmin? <Link to="/Admin" className="active" onClick={activeMyAdmin} >Rätta spel</Link> :
+        <Link to="/Admin" className="text-decoration-none pl-3 ml-3" onClick={activeMyAdmin}>Rätta spel</Link>
+        }
+       <br/>
+       {activeUpdate? <Link to="/Update" className="active" onClick={activeMyUpdate} >Updatera elimination</Link> :
+        <Link to="/Update" className="text-decoration-none pl-3 ml-3" onClick={activeMyUpdate}>Updatera elimination</Link>
+        }
+
         <NavDropdown.Divider />
-        <Link to="/Reset" style={{color: 'red'}}> <i className="bi bi-exclamation-triangle"></i> Nollställ event</Link>
+
+        {activeReset? <Link to="/Reset"  className="active" onClick={activeMyReset}  style={{color: 'red'}}> <i className="bi bi-exclamation-triangle "> </i> Nollställ event </Link> :
+        <Link to="/Reset"  className="text-decoration-none" onClick={activeMyReset}  style={{color: 'red'}}> <i className="bi bi-exclamation-triangle "> </i>Nollställ event </Link>
+        }
+       
       </NavDropdown>
        ) : (
         <></>
        )}
       </Nav>
       <Nav >    
-
-      <Link to="/Profile">Profil</Link>
-      <Link eventKey={2} onClick={signOut}>
+        {activeProfile ? <Link to="/Profiel" className="active" onClick={activeMyProfile}> Profil </Link> :
+        <Link to="/Profiel" className="text-decoration-none pl-3 ml-3" onClick={activeMyProfile}> Profil </Link> }
+      
+      <Link eventKey={2} className="text-decoration-none pl-3 ml-3" onClick={signOut}>
         Logga ut
       </Link>
     </Nav>
