@@ -145,10 +145,7 @@ function Brackets() {
                   const away = teams[1]
                   const HomeFlag = Flags[getTeamFlag(game.teaminfo.home_team)];
                   const AwayFlag = Flags[getTeamFlag(game.teaminfo.away_team)];
-                  console.log(game.teaminfo.winner)
-                  console.log(game.teaminfo.home_team)
-                  console.log(game.teaminfo)
-                  console.log("----------")
+                  
                   if(game.teaminfo.winner === game.teaminfo.home_team){
                     awayOpacity = "awayOpacity"
                   }else if(game.teaminfo.winner === game.teaminfo.away_team) {
@@ -199,6 +196,13 @@ function Brackets() {
                   <span className="date">"DATE"</span>
                 </div>
                 {gamesQuarter.map((game) => {
+                  let homeOpacity = ""
+                  let awayOpacity = ""
+                  if(game.winner === game.home_team){
+                    awayOpacity = "awayOpacity"
+                  }else if(game.winner === game.away_team) {
+                    homeOpacity = "homeOpacity"
+                  }
                   const home = game.home_team;
                   const away = game.away_team;
                   const teams = game.eventname.split("-");
@@ -206,10 +210,11 @@ function Brackets() {
                   const away_pre = teams[1];
                   const HomeFlag = Flags[getTeamFlag(home)];
                   const AwayFlag = Flags[getTeamFlag(away)];
-                  if (game.home_team !== "") {
+                  
+                  if (game.home_team !== "" && game.away_team !== "") {
                     return (
                       <ul key={game.id} className="matchup">
-                        <li className="team team-top">
+                        <li className={`team team-top ${homeOpacity}`}>
                           <span className="flag">
                             <HomeFlag width="40px" />
                           </span>
@@ -217,7 +222,7 @@ function Brackets() {
                           {home}
                           <span className="score">{game.home_final}</span>
                         </li>
-                        <li className="team team-bottom">
+                        <li className={`team team-bottom ${awayOpacity}`}>
                           <span className="flag">
                             <AwayFlag width="40px" />
                           </span>
@@ -230,7 +235,7 @@ function Brackets() {
                   } else {
                     return (
                       <ul className="matchup">
-                        <li className="team team-top">
+                        <li className={`team team-top ${homeOpacity}`}>
                           {home_pre}
                           <span className="score">{game.home_final}</span>
                         </li>
@@ -252,6 +257,13 @@ function Brackets() {
                   <span className="date">"DATE"</span>
                 </div>
                 {gamesSemi.map((game) => {
+                  let homeOpacity = ""
+                  let awayOpacity = ""
+                  if(game.winner === game.home_team){
+                    awayOpacity = "awayOpacity"
+                  }else if(game.winner === game.away_team) {
+                    homeOpacity = "homeOpacity"
+                  }
                   const home = game.home_team;
                   const away = game.away_team;
                   const teams = game.eventname.split("-");
@@ -260,10 +272,10 @@ function Brackets() {
                   const HomeFlag = Flags[getTeamFlag(home)];
                   const AwayFlag = Flags[getTeamFlag(away)];
 
-                  if (game.home_team !== "") {
+                  if (game.home_team !== "" && game.away_team !== "") {
                     return (
                       <ul key={game.id} className="matchup">
-                        <li className="team team-top">
+                        <li className={`team team-top ${homeOpacity}`}>
                           <span className="flag">
                             <HomeFlag width="40px" />
                           </span>
@@ -271,7 +283,7 @@ function Brackets() {
                           {home}
                           <span className="score">{game.home_final}</span>
                         </li>
-                        <li className="team team-bottom">
+                        <li className={`team team-bottom ${awayOpacity}`}>
                           <span className="flag">
                             <AwayFlag width="40px" />
                           </span>
@@ -306,6 +318,7 @@ function Brackets() {
                 <div className="round-details">
                   Final <br />
                   {gamesFinal.map((game) => {
+                    
                     const winner = game.winner;
                     const WinnerFlag = Flags[getTeamFlag(winner)];
                     if (game.winner !== "") {
@@ -331,6 +344,13 @@ function Brackets() {
                   })}
                 </div>
                 {gamesFinal.map((game) => {
+                  let homeOpacity = ""
+                  let awayOpacity = ""
+                  if(game.winner === game.home_team){
+                    awayOpacity = "awayOpacity"
+                  }else if(game.winner === game.away_team) {
+                    homeOpacity = "homeOpacity"
+                  }
                   const home = game.home_team;
                   const away = game.away_team;
                   const teams = game.eventname.split("-");
@@ -339,10 +359,10 @@ function Brackets() {
                   const HomeFlag = Flags[getTeamFlag(home)];
                   const AwayFlag = Flags[getTeamFlag(away)];
 
-                  if (game.home_team !== "") {
+                  if (game.home_team !== "" && game.away_team !== "") {
                     return (
                       <ul key={game.id} className="matchup">
-                        <li className="team team-top">
+                        <li className={`team team-top ${homeOpacity}`}>
                           <span className="flag">
                             <HomeFlag width="40px" />
                           </span>
@@ -350,7 +370,7 @@ function Brackets() {
                           {home}
                           <span className="score">{game.home_final}</span>
                         </li>
-                        <li className="team team-bottom">
+                        <li className={`team team-bottom ${awayOpacity}`}>
                           <span className="flag">
                             <AwayFlag width="40px" />
                           </span>
