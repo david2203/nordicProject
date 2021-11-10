@@ -259,7 +259,7 @@ function Header() {
                 <Nav>
                   {activeProfile ? (
                     <Link
-                      to="/Profiel"
+                      to="/Profile"
                       className="active"
                       onClick={activeMyProfile}
                       style={{marginLeft:"5%"}}
@@ -269,7 +269,7 @@ function Header() {
                     </Link>
                   ) : (
                     <Link
-                      to="/Profiel"
+                      to="/Profile"
                       className="text-decoration-none pl-3 ml-3"
                       onClick={activeMyProfile}
                       style={{marginLeft:"5%"}}
