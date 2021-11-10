@@ -127,7 +127,7 @@ function Brackets() {
         </header>
 
         <section id="bracket">
-          <div className="container">
+          <div className="container1">
             <div className="split split-one">
               <div className="round round-one current">
                 <div className="round-details">

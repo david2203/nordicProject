@@ -65,7 +65,7 @@
     padding: 40px 0;
 }
 
-.container {
+.container1 {
     max-width: 1100px;
     margin: 0 auto;
     display: block;
@@ -254,7 +254,7 @@
     height: 52px;
 }
 
-.share .container {
+.share .container1 {
     margin: 0 auto;
     text-align: center;
 }
@@ -363,7 +363,7 @@
 
 
 @media screen and (min-width: 981px) and (max-width: 1099px) {
-    .container {
+    .container1 {
         margin: 0 1%;
     }
 
@@ -390,7 +390,7 @@
 }
 
 @media screen and (max-width: 980px) {
-    .container {
+    .container1 {
         -webkit-flex-direction: column;
         -moz-flex-direction: column;
         flex-direction: column;
@@ -448,12 +448,13 @@
     .split {
         flex-direction: column;
     }
-    .container {
+    .container1 {
         width: 100%;
     }
 
     .final {
         margin-left: -290px;
+
     }
     .team {
         padding-top: 0.5%;
@@ -467,7 +468,12 @@
         padding-top: 2.5%;
     }
     .round-two .round-details {
-        
+        padding-top: 5%;
+        margin-right: 50px;
+    }
+    .round-three .round-details {
+        padding-top: 5%;
+        margin-right: 75px;
     }
 }
 
