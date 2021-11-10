@@ -313,8 +313,9 @@ function Brackets() {
                         <>
                           <ul className="matchup">
                             <li className="team team-top">
+                              <span className="flag">
                               <WinnerFlag width="40px" />
-                              <span> </span>
+                              </span>
                               Winner : {winner}
                             </li>
                           </ul>

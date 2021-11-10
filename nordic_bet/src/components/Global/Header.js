@@ -259,7 +259,7 @@ function Header() {
                 <Nav>
                   {activeProfile ? (
                     <Link
-                      to="/Profiel"
+                      to="/Profile"
                       className="active"
                       onClick={activeMyProfile}
                       style={{marginLeft:"5%"}}
