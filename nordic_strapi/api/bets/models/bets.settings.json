@@ -39,6 +39,9 @@
     },
     "odds_multiplier": {
       "type": "decimal"
+    },
+    "recieved_points": {
+      "type": "biginteger"
     }
   }
 }

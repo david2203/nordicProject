@@ -665,9 +665,11 @@ function Update() {
       }
     }
   }
-  return <div><button onClick={uppdateElim}> Update from group to elim </button> <br/><br/>
-  <button onClick={updateElim16}> Update from round of 16 to quarterfinals</button>
-  <button onClick={updateQuarter}> Update from quarter to semi finals</button>
+  return <div>
+    
+  <button onClick={uppdateElim}> Update from group to elim </button> <br/><br/>
+  <button onClick={updateElim16}> Update from round of 16 to quarterfinals</button><br/><br/>
+  <button onClick={updateQuarter}> Update from quarter to semi finals</button><br/><br/>
   <button onClick={updateSemi}> Update from semi to final</button>
   </div> ;
 

@@ -14,7 +14,7 @@ import setTeamFlag from "../Game/Flags";
 
 import { styled } from "@mui/material/styles";
 
-function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, status }) {
+function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, status, points_recieved }) {
   const [expanded, setExpanded] = React.useState(false);
   const instance = axios.create({ baseURL: server });
   const [homeFlag, setHomeFlag] = useState("AQ");
@@ -28,7 +28,7 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
   }else {
     liveStatus = "Score given!"
   }
-
+  
   useEffect(()=>{
 
     setHomeFlag(setTeamFlag("home", home_name));
@@ -80,7 +80,7 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
     <>
       <div className="bet_info">
         <Card
-          sx={{ maxWidth: "100%", mx: "38%", width: ["100%", "50%", "25%"] }}
+          sx={{ maxWidth: "100%", mx: "22.5%", width: ["100%", "50%", "55%"] }}
         >
           <CardContent>
             <Typography variant="body2" color="text.secondary">
@@ -120,10 +120,13 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
               <strong>Maximum points for this bet: </strong>{score}
             </Typography>
           </CardContent>
+          {liveStatus === "Active" ?
+             <>
           <CardActions
             disableSpacing
             sx={{ display: "inline-flex", verticalAlign: "middle" }}
           >
+             
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -136,13 +139,16 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               
-                <div>
-                  Delete bet ?
-                  <Button variant="text" onClick={handleOnSubmit}>
-                    Yes
-                  </Button>
-                  <br />
-                </div>
+              <div>
+              Delete bet ?
+              <Button variant="text" onClick={handleOnSubmit}>
+                Yes
+              </Button>
+              <br />
+              </div> 
+              
+              
+                
               
               <Typography paragraph></Typography>
               <Typography paragraph></Typography>
@@ -150,7 +156,31 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
               <Typography paragraph></Typography>
               <Typography></Typography>
             </CardContent>
+
           </Collapse>
+          </>:
+          <>
+          <CardContent >
+          <Typography variant="body2" color="text.secondary">
+              <div>
+              <strong>Outcome: </strong>
+              <br />
+              {home_name}: {euro_event.home_final}
+              <br/>
+              {away_name}: {euro_event.away_final}
+              <br/>
+              Winner : {euro_event.winner}
+                <br/>
+              </div>
+              <br /> 
+              <div>
+              Points recieved: {points_recieved}
+              </div> 
+          </Typography>
+              <Typography></Typography>
+            </CardContent>
+          </>
+              }
         </Card>
       </div>
     </>
