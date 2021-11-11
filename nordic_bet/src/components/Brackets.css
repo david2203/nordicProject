@@ -389,6 +389,52 @@
 
 }
 
+@media screen and (max-width: 1570px) {
+    .container1 {
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        flex-direction: column;
+        width: 33%;
+        margin-left: 0;
+    }
+
+    .split,
+    .champion {
+        width: 90%;
+        margin: 150px 50px 0;
+
+    }
+
+    .champion {
+        -webkit-box-ordinal-group: 3;
+        -moz-box-ordinal-group: 3;
+        -ms-flex-order: 3;
+        -webkit-order: 3;
+        order: 0;
+       padding-left: 50%;
+    }
+
+    .split {
+        padding-bottom: 20px;
+        margin: 50px;
+        margin-top: 40px;
+    }
+
+    .hero p.intro {
+        font-size: 24px;
+        padding-bottom: 25px;
+    }
+
+    .hero h1 {
+        font-size: 3em;
+        margin: 15px 0;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+}
+
 @media screen and (max-width: 980px) {
     .container1 {
         -webkit-flex-direction: column;
@@ -433,12 +479,6 @@
     .hero p {
         font-size: 1em;
     }
-    .final {
-        
-    }
-    .final .round-details .matchup .team{
-        
-    }
 
 
 
@@ -453,8 +493,9 @@
     }
 
     .final {
+        padding-top: 10%;
         padding-left: 5%;
-        margin: -11.5em;
+        margin: -14em;
     }
     
     .team {
@@ -478,16 +519,29 @@
     }
 }
 
+@media screen and (max-width: 500px) {
+    .final {
+        margin: -12em;
+    }
+}
+
 
 @media screen and (max-width: 400px) {
 
-    .split {
-        width: 95%;
-        margin: 25px 2.5%;
+    .champion {
+        width: 80%;
+    }
+    
+    .final {
+        width: 90vw;
     }
 
     .round {
-        width: 21%;
+        width: 80%;
+    }
+
+    .container1 {
+        width: 100%;
     }
 
     .current {
@@ -524,4 +578,29 @@
         width: 20%;
     }
 
+    .round-two .round-details {
+        padding-top: 5%;
+        margin-right: 20px;
+    }
+    .round-three .round-details {
+        padding-top: 5%;
+        margin-right: 25px;
+    }
+
+}
+
+@media screen and (max-width: 350px) {
+    .champion {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .champion {
+        width: 55%;
+    }
+    
+    .champion .final .round-details {
+        margin-bottom: 5%;
+    }
 }
