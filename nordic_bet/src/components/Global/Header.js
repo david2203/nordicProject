@@ -91,16 +91,16 @@ function Header() {
         className="py-4 "
       >
         <Container fluid>
-          <Navbar.Brand href="/Games" style={{marginLeft:"5%"}} >Nordic Bet </Navbar.Brand>
+          <Navbar.Brand href="/Landingpage" style={{marginLeft:"5%"}} >Nordic Bet </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             {token ? (
               <>
-                <Nav className="me-auto">
+                <Nav className="me-auto ">
                   {activeBets ? (
                     <Link
                       to="/MyBets"
-                      className="active "
+                      className="active text-light"
                       onClick={activeMyBets}
                       style={{marginLeft:"5%"}}
                       
@@ -110,7 +110,7 @@ function Header() {
                   ) : (
                     <Link
                       to="/MyBets"
-                      className="text-decoration-none "
+                      className="text-decoration-none text-light "
                       onClick={activeMyBets}
                       style={{marginLeft:"5%"}}
                     >
@@ -120,7 +120,7 @@ function Header() {
                   {activeBrackets ? (
                     <Link
                       to="/Euro"
-                      className="active"
+                      className="active text-light"
                       onClick={activeMyBrackets}
                       style={{marginLeft:"5%"}}
                     >
@@ -129,7 +129,7 @@ function Header() {
                   ) : (
                     <Link
                       to="/Euro"
-                      className="text-decoration-none pl-3 ml-3"
+                      className="text-decoration-none  pl-3 ml-3 text-light"
                       onClick={activeMyBrackets}
                       style={{marginLeft:"5%"}}
                     >
@@ -139,7 +139,7 @@ function Header() {
                   {activeGames ? (
                     <Link
                       to="/Games"
-                      className="active"
+                      className="active text-light"
                       onClick={activeMyGames}
                       style={{marginLeft:"5%"}}
                     >
@@ -148,7 +148,7 @@ function Header() {
                   ) : (
                     <Link
                       to="/Games"
-                      className="text-decoration-none pl-3 ml-3"
+                      className="text-decoration-none pl-3 ml-3 text-light"
                       onClick={activeMyGames}
                       style={{marginLeft:"5%"}}
                     >
@@ -158,7 +158,7 @@ function Header() {
                   {activeScore ? (
                     <Link
                       to="/Scoreboard"
-                      className="active"
+                      className="active text-light"
                       onClick={activeMyScore}
                       style={{marginLeft:"5%"}}
                     >
@@ -167,7 +167,7 @@ function Header() {
                   ) : (
                     <Link
                       to="/Scoreboard"
-                      className="text-decoration-none pl-3 ml-3"
+                      className="text-decoration-none pl-3 ml-3 text-light"
                       onClick={activeMyScore}
                       style={{marginLeft:"5%"}}
                     >
@@ -189,7 +189,7 @@ function Header() {
                       {activeAdmin ? (
                         <Link
                           to="/Admin"
-                          className="active"
+                          className="active text-dark"
                           onClick={activeMyAdmin}
                           style={{marginLeft:"5%"}}
                         >
@@ -198,7 +198,7 @@ function Header() {
                       ) : (
                         <Link
                           to="/Admin"
-                          className="text-decoration-none pl-3 ml-3"
+                          className="text-decoration-none pl-3 ml-3 text-dark"
                           onClick={activeMyAdmin}
                           style={{marginLeft:"5%"}}
                         >
@@ -209,7 +209,7 @@ function Header() {
                       {activeUpdate ? (
                         <Link
                           to="/Update"
-                          className="active"
+                          className="active text-dark"
                           onClick={activeMyUpdate}
                           style={{marginLeft:"5%"}}
                         >
@@ -218,7 +218,7 @@ function Header() {
                       ) : (
                         <Link
                           to="/Update"
-                          className="text-decoration-none pl-3 ml-3"
+                          className="text-decoration-none pl-3 ml-3 text-dark"
                           onClick={activeMyUpdate}
                           style={{marginLeft:"5%"}}
                         >
@@ -260,7 +260,7 @@ function Header() {
                   {activeProfile ? (
                     <Link
                       to="/Profile"
-                      className="active"
+                      className="active text-light"
                       onClick={activeMyProfile}
                       style={{marginLeft:"5%"}}
                     >
@@ -270,7 +270,7 @@ function Header() {
                   ) : (
                     <Link
                       to="/Profile"
-                      className="text-decoration-none pl-3 ml-3"
+                      className="text-decoration-none pl-3 ml-3 text-light"
                       onClick={activeMyProfile}
                       style={{marginLeft:"5%"}}
                     >
@@ -281,7 +281,7 @@ function Header() {
 
                   <Link
                     eventKey={2}
-                    className="text-decoration-none pl-3 ml-3"
+                    className="text-decoration-none pl-3 ml-3 text-white"
                     onClick={signOut}
                   >
                     Logga ut

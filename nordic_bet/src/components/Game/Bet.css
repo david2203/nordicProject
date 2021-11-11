@@ -1,0 +1,13 @@
+@media screen and (max-width: 600px) {
+    .flexcontainer{
+       flex-direction: column;
+       
+    }
+    .header {
+       position:relative
+    }
+    .bet_info {
+        width:70%
+    }
+    
+}

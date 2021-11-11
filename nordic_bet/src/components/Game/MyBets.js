@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
 import Bet from "./Bet";
+import "./Bet.css";
 
 import { Parallax } from "react-parallax";
 
@@ -60,9 +61,9 @@ function MyBets() {
 
            
        
-       <div className="d-flex justify-content-between"> 
-       <div className="activeBets ml-0 " style={{width:"1000px"}}>
-       <h2 className=" bg-light w-50 border mx-auto mt-3"> Här är dina aktiva bets: </h2>
+       <div className="flexcontainer d-flex justify-content-between"> 
+       <div className="activeBets ml-0 " style={{width:"100vw"}}>
+       <h2 className="header bg-light w-50 border mx-auto mt-3"> Här är dina aktiva bets: </h2>
        <div className="w-100">
       {activeBets.map((bet) => {
       
@@ -106,8 +107,8 @@ function MyBets() {
       )
       }
       </div>
-      <div className="finishedBets" style={{width:"1000px"}}>
-      <h2 className=" bg-light w-50 border mx-auto mt-3"> Här är dina slutförda bets: </h2>
+      <div className="finishedBets" style={{width:"100vw"}}>
+      <h2 className="header bg-light w-50 border mx-auto mt-3"> Här är dina slutförda bets: </h2>
       {finishedBets.map((bet) => {
         return (
           <>

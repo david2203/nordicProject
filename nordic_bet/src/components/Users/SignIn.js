@@ -58,7 +58,7 @@ export default function SignIn() {
         localStorage.setItem("jwt", response.data.jwt);
         localStorage.setItem("user_id", response.data.user.id);
         localStorage.setItem("username", response.data.user.username);
-        history.push("/games");
+        history.push("/Landingpage");
         window.location.reload();
       })
       .catch(showError);

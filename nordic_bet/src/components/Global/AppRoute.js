@@ -6,7 +6,7 @@ import MyBets from "../Game/MyBets";
 import SignIn from "../Users/SignIn";
 import Admin from "../Admin/Admin";
 import Result16 from "../Admin/Results_postGroup";
-
+import Landingpage from "../Landingpage"
 import Footer from "./Footer";
 import Euro from "../Game/Euro";
 import ProfileInfo from "../Users/ProfileInfo";
@@ -43,6 +43,8 @@ function AppRoute() {
           <Route path="/Scoreboard" exact component={Scoreboard} />
           <Route path="/Result16" exact component={Result16} />
           <Route path="/Update" exact component={Update} />
+          <Route path="/Landingpage" exact component={Landingpage} />
+
 
 
 
