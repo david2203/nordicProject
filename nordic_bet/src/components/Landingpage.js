@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../style.css";
+import "../style.css";
 import { Link } from "react-router-dom";
 
 function Landingpage() {
@@ -7,12 +7,11 @@ function Landingpage() {
     <>
     
     <div className="bodyPage">
-      <div className="site-wrapper">
-        <div className="site-wrapper-inner">
-          <div className="container">
-            <div className="masthead clearfix">
-              <div className="container inner">
-                <h3 className="masthead-brand">Cover</h3>
+      <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+          <div class="container">
+            <div class="masthead clearfix">
+              <div class="container inner">
               </div>
             </div>
           

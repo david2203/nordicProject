@@ -54,7 +54,7 @@ function Scoreboard() {
 
   return (
     <>
-      <Parallax bgImage={image1} strength={150}>
+      <Parallax key="" bgImage={image1} strength={150}>
         <div className="min-vh-100">
           <span>
             <span className="d-flex justify-content-center">

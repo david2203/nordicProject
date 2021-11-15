@@ -22,6 +22,7 @@ function Euro() {
     <>
       {formValues.typeOfView === "" ? (
         <Parallax
+          key=""
           bgImage={image1}
           className="min-vh-100 opacity-75"
           strength={500}
@@ -73,7 +74,7 @@ function Euro() {
       )}
       {formValues.typeOfView === "GroupView" ? (
         <>
-          <Parallax bgImage={image1} strength={1500}>
+          <Parallax key="" bgImage={image1} strength={1500}>
             <br />
                       <div style={{paddingBottom: '5%'}}>
             <Row className="g-2 mt-3">
@@ -109,7 +110,7 @@ function Euro() {
       )}
       {formValues.typeOfView === "EliminationView" ? (
         <>
-        <Parallax bgImage={image1} strength={1500}>
+        <Parallax key="" bgImage={image1} strength={1500}>
         <br/>
         <div style={{paddingBottom: '5%'}}>
             <Row className="g-2 mt-3">

@@ -56,7 +56,7 @@ function MyBets() {
 
   if(activeBets.length === 0) {
     return(
-      <Parallax bgImage={image1} strength={500}>
+      <Parallax key="" bgImage={image1} strength={500}>
       <div className="min-vh-100">
 
         
@@ -104,7 +104,7 @@ function MyBets() {
 
     
         
-       <Parallax bgImage={image1} strength={0}>
+       <Parallax key="" bgImage={image1} strength={0}>
          <div className="min-vh-100">
 
            

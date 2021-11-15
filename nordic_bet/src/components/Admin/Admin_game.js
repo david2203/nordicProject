@@ -5,20 +5,7 @@ import Flags from "country-flag-icons/react/3x2";
 import setTeamFlag from "../Game/Flags";
 import Styled from "styled-components";
 
-function Game({ event_id, eventname, status, score_given, deadline }) {
-  const instance = axios.create({ baseURL: server });
-  const playingTeams = eventname.split("-");
-  const home_team = playingTeams[0];
-  const away_team = playingTeams[1];
-  const [gameId, setGameId] = useState();
-  const [gameGrp, setGameGrp] = useState();
-
-  const [gameResult, setGameResult] = useState();
-  const [homeFlag, setHomeFlag] = useState("AQ");
-  const [awayFlag, setAwayFlag] = useState("AQ");
-  const token = localStorage.getItem("jwt");
-
-  const MediaQgames = Styled.span
+ const MediaQgames = Styled.span
   `
   font-size: 30px;
   @media (max-width: 1030px ) {
@@ -40,6 +27,21 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
   }
 
   `;
+
+function Game({ event_id, eventname, status, score_given, deadline }) {
+  const instance = axios.create({ baseURL: server });
+  const playingTeams = eventname.split("-");
+  const home_team = playingTeams[0];
+  const away_team = playingTeams[1];
+  const [gameId, setGameId] = useState();
+  const [gameGrp, setGameGrp] = useState();
+
+  const [gameResult, setGameResult] = useState();
+  const [homeFlag, setHomeFlag] = useState("AQ");
+  const [awayFlag, setAwayFlag] = useState("AQ");
+  const token = localStorage.getItem("jwt");
+
+
  
   var counter = 0; 
   useEffect(() => {

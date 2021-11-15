@@ -154,7 +154,7 @@ function Profile({
 
   return (
     <>
-      <Parallax bgImage={image1} strength={500}>
+      <Parallax key="" bgImage={image1} strength={500}>
         <div style={{ height: "auto" }}></div>
         <link
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
