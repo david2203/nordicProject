@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../Brackets.css";
 import server from "../Global/config";
 import axios from "axios";
+import { border } from "@mui/system";
+import { Parallax } from "react-parallax";
 
 function Update() {
   const chunkedGames = [];
@@ -704,14 +706,20 @@ function Update() {
       }
     }
   }
-  return <div>
-    <div style={{ height: "auto" }} className="min-vh-100">
-  <button className='btn btn-info' onClick={uppdateElim}> Update from group to elim </button> <br/><br/>
-  <button className='btn btn-info' onClick={updateElim16}> Update from round of 16 to quarterfinals</button><br/><br/>
-  <button className='btn btn-info' onClick={updateQuarter}> Update from quarter to semi finals</button><br/><br/>
-  <button className='btn btn-info'onClick={updateSemi}> Update from semi to final</button>
+
+  const imgAdmin = 'https://images.unsplash.com/photo-1570221622224-3bb8f08f166c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1460&q=80'
+
+  return <Parallax key="" bgImage={imgAdmin} strength={100}><div>
+    <div style={{ height: "auto"}} className="min-vh-100">
+      <div style={{paddingTop: '15%'}}>
+  <button className='btn btn-warning' onClick={uppdateElim}> Uppdatera från gruppspel till eliminering </button> <br/><br/>
+  <button className='btn btn-warning' onClick={updateElim16}> Uppdatera från runda 16 till kvartsfinal</button><br/><br/>
+  <button className='btn btn-warning' onClick={updateQuarter}> Uppdatera från kvartsfinal till semifinal</button><br/><br/>
+  <button className='btn btn-warning'onClick={updateSemi}> Uppdatera från semifinal till final</button>
   </div>
-  </div> ;
+  </div>
+  </div>
+  </Parallax>
 
 
 
