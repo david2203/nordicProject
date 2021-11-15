@@ -227,7 +227,7 @@ function Header() {
                           onClick={activeMyUpdate}
                           style={{marginLeft: '5%'}}
                         >
-                          Updatera elimination
+                          Uppdatera kval
                         </Link>
                       ) : (
                         <Link
@@ -236,7 +236,7 @@ function Header() {
                           onClick={activeMyUpdate}
                           style={{marginLeft: '5%'}}
                         >
-                          Updatera elimination
+                          Uppdatera kval
                         </Link>
                       )}
 
@@ -307,8 +307,11 @@ function Header() {
               <>
                 <Nav className="me-auto"></Nav>
                 <Nav>
-                  <Link to="/SignIn">Login</Link>
-                  <Link to="/SignUp">
+                  <Link to="/SignIn" className="text-decoration-none" style={{marginRight: '20px'}}>
+                    Logga In
+                    </Link>
+                    <br/>
+                  <Link to="/SignUp" className="text-decoration-none">
                     Registrera
                   </Link>
                 </Nav>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import TermsConditions from "./TermsConditions";
 
 function Footer() {
     return (
@@ -68,7 +69,7 @@ function Footer() {
             Länkar:
           </h6>
           <p>
-          <Link to="/reglervilkor" className="text-reset"> Regler & Vilkor</Link>
+          <Link to="/TermsConditions" className="text-reset"> Regler & Vilkor</Link>
 
           </p>
           <p>

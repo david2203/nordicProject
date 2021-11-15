@@ -195,9 +195,9 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
-                {!  visibility ?  <i style={{cursor:'pointer'}} className="bi bi-eye-slash" onClick={handleToggle}> Visa lösen</i>
+                {!  visibility ?  <i style={{cursor:'pointer'}} className="bi bi-eye-slash" onClick={handleToggle}> Visa lösenord</i>
               :
-              <i  style={{cursor:'pointer'}}className="bi bi-eye" onClick={handleToggle}> Döljlösen</i>
+              <i  style={{cursor:'pointer'}}className="bi bi-eye" onClick={handleToggle}> Dölj lösenord</i>
               }
               </Grid>
 

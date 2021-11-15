@@ -158,9 +158,9 @@ function handleToggle() {
                     id="password"
                     autoComplete="current-password"
                   />
-                  {!  visibility ?  <i style={{cursor:'pointer'}} className="bi bi-eye-slash" onClick={handleToggle}> Visa lösen</i>
+                  {!  visibility ?  <i style={{cursor:'pointer'}} className="bi bi-eye-slash" onClick={handleToggle}> Visa lösenord</i>
               :
-              <i  style={{cursor:'pointer'}}className="bi bi-eye" onClick={handleToggle}> Döljlösen</i>
+              <i  style={{cursor:'pointer'}}className="bi bi-eye" onClick={handleToggle}> Dölj lösenord</i>
               }
                   <br />
                   {error ? (

@@ -210,7 +210,7 @@ export default function RequestPassword() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Till login
+                    Till Inlogg
                   </Button>
              
               </Box> 
