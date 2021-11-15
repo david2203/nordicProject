@@ -38,7 +38,6 @@ function Profile({
   const [token] = useState(localStorage.getItem("jwt"));
   const [modalShow, setModalShow] = React.useState(false);
 
-  console.log(splitCreated[0])
   var editValues = {
     username: username,
     firstname: firstname,
@@ -202,9 +201,8 @@ function Profile({
                               {firstname} {lastname}
                             </h4>
                             <p className="mb-0">{username}</p>
-                    {score ? (<p className="mb-0">Poäng: {score}</p>):(
-                      <p className="mb-0">Poäng: 0</p>
-                    )}
+                    <p className="mb-0">Poäng: {score}</p>
+                     
                             <br/><div className="mt-2">
                               {/* <FileUploader/> */}
                               <ChangeImg />

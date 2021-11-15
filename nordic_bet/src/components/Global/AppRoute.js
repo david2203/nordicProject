@@ -20,7 +20,7 @@ import Reset from "../Admin/Reset"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Scoreboard from "../Scoreboard";
 import Update from "../Admin/Update";
-
+import Timegame from "../Game/Timegame"
 
 function AppRoute() {
       return (
@@ -44,6 +44,8 @@ function AppRoute() {
           <Route path="/Result16" exact component={Result16} />
           <Route path="/Update" exact component={Update} />
           <Route path="/Landingpage" exact component={Landingpage} />
+          <Route path="/Timegame" exact component={Timegame} />
+
 
 
 

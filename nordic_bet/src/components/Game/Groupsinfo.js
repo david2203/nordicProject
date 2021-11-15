@@ -22,15 +22,12 @@ function Groupsinfo() {
       } catch (err) {
         console.log(err);
       }
-      
     };
-    
+
     const fetchGames = async () => {
       try {
-        
-          const { data } = await instance.get(`Euro_events`);
-          setGamesArray((games) => [...games, ...data]);
-       
+        const { data } = await instance.get(`Euro_events`);
+        setGamesArray((games) => [...games, ...data]);
       } catch (err) {
         console.log(err);
       }
@@ -46,7 +43,6 @@ function Groupsinfo() {
   };
   const { loading, teamsArray, gamesArray } = useGetGames();
   if (!loading) {
-    console.log(gamesArray)
     for (let i = 0; i < teamsArray.length; i += 4) {
       //chunked is an array with all groups as arrays inside
       chunked.push(teamsArray.slice(i, i + 4));
@@ -58,26 +54,28 @@ function Groupsinfo() {
     <div>
       {chunked.map((groups, index) => {
         groups.sort(function (a, b) {
-          returnValue = (b.group_score - a.group_score);
-          if(b.group_score === a.group_score){
-            let matchOne = `${a.country}-${b.country}`
-            let matchTwo = `${b.country}-${a.country}`
-            returnValue = (b.group_goals - a.group_goals)
-            for(let i = 0; i < gamesArray.length; i++) {
-              if(gamesArray[i].eventname === matchOne || gamesArray[i].eventname === matchTwo) {
-                if(gamesArray[i].winner === a.country){
-                  returnValue = -1
-                }else if(gamesArray[i].winner === a.country){
-                  returnValue = -1
+          returnValue = b.group_score - a.group_score;
+          if (b.group_score === a.group_score) {
+            let matchOne = `${a.country}-${b.country}`;
+            let matchTwo = `${b.country}-${a.country}`;
+            returnValue = b.group_goals - a.group_goals;
+            for (let i = 0; i < gamesArray.length; i++) {
+              if (
+                gamesArray[i].eventname === matchOne ||
+                gamesArray[i].eventname === matchTwo
+              ) {
+                if (gamesArray[i].winner === a.country) {
+                  returnValue = -1;
+                } else if (gamesArray[i].winner === a.country) {
+                  returnValue = -1;
                 }
               }
             }
           }
-         console.log(groups)
+
           return returnValue;
-          
         });
-       
+
         return (
           <>
             <table className="table table-hover w-50 border bg-light mt-3 mx-auto  ">
@@ -88,25 +86,24 @@ function Groupsinfo() {
                   <th scope="col">Score</th>
                   <th scope="col">Total Group Goals</th>
                   <th scope="col">Status</th>
-
-
                 </tr>
               </thead>
               <tbody>
                 {groups.map((country) => {
                   const CountryFlag = Flags[getTeamFlag(country.name)];
-                  console.log(groups[1])
-                  console.log(country)
-                  let color = 'bg-danger'
-                  if (country.name === groups[0].name|| country.name === groups[1].name) {
-                    color = 'bg-success'
+
+                  let color = "bg-danger";
+                  if (
+                    country.name === groups[0].name ||
+                    country.name === groups[1].name
+                  ) {
+                    color = "bg-success";
+                  } else if (country.name === groups[2].name) {
+                    color = "bg-warning";
                   }
-                  else if(country.name === groups[2].name) {
-                    color = 'bg-warning'
-                  }
-                  
+
                   return (
-                    <tr key={country.id} >
+                    <tr key={country.id}>
                       <td>
                         <CountryFlag width="40px" />
                       </td>
@@ -114,7 +111,6 @@ function Groupsinfo() {
                       <td>{country.group_score} </td>
                       <td>{country.group_goals} </td>
                       <td className={` text-light ${color}`}> </td>
-
                     </tr>
                   );
                 })}

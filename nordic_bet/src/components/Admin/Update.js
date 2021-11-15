@@ -12,7 +12,7 @@ function Update() {
     const [array16, setArray16] = useState([]);
     const [arrayQuarter, setArrayQuarter] = useState([]);
     const [arraySemi, setArraySemi] =useState([])
-    const [arrayFinal, setArrayFinal] =useState([])
+    
 
 
 
@@ -49,16 +49,7 @@ function Update() {
         console.log(err);
       }
     };
-    const fetchFinal = async () => {
-      try {
-        
-          const { data } = await instance.get(`Euro_events?grp=EURO Final`);
-          setArrayFinal(data);
-        
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    
     const fetchSemiGames = async () => {
       try {
         
@@ -93,7 +84,7 @@ function Update() {
     };
 
     useEffect(() => {
-      fetchFinal();
+      
       fetchSemiGames();
       fetchQuarterGames();
       fetchCountries();
@@ -102,10 +93,10 @@ function Update() {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { loading, gamesArray, countriesArray, array16, arrayQuarter, arraySemi, arrayFinal};
+    return { loading, gamesArray, countriesArray, array16, arrayQuarter, arraySemi};
   };
 
-  const { loading, gamesArray, countriesArray , array16, arrayQuarter, arraySemi, arrayFinal} = useGetGames();
+  const { loading, gamesArray, countriesArray , array16, arrayQuarter, arraySemi} = useGetGames();
   function uppdateElim() {
     if (!loading) {
       // All data should be available
@@ -243,10 +234,13 @@ function Update() {
               if (side === "home") {
                 await instance.put(`euro_events/${id}`, {
                   home_team: place,
+                  status:"Not Started"
                 });
               } else if (side === "away") {
                 await instance.put(`euro_events/${id}`, {
                   away_team: place,
+                  status:"Not Started"
+
                 });
               }
             };
@@ -360,6 +354,8 @@ function Update() {
   
           await instance.put(`euro_events/${resp.id31}`, {
             away_team: resp.sendCountry,
+            status:"Not Started"
+
           });
         };
   
@@ -385,6 +381,8 @@ function Update() {
           
           await instance.put(`euro_events/${resp.id32}`, {
             away_team: resp.sendCountry,
+            status:"Not Started"
+
           });
         };
         const fetchGame3 = async () => {
@@ -409,6 +407,8 @@ function Update() {
         const putThird = async (resp) => {
           await instance.put(`euro_events/${resp.id33}`, {
             away_team: resp.sendCountry,
+            status:"Not Started"
+
           });
         };
         const fetchGame4 = async () => {
@@ -433,6 +433,8 @@ function Update() {
         const putFourth = async (resp) => {
           await instance.put(`euro_events/${resp.id34}`, {
             away_team: resp.sendCountry,
+            status:"Not Started"
+
           });
         };
   
@@ -503,28 +505,43 @@ function Update() {
         if(quarterLineup.hasOwnProperty(eventname)){
           const getEventId = async() =>{
             const response = await instance.get(`euro_events?eventname=${event}`)
-            
+            const home_team = response.data[0].home_team
+            const away_team = response.data[0].away_team
+
             const eventId = response.data[0].id
             return (
-              eventId
+              {eventId,home_team,away_team}
             )
         }
         getEventId().then((resp)=>sendToQuarter(resp))
          function sendToQuarter(resp) {
+           const id=resp.eventId
+           const home = resp.home_team
+           const away = resp.away_team
+           console.log(home,away)
+           let status = ""
+          if(away !== "" && home !== ""){
+            status = "Not Started"
+          }else (
+            status = "Not Ready"
+          )
+           console.log(status)
            console.log(resp)
-           console.log("hej")
           const side = quarterLineup[eventname].side
           if(side === "home"){
             const sendWinner = async() =>{
-              await instance.put(`euro_events/${resp}`, {
-                home_team:winner
+              await instance.put(`euro_events/${id}`, {
+                home_team:winner,
+                status:status
               })
           }
           sendWinner()
           }else if (side === "away"){
             const sendWinner = async() =>{
-              await instance.put(`euro_events/${resp}`, {
-                away_team:winner
+              await instance.put(`euro_events/${id}`, {
+                away_team:winner,
+                status:status
+
               })
           }
           sendWinner()
@@ -572,27 +589,38 @@ function Update() {
         if(semiLineup.hasOwnProperty(eventname)){
           const getEventId = async() =>{
             const response = await instance.get(`euro_events?eventname=${event}`)
-            
+            const home_team = response.data[0].home_team
+            const away_team = response.data[0].away_team
             const eventId = response.data[0].id
             return (
-              eventId
+              {eventId,home_team,away_team}
             )
         }
         getEventId().then((resp)=>sendToSemi(resp))
          function sendToSemi(resp) {
-           console.log(resp)
+          const id=resp.eventId
+          const home = resp.home_team
+          const away = resp.away_team
+          let status = ""
+         if(away !== "" && home !== ""){
+           status = "Not Started"
+         }else (
+           status = "Not Ready"
+         )
           const side = semiLineup[eventname].side
           if(side === "home"){
             const sendWinner = async() =>{
-              await instance.put(`euro_events/${resp}`, {
-                home_team:winner
+              await instance.put(`euro_events/${id}`, {
+                home_team:winner,
+                status:status
               })
           }
           sendWinner()
           }else if (side === "away"){
             const sendWinner = async() =>{
-              await instance.put(`euro_events/${resp}`, {
-                away_team:winner
+              await instance.put(`euro_events/${id}`, {
+                away_team:winner,
+                status:status
               })
           }
           sendWinner()
@@ -631,27 +659,38 @@ function Update() {
         if(finalLineup.hasOwnProperty(eventname)){
           const getEventId = async() =>{
             const response = await instance.get(`euro_events?eventname=${event}`)
-            
+            const home_team = response.data[0].home_team
+            const away_team = response.data[0].away_team
             const eventId = response.data[0].id
             return (
-              eventId
+              {eventId,home_team,away_team}
             )
         }
         getEventId().then((resp)=>sendToFinal(resp))
          function sendToFinal(resp) {
-           console.log(resp)
+          const id=resp.eventId
+          const home = resp.home_team
+          const away = resp.away_team
+          let status = ""
+         if(away !== "" && home !== ""){
+           status = "Not Started"
+         }else (
+           status = "Not Ready"
+         )
           const side = finalLineup[eventname].side
           if(side === "home"){
             const sendWinner = async() =>{
-              await instance.put(`euro_events/${resp}`, {
-                home_team:winner
+              await instance.put(`euro_events/${id}`, {
+                home_team:winner,
+                status:status
               })
           }
           sendWinner()
           }else if (side === "away"){
             const sendWinner = async() =>{
-              await instance.put(`euro_events/${resp}`, {
-                away_team:winner
+              await instance.put(`euro_events/${id}`, {
+                away_team:winner,
+                status:status
               })
           }
           sendWinner()
@@ -666,11 +705,12 @@ function Update() {
     }
   }
   return <div>
-    
+    <div style={{ height: "auto" }} className="min-vh-100">
   <button onClick={uppdateElim}> Update from group to elim </button> <br/><br/>
   <button onClick={updateElim16}> Update from round of 16 to quarterfinals</button><br/><br/>
   <button onClick={updateQuarter}> Update from quarter to semi finals</button><br/><br/>
   <button onClick={updateSemi}> Update from semi to final</button>
+  </div>
   </div> ;
 
 

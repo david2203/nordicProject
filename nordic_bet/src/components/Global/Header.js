@@ -89,9 +89,10 @@ function Header() {
         variant="dark"
         sticky="top"
         className="py-4 "
+        
       >
         <Container fluid>
-          <Navbar.Brand href="/Landingpage" style={{marginLeft:"5%"}} >Nordic Bet </Navbar.Brand>
+          <Navbar.Brand href="/Landingpage" >Nordic Bet </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             {token ? (
@@ -102,7 +103,7 @@ function Header() {
                       to="/MyBets"
                       className="active text-light"
                       onClick={activeMyBets}
-                      style={{marginLeft:"5%"}}
+                      style={{marginLeft:"20%"}}
                       
                     >
                       Mina bets
@@ -112,7 +113,7 @@ function Header() {
                       to="/MyBets"
                       className="text-decoration-none text-light "
                       onClick={activeMyBets}
-                      style={{marginLeft:"5%"}}
+                      style={{marginLeft:"20%"}}
                     >
                       Mina bets
                     </Link>
@@ -280,7 +281,7 @@ function Header() {
                   )}
 
                   <Link
-                    eventKey={2}
+                  to="/signIn"
                     className="text-decoration-none pl-3 ml-3 text-white"
                     onClick={signOut}
                   >
@@ -293,7 +294,7 @@ function Header() {
                 <Nav className="me-auto"></Nav>
                 <Nav>
                   <Link to="/SignIn">Login</Link>
-                  <Link eventKey={2} to="/SignUp">
+                  <Link to="/SignUp">
                     Registrera
                   </Link>
                 </Nav>
