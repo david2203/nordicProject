@@ -26,23 +26,37 @@ function Game({
   odds_x,
   odds_2,
   status,
+  home,
+  away,
+  deadline
 }) {
   const instance = axios.create({ baseURL: server });
-  const playingTeams = eventname.split("-");
-  const home_team = playingTeams[0];
-  const away_team = playingTeams[1];
+  let playingTeams = eventname.split("-");
+  let home_team = playingTeams[0];
+  let away_team = playingTeams[1];
+  if(home !== ""){
+    home_team = home
+  }
+  if (away !== ""){
+    away_team = away
+  }
+  
   const [gameId, setGameId] = useState();
   const user_id = localStorage.getItem("user_id");
+  
   const [homeFlag, setHomeFlag] = useState("AQ");
   const [awayFlag, setAwayFlag] = useState("AQ");
-
+  const dateArray = deadline.split("T")
+  const date = dateArray[0]
+  const timeArray = dateArray[1].split(":")
+  const time = timeArray[0] + ":" + timeArray[1]
   useEffect(() => {
     const fetchGameId = async () => {
       const response = await instance.get(`Euro_events?eid_xml=${event_id}`);
       setGameId(response.data[0].id);
     };
     fetchGameId();
-
+    
     setHomeFlag(setTeamFlag("home", home_team));
     setAwayFlag(setTeamFlag("away", away_team));
 
@@ -76,14 +90,7 @@ function Game({
   const [formValues, setFormValues] = useState(initialValues);
 
   function handleOnSubmit() {
-    let oddsMulti = 1
-      if(formValues.winner === home_team){
-        oddsMulti = odds_1
-      }else if(formValues.winner === away_team){
-        oddsMulti = odds_2
-      }else if(formValues.winner === "X"){
-        oddsMulti = odds_x
-      }
+    
     if (formValues.typeOfBet === "BetOnResult") {
       
       instance.get(`bets`, {});
@@ -95,7 +102,7 @@ function Game({
           winner: formValues.winner,
           euro_event: gameId,
           user: user_id,
-          odds_multiplier: oddsMulti
+         
 
         })
         .then();
@@ -109,7 +116,7 @@ function Game({
           winner: "Not included in this bet",
           euro_event: gameId,
           user: user_id,
-          odds_multiplier:1
+         
         })
         .then();
       window.location.reload();
@@ -122,7 +129,7 @@ function Game({
           winner: formValues.winner,
           euro_event: gameId,
           user: user_id,
-          odds_multiplier: oddsMulti
+         
 
         })
         .then();
@@ -138,14 +145,15 @@ function Game({
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
 
+  
   return (
     <>
-      <div>
+      <div className="mb-3">
         <br />
         <br />
         <Card
-          className="bg-secondary opacity-100"
-          container
+          className="bg-light opacity-70"
+          container="true"
           spacing={6}
           sx={{ maxWidth: "100%", mx: "auto", width: ["50%", "50%", "25%"] }}
         >
@@ -157,20 +165,28 @@ function Game({
             sx={{ fontSize: 20 }}
           >
             <strong>{grp} </strong><br/>
-
+            {date}
+            <br/>
+            {time}
+            <br/>
             <span> </span>
-            <HomeFlag width="40px" title="HomeFlag" className="..." />
-           
-                <span> </span>
-            {eventname}
+            <HomeFlag  style={{border:"1px solid"}} width="40px" title="HomeFlag" className="..." />
             <span> </span>
-            <AwayFlag width="40px" title="AwayFlag" className="..." />
+            {home_team}
+                <span> - </span>
+            {away_team}
+            <span> </span>
+            <AwayFlag style={{border:"1px solid"}} width="40px" title="AwayFlag" className="..." />
+            <span> </span>
+            
           </Typography>
 
           <CardActions
             disableSpacing
             sx={{ display: "inline-flex", verticalAlign: "middle" }}
-          >
+          > 
+          { status === "Not Started" ? 
+
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
@@ -179,6 +195,7 @@ function Game({
             >
               <ExpandMoreIcon></ExpandMoreIcon>
             </ExpandMore>
+            : <></> }
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>

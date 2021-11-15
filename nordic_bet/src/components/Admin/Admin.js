@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
 import AdminGame from "./Admin_game";
-import Update from "./Update";
 import { Parallax } from "react-parallax";
 import { FloatingLabel, Form, Row, Col } from "react-bootstrap";
 
@@ -27,7 +26,6 @@ function Admin() {
       const fetchRole = async () => {
         const response = await instance.get(`/users?id=${userId}`);
         setIsAdmin(response.data[0].isAdmin);
-        console.log(response.data[0].isAdmin);
       };
       fetchRole();
     }
@@ -47,7 +45,7 @@ function Admin() {
   return (
     <>
       <Parallax bgImage={image1} strength={500}>
-        <div cstyle={{ height: "auto" }}></div>
+        <div style={{ height: "auto" }}></div>
         <div className="d-flex flex-column align-items-center">
         
           {isAdmin ? (
@@ -90,6 +88,7 @@ function Admin() {
                       odds_2={game.odds_2}
                       status={game.status}
                       score_given={game.score_given}
+                      deadline={game.deadline}
                     />
                   );
                 }else if (formValues.typeOfView === "1/8" || formValues.typeOfView === "Quarter" ||formValues.typeOfView === "Semi" || formValues.typeOfView === "EURO Final" ){
@@ -107,9 +106,15 @@ function Admin() {
                       odds_2={game.odds_2}
                       status={game.status}
                       score_given={game.score_given}
+                      deadline={game.deadline}
                     />
                   );
+                } else {
+                  return (
+                    <></>
+                  )
                 }
+                
               
                
               })}

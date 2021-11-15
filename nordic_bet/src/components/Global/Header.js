@@ -88,11 +88,19 @@ function Header() {
         bg="dark"
         variant="dark"
         sticky="top"
+<<<<<<< HEAD
         className="py-4"
         
       >
         <Container fluid>
           <Navbar.Brand href="/Landingpage"  >Nordic Bet </Navbar.Brand>
+=======
+        className="py-4 "
+        
+      >
+        <Container fluid>
+          <Navbar.Brand href="/Landingpage" >Nordic Bet </Navbar.Brand>
+>>>>>>> fca89423012df4367faddb026a853aa4b612e7dc
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" >
             {token ? (
@@ -103,7 +111,11 @@ function Header() {
                       to="/MyBets"
                       className="active text-light"
                       onClick={activeMyBets}
+<<<<<<< HEAD
                       style={{width: '100px', marginTop: '1vh'}}
+=======
+                      style={{marginLeft:"20%"}}
+>>>>>>> fca89423012df4367faddb026a853aa4b612e7dc
                       
                     >
                       Mina bets
@@ -113,7 +125,11 @@ function Header() {
                       to="/MyBets"
                       className="text-decoration-none text-light "
                       onClick={activeMyBets}
+<<<<<<< HEAD
                       style={{width: '100px', marginTop: '1vh'}}
+=======
+                      style={{marginLeft:"20%"}}
+>>>>>>> fca89423012df4367faddb026a853aa4b612e7dc
                     >
                       Mina bets
                     </Link>
@@ -282,7 +298,7 @@ function Header() {
                   )}
 
                   <Link
-                    eventKey={2}
+                  to="/signIn"
                     className="text-decoration-none pl-3 ml-3 text-white"
                     onClick={signOut}
                     style={{width: '100px', marginTop: '1vh'}}
@@ -296,7 +312,7 @@ function Header() {
                 <Nav className="me-auto"></Nav>
                 <Nav>
                   <Link to="/SignIn">Login</Link>
-                  <Link eventKey={2} to="/SignUp">
+                  <Link to="/SignUp">
                     Registrera
                   </Link>
                 </Nav>

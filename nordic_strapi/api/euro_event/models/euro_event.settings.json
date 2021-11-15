@@ -46,7 +46,7 @@
       "type": "float"
     },
     "deadline": {
-      "type": "float"
+      "type": "datetime"
     },
     "status": {
       "type": "string"

@@ -19,18 +19,31 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
   const instance = axios.create({ baseURL: server });
   const [homeFlag, setHomeFlag] = useState("AQ");
   const [awayFlag, setAwayFlag] = useState("AQ");
+  const [winnerFlag, setWinnerFlag] = useState("AQ");
+
   const teams = euro_event.eventname.split("-")
-  const home_name = teams[0]
-  const away_name = teams[1]
+  let home_name = teams[0]
+  let away_name = teams[1]
+  if(euro_event.home_team !== ""){
+    home_name = euro_event.home_team
+  }
+  if(euro_event.away_team !== ""){
+    away_name = euro_event.away_team
+  }
   var liveStatus = ""
   if(status) {
     liveStatus = "Active"
   }else {
     liveStatus = "Score given!"
   }
+  const dateArray = euro_event.deadline.split("T")
+  const date = dateArray[0]
+  const timeArray = dateArray[1].split(":")
+  const time = timeArray[0] + ":" + timeArray[1]
   
   useEffect(()=>{
-
+    setWinnerFlag(setTeamFlag("home", winner));
+    
     setHomeFlag(setTeamFlag("home", home_name));
     setAwayFlag(setTeamFlag("away", away_name));
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,6 +88,7 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
 
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
+  const WinnerFlag = Flags[winnerFlag]
 
   return (
     <>
@@ -85,10 +99,13 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               <strong> Status: </strong> {liveStatus}<br/>
+             <strong> Date: {date} </strong> <br/>
+             <strong>Time: {time}</strong> <br/>
              <strong> Event: </strong> 
-             <HomeFlag width="20px" title="United States" className="..." />
-             <span>  </span>{euro_event.eventname}<span>  </span>
-             <AwayFlag width="20px" title="United States" className="..." /><br/>
+             <HomeFlag width="20px" title="United States" style={{border:"1px solid"}} className="..." />
+             <span>  </span>{home_name}<span> - </span>
+             {away_name}<span>  </span>
+             <AwayFlag width="20px" title="United States"  style={{border:"1px solid"}} className="..." /><br/>
               <strong>Type of bet:</strong> {type} <br/> <br/>
               
               <strong>Bet:</strong>
@@ -110,7 +127,8 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
               )}
               {winner !== "Not included in this bet" ? (
                 <>
-                  <div> Winner: {winner} </div>
+                  <div> Winner: <WinnerFlag width="20px" style={{border:"1px solid"}} title="United States" className="..." /> {winner}
+                   </div>
                   
                 </>
               ) : (

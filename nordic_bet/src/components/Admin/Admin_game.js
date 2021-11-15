@@ -5,7 +5,7 @@ import Flags from "country-flag-icons/react/3x2";
 import setTeamFlag from "../Game/Flags";
 import Styled from "styled-components";
 
-function Game({ event_id, eventname, status, score_given }) {
+function Game({ event_id, eventname, status, score_given, deadline }) {
   const instance = axios.create({ baseURL: server });
   const playingTeams = eventname.split("-");
   const home_team = playingTeams[0];
@@ -17,7 +17,7 @@ function Game({ event_id, eventname, status, score_given }) {
   const [homeFlag, setHomeFlag] = useState("AQ");
   const [awayFlag, setAwayFlag] = useState("AQ");
   const token = localStorage.getItem("jwt");
-  const [render, setRender] =useState()
+
   const MediaQgames = Styled.span
   `
   font-size: 30px;
@@ -40,7 +40,8 @@ function Game({ event_id, eventname, status, score_given }) {
   }
 
   `;
-
+ 
+  var counter = 0; 
   useEffect(() => {
     const fetchGameId = async () => {
       const response = await instance.get(`Euro_events?eid_xml=${event_id}`);
@@ -53,13 +54,15 @@ function Game({ event_id, eventname, status, score_given }) {
     setAwayFlag(setTeamFlag("away", away_team));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [render]);
+  }, []);
 
   useEffect(() => {
     
   }, [gameResult]);
   
   function updateGameStatus() {
+    counter +=1;
+    if (counter === 1){
     const putStatus = async () => {
       await instance.put(
         `euro_events/${gameId}`,
@@ -75,6 +78,7 @@ function Game({ event_id, eventname, status, score_given }) {
       
     };
     putStatus().then(sendBetResults());
+  }
   }
 
   function sendBetResults() {
@@ -291,6 +295,34 @@ function Game({ event_id, eventname, status, score_given }) {
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
 
+  const dateArray = deadline.split("T")
+  const date = dateArray[0]
+  // const year = dateArray[0].split("-")[0]
+  // const month = dateArray[0].split("-")[1]
+  // const day = dateArray[0].split("-")[2]
+  // const hour = dateArray[1].split(":")[0]
+  // const min = dateArray[1].split(":")[1]
+  // const sek = dateArray[1].split(":")[2].split(".")[0]
+  const timeArray = dateArray[1].split(":")
+  const time = timeArray[0] + ":" + timeArray[1]
+//   var now = new Date();
+
+// var correctGame = new Date(year,month -1,day,hour,min,sek,0) - now;
+// if (correctGame < 0) {
+//   correctGame += 86400000; // it's after 10am, try 10am tomorrow.
+// }
+
+// useEffect(() => {
+  
+//   const timer = setTimeout(() => {
+    
+//       updateGameStatus()
+//   }, correctGame);
+
+//   return () => {
+//     clearTimeout(timer);
+//   }
+// }, [gameId]);
   return (
     <>
       <div className="game_info mt-3 mb-3 bg-secondary w-50 center" style={{ backgroundColor: 'rgba(52, 52, 52, 0.8)', border: '2px solid black', color: 'white', padding: '35px',}}>
@@ -304,13 +336,17 @@ function Game({ event_id, eventname, status, score_given }) {
         
         <h3>{status}</h3>
         <br />
+        <h3>{date}</h3>
+        <br />
+        <h3>{time}</h3>
+        <br />
         {status === "Not Started"? (
           <>
-            {" "}
+            
             <button onClick={updateGameStatus} className="btn btn-success mt-4">
-              {" "}
+              
               Update Game Status
-            </button> <br />{" "}
+            </button> <br />
           </>
         ) : (
           <> </>

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
 import server from "../Global/config";
 import axios from "axios";
 
@@ -148,7 +147,7 @@ const dataFinal = [
     }
     },
 ]
-
+// eslint-disable-next-line
     function post16Results() {
         for(let i = 0; i< data16.length; i++){
             
@@ -172,6 +171,7 @@ const dataFinal = [
             put16Results()
         }
     }
+    // eslint-disable-next-line
     function postQuarter() {
         for(let i = 0; i< dataQuarter.length; i++){
             
@@ -195,6 +195,7 @@ const dataFinal = [
             putQuarter()
         }
     }
+    // eslint-disable-next-line
     function postSemi() {
         for(let i = 0; i< dataSemi.length; i++){
             
@@ -218,7 +219,7 @@ const dataFinal = [
             putSemi()
         }
     }
-
+     // eslint-disable-next-line
     function postFinal() {
         for(let i = 0; i< dataFinal.length; i++){
             
@@ -249,6 +250,7 @@ const dataFinal = [
     return (
         <div>
             already posted
+            This only needs to be posted once into the admins database :)
             {/* <button onClick={post16Results}> Post 16</button>
             <button onClick={postQuarter}> Post quarter</button>
             <button onClick={postSemi}> Post Semi</button>

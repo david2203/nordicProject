@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { Parallax } from "react-parallax";
 
 function MyBets() {
-  const username = localStorage.getItem("username")
+  
   const instance = axios.create({ baseURL: server });
   const user = localStorage.getItem("user_id");
   const [activeLoadPage, setActiveLoadPage] = useState(3);
@@ -52,6 +52,7 @@ function MyBets() {
   }
 
   const image1 =
+<<<<<<< HEAD
   "https://images.unsplash.com/photo-1561034645-e6f28dfddd2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80";
 
   if(activeBets.length === 0) {
@@ -99,12 +100,15 @@ function MyBets() {
     )
   }
 
+=======
+  "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80";
+>>>>>>> fca89423012df4367faddb026a853aa4b612e7dc
   return (
     <>  
 
     
         
-       <Parallax bgImage={image1} strength={500}>
+       <Parallax bgImage={image1} strength={0}>
          <div className="min-vh-100">
 
            

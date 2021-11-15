@@ -65,7 +65,8 @@ function Reset() {
     return { loading, gamesArray, betsArray, countryArray, usersArray};
   };
   const { loading, gamesArray, betsArray , countryArray, usersArray} = useGetGames()
-  
+ 
+ 
   
   function resetEvent2016() {
 
@@ -111,15 +112,21 @@ function Reset() {
           final.push(gamesArray[i].id)
         }
         
+        
       }
+      
       for(let i =0; i<eventIdArray.length;i++) {
+        const date = new Date(2021,10,20,16,44,i,0 )
           const resetEvents = async ()=> {
+
             await instance.put(`Euro_events/${eventIdArray[i]}`, {
                 status: "Not Started",
                 score_given: "no",
                 home_final: 0,
                 away_final: 0,
-                winner:""
+                winner:"",
+                deadline: date
+               
             })
           }
           resetEvents()
@@ -129,6 +136,7 @@ function Reset() {
           await instance.put(`Euro_events/${roundOf16[i]}`, {
               home_team: "",
               away_team: "",
+              status:"Not Ready"
             
           })
         }
@@ -139,7 +147,7 @@ function Reset() {
         await instance.put(`Euro_events/${quarter[i]}`, {
             home_team: "",
             away_team: "",
-          
+            status:"Not Ready"
         })
       }
       resetQuarter()
@@ -149,7 +157,7 @@ function Reset() {
         await instance.put(`Euro_events/${semi[i]}`, {
             home_team: "",
             away_team: "",
-          
+            status:"Not Ready"
         })
       }
       resetSemi()
@@ -159,6 +167,7 @@ function Reset() {
         await instance.put(`Euro_events/${final[i]}`, {
             home_team: "",
             away_team: "",
+            status:"Not Ready"
           
         })
       }
