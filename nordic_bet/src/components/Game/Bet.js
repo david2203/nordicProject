@@ -20,7 +20,9 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
   const [homeFlag, setHomeFlag] = useState("AQ");
   const [awayFlag, setAwayFlag] = useState("AQ");
   const [winnerFlag, setWinnerFlag] = useState("AQ");
+  const [betWinnerFlag, setBetWinnerFlag] = useState("AQ");
 
+const real_winner = euro_event.winner
   const teams = euro_event.eventname.split("-")
   let home_name = teams[0]
   let away_name = teams[1]
@@ -42,8 +44,8 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
   const time = timeArray[0] + ":" + timeArray[1]
   
   useEffect(()=>{
-    setWinnerFlag(setTeamFlag("home", winner));
-    
+    setWinnerFlag(setTeamFlag("home", real_winner));
+    setBetWinnerFlag(setTeamFlag("home", winner))
     setHomeFlag(setTeamFlag("home", home_name));
     setAwayFlag(setTeamFlag("away", away_name));
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,7 +90,9 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
 
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
-  const WinnerFlag = Flags[winnerFlag]
+  const BetWinnerFlag = Flags[betWinnerFlag];
+  const WinnerFlag = Flags[winnerFlag];
+  
 
   return (
     <>
@@ -97,15 +101,15 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
           sx={{ maxWidth: "100%", mx: "22.5%", width: ["100%", "50%", "55%"] }}
         >
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography component={'span'} variant="body2" color="text.secondary">
               <strong> Status: </strong> {liveStatus}<br/>
              <strong> Date: {date} </strong> <br/>
              <strong>Time: {time}</strong> <br/>
              <strong> Event: </strong> 
-             <HomeFlag width="20px" title="United States" style={{border:"1px solid"}} className="..." />
+             <HomeFlag width="20px"  style={{border:"1px solid"}} className="..." />
              <span>  </span>{home_name}<span> - </span>
              {away_name}<span>  </span>
-             <AwayFlag width="20px" title="United States"  style={{border:"1px solid"}} className="..." /><br/>
+             <AwayFlag width="20px"   style={{border:"1px solid"}} className="..." /><br/>
               <strong>Type of bet:</strong> {type} <br/> <br/>
               
               <strong>Bet:</strong>
@@ -127,7 +131,7 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
               )}
               {winner !== "Not included in this bet" ? (
                 <>
-                  <div> Winner: <WinnerFlag width="20px" style={{border:"1px solid"}} title="United States" className="..." /> {winner}
+                  <div> Winner: <BetWinnerFlag width="20px" style={{border:"1px solid"}}  className="..." /> {winner}
                    </div>
                   
                 </>
@@ -179,7 +183,7 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
           </>:
           <>
           <CardContent >
-          <Typography variant="body2" color="text.secondary">
+          <Typography component={'span'} variant="body2" color="text.secondary">
               <div>
               <strong>Outcome: </strong>
               <br />
@@ -187,12 +191,12 @@ function Bet({ id, type, homeTeamGoals, awayTeamGoals, winner, euro_event, statu
               <br/>
               {away_name}: {euro_event.away_final}
               <br/>
-              Winner : {euro_event.winner}
+              Winner: <WinnerFlag width="20px" style={{border:"1px solid"}}  className="..." /> {euro_event.winner}  
                 <br/>
               </div>
               <br /> 
               <div>
-              Points recieved: {points_recieved}
+              <strong> Points recieved: </strong>{points_recieved}
               </div> 
           </Typography>
               <Typography></Typography>
