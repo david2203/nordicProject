@@ -23,6 +23,7 @@ import Update from "../Admin/Update";
 import Timegame from "../Game/Timegame"
 import TermsConditions from "./TermsConditions";
 
+import Manual from "../Global/Manual"
 function AppRoute() {
       return (
         <>
@@ -47,6 +48,8 @@ function AppRoute() {
           <Route path="/Landingpage" exact component={Landingpage} />
           <Route path="/Timegame" exact component={Timegame} />
           <Route path="/TermsConditions" exact component={TermsConditions} />
+          <Route path="/Manual" exact component={Manual} />
+
 
 
 
