@@ -7,11 +7,11 @@ function Landingpage() {
     <>
     
     <div className="bodyPage">
-      <div class="site-wrapper">
-        <div class="site-wrapper-inner">
-          <div class="container">
-            <div class="masthead clearfix">
-              <div class="container inner">
+      <div className="site-wrapper">
+        <div className="site-wrapper-inner">
+          <div className="container">
+            <div className="masthead clearfix">
+              <div className="container inner">
               </div>
             </div>
           

@@ -99,11 +99,11 @@ function Groups() {
   return (
     <>
     <div>
-      {chunked.map((games, index) => {
+      {chunked.map((games, key) => {
         
         return (
-          <>
-            <table key={games[index].id} className="table table-hover w-75 border bg-light mt-3 mx-auto">
+          <div key={key} >
+            <table className="table table-hover w-75 border bg-light mt-3 mx-auto">
               <thead>
                 
               <tr >
@@ -117,7 +117,7 @@ function Groups() {
                 </tr>
               </thead>
               <tbody>
-                {games.map((game) => {
+                {games.map((game, key2) => {
                   const playingTeams = game.eventname.split("-");
                   const home_team = playingTeams[0];
                   const away_team = playingTeams[1];
@@ -125,7 +125,7 @@ function Groups() {
                   const AwayFlag = Flags[setTeamFlag("away", away_team)];
 
                   return (
-                    <tr key={game.eid_xml}>
+                    <tr key={key2}>
                       <td>
                         <HomeFlag width="40px" />
                       </td>
@@ -144,7 +144,7 @@ function Groups() {
             </table>
             <br />
             <br />
-          </>
+          </div>
         );
       })}
     </div>
