@@ -12,7 +12,7 @@ function TermsConditions() {
           textAlign: "left",
         }}
       >
-        <li>
+        <p>
           1. Inledning
           <br />
           2. Det grundläggande
@@ -71,7 +71,7 @@ function TermsConditions() {
           <br />
           30. Bilaga
           <br />
-        </li>
+        </p>
         <div className="text-light w-50 pt-5">
           <h4>1. Inledning</h4>
           Välkommen till Nordic Bet. Vi vill att du ska ha roligt den tiden du
