@@ -78,9 +78,9 @@ function Groupsinfo() {
 
         return (
           <>
-            <table className="table table-hover w-50 border bg-light mt-3 mx-auto  ">
+            <table key={groups[index]} className="table table-hover w-50 border bg-light mt-3 mx-auto  ">
               <thead>
-                <tr key={index}>
+                <tr >
                   <th scope="col"></th>
                   <th scope="col"> {groups[0].group} </th>
                   <th scope="col">Score</th>
@@ -91,8 +91,7 @@ function Groupsinfo() {
               <tbody>
                 {groups.map((country) => {
                   const CountryFlag = Flags[getTeamFlag(country.name)];
-                  console.log(groups[1])
-                  console.log(country)
+                  
                   let color = 'bg-danger'
                   let textcolor = 'Diskvalificerad'
                   if (country.name === groups[0].name|| country.name === groups[1].name) {

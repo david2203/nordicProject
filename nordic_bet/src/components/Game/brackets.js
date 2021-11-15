@@ -19,7 +19,6 @@ function Brackets() {
       try {
         const data = await instance.get(`euro_events?grp=EURO 1/8 finals`);
         set16GamesArray(data.data);
-        console.log(data.data)
         const data2 = await instance.get(`euro_events?grp=EURO Quarter finals`);
         setGamesQuarter(data2.data);
         const data3 = await instance.get(`euro_events?grp=EURO Semi finals`);
@@ -72,12 +71,12 @@ function Brackets() {
       
     // })
 
-    console.log(sorted16);
+   
   }
 
   return (
     <>
-      <head />
+      
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -108,8 +107,8 @@ function Brackets() {
       <link rel="stylesheet" type="text/css" href="../Brackets.css" />
 
       <title>Uefa Euro 2016</title>
-      <head />
-      <body className="bracketsBody">
+      
+      <div className="bracketsBody">
         <header className="hero">
           <div className="hero-wrap">
             <p className="intro" id="intro">
@@ -406,11 +405,10 @@ function Brackets() {
             <a className="share-icon" href="https://twitter.com/_joebeason">
               <i className="fa fa-twitter"></i>
             </a>
-            {/* <a className="share-icon" href="#"><i className="fa fa-facebook"></i></a> */}
-            {/* <a className="share-icon" href="#"><i className="fa fa-envelope"></i></a> */}
+            
           </div>
         </section>
-      </body>
+      </div>
     </>
   );
 }

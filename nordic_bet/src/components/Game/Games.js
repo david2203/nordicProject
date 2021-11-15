@@ -45,7 +45,6 @@ function Games() {
               games.map((game) => {
                 return (
                   <Game
-                    key={game.eid_xml}
                     event_id={game.eid_xml}
                     eventname={game.eventname}
                     grp={game.grp}
