@@ -56,6 +56,9 @@ html,
 /* Padding for spacing */
 .inner {
   padding: 30px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 

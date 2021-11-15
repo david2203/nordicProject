@@ -91,7 +91,6 @@ function Groupsinfo() {
               <tbody>
                 {groups.map((country) => {
                   const CountryFlag = Flags[getTeamFlag(country.name)];
-<<<<<<< HEAD
                   console.log(groups[1])
                   console.log(country)
                   let color = 'bg-danger'
@@ -103,17 +102,6 @@ function Groupsinfo() {
                   else if(country.name === groups[2].name) {
                     color = 'bg-warning'
                     textcolor = 'Möjligen Kvalificerad'
-=======
-
-                  let color = "bg-danger";
-                  if (
-                    country.name === groups[0].name ||
-                    country.name === groups[1].name
-                  ) {
-                    color = "bg-success";
-                  } else if (country.name === groups[2].name) {
-                    color = "bg-warning";
->>>>>>> fca89423012df4367faddb026a853aa4b612e7dc
                   }
 
                   return (
@@ -124,12 +112,8 @@ function Groupsinfo() {
                       <td> {country.name}</td>
                       <td>{country.group_score} </td>
                       <td>{country.group_goals} </td>
-<<<<<<< HEAD
                       <td className={` text-dark ${color}`}>{textcolor}</td>
 
-=======
-                      <td className={` text-light ${color}`}> </td>
->>>>>>> fca89423012df4367faddb026a853aa4b612e7dc
                     </tr>
                   );
                 })}

@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 function Landingpage() {
   return (
     <>
-    <body className="bodyPage">
+    
+    <div className="bodyPage">
       <div class="site-wrapper">
         <div class="site-wrapper-inner">
           <div class="container">
@@ -14,8 +15,8 @@ function Landingpage() {
                 <h3 class="masthead-brand">Cover</h3>
               </div>
             </div>
-
-            <div class="inner cover">
+          
+            <div className="inner cover min-vh-100" style={{ height: "auto"}}>
               <h1 class="cover-heading">
                 Välkommen till Nordic Bet <br /> Svergies mest omnämnda
                 spelbolag{" "}
@@ -43,7 +44,7 @@ function Landingpage() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
     </>
   );
 }
