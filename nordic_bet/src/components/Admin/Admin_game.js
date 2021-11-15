@@ -35,6 +35,8 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
   const away_team = playingTeams[1];
   const [gameId, setGameId] = useState();
   const [gameGrp, setGameGrp] = useState();
+  const [clicked, setClicked] = useState(false);
+
 
   const [gameResult, setGameResult] = useState();
   const [homeFlag, setHomeFlag] = useState("AQ");
@@ -63,6 +65,9 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
   }, [gameResult]);
   
   function updateGameStatus() {
+    setClicked(true)
+  
+  
     counter +=1;
     if (counter === 1){
     const putStatus = async () => {
@@ -192,82 +197,81 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
         `bets?euro_event.eid_xml=${event_id}`
       );
       const bets = response.data;
-      console.log(bets)
-      if (bets.length === 0) {
-        return false;
-      } else {
-        return [bets, resultData];
-      }
+      
+      return [bets, resultData];
+      
     };
   }
 
   function compareBetsWithResult(resp) {
-    if (resp === false) {
-      return false;
-    } else {
-      const bets = resp[0];
-      const gameResult = resp[1];
-      const resultHomeGoals = gameResult[0].home_goals;
-      const resultAwayGoals = gameResult[0].away_goals;
-      const resultWinner = gameResult[0].winner_team;
-      var score = 0;
-      var betOwner = "";
-      bets.forEach((bet) => {
-        betOwner = bet.user.id;
-
-        if (bet.Active === true) {
-          const bettedHomeGoals = Number(bet.homeTeamGoals);
-          const bettedAwayGoals = Number(bet.awayTeamGoals);
-          const bettedWinner = bet.winner;
-          if (bet.type === "BetOnResult") {
-            if (resultHomeGoals === bettedHomeGoals) {
-              score = score + 1;
-              console.log("Right home goals");
+      if(resp[0].length > 0) {
+        const bets = resp[0];
+        const gameResult = resp[1];
+        const resultHomeGoals = gameResult[0].home_goals;
+        const resultAwayGoals = gameResult[0].away_goals;
+        const resultWinner = gameResult[0].winner_team;
+        var score = 0;
+        var betOwner = "";
+        bets.forEach((bet) => {
+          betOwner = bet.user.id;
+  
+          if (bet.Active === true) {
+            const bettedHomeGoals = Number(bet.homeTeamGoals);
+            const bettedAwayGoals = Number(bet.awayTeamGoals);
+            const bettedWinner = bet.winner;
+            if (bet.type === "BetOnResult") {
+              if (resultHomeGoals === bettedHomeGoals) {
+                score = score + 1;
+                console.log("Right home goals");
+              }
+              if (resultAwayGoals === bettedAwayGoals) {
+                score = score + 1;
+                console.log("Right away goals");
+              }
+              if (resultWinner === bettedWinner) {
+                score = score + 3;
+                console.log("Right winner");
+              }
+            } else if (bet.type === "BetOnGoals") {
+              if (resultHomeGoals === bettedHomeGoals) {
+                score = score + 1;
+  
+                console.log("Right home goals");
+              }
+              if (resultAwayGoals === bettedAwayGoals) {
+                score = score + 1;
+  
+                console.log("Right away goals");
+                return;
+              }
+            } else if (bet.type === "BetOnWinner") {
+              if (resultWinner === bettedWinner) {
+                score = score + 3;
+  
+                console.log("Right winner");
+              }
             }
-            if (resultAwayGoals === bettedAwayGoals) {
-              score = score + 1;
-              console.log("Right away goals");
-            }
-            if (resultWinner === bettedWinner) {
-              score = score + 3;
-              console.log("Right winner");
-            }
-          } else if (bet.type === "BetOnGoals") {
-            if (resultHomeGoals === bettedHomeGoals) {
-              score = score + 1;
-
-              console.log("Right home goals");
-            }
-            if (resultAwayGoals === bettedAwayGoals) {
-              score = score + 1;
-
-              console.log("Right away goals");
-              return;
-            }
-          } else if (bet.type === "BetOnWinner") {
-            if (resultWinner === bettedWinner) {
-              score = score + 3;
-
-              console.log("Right winner");
-            }
+          } else {
+            return false;
           }
-        } else {
-          return false;
-        }
-      });
-      return [bets, score, betOwner];
-    }
+        });
+        return [bets, score, betOwner];
+      }
+      else {
+        return(console.log("Inga bets"))
+      }
+    
   }
 
   function sendScores(resp) {
-    if (resp === false) {
-      // return alert("No bets on this game");
+    console.log(resp)
+    if (resp === undefined) {
+      console.log("inga bets")
     } else {
       const userBetId = resp[2];
       const fetchScore = async () => {
         const response = await instance.get(`/users?id=${userBetId}`);
         const userScore = response.data[0].Score;
-        console.log(response.data[0].Score);
         return [userScore, resp];
       };
       fetchScore().then((resp2) => calcScore(resp2));
@@ -292,7 +296,7 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
         recieved_points:scoreToAdd
       });
     };
-    updateBet().then(window.location.reload());
+    updateBet().then(console.log("Active set to false korv"));
   }
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
@@ -325,6 +329,8 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
 //     clearTimeout(timer);
 //   }
 // }, [gameId]);
+
+
   return (
     <>
       <div className="game_info mt-3 mb-3 bg-secondary w-50 center" style={{ backgroundColor: 'rgba(52, 52, 52, 0.8)', border: '2px solid black', color: 'white', padding: '35px',}}>
@@ -342,17 +348,16 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
         <br />
         <h3>{time}</h3>
         <br />
-        {status === "Not Started"? (
-          <>
-            
-            <button onClick={updateGameStatus} className="btn btn-success mt-4">
+        {status === "Not Started"? 
+         
+            !clicked ? 
+           ( <button onClick={updateGameStatus} className="btn btn-success mt-4"> Update Game Status</button> ) : 
+            ( <div>Updated</div>)
               
-              Update Game Status
-            </button> <br />
-          </>
-        ) : (
+          
+         : 
           <> </>
-        )}
+        }
         <br />
       </div>
     </>

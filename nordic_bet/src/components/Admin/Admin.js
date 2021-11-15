@@ -44,7 +44,7 @@ function Admin() {
 
   return (
     <>
-      <Parallax key="" bgImage={image1} strength={500}>
+      <Parallax key="" bgImage={image1} strength={0}>
         <div style={{ height: "auto" }}></div>
         <div className="d-flex flex-column align-items-center">
         
