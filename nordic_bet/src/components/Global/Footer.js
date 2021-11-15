@@ -72,7 +72,7 @@ function Footer() {
 
           </p>
           <p>
-          <Link to="/privacypolicy" className="text-reset"> Någon sida </Link>
+          <Link to="/manual" className="text-reset"> Manual </Link>
 
           </p>
           <p>

@@ -46,6 +46,10 @@ function Game({
   
   const [homeFlag, setHomeFlag] = useState("AQ");
   const [awayFlag, setAwayFlag] = useState("AQ");
+  const [loading, setLoading] = useState(true);
+  const [hasBetted, setHasBetted] = useState(false);
+
+  
   const dateArray = deadline.split("T")
   const date = dateArray[0]
   const timeArray = dateArray[1].split(":")
@@ -54,14 +58,29 @@ function Game({
     const fetchGameId = async () => {
       const response = await instance.get(`Euro_events?eid_xml=${event_id}`);
       setGameId(response.data[0].id);
+      setLoading(false)
     };
     fetchGameId();
+    
     
     setHomeFlag(setTeamFlag("home", home_team));
     setAwayFlag(setTeamFlag("away", away_team));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if(!loading){
+    const fetchBetOnGame = async () => {
+    
+      const response = await instance.get(`Bets?user=${user_id}&&euro_event=${gameId}`)
+      if(response.data.length > 0){
+        setHasBetted(true)
+      }
+     
+    }
+    fetchBetOnGame()
+  }
+
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -93,7 +112,7 @@ function Game({
     
     if (formValues.typeOfBet === "BetOnResult") {
       
-      instance.get(`bets`, {});
+     
       instance
         .post(`bets`, {
           type: formValues.typeOfBet,
@@ -185,7 +204,7 @@ function Game({
             disableSpacing
             sx={{ display: "inline-flex", verticalAlign: "middle" }}
           > 
-          { status === "Not Started" ? 
+          { status === "Not Started" && hasBetted === false? 
 
             <ExpandMore
               expand={expanded}
@@ -195,7 +214,9 @@ function Game({
             >
               <ExpandMoreIcon></ExpandMoreIcon>
             </ExpandMore>
-            : <></> }
+            : status === "Not Ready" ?
+          <Typography paragraph>Vänta på att lag ska tilldelas!</Typography>:
+          <Typography paragraph>Du har ett bet på detta spel! </Typography> }
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
@@ -208,7 +229,7 @@ function Game({
                       <Select
                         name="typeOfBet"
                         id="type"
-                        value={formValues.type}
+                        value={formValues.typeOfBet}
                         onChange={handleOnChange}
                         sx={{
                           minWidth: 125,

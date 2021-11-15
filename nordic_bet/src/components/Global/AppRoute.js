@@ -21,7 +21,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Scoreboard from "../Scoreboard";
 import Update from "../Admin/Update";
 import Timegame from "../Game/Timegame"
-
+import Manual from "../Global/Manual"
 function AppRoute() {
       return (
         <>
@@ -45,6 +45,8 @@ function AppRoute() {
           <Route path="/Update" exact component={Update} />
           <Route path="/Landingpage" exact component={Landingpage} />
           <Route path="/Timegame" exact component={Timegame} />
+          <Route path="/Manual" exact component={Manual} />
+
 
 
 
