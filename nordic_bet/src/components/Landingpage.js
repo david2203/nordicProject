@@ -32,7 +32,7 @@ function Landingpage() {
                 till en våg av känslor. Därför ger vi dig detta evenemang där du
                 kan satsa på resultatet av spelen 2016. Lägg ett spel innan
                 spelet startar, eller prova ett livespel medan du tittar. Kolla
-                in spelsidan när vi uppdaterar det kommande spel dagligen.
+                in spelsidan där vi uppdaterar de kommande spel dagligen.
               </p>
               <div className="lead">
                 <Link to="/Games" className="btn btn-lg btn-default">

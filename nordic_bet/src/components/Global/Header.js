@@ -4,8 +4,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "./config";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import Styled from "styled-components";
+
+ const MediaQheader = Styled.span
+  `
+  display: contents;
+  @media (max-width: 991px ) {
+    display: grid;
+    justify-content: center;
+
+  }
+
+  `;
 
 function Header() {
   const history = useHistory();
@@ -95,9 +106,10 @@ function Header() {
           <Navbar.Brand href="/Landingpage"  >Nordic Bet </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
+          <MediaQheader>
             {token ? (
               <>
-                <Nav className="me-auto ">
+                <Nav className="me-auto">
                   {activeBets ? (
                     <Link
                       to="/MyBets"
@@ -172,7 +184,7 @@ function Header() {
                       onClick={activeMyScore}
                       style={{width: '100px', marginTop: '1vh'}}
                     >
-                      Top-lista
+                      Topplista
                     </Link>
                   )}
 
@@ -302,7 +314,7 @@ function Header() {
                 </Nav>
               </>
             )}
-            );
+            </MediaQheader>
           </Navbar.Collapse>
         </Container>
       </Navbar>
