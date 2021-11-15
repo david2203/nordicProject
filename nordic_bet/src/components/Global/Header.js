@@ -94,7 +94,7 @@ function Header() {
         <Container fluid>
           <Navbar.Brand href="/Landingpage"  >Nordic Bet </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav" >
+          <Navbar.Collapse id="responsive-navbar-nav">
             {token ? (
               <>
                 <Nav className="me-auto ">
