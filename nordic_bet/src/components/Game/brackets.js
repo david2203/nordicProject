@@ -19,7 +19,6 @@ function Brackets() {
       try {
         const data = await instance.get(`euro_events?grp=EURO 1/8 finals`);
         set16GamesArray(data.data);
-        console.log(data.data)
         const data2 = await instance.get(`euro_events?grp=EURO Quarter finals`);
         setGamesQuarter(data2.data);
         const data3 = await instance.get(`euro_events?grp=EURO Semi finals`);
@@ -72,15 +71,13 @@ function Brackets() {
       
     // })
 
-    console.log(sorted16);
+   
   }
 
   return (
     <>
-      <head />
-      <meta charSet="utf-8" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-      <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+      
+    
       <link
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
         rel="stylesheet"
@@ -108,8 +105,8 @@ function Brackets() {
       <link rel="stylesheet" type="text/css" href="../Brackets.css" />
 
       <title>Uefa Euro 2016</title>
-      <head />
-      <body className="bracketsBody">
+      
+      <div className="bracketsBody">
         <header className="hero">
           <div className="hero-wrap">
             <p className="intro" id="intro">
@@ -136,7 +133,7 @@ function Brackets() {
                   <span className="date">"DATE"</span>
                 </div>
 
-                {sorted16.map((game) => {
+                {sorted16.map((game, key) => {
                   let homeOpacity = ""
                   let awayOpacity = ""
 
@@ -153,7 +150,7 @@ function Brackets() {
                   }
                   if(game.teaminfo.home_team !== "" && game.teaminfo.away_team !== ""){
                     return (
-                      <ul key={game.teaminfo.id} className="matchup"> 
+                      <ul key={key} className="matchup"> 
                         <li className={`team team-top ${homeOpacity}`}>
                           
                         <span className="flag">
@@ -173,7 +170,7 @@ function Brackets() {
                     );
                   } else {
                     return (
-                      <ul className="matchup">
+                      <ul key={key} className="matchup">
                         <li className="team team-top">
                           {home}
                           <span className="score">{game.teaminfo.home_final}</span>
@@ -195,7 +192,7 @@ function Brackets() {
                   <br />
                   <span className="date">"DATE"</span>
                 </div>
-                {gamesQuarter.map((game) => {
+                {gamesQuarter.map((game, key2) => {
                   let homeOpacity = ""
                   let awayOpacity = ""
                   if(game.winner === game.home_team){
@@ -213,7 +210,7 @@ function Brackets() {
                   
                   if (game.home_team !== "" && game.away_team !== "") {
                     return (
-                      <ul key={game.id} className="matchup">
+                      <ul key={key2} className="matchup">
                         <li className={`team team-top ${homeOpacity}`}>
                           <span className="flag">
                             <HomeFlag width="40px" />
@@ -234,7 +231,7 @@ function Brackets() {
                     );
                   } else {
                     return (
-                      <ul className="matchup">
+                      <ul key={key2} className="matchup">
                         <li className={`team team-top ${homeOpacity}`}>
                           {home_pre}
                           <span className="score">{game.home_final}</span>
@@ -256,7 +253,7 @@ function Brackets() {
                   <br />
                   <span className="date">"DATE"</span>
                 </div>
-                {gamesSemi.map((game) => {
+                {gamesSemi.map((game, key3) => {
                   let homeOpacity = ""
                   let awayOpacity = ""
                   if(game.winner === game.home_team){
@@ -274,7 +271,7 @@ function Brackets() {
 
                   if (game.home_team !== "" && game.away_team !== "") {
                     return (
-                      <ul key={game.id} className="matchup">
+                      <ul key={key3} className="matchup">
                         <li className={`team team-top ${homeOpacity}`}>
                           <span className="flag">
                             <HomeFlag width="40px" />
@@ -295,7 +292,7 @@ function Brackets() {
                     );
                   } else {
                     return (
-                      <ul className="matchup">
+                      <ul key={key3} className="matchup">
                         <li className="team team-top">
                           {home_pre}
                           <span className="score">{game.home_final}</span>
@@ -317,14 +314,14 @@ function Brackets() {
                 <i className="fa fa-trophy"></i>
                 <div className="round-details">
                   Final <br />
-                  {gamesFinal.map((game) => {
+                  {gamesFinal.map((game, key4) => {
                     
                     const winner = game.winner;
                     const WinnerFlag = Flags[getTeamFlag(winner)];
                     if (game.winner !== "") {
                       return (
-                        <>
-                          <ul className="matchup">
+                        
+                          <ul key={key4} className="matchup">
                             <li className="team team-top">
                               <span className="flag">
                               <WinnerFlag width="40px" />
@@ -332,18 +329,18 @@ function Brackets() {
                               Winner : {winner}
                             </li>
                           </ul>
-                        </>
+                        
                       );
                     } else {
                       return (
-                        <>
+                        <div key={key4}>
                           <span className="date"></span>
-                        </>
+                        </div>
                       );
                     }
                   })}
                 </div>
-                {gamesFinal.map((game) => {
+                {gamesFinal.map((game, key5) => {
                   let homeOpacity = ""
                   let awayOpacity = ""
                   if(game.winner === game.home_team){
@@ -361,7 +358,7 @@ function Brackets() {
 
                   if (game.home_team !== "" && game.away_team !== "") {
                     return (
-                      <ul key={game.id} className="matchup">
+                      <ul key={key5} className="matchup">
                         <li className={`team team-top ${homeOpacity}`}>
                           <span className="flag">
                             <HomeFlag width="40px" />
@@ -382,7 +379,7 @@ function Brackets() {
                     );
                   } else {
                     return (
-                      <ul className="matchup">
+                      <ul key={key5} className="matchup">
                         <li className="team team-top">
                           {home_pre}
                           <span className="score">{game.home_final}</span>
@@ -406,11 +403,10 @@ function Brackets() {
             <a className="share-icon" href="https://twitter.com/_joebeason">
               <i className="fa fa-twitter"></i>
             </a>
-            {/* <a className="share-icon" href="#"><i className="fa fa-facebook"></i></a> */}
-            {/* <a className="share-icon" href="#"><i className="fa fa-envelope"></i></a> */}
+            
           </div>
         </section>
-      </body>
+      </div>
     </>
   );
 }

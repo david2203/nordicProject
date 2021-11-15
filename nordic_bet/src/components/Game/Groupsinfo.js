@@ -52,7 +52,7 @@ function Groupsinfo() {
 
   return (
     <div>
-      {chunked.map((groups, index) => {
+      {chunked.map((groups, key) => {
         groups.sort(function (a, b) {
           returnValue = b.group_score - a.group_score;
           if (b.group_score === a.group_score) {
@@ -77,10 +77,10 @@ function Groupsinfo() {
         });
 
         return (
-          <>
-            <table className="table table-hover w-50 border bg-light mt-3 mx-auto  ">
+          <div key={key}>
+            <table  className="table table-hover w-50 border bg-light mt-3 mx-auto  ">
               <thead>
-                <tr key={index}>
+                <tr >
                   <th scope="col"></th>
                   <th scope="col"> {groups[0].group} </th>
                   <th scope="col">Score</th>
@@ -89,10 +89,10 @@ function Groupsinfo() {
                 </tr>
               </thead>
               <tbody>
-                {groups.map((country) => {
+                {groups.map((country, key2) => {
+                  
                   const CountryFlag = Flags[getTeamFlag(country.name)];
-                  console.log(groups[1])
-                  console.log(country)
+                  
                   let color = 'bg-danger'
                   let textcolor = 'Diskvalificerad'
                   if (country.name === groups[0].name|| country.name === groups[1].name) {
@@ -105,7 +105,7 @@ function Groupsinfo() {
                   }
 
                   return (
-                    <tr key={country.id}>
+                    <tr key={key2}>
                       <td>
                         <CountryFlag width="40px" />
                       </td>
@@ -121,7 +121,7 @@ function Groupsinfo() {
             </table>
             <br />
             <br />
-          </>
+          </div>
         );
       })}
     </div>

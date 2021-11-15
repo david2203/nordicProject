@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Brackets.css";
 import server from "../Global/config";
 import axios from "axios";
-import { border } from "@mui/system";
+
 import { Parallax } from "react-parallax";
 
 function Update() {

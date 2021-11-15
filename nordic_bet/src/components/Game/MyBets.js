@@ -63,17 +63,16 @@ function MyBets() {
     
     <div className="flexcontainer d-flex justify-content-between"> 
     <div className="activeBets ml-0 " style={{width:"100vw"}}>
-    <h2 className="header bg-light w-50 border mx-auto mt-3" style={{opacity: '70%'}}>Du har inga aktiva spel <p><br/><Link to="/Games" className="text-decoration-none text-black">Gå till spel här</Link></p> </h2>
+    <h2 className="header bg-light w-50 border mx-auto mt-3" style={{opacity: '70%'}}>Du har inga aktiva spel <div><br/><Link to="/Games" className="text-decoration-none text-black">Gå till spel här</Link></div> </h2>
     <div className="w-100">
-   {activeBets.map((bet) => {
+   {activeBets.map((bet,key) => {
    
      return (
-       <>
+       <div key={key}>
        <br/>
        
        
        <Bet 
-         key={bet.id}
          id={bet.id}
          type={bet.type}
          grp={bet.grp}
@@ -87,7 +86,7 @@ function MyBets() {
      
       
        <br/>
-       </>
+       </div>
      )
 
    })}
@@ -113,15 +112,15 @@ function MyBets() {
        <div className="activeBets ml-0 " style={{width:"100vw"}}>
        <h2 className="header bg-light w-50 border mx-auto mt-3"> Här är dina aktiva bets: </h2>
        <div className="w-100">
-      {activeBets.map((bet) => {
+      {activeBets.map((bet, key2) => {
       
         return (
-          <>
+          <div  key={key2}>
           <br/>
           
           
           <Bet 
-            key={bet.id}
+
             id={bet.id}
             type={bet.type}
             grp={bet.grp}
@@ -135,7 +134,7 @@ function MyBets() {
         
          
           <br/>
-          </>
+          </div>
         )
  
       })}
@@ -157,14 +156,14 @@ function MyBets() {
       </div>
       <div className="finishedBets" style={{width:"100vw"}}>
       <h2 className="header bg-light w-50 border mx-auto mt-3"> Här är dina slutförda bets: </h2>
-      {finishedBets.map((bet) => {
+      {finishedBets.map((bet, key3) => {
         return (
-          <>
+          <div key={key3}>
           <br/>
           
           
           <Bet 
-            key={bet.id}
+            
             id={bet.id}
             type={bet.type}
             grp={bet.grp}
@@ -178,7 +177,7 @@ function MyBets() {
         
          
           <br/>
-          </>
+          </div>
         )
        
         

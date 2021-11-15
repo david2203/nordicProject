@@ -42,10 +42,10 @@ function Games() {
           <div style={{ height: "auto" }} className="min-vh-100">
           <h2 className="header bg-light w-25 border mx-auto mt-3"> Kommande spel </h2>
             {games.length !== 0 ? (
-              games.map((game) => {
+              games.map((game, key) => {
                 return (
                   <Game
-                    key={game.eid_xml}
+                    key={key}
                     event_id={game.eid_xml}
                     eventname={game.eventname}
                     grp={game.grp}
