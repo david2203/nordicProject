@@ -1,27 +1,50 @@
 import React from "react";
+import style from "../style.css";
+import { Link } from "react-router-dom";
 
 function Landingpage() {
   return (
-      <div className=" bg-dark">
-    <div className="m-3 bg-light">
-      <h1>
-        WELCOME TO NORDIC BET - <br/> YOUR FANTASY ONLINE GAMING BRAND{" "}
-      </h1><br/>
-      <p>
-      With more than 50 years in the business, we know what you want –
-      entertainment. That’s why we have created this project:{" "}
-      <strong>EURO 2016 Reimagined!</strong><br/>
-      We know that a simple bet could turn any game into a wave of emotion. For
-      that reason, we bring you this event where you can bet on the outcomes of
-      the games of 2016. Place a bet before the game starts, or try a Live Bet
-      while you’re watching. Check out the Games page as we update the upcomming
-      games daily.
-      </p>
-    </div>
-    <div className="m-3 bg-light">
-      text
-    </div>
-    </div>
+    <>
+    <body className="bodyPage">
+      <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+          <div class="container">
+            <div class="masthead clearfix">
+              <div class="container inner">
+                <h3 class="masthead-brand">Cover</h3>
+              </div>
+            </div>
+
+            <div class="inner cover">
+              <h1 class="cover-heading">
+                Välkommen till Nordic Bet <br /> Svergies mest omnämnda
+                spelbolag{" "}
+              </h1>
+              <br/>
+              <p class="lead">
+                Med mer än 50 år i branschen vet vi vad du vill ha –
+                underhållning. Det är därför vi har skapat detta projekt
+                <br />
+                <strong>EURO 2016 omarbetad!</strong>
+                <br />
+                <br/>
+                Vi vet att en enkel satsning kan förvandla vilket spel som helst
+                till en våg av känslor. Därför ger vi dig detta evenemang där du
+                kan satsa på resultatet av spelen 2016. Lägg ett spel innan
+                spelet startar, eller prova ett livespel medan du tittar. Kolla
+                in spelsidan när vi uppdaterar det kommande spel dagligen.
+              </p>
+              <p class="lead">
+                <Link to="/Games" class="btn btn-lg btn-default">
+                  Kolla runt om kommande spel
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+    </>
   );
 }
 

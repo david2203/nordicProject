@@ -98,11 +98,14 @@ function Groupsinfo() {
                   console.log(groups[1])
                   console.log(country)
                   let color = 'bg-danger'
+                  let textcolor = 'Diskvalificerad'
                   if (country.name === groups[0].name|| country.name === groups[1].name) {
                     color = 'bg-success'
+                    textcolor = 'Kvalificerad'
                   }
                   else if(country.name === groups[2].name) {
                     color = 'bg-warning'
+                    textcolor = 'Möjligen Kvalificerad'
                   }
                   
                   return (
@@ -113,7 +116,7 @@ function Groupsinfo() {
                       <td> {country.name}</td>
                       <td>{country.group_score} </td>
                       <td>{country.group_goals} </td>
-                      <td className={` text-light ${color}`}> </td>
+                      <td className={` text-dark ${color}`}>{textcolor}</td>
 
                     </tr>
                   );

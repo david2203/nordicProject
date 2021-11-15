@@ -59,3 +59,8 @@ export const Heading = styled.p`
   margin-bottom: 40px;
   font-weight: bold;
 `;
+
+export const Footer = styled.footer`
+  position: sticky;
+  top: 0;
+`;

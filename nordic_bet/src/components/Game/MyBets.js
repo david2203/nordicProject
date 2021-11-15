@@ -3,6 +3,7 @@ import axios from "axios";
 import server from "../Global/config";
 import Bet from "./Bet";
 import "./Bet.css";
+import { Link } from "react-router-dom";
 
 import { Parallax } from "react-parallax";
 
@@ -49,12 +50,59 @@ function MyBets() {
   function showLessFinished() {
     setFinishedLoadPage(3);
   }
-  
 
   const image1 =
   "https://images.unsplash.com/photo-1561034645-e6f28dfddd2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80";
+
+  if(activeBets.length === 0) {
+    return(
+      <Parallax bgImage={image1} strength={500}>
+      <div className="min-vh-100">
+
+        
+    
+    <div className="flexcontainer d-flex justify-content-between"> 
+    <div className="activeBets ml-0 " style={{width:"100vw"}}>
+    <h2 className="header bg-light w-50 border mx-auto mt-3" style={{opacity: '70%'}}>Du har inga aktiva spel <p><br/><Link to="/Games" className="text-decoration-none text-black">Gå till spel här</Link></p> </h2>
+    <div className="w-100">
+   {activeBets.map((bet) => {
+   
+     return (
+       <>
+       <br/>
+       
+       
+       <Bet 
+         key={bet.id}
+         id={bet.id}
+         type={bet.type}
+         grp={bet.grp}
+         homeTeamGoals={bet.homeTeamGoals}
+         awayTeamGoals={bet.awayTeamGoals}
+         winner={bet.winner}
+         euro_event={bet.euro_event}
+         status={bet.Active}
+         points_recieved={bet.recieved_points}
+       />
+     
+      
+       <br/>
+       </>
+     )
+
+   })}
+   </div>
+   </div>
+   </div>
+   </div>
+   </Parallax>
+    )
+  }
+
   return (
     <>  
+
+    
         
        <Parallax bgImage={image1} strength={500}>
          <div className="min-vh-100">

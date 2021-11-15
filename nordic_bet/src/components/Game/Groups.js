@@ -97,6 +97,7 @@ function Groups() {
   }
 
   return (
+    <>
     <div>
       {chunked.map((games, index) => {
         console.log(index)
@@ -147,6 +148,7 @@ function Groups() {
         );
       })}
     </div>
+    </>
   );
 }
 

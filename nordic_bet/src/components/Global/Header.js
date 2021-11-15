@@ -88,12 +88,13 @@ function Header() {
         bg="dark"
         variant="dark"
         sticky="top"
-        className="py-4 "
+        className="py-4"
+        
       >
         <Container fluid>
-          <Navbar.Brand href="/Landingpage" style={{marginLeft:"5%"}} >Nordic Bet </Navbar.Brand>
+          <Navbar.Brand href="/Landingpage"  >Nordic Bet </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse id="responsive-navbar-nav" >
             {token ? (
               <>
                 <Nav className="me-auto ">
@@ -102,7 +103,7 @@ function Header() {
                       to="/MyBets"
                       className="active text-light"
                       onClick={activeMyBets}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                       
                     >
                       Mina bets
@@ -112,7 +113,7 @@ function Header() {
                       to="/MyBets"
                       className="text-decoration-none text-light "
                       onClick={activeMyBets}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       Mina bets
                     </Link>
@@ -122,7 +123,7 @@ function Header() {
                       to="/Euro"
                       className="active text-light"
                       onClick={activeMyBrackets}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       Brackets
                     </Link>
@@ -131,7 +132,7 @@ function Header() {
                       to="/Euro"
                       className="text-decoration-none  pl-3 ml-3 text-light"
                       onClick={activeMyBrackets}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       Brackets
                     </Link>
@@ -141,7 +142,7 @@ function Header() {
                       to="/Games"
                       className="active text-light"
                       onClick={activeMyGames}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       Spel
                     </Link>
@@ -150,7 +151,7 @@ function Header() {
                       to="/Games"
                       className="text-decoration-none pl-3 ml-3 text-light"
                       onClick={activeMyGames}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       Spel
                     </Link>
@@ -160,7 +161,7 @@ function Header() {
                       to="/Scoreboard"
                       className="active text-light"
                       onClick={activeMyScore}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       Top-lista
                     </Link>
@@ -169,7 +170,7 @@ function Header() {
                       to="/Scoreboard"
                       className="text-decoration-none pl-3 ml-3 text-light"
                       onClick={activeMyScore}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       Top-lista
                     </Link>
@@ -185,13 +186,14 @@ function Header() {
                     <NavDropdown
                       title="Adminpanel"
                       id="collasible-nav-dropdown"
+                      style={{width: '100px', marginTop: '0.5vh'}}
                     >
                       {activeAdmin ? (
                         <Link
                           to="/Admin"
                           className="active text-dark"
                           onClick={activeMyAdmin}
-                          style={{marginLeft:"5%"}}
+                          style={{marginLeft: '5%'}}
                         >
                           Rätta spel
                         </Link>
@@ -200,7 +202,7 @@ function Header() {
                           to="/Admin"
                           className="text-decoration-none pl-3 ml-3 text-dark"
                           onClick={activeMyAdmin}
-                          style={{marginLeft:"5%"}}
+                          style={{marginLeft: '5%'}}
                         >
                           Rätta spel
                         </Link>
@@ -211,7 +213,7 @@ function Header() {
                           to="/Update"
                           className="active text-dark"
                           onClick={activeMyUpdate}
-                          style={{marginLeft:"5%"}}
+                          style={{marginLeft: '5%'}}
                         >
                           Updatera elimination
                         </Link>
@@ -220,7 +222,7 @@ function Header() {
                           to="/Update"
                           className="text-decoration-none pl-3 ml-3 text-dark"
                           onClick={activeMyUpdate}
-                          style={{marginLeft:"5%"}}
+                          style={{marginLeft: '5%'}}
                         >
                           Updatera elimination
                         </Link>
@@ -262,7 +264,7 @@ function Header() {
                       to="/Profile"
                       className="active text-light"
                       onClick={activeMyProfile}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       {" "}
                       Profil{" "}
@@ -272,7 +274,7 @@ function Header() {
                       to="/Profile"
                       className="text-decoration-none pl-3 ml-3 text-light"
                       onClick={activeMyProfile}
-                      style={{marginLeft:"5%"}}
+                      style={{width: '100px', marginTop: '1vh'}}
                     >
                       {" "}
                       Profil{" "}
@@ -283,6 +285,7 @@ function Header() {
                     eventKey={2}
                     className="text-decoration-none pl-3 ml-3 text-white"
                     onClick={signOut}
+                    style={{width: '100px', marginTop: '1vh'}}
                   >
                     Logga ut
                   </Link>

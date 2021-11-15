@@ -147,7 +147,7 @@ function Game({
           className="bg-secondary opacity-100"
           container
           spacing={6}
-          sx={{ maxWidth: "100%", mx: "38%", width: ["100%", "50%", "25%"] }}
+          sx={{ maxWidth: "100%", mx: "auto", width: ["50%", "50%", "25%"] }}
         >
           <CardContent></CardContent>
 
@@ -157,8 +157,7 @@ function Game({
             sx={{ fontSize: 20 }}
           >
             <strong>{grp} </strong><br/>
-            <span> </span>
-            {odds_1}
+
             <span> </span>
             <HomeFlag width="40px" title="HomeFlag" className="..." />
            
@@ -166,8 +165,6 @@ function Game({
             {eventname}
             <span> </span>
             <AwayFlag width="40px" title="AwayFlag" className="..." />
-            <span> </span>
-            {odds_2}
           </Typography>
 
           <CardActions
@@ -190,7 +187,7 @@ function Game({
                   <div>
                     <span>Choose Type</span>
                     <br />
-                    <FormControl sx={{ m: 1, minWidth: 200 }}>
+                    <FormControl sx={{ m: 1, minWidth: 100 }}>
                       <Select
                         name="typeOfBet"
                         id="type"
@@ -272,9 +269,12 @@ function Game({
                             }}
                           >
                             <MenuItem value=""></MenuItem>
+                            {formValues.homeTeamGoals>formValues.awayTeamGoals ?
                             <MenuItem value={home_team}> {home_team} </MenuItem>
+                            : formValues.awayTeamGoals>formValues.homeTeamGoals ? 
+                            <MenuItem value={away_team}> {away_team} </MenuItem> :
                             <MenuItem value="X">Draw</MenuItem>
-                            <MenuItem value={away_team}> {away_team} </MenuItem>
+                            }
                           </Select>
                           <br />
                         </>

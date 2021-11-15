@@ -54,13 +54,14 @@ function Games() {
                 />
               );
             })}
+            <br/>
             {/* pagination function */}
             {loadPage <= games.length ? (
-              <button onClick={loadMore} className="mt-5 mb-5">
+              <button onClick={loadMore} className="btn btn-secondary">
                 Load more
               </button>
             ) : (
-              <button onClick={showLess} className="mt-5 mb-5">
+              <button onClick={showLess} className="btn btn-secondary">
                 Show less
               </button>
             )}
