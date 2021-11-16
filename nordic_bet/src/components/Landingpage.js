@@ -23,7 +23,7 @@ function Landingpage() {
               <br/>
               <p className="lead">
                 Med mer än 50 år i branschen vet vi vad du vill ha –
-                underhållning. Det är därför vi har skapat detta projekt
+                underhållning.<br/> Det är därför vi har skapat detta projekt
                 <br />
                 <strong>EURO 2016 omarbetad!</strong>
                 <br />

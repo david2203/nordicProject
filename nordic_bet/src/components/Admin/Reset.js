@@ -216,7 +216,6 @@ function Reset() {
         .then(setMsg)
         function setMsg() {
           setMessage(msg)
-          console.log(msg)
         }
         
     }

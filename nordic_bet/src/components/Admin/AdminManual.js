@@ -32,20 +32,31 @@ function AdminManual() {
                 <u>Admin Manual </u>
               </h2>
               <p className="m-5">
-                <strong>1:</strong> När eventet startar/ eller startas om så kan
-                du som användare lägga bets på alla gruppspel. Du har då
-                möjlighet att välja att betta på Resultat, Mål eller Vinnare
+                <strong>1. Rättning:</strong> Som Admin har du många
+                rättigheter, en av dessa viktigaste rättigheter är att rätta
+                spelen. För att rätta spelen så att gruppfaserna står som
+                "Kvalificerade eller Diskvalificerade" Så behöver du först.
+                Rätta alla spel via "Adminpanel" -&gt; Rätta spel -&gt; Updatera
+                ALLA spel. Efter det så går du via Adminpanelen -&gt; Uppdatera
+                kval och klickar på "Uppdatera från gruppspel till eliminering"
+                Sedan är du klar och kan kika in statusen på "Brackets" -&gt;
+                "Grupper"
               </p>
               <p className="m-5">
-                <strong>2:</strong> Sedan inväntas rättning av spel och
-                uppdatering av Åttondelsfinal (Just nu gör admin detta manuellt
-                när spelets deadline har löpt ut). Du får poäng när spelet du
-                valt att betta på är rättat
+                <strong>2. Nollstäl event:</strong> Att nollställa eventet när
+                något snett skulle ske, så finns möjligheten där. Den finns
+                under fliken Adminpanel -&gt; "Nollställ Event." När du klickar på
+                den röda knappen så görs en laddning och hela EM eventet
+                nollställs.
               </p>
               <p className="m-5">
-                <strong>3:</strong> Nu är det dags att lägga bets på spelen för
-                Åttondelsfinal. Rättning och uppdatering sker successivt när
-                spelen har löpt ut till skildnad från grupp fasen
+                <strong>3. Uppdatera kval:</strong> Uppdatera kval. Det finns
+                ytterliga en punkt att klicka sig igenom via Adminpanelen. Det
+                är den självaste "Uppdatera kval" Där inne kommer du att kunna
+                Uppdatera status och eliminationen beroende på vilka spel du har
+                rättat. Har du inte rättat något spel så kommer inget att
+                uppdateras. Det finns Alla möjliga uppdateraringar från
+                gruppspel till final att uppdatera.
               </p>
               <p className="m-5">
                 <strong>4:</strong> Du kan följa spelens uppställning via länken

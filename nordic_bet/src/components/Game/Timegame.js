@@ -10,7 +10,7 @@ function showConsole() {
     counter +=1
     console.log(counter) 
     if(counter === 1) {
-        console.log("hej")
+        console.log("")
     }
 }
 var counter = 0

@@ -222,33 +222,33 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
             if (bet.type === "BetOnResult") {
               if (resultHomeGoals === bettedHomeGoals) {
                 score = score + 1;
-                console.log("Right home goals");
+
               }
               if (resultAwayGoals === bettedAwayGoals) {
                 score = score + 1;
-                console.log("Right away goals");
+
               }
               if (resultWinner === bettedWinner) {
                 score = score + 3;
-                console.log("Right winner");
+
               }
             } else if (bet.type === "BetOnGoals") {
               if (resultHomeGoals === bettedHomeGoals) {
                 score = score + 1;
   
-                console.log("Right home goals");
+
               }
               if (resultAwayGoals === bettedAwayGoals) {
                 score = score + 1;
   
-                console.log("Right away goals");
+
                 return;
               }
             } else if (bet.type === "BetOnWinner") {
               if (resultWinner === bettedWinner) {
                 score = score + 3;
   
-                console.log("Right winner");
+
               }
             }
           } else {
@@ -296,7 +296,7 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
         recieved_points:scoreToAdd
       });
     };
-    updateBet().then(console.log("Active set to false korv"));
+    updateBet().then(console.log(""));
   }
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];

@@ -1,8 +1,8 @@
-import React, {  useRef } from "react";
+import React from "react";
 import emailjs from "emailjs-com";
 
 
-function Kontakt() {
+function Contact() {
   
   function sendMessage(e) {
     e.preventDefault();
@@ -61,4 +61,4 @@ function Kontakt() {
   );
 }
 
-export default Kontakt;
+export default Contact;

@@ -52,11 +52,11 @@ function MyBets() {
   }
 
   const image1 =
-  "https://images.unsplash.com/photo-1561034645-e6f28dfddd2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80";
+  "https://images.unsplash.com/photo-1579156412375-310af82390a8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80";
 
   if(activeBets.length === 0 && finishedBets.length === 0) {
     return(
-      <Parallax key="" bgImage={image1} strength={500}>
+      <Parallax key="" bgImage={image1} strength={100}>
       <div className="min-vh-100">
 
         
