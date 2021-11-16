@@ -185,7 +185,7 @@ function Header() {
                       onClick={activeMyScore}
                       style={{width: '100px', marginTop: '1vh'}}
                     >
-                      Top-lista
+                      Topplista
                     </Link>
                   ) : (
                     <Link

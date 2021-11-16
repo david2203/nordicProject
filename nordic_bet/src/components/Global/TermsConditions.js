@@ -12,7 +12,7 @@ function TermsConditions() {
           textAlign: "left",
         }}
       >
-        <li>
+        <p>
           1. Inledning
           <br />
           2. Det grundläggande
@@ -71,9 +71,9 @@ function TermsConditions() {
           <br />
           30. Bilaga
           <br />
-        </li>
+        </p>
         <div className="text-light w-50 pt-5">
-          <h4>1. Inledning</h4>
+          <h4><strong>1. Inledning</strong></h4>
           Välkommen till Nordic Bet. Vi vill att du ska ha roligt den tiden du
           är här. Eftersom det här är en spelwebbplats finns det ett antal lagar
           och föreskrifter som reglerar våra aktiviteter. Vi förklarar reglerna
@@ -88,7 +88,7 @@ function TermsConditions() {
           dem, kan du kontakta oss.
         </div>
         <div className="text-light w-50 pt-5">
-          <h4>2. Det grundläggande</h4>
+          <h4><strong>2. Det grundläggande</strong></h4>
           Reglerna är ett bindande avtal mellan oss, och genom att klicka i att
           du godkänt Reglerna när du skapar ditt konto och/eller använder
           Webbplatsen och/eller accepterar en Bonus eller ett pris så godkänner
@@ -102,13 +102,13 @@ function TermsConditions() {
           nya Reglerna.
         </div>
         <div className="text-light w-50 pt-5">
-          <h4>3. Definitioner</h4>
+          <h4><strong>3. Definitioner</strong></h4>
           Du ser följande termer som används i Reglerna: "Bonus" ska innefatta
           alla kampanjerbjudanden som medför en konkret belöning, inklusive men
           inte begränsat till: välkomsterbjudanden, omladdningsbonusar,
           insättningsbonusar, fria spins, fria insatser, och riskfria insatser.
-          <br/>
-          <br/>
+          <br />
+          <br />
           För svenska invånare räknas en "Bonus" som alla ekonomiska incitament
           som beviljas Dig vid registreringen hos Betsson.
           <br />
@@ -129,7 +129,7 @@ function TermsConditions() {
           'nordicbet.com'.
         </div>
         <div className="text-light w-50 pt-5">
-          <h4>4. Licenser</h4>
+          <h4><strong>4. Licenser</strong></h4>
           Eftersom vi tillhandahåller onlinespel måste vi, enligt lag, meddela
           följande till dig:
           <br />
@@ -151,6 +151,21 @@ function TermsConditions() {
           4.2 För svenska invånare är www.nordicbet.com/sv en webbplats som är
           licensierad och reglerad av Spelinspektionen/Swedish Gambling
           Authority (hädanefter kallad "SGA") med ärendenummer 18Li7378.
+        </div>
+        <div className="text-light w-50 pt-5 pb-5">
+          <h4>
+            <strong>5. Vem får spela</strong>
+          </h4>
+          För att spela Spelen på webbplatsen måste du
+          <br />
+          <br />
+          vara över 18 år eller över den lagstadgade åldern för att få spela i
+          det land som du spelar ifrån vara en faktisk person.
+          <br />
+          <br /> Du kan inte vara en del av ett företag eller en juridisk person
+          spelar Spelen för egen räkning på ett icke-professionellt sätt, och
+          inte för någon annans räkning ha laglig rätt att spela Spelen på
+          webbplatsen
         </div>
       </div>
     </div>

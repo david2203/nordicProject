@@ -31,7 +31,7 @@ function Game({
   deadline
 }) {
   const instance = axios.create({ baseURL: server });
-  let playingTeams = eventname.split("-");
+  const playingTeams = eventname.split("-");
   let home_team = playingTeams[0];
   let away_team = playingTeams[1];
   if(home !== "" && home !== null){
@@ -40,7 +40,7 @@ function Game({
   if (away !== "" && away !== null){
     away_team = away
   }
-  
+  console.log(eventname)
   const [gameId, setGameId] = useState();
   const user_id = localStorage.getItem("user_id");
   
@@ -164,7 +164,6 @@ function Game({
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
 
-  
   return (
     <>
       <div className="mb-3">
@@ -223,7 +222,7 @@ function Game({
               <form onSubmit={handleOnSubmit}>
                 <div>
                   <div>
-                    <span>Choose Type</span>
+                    <span>Typ av spel</span>
                     <br />
                     <FormControl sx={{ m: 1, minWidth: 100 }}>
                       <Select
@@ -236,14 +235,14 @@ function Game({
                           minHeight: 5,
                         }}
                       >
-                        <MenuItem value="BetOnResult"> Bet on result </MenuItem>
-                        <MenuItem value="BetOnGoals"> Bet on goals </MenuItem>
-                        <MenuItem value="BetOnWinner"> Bet on winner </MenuItem>
+                        <MenuItem value="BetOnResult"> Spela på resultat </MenuItem>
+                        <MenuItem value="BetOnGoals"> Spela på mål </MenuItem>
+                        <MenuItem value="BetOnWinner"> Spela på 1X2 </MenuItem>
                       </Select>
                       <br />
                       {formValues.typeOfBet === "BetOnResult" ? (
                         <>
-                          <span>{home_team} goals:</span>
+                          <span>{home_team} Antal Mål</span>
                           <Select
                             required
                             name="homeTeamGoals"
@@ -268,7 +267,7 @@ function Game({
                             <MenuItem value="8"> 8 </MenuItem>
                           </Select>
                           <br />
-                          <span>{away_team} goals:</span>
+                          <span>{away_team} Antal Mål</span>
                           <Select
                             required
                             name="awayTeamGoals"
@@ -293,7 +292,7 @@ function Game({
                             <MenuItem value="8"> 8 </MenuItem>
                           </Select>
                           <br />
-                          <span>Winner:</span>
+                          <span>Vinnare</span>
                           <Select
                             required
                             name="winner"
@@ -311,7 +310,7 @@ function Game({
                             <MenuItem value={home_team}> {home_team} </MenuItem>
                             : formValues.awayTeamGoals>formValues.homeTeamGoals ? 
                             <MenuItem value={away_team}> {away_team} </MenuItem> :
-                            <MenuItem value="X">Draw</MenuItem>
+                            <MenuItem value="X">X</MenuItem>
                             }
                           </Select>
                           <br />
@@ -321,7 +320,7 @@ function Game({
                       )}
                       {formValues.typeOfBet === "BetOnGoals" ? (
                         <>
-                          <span>{home_team} goals:</span>
+                          <span>{home_team} Antal Mål</span>
                           <Select
                             required
                             name="homeTeamGoals"
@@ -347,7 +346,7 @@ function Game({
                           </Select>
                           <br />
 
-                          <span>{away_team} goals:</span>
+                          <span>{away_team} Antal Mål</span>
                           <Select
                             required
                             name="awayTeamGoals"
@@ -378,7 +377,7 @@ function Game({
                       )}
                       {formValues.typeOfBet === "BetOnWinner" ? (
                         <>
-                          <span>Winner:</span>
+                          <span>Vinnare</span>
                           <Select
                             required
                             name="winner"
@@ -393,7 +392,7 @@ function Game({
                           >
                             <MenuItem value=""></MenuItem>
                             <MenuItem value={home_team}> {home_team} </MenuItem>
-                            <MenuItem value="X">Draw</MenuItem>
+                            <MenuItem value="X">X</MenuItem>
                             <MenuItem value={away_team}> {away_team} </MenuItem>
                           </Select>
                           <br />
@@ -423,7 +422,7 @@ function Game({
                   </div>
 
                   <Button variant="text" type="submit">
-                    Submit bet
+                    Skicka In Spel
                   </Button>
                   <br />
                 </div>
