@@ -54,7 +54,7 @@ function Groupsinfo() {
     }
     for(let i = 0; i< 6; i += 1) {
       chunkedGroups.push(chunkedGames[i])
-    }
+    } 
   }
   let returnValue;
   console.log(chunkedGroups)
