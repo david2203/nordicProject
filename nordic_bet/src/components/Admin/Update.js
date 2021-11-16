@@ -384,7 +384,6 @@ function Update() {
           await instance.put(`euro_events/${resp.id32}`, {
             away_team: resp.sendCountry,
             status:"Not Started"
-
           });
         };
         const fetchGame3 = async () => {
