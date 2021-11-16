@@ -38,7 +38,7 @@ function Games() {
   return (
     <>
       <div>
-        <Parallax key="" bgImage={image1} strength={0}>
+        <Parallax key="" bgImage={image1} strength={500}>
           <div style={{ height: "auto" }} className="min-vh-100">
           <h2 className="header bg-light w-25 border mx-auto mt-3"> Kommande spel </h2>
             {games.length !== 0 ? (
