@@ -8,10 +8,10 @@ import { Parallax } from "react-parallax";
 function Update() {
   const chunkedGames = [];
   const chunkedCountries = [];
-  const [elimMessage, setElimMessage] = useState("")
-  const [quarterMessage, setQuarterMessage] = useState("")
-  const [semiMessage, setSemiMessage] = useState("")
-  const [finalMessage, setFinalMessage] = useState("")
+  const [elimMessage, setElimMessage] = useState("Uppdatera från gruppspel till eliminering")
+  const [quarterMessage, setQuarterMessage] = useState("Uppdatera från Åttondelsfinal till Kvartsfinal")
+  const [semiMessage, setSemiMessage] = useState("Uppdatera från Kvartsfinal till Semifinal")
+  const [finalMessage, setFinalMessage] = useState("Uppdatera från Semifinal till Final")
 
   const useGetGames = () => {
     const [gamesArray, setGamesArray] = useState([]);
@@ -837,38 +837,23 @@ function Update() {
         <div style={{ height: "auto" }} className="min-vh-100">
           <div style={{ paddingTop: "15%" }}>
             <button className="btn btn-warning" onClick={uppdateElim}>
-              {" "}
-              Uppdatera från gruppspel till eliminering{" "}
+              {elimMessage}
             </button>{" "}
-            <br/> <div className="bg-light w-25 mt-3 mx-auto">{elimMessage}</div>
-            
             <br />
             <br />
             <button className="btn btn-warning" onClick={updateElim16}>
-              {" "}
-              Uppdatera från runda 16 till kvartsfinal
+              {quarterMessage}
             </button>
-            <br/> <div className="bg-light w-25 mt-3 mx-auto">{quarterMessage}</div>
-
             <br />
             <br />
             <button className="btn btn-warning" onClick={updateQuarter}>
-              {" "}
-              Uppdatera från kvartsfinal till semifinal
+              {semiMessage}
             </button>
-            <br/> <div className="bg-light w-25 mt-3 mx-auto">{semiMessage}</div>
-
-            
-
             <br />
             <br />
-            <button className="btn btn-warning" onClick={updateSemi}>
-              {" "}
-              Uppdatera från semifinal till final
+            <button className="btn btn-warning" onClick={updateSemi}> 
+              {finalMessage}
             </button>
-            <br/> <div className="bg-light w-25 mt-3 mx-auto">{finalMessage}</div>
-
-
           </div>
         </div>
       </div>
