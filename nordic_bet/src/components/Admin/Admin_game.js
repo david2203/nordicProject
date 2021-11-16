@@ -333,7 +333,7 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
 
   return (
     <>
-      <div className="game_info mt-3 mb-3 bg-secondary w-50 center" style={{ backgroundColor: 'rgba(52, 52, 52, 0.8)', border: '2px solid black', color: 'white', padding: '35px',}}>
+      <div className="game_info mt-3 mb-3 bg-dark w-50 center" style={{ backgroundColor: 'rgba(52, 52, 52, 0.8)', border: '2px solid black', color: 'white', padding: '35px',}}>
 
 
         <HomeFlag width="60px" title="United States" className="..."/>

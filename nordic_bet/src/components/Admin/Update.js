@@ -8,6 +8,10 @@ import { Parallax } from "react-parallax";
 function Update() {
   const chunkedGames = [];
   const chunkedCountries = [];
+  const [elimMessage, setElimMessage] = useState("Uppdatera från gruppspel till eliminering")
+  const [quarterMessage, setQuarterMessage] = useState("Uppdatera från Åttondelsfinal till Kvartsfinal")
+  const [semiMessage, setSemiMessage] = useState("Uppdatera från Kvartsfinal till Semifinal")
+  const [finalMessage, setFinalMessage] = useState("Uppdatera från Semifinal till Final")
 
   const useGetGames = () => {
     const [gamesArray, setGamesArray] = useState([]);
@@ -121,6 +125,11 @@ function Update() {
   } = useGetGames();
   function uppdateElim() {
     if (!loading) {
+      
+    setElimMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setElimMessage("Uppdateringen har slutförts")
+  }, 8000);
       // All data should be available
       const finishedArray = [];
       const thirdPlaceArray = [];
@@ -589,7 +598,9 @@ function Update() {
             console.log(err);
           }
         };
-        fetchGame4().then((resp) => putFourth(resp));
+       
+        fetchGame4().then((resp) => putFourth(resp))
+        
         const putFourth = async (resp) => {
           await instance.put(`euro_events/${resp.id34}`, {
             away_team: resp.sendCountry,
@@ -597,10 +608,17 @@ function Update() {
           });
         };
       }
+      
     }
+    
   }
 
   function updateElim16() {
+    
+    setQuarterMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setQuarterMessage("Uppdateringen har slutförts")
+  }, 4000);
     const quarterLineup = {
       "2A-2C": {
         game: "Winner 2A/2C-Winner 1D/3BEF",
@@ -688,6 +706,10 @@ function Update() {
   }
 
   function updateQuarter() {
+    setSemiMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setSemiMessage("Uppdateringen har slutförts")
+  }, 2000);
     const semiLineup = {
       "Winner 2A/2C-Winner 1D/3BEF": {
         game: "Winner QF 1-Winner QF 2",
@@ -757,6 +779,10 @@ function Update() {
     }
   }
   function updateSemi() {
+    setFinalMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setFinalMessage("Uppdateringen har slutförts")
+  }, 2000);
     const finalLineup = {
       "Winner QF 1-Winner QF 2": {
         game: "Winner SF 1-Winner SF 2",
@@ -830,26 +856,22 @@ function Update() {
         <div style={{ height: "auto" }} className="min-vh-100">
           <div style={{ paddingTop: "15%" }}>
             <button className="btn btn-warning" onClick={uppdateElim}>
-              {" "}
-              Uppdatera från gruppspel till eliminering{" "}
+              {elimMessage}
             </button>{" "}
             <br />
             <br />
             <button className="btn btn-warning" onClick={updateElim16}>
-              {" "}
-              Uppdatera från runda 16 till kvartsfinal
+              {quarterMessage}
             </button>
             <br />
             <br />
             <button className="btn btn-warning" onClick={updateQuarter}>
-              {" "}
-              Uppdatera från kvartsfinal till semifinal
+              {semiMessage}
             </button>
             <br />
             <br />
-            <button className="btn btn-warning" onClick={updateSemi}>
-              {" "}
-              Uppdatera från semifinal till final
+            <button className="btn btn-warning" onClick={updateSemi}> 
+              {finalMessage}
             </button>
           </div>
         </div>

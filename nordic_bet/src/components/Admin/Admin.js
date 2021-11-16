@@ -18,7 +18,7 @@ function Admin() {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   }
  
-  
+  console.log(formValues)
   useEffect(() => {
     const instance = axios.create({ baseURL: server });
     const userId = localStorage.getItem("user_id");
@@ -39,13 +39,12 @@ function Admin() {
     };
     fetchGame();
   }, [formValues]);
-  const image1 =
-    "https://images.unsplash.com/photo-1531819318554-84abdf082937?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2246&q=80";
+  
 
   return (
     <>
-      <Parallax key="" bgImage={image1} strength={0}>
-        <div style={{ height: "auto", color:'white'}} className="min-vh-100">
+    
+        <div style={{ height: "auto" }} className="bg-secondary">
         <div className="d-flex flex-column align-items-center">
         
           {isAdmin ? (
@@ -92,8 +91,17 @@ function Admin() {
                     />
                   );
                 }else if (formValues.typeOfView === "1/8" || formValues.typeOfView === "Quarter" ||formValues.typeOfView === "Semi" || formValues.typeOfView === "EURO Final" ){
-                  const home = game.home_team
-                  const away = game.away_team
+                  const playingTeams = game.eventname.split("-")
+                  let home = playingTeams[0]
+                  let away = playingTeams[1]
+                  if(game.home_team !== "" && game.home_team !== null){
+                    home =  game.home_team
+                  }
+                  if(game.away_team !== "" && game.away_team !== null){
+                    away =  game.away_team
+                  }
+                  
+                  
                   const eventname = home + "-" + away
                   return (
                     <AdminGame
@@ -125,7 +133,7 @@ function Admin() {
           )}
         </div>
         </div>
-      </Parallax>
+      
     </>
   );
 }
