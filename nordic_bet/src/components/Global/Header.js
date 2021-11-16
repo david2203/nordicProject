@@ -29,6 +29,7 @@ function Header() {
   const [activeUpdate, setActiveUpdate] = useState(false);
   const [activeReset, setActiveReset] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
+  const [activeAdminManual, setActiveManual] = useState(false);
 
   const instance = axios.create({ baseURL: server });
   useEffect(() => {
@@ -57,6 +58,7 @@ function Header() {
     setActiveUpdate(false);
     setActiveReset(false);
     setActiveProfile(false);
+    setActiveManual(false);
 
     function scrollToTop() {
       window.scrollTo({
@@ -98,6 +100,10 @@ function Header() {
   function activeMyProfile() {
     setAllFalse();
     setActiveProfile(true);
+  }
+  function activeMyAdminManual() {
+    setAllFalse();
+    setActiveManual(true);
   }
 
   
@@ -228,6 +234,8 @@ function Header() {
                         >
                           Rätta spel
                         </Link>
+
+                        
                       )}
                       <br />
                       {activeUpdate ? (
@@ -248,6 +256,29 @@ function Header() {
                         >
                           Uppdatera kval
                         </Link>
+                        
+                      )}
+                      <br/>
+                      {activeAdminManual ? (
+                        <Link
+                          to="/AdminManual"
+                          className="active text-dark"
+                          onClick={activeMyAdminManual}
+                          style={{marginLeft: '5%'}}
+                        >
+                          Manual
+                        </Link>
+                      ) : (
+                        <Link
+                          to="/AdminManual"
+                          className="text-decoration-none pl-3 ml-3 text-dark"
+                          onClick={activeMyAdminManual}
+                          style={{marginLeft: '5%'}}
+                        >
+                          Manual
+                        </Link>
+                        
+                        
                       )}
 
                       <NavDropdown.Divider />

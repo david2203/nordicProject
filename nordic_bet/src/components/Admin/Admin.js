@@ -45,7 +45,7 @@ function Admin() {
   return (
     <>
       <Parallax key="" bgImage={image1} strength={0}>
-        <div style={{ height: "auto" }}></div>
+        <div style={{ height: "auto", color:'white'}} className="min-vh-100">
         <div className="d-flex flex-column align-items-center">
         
           {isAdmin ? (
@@ -121,8 +121,9 @@ function Admin() {
               
             </>
           ) : (
-            <div>No permission</div>
+            <h1 className="pt-5 display-1">404: <br/>Not Found</h1>
           )}
+        </div>
         </div>
       </Parallax>
     </>

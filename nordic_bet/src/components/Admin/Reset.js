@@ -11,6 +11,8 @@ function Reset() {
     const [usersArray,setUsersArray] = useState([])
     const instance = axios.create({ baseURL: server });
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
+    
     const getAllGames = async() => {
         try {
             const response = await instance.get(`Euro_events`);
@@ -53,18 +55,32 @@ function Reset() {
         setLoading(false);  
         
     };
+
+    const getAdmin = async() => {
+      const instance = axios.create({ baseURL: server });
+        const userId = localStorage.getItem("user_id");
+        if(userId !== null) {
+      try {
+        const response = await instance.get(`/users?id=${userId}`);
+            setIsAdmin(response.data[0].isAdmin);
+      } catch(err) {
+        console.log(err)
+      }
+    }}
+    
     useEffect(() => {
         getAllGames()
         getAllUsers()
         getAllCountries()
         getAllBets()
+        getAdmin()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
     
-    return { loading, gamesArray, betsArray, countryArray, usersArray};
+    return { loading, gamesArray, betsArray, countryArray, usersArray, isAdmin};
   };
-  const { loading, gamesArray, betsArray , countryArray, usersArray} = useGetGames()
+  const { loading, gamesArray, betsArray , countryArray, usersArray, isAdmin} = useGetGames()
  
  
   
@@ -209,6 +225,9 @@ function Reset() {
 }
     return (
       <>
+      <div style={{ height: "auto", color:'black'}} className="min-vh-100">
+      {isAdmin ? (
+        
         <div className="min-vh-100 d-flex flex-column" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Button variant="danger" size="lg" onClick={resetEvent2016}>
       Återställ EM 2016 
@@ -216,8 +235,12 @@ function Reset() {
     </Button>{' '}
     <h2 className="mt-5">{message}</h2>
         </div>
-
+     ) : (
+      <h1 className="pt-5 display-1">404: <br/>Not Found</h1>
+    )}
+    </div>
         </>
+
     )
 }
 

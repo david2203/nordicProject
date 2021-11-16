@@ -14,10 +14,9 @@ function Update() {
     const [array16, setArray16] = useState([]);
     const [arrayQuarter, setArrayQuarter] = useState([]);
     const [arraySemi, setArraySemi] = useState([]);
-
     const [countriesArray, setCountriesArray] = useState([]);
-
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const groups = [
       "EURO Grp. A",
@@ -78,12 +77,25 @@ function Update() {
       setLoading(false);
     };
 
+    const getAdmin = async() => {
+      const instance = axios.create({ baseURL: server });
+        const userId = localStorage.getItem("user_id");
+        if(userId !== null) {
+      try {
+        const response = await instance.get(`/users?id=${userId}`);
+            setIsAdmin(response.data[0].isAdmin);
+      } catch(err) {
+        console.log(err)
+      }
+    }}
+
     useEffect(() => {
       fetchSemiGames();
       fetchQuarterGames();
       fetchCountries();
       fetchGroupGames();
       fetch16Games();
+      getAdmin();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -94,6 +106,7 @@ function Update() {
       array16,
       arrayQuarter,
       arraySemi,
+      isAdmin
     };
   };
 
@@ -104,6 +117,7 @@ function Update() {
     array16,
     arrayQuarter,
     arraySemi,
+    isAdmin
   } = useGetGames();
   function uppdateElim() {
     if (!loading) {
@@ -808,6 +822,9 @@ function Update() {
     "https://images.unsplash.com/photo-1570221622224-3bb8f08f166c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1460&q=80";
 
   return (
+    <>
+    <div style={{ height: "auto", color:'black'}} className="min-vh-100">
+    {isAdmin ? ( 
     <Parallax key="" bgImage={imgAdmin} strength={100}>
       <div>
         <div style={{ height: "auto" }} className="min-vh-100">
@@ -838,6 +855,11 @@ function Update() {
         </div>
       </div>
     </Parallax>
+    ) : (
+      <h1 className="pt-5 display-1">404: <br/>Not Found</h1>
+      )}
+      </div>
+    </>
   );
 }
 

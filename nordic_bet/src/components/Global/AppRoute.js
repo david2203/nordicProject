@@ -23,6 +23,7 @@ import Update from "../Admin/Update";
 import Timegame from "../Game/Timegame"
 import TermsConditions from "./TermsConditions";
 import Kontakt from "./Kontakt"
+import AdminManual from '../Admin/AdminManual';
 
 import Manual from "../Global/Manual"
 function AppRoute() {
@@ -51,6 +52,8 @@ function AppRoute() {
           <Route path="/TermsConditions" exact component={TermsConditions} />
           <Route path="/Manual" exact component={Manual} />
           <Route path="/Kontakt" exact component={Kontakt} />
+          <Route path="/AdminManual" exact component={AdminManual} />
+
 
 
 
