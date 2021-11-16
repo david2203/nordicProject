@@ -23,6 +23,9 @@
     },
     "group": {
       "type": "string"
+    },
+    "Qualified": {
+      "type": "boolean"
     }
   }
 }
