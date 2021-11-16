@@ -40,7 +40,7 @@ function Game({
   if (away !== "" && away !== null){
     away_team = away
   }
-  console.log(eventname)
+ 
   const [gameId, setGameId] = useState();
   const user_id = localStorage.getItem("user_id");
   

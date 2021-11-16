@@ -33,12 +33,12 @@ function Games() {
 
 
   const image1 =
-    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80";
+  "https://images.unsplash.com/photo-1486286701208-1d58e9338013?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80";
 
   return (
     <>
       <div>
-        <Parallax key="" bgImage={image1} strength={500}>
+        <Parallax key="" bgImage={image1} strength={0}>
           <div style={{ height: "auto" }} className="min-vh-100">
           <h2 className="header bg-light w-25 border mx-auto mt-3"> Kommande spel </h2>
             {games.length !== 0 ? (

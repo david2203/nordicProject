@@ -8,15 +8,17 @@ import { Parallax } from "react-parallax";
 function Update() {
   const chunkedGames = [];
   const chunkedCountries = [];
+  const [elimMessage, setElimMessage] = useState("")
+  const [quarterMessage, setQuarterMessage] = useState("")
+  const [semiMessage, setSemiMessage] = useState("")
+  const [finalMessage, setFinalMessage] = useState("")
 
   const useGetGames = () => {
     const [gamesArray, setGamesArray] = useState([]);
     const [array16, setArray16] = useState([]);
     const [arrayQuarter, setArrayQuarter] = useState([]);
     const [arraySemi, setArraySemi] = useState([]);
-
     const [countriesArray, setCountriesArray] = useState([]);
-
     const [loading, setLoading] = useState(true);
 
     const groups = [
@@ -107,6 +109,11 @@ function Update() {
   } = useGetGames();
   function uppdateElim() {
     if (!loading) {
+      
+    setElimMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setElimMessage("Uppdateringen har slutförts")
+  }, 8000);
       // All data should be available
       const finishedArray = [];
       const thirdPlaceArray = [];
@@ -575,7 +582,9 @@ function Update() {
             console.log(err);
           }
         };
-        fetchGame4().then((resp) => putFourth(resp));
+       
+        fetchGame4().then((resp) => putFourth(resp))
+        
         const putFourth = async (resp) => {
           await instance.put(`euro_events/${resp.id34}`, {
             away_team: resp.sendCountry,
@@ -583,10 +592,17 @@ function Update() {
           });
         };
       }
+      
     }
+    
   }
 
   function updateElim16() {
+    
+    setQuarterMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setQuarterMessage("Uppdateringen har slutförts")
+  }, 4000);
     const quarterLineup = {
       "2A-2C": {
         game: "Winner 2A/2C-Winner 1D/3BEF",
@@ -674,6 +690,10 @@ function Update() {
   }
 
   function updateQuarter() {
+    setSemiMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setSemiMessage("Uppdateringen har slutförts")
+  }, 2000);
     const semiLineup = {
       "Winner 2A/2C-Winner 1D/3BEF": {
         game: "Winner QF 1-Winner QF 2",
@@ -743,6 +763,10 @@ function Update() {
     }
   }
   function updateSemi() {
+    setFinalMessage("Updateras, Vänligen vänta")
+    setTimeout(() => {
+      setFinalMessage("Uppdateringen har slutförts")
+  }, 2000);
     const finalLineup = {
       "Winner QF 1-Winner QF 2": {
         game: "Winner SF 1-Winner SF 2",
@@ -816,24 +840,35 @@ function Update() {
               {" "}
               Uppdatera från gruppspel till eliminering{" "}
             </button>{" "}
+            <br/> <div className="bg-light w-25 mt-3 mx-auto">{elimMessage}</div>
+            
             <br />
             <br />
             <button className="btn btn-warning" onClick={updateElim16}>
               {" "}
               Uppdatera från runda 16 till kvartsfinal
             </button>
+            <br/> <div className="bg-light w-25 mt-3 mx-auto">{quarterMessage}</div>
+
             <br />
             <br />
             <button className="btn btn-warning" onClick={updateQuarter}>
               {" "}
               Uppdatera från kvartsfinal till semifinal
             </button>
+            <br/> <div className="bg-light w-25 mt-3 mx-auto">{semiMessage}</div>
+
+            
+
             <br />
             <br />
             <button className="btn btn-warning" onClick={updateSemi}>
               {" "}
               Uppdatera från semifinal till final
             </button>
+            <br/> <div className="bg-light w-25 mt-3 mx-auto">{finalMessage}</div>
+
+
           </div>
         </div>
       </div>
