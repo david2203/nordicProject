@@ -39,8 +39,8 @@ function Footer() {
             <i className="bi bi-gem me-3"></i> Om Nordic Bet
           </h6>
           <p>
-            Vi är ledande innom fantasy betting i norden! 
-            Du har möjlighet att betta på flera olika spel under vårat nuvariga event: <br/>  EURO 2016 Reimagined
+            Vi är ledande inom fantasy betting i norden! 
+            Du har möjlighet att betta på flera olika spel under vårat nuvariga event. <br/>  <strong>'EURO 2016 Reimagined'</strong>
           </p>
         </div>
 
