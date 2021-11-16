@@ -22,7 +22,7 @@ import Scoreboard from "../Scoreboard";
 import Update from "../Admin/Update";
 import Timegame from "../Game/Timegame"
 import TermsConditions from "./TermsConditions";
-import Kontakt from "./Kontakt"
+import Contact from "./Contact"
 import AdminManual from '../Admin/AdminManual';
 
 import Manual from "../Global/Manual"
@@ -51,7 +51,7 @@ function AppRoute() {
           <Route path="/Timegame" exact component={Timegame} />
           <Route path="/TermsConditions" exact component={TermsConditions} />
           <Route path="/Manual" exact component={Manual} />
-          <Route path="/Kontakt" exact component={Kontakt} />
+          <Route path="/Contact" exact component={Contact} />
           <Route path="/AdminManual" exact component={AdminManual} />
 
 

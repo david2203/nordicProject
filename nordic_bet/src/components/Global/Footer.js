@@ -93,7 +93,7 @@ function Footer() {
           <Link to="/stödlinjen" className="text-reset"> Stödlinjen.se </Link>
           </p>
           <p>
-          <Link to="/Kontakt" onClick={scrollToTop} className="text-reset"> Kontakta oss </Link>
+          <Link to="/Contact" onClick={scrollToTop} className="text-reset"> Kontakta oss </Link>
 
           </p>
         </div>
