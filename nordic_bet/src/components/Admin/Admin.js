@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
 import AdminGame from "./Admin_game";
-import { Parallax } from "react-parallax";
 import { FloatingLabel, Form, Row, Col } from "react-bootstrap";
 
 function Admin() {
