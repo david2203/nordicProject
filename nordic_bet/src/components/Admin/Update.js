@@ -181,7 +181,61 @@ function Update() {
           const secondPlace = teamArray[1].country;
           const thirdPlace = teamArray[2];
           thirdPlaceArray.push(thirdPlace);
-  
+          
+          const qualifiedOne = []
+        const fetchCountriesWinner = async() =>{
+          try {
+            for (let i = 0; i < 4; i++) {
+              const response = await instance.get(`countries?name=${winner}`)
+            qualifiedOne.push(response.data[0].id)
+            }
+            return qualifiedOne
+          }
+          catch (err) {
+            console.log(err)
+          }
+        }
+        fetchCountriesWinner().then((resp) => putQualifiedWinner(resp))
+
+        const putQualifiedWinner = async() => {
+          try {
+            for(let i = 0; i< qualifiedOne.length; i++) {
+              await instance.put(`countries/${qualifiedOne[i]}`, {
+                Qualified:true
+              })
+            }
+          } 
+          catch (err){
+            console.log(err)
+          }
+        }
+        const qualifiedTwo = []
+        const fetchCountriesSecond = async() =>{
+          try {
+            for (let i = 0; i < 4; i++) {
+              const response = await instance.get(`countries?name=${secondPlace}`)
+            qualifiedTwo.push(response.data[0].id)
+            }
+            return qualifiedTwo
+          }
+          catch (err) {
+            console.log(err)
+          }
+        }
+        fetchCountriesSecond().then((resp) => putQualifiedSecond(resp))
+
+        const putQualifiedSecond = async() => {
+          try {
+            for(let i = 0; i< qualifiedTwo.length; i++) {
+              await instance.put(`countries/${qualifiedTwo[i]}`, {
+                Qualified:true
+              })
+            }
+          } 
+          catch (err){
+            console.log(err)
+          }
+        }
           const groupsObject = {
             "EURO Grp. A": {
               games: ["1A-3CDE", "2A-2C"],
@@ -329,8 +383,33 @@ function Update() {
         const joined = letterArray.join('')
         
         
-        
-  
+        const qualifiedThird = []
+        const fetchCountries = async() =>{
+          try {
+            for (let i = 0; i < 4; i++) {
+              const response = await instance.get(`countries?name=${thirdPlaceArray[i].country}`)
+            qualifiedThird.push(response.data[0].id)
+            }
+            return qualifiedThird
+          }
+          catch (err) {
+            console.log(err)
+          }
+        }
+        fetchCountries().then((resp) => putQualified(resp))
+
+        const putQualified = async() => {
+          try {
+            for(let i = 0; i< qualifiedThird.length; i++) {
+              await instance.put(`countries/${qualifiedThird[i]}`, {
+                Qualified:true
+              })
+            }
+          } 
+          catch (err){
+            console.log(err)
+          }
+        }
         const fetchGame1 = async () => {
           try {
             const response = await instance.get(`euro_events?eventname=1A-3CDE`);
@@ -352,8 +431,7 @@ function Update() {
   
         fetchGame1().then((resp) => putWinner(resp));
         const putWinner = async (resp) => {
-         
-  
+    
           await instance.put(`euro_events/${resp.id31}`, {
             away_team: resp.sendCountry,
             status:"Not Started"
