@@ -58,7 +58,6 @@ export default function SignUp() {
         password: data.get("password"),
       })
       .then((response) => {
-        console.log("user token", response.data.jwt);
         history.push("/SignIn");
       })
       .catch(showError);

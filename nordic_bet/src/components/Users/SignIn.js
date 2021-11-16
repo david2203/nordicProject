@@ -52,8 +52,6 @@ export default function SignIn() {
         password: data.get("password"),
       })
       .then((response) => {
-        console.log("user token", response.data.jwt);
-        console.log(response.data.user.fname);
         localStorage.setItem("firstname", response.data.user.fname);
         localStorage.setItem("jwt", response.data.jwt);
         localStorage.setItem("user_id", response.data.user.id);
