@@ -71,11 +71,11 @@ function Games() {
             )}
             {/* pagination function */}
             {loadPage <= games.length ? (
-              <button onClick={loadMore} className="btn btn-secondary">
+              <button onClick={loadMore} className="btn btn-light mt-5 mb-5">
                 Load more
               </button>
             ) : games.length !== 0 && games.length > 5 ? (
-              <button onClick={showLess} className="mt-5 mb-5">
+              <button onClick={showLess} className="btn btn-light mt-5 mb-5">
                 Show less
               </button>
             ) : (

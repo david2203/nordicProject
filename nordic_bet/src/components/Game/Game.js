@@ -34,10 +34,10 @@ function Game({
   let playingTeams = eventname.split("-");
   let home_team = playingTeams[0];
   let away_team = playingTeams[1];
-  if(home !== ""){
+  if(home !== "" && home !== null){
     home_team = home
   }
-  if (away !== ""){
+  if (away !== "" && away !== null){
     away_team = away
   }
   

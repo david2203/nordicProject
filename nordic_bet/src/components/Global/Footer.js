@@ -1,7 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import TermsConditions from "./TermsConditions";
+import visa from "../img/visa.png"
+import mastercard from "../img/mastercard.png"
+import skrill from "../img/skrill.png"
+import trustly from "../img/trustly.png"
+
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 
 function Footer() {
     return (
@@ -44,22 +55,24 @@ function Footer() {
           </p>
         </div>
 
-        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto ">
 
-          <h6 className="text-uppercase fw-bold mb-4">
+          <h6 className="text-uppercase fw-bold mb-3">
             Sammarbeten:
           </h6>
           <p>
-            <a href="#!" className="text-reset">Visa</a>
+            <img src={visa} width="70px" alt="visa icon"></img>
           </p>
           <p>
-            <a href="#!" className="text-reset">Trustly</a>
+          <img src={trustly} width="70px" alt="trustly icon"></img>
+
           </p>
           <p>
-            <a href="#!" className="text-reset">Skrill</a>
+          <img src={skrill} width="70px" alt="skrill icon"></img>
+
           </p>
           <p>
-            <a href="#!" className="text-reset">Mastercard</a>
+          <img src={mastercard} width="70px" alt="mastercard icon"></img>
           </p>
         </div>
 
@@ -69,18 +82,18 @@ function Footer() {
             Länkar:
           </h6>
           <p>
-          <Link to="/TermsConditions" className="text-reset"> Regler & Vilkor</Link>
+          <Link to="/TermsConditions" onClick={scrollToTop} className="text-reset"> Regler & Vilkor</Link>
 
           </p>
           <p>
-          <Link to="/manual" className="text-reset"> Manual </Link>
+          <Link to="/manual" onClick={scrollToTop} className="text-reset"> Manual </Link>
 
           </p>
           <p>
           <Link to="/stödlinjen" className="text-reset"> Stödlinjen.se </Link>
           </p>
           <p>
-          <Link to="/privacypolicy" className="text-reset"> Hjälp </Link>
+          <Link to="/Hjalp" onClick={scrollToTop} className="text-reset"> Hjälp </Link>
 
           </p>
         </div>

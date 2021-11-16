@@ -57,6 +57,14 @@ function Header() {
     setActiveUpdate(false);
     setActiveReset(false);
     setActiveProfile(false);
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+    scrollToTop()
   }
   function activeMyBets() {
     setAllFalse();
@@ -91,6 +99,8 @@ function Header() {
     setAllFalse();
     setActiveProfile(true);
   }
+
+  
   return (
     <>
       <Navbar
