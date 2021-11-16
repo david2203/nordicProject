@@ -5,6 +5,8 @@ import Flags from "country-flag-icons/react/3x2";
 import setTeamFlag from "../Game/Flags";
 import Styled from "styled-components";
 
+
+//styled span to fix responsivity of the games shown to admin
  const MediaQgames = Styled.span
   `
   font-size: 30px;
@@ -27,8 +29,9 @@ import Styled from "styled-components";
   }
 
   `;
-
+//game is looped from the file Admin.js in order to write out game for admin to manually correct / compare with results
 function Game({ event_id, eventname, status, score_given, deadline }) {
+  //setting states for later use
   const instance = axios.create({ baseURL: server });
   const playingTeams = eventname.split("-");
   const home_team = playingTeams[0];
@@ -36,17 +39,16 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
   const [gameId, setGameId] = useState();
   const [gameGrp, setGameGrp] = useState();
   const [clicked, setClicked] = useState(false);
-
-
   const [gameResult, setGameResult] = useState();
   const [homeFlag, setHomeFlag] = useState("AQ");
   const [awayFlag, setAwayFlag] = useState("AQ");
   const token = localStorage.getItem("jwt");
 
 
- 
+  //counter for later if statement in order to only call the function putStatus once
   var counter = 0; 
   useEffect(() => {
+    //fetching game id for every iteration from Admin.js
     const fetchGameId = async () => {
       const response = await instance.get(`Euro_events?eid_xml=${event_id}`);
       setGameGrp(response.data[0].grp)
@@ -60,14 +62,12 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    
+  useEffect(() => { 
+    //render every time gameResult is changed. (maybe not needed)
   }, [gameResult]);
-  
+  // function for when admin clicks on updateGameStatus on one of the games. It sets the status of the game to finished and then continues to call other functions
   function updateGameStatus() {
     setClicked(true)
-  
-  
     counter +=1;
     if (counter === 1){
     const putStatus = async () => {
@@ -87,11 +87,11 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
     putStatus().then(sendBetResults());
   }
   }
-
+  // function to deactivate the bets on the updated game and at the same time giving score according to the outcome compared with the bet
+  // at the same time the game recieves a status of "score given" so that points and goals etc is only given once
   function sendBetResults() {
     const fetchResults = async () => {
       const response = await instance.get(`results?event_id=${event_id}`);
-
       const home_goals = response.data[0].home_goals;
       const away_goals = response.data[0].away_goals;
       const winner = response.data[0].winner_team;
@@ -106,7 +106,6 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
       const away_id = response3.data[0].id;
       const grpGoalsAway = Number(response3.data[0].group_goals)
       const away_score = Number(response3.data[0].group_score);
-
       setGameResult(response.data[0]);
 
       if (score_given === "no" && gameGrp.includes("Grp.")) {
@@ -166,7 +165,7 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
       } else {
         // does not send points
       }
-
+      //a result is put to the event in question 
       const putResult = async () => {
         await instance.put(
           `euro_events/${gameId}`,
@@ -202,7 +201,7 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
       
     };
   }
-
+  //bets are compared with the result that was posted and points added upp to the score value
   function compareBetsWithResult(resp) {
       if(resp[0].length > 0) {
         const bets = resp[0];
@@ -262,7 +261,7 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
       }
     
   }
-
+//function to get the id of the users owning the bets 
   function sendScores(resp) {
     console.log(resp)
     if (resp === undefined) {
@@ -277,6 +276,8 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
       fetchScore().then((resp2) => calcScore(resp2));
     }
   }
+
+  //function to take the old points of the user and add the new points to it
   function calcScore(resp2) {
     const betId = resp2[1][0][0].id;
     const userBetId = resp2[1][2];
@@ -298,9 +299,13 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
     };
     updateBet().then(console.log(""));
   }
+
+  //setting flag functions to visualize the teams
   const HomeFlag = Flags[homeFlag];
   const AwayFlag = Flags[awayFlag];
 
+
+  // function for displaying the dates of the games ----- This is a function that we have not completely finished due to the lack of server environment
   const dateArray = deadline.split("T")
   const date = dateArray[0]
   // const year = dateArray[0].split("-")[0]
@@ -332,6 +337,7 @@ function Game({ event_id, eventname, status, score_given, deadline }) {
 
 
   return (
+    /*Card (looks) of the games looped out in the "rätta spel" link  */
     <>
       <div className="game_info mt-3 mb-3 bg-dark w-50 center" style={{ backgroundColor: 'rgba(52, 52, 52, 0.8)', border: '2px solid black', color: 'white', padding: '35px',}}>
 

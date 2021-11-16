@@ -2,9 +2,13 @@ import React from "react";
 import server from "../Global/config";
 import axios from "axios";
 
+
+//function for manually posting the result information of the games after the group stage, because we didnt have access to them before hand. 
+//the results of the group games we put into the database phpmyadmin via a php script in the NORDIC-BET-PRAKTIK-2021 map called parsing....something 
 function Results_postGroup() {
     const instance = axios.create({ baseURL: server });
 
+    //manually setting an array of objects of the results for the round of 16 games
     const data16 = [
         
         {event:{
@@ -75,6 +79,7 @@ function Results_postGroup() {
         }}
            
     ]
+    //manually setting an array of objects of the results for the quarterfinal games
 
     const dataQuarter = [
          
@@ -114,6 +119,8 @@ function Results_postGroup() {
         }}
     ]
 
+    //manually setting an array of objects of the results for the semi final games
+
     const dataSemi = [
           
         {event:{
@@ -135,6 +142,8 @@ function Results_postGroup() {
         }
     },
 ]
+
+    //manually setting an array of objects of the results for the final game
 
 const dataFinal = [
     {event:{
@@ -171,6 +180,8 @@ const dataFinal = [
             put16Results()
         }
     }
+
+    //function
     // eslint-disable-next-line
     function postQuarter() {
         for(let i = 0; i< dataQuarter.length; i++){

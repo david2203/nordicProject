@@ -4,20 +4,20 @@ import server from "../Global/config";
 import AdminGame from "./Admin_game";
 import { FloatingLabel, Form, Row, Col } from "react-bootstrap";
 
+//Main page for admin where the person can manually set the games to finished and put in the results with the push of a button
 function Admin() {
   const [games, setGames] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
  
+  // option for admin to change view between grp, round of 16, quarter, semi and final games
   const initialValues = {
     typeOfView: "Grp.",
   };
-
   const [formValues, setFormValues] = useState(initialValues);
   function handleOnChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   }
- 
-  console.log(formValues)
+  // only authorizing users with admin status set to true
   useEffect(() => {
     const instance = axios.create({ baseURL: server });
     const userId = localStorage.getItem("user_id");
@@ -30,6 +30,7 @@ function Admin() {
     }
   }, []);
 
+  //fetching games depending on the type of games the admin has chosen to see. 
   useEffect(() => {
     const instance = axios.create({ baseURL: server });
     const fetchGame = async () => {
@@ -41,8 +42,8 @@ function Admin() {
   
 
   return (
+    /* Visuals of the admin page/ loop through the games and the Admin_game.js component */
     <>
-    
         <div style={{ height: "auto" }} className="bg-secondary">
         <div className="d-flex flex-column align-items-center">
         

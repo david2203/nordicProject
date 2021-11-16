@@ -2,8 +2,16 @@ import React, { useState, useEffect } from "react";
 import server from "../Global/config";
 import axios from "axios";
 import { Button } from 'react-bootstrap'
+
+// reset function to be able to reset the whole event if something should be changed or if it should be used for some other similar event 
 function Reset() {
   const [message, setMessage] = useState("")
+
+
+  //special kind of very clean function from stack overflow where many functions have own returns that are exported and put inside a const. 
+  //all the data that comes from this function is certain to be renderd before anything else
+
+  //function for getting every single event, country, bet and user in order to reset them to their original values
     const useGetGames = () => {
     const [countryArray,setCountryArray] = useState([]) 
     const [betsArray,setBetsArray] = useState([]) 
@@ -12,7 +20,7 @@ function Reset() {
     const instance = axios.create({ baseURL: server });
     const [loading, setLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
-    
+    //fetching all events
     const getAllGames = async() => {
         try {
             const response = await instance.get(`Euro_events`);
@@ -23,6 +31,7 @@ function Reset() {
             console.log(err);
           }
     };
+    //fetching all users
     const getAllUsers = async() => {
         try {
             const response = await instance.get(`Users`);
@@ -33,6 +42,7 @@ function Reset() {
             console.log(err);
           }
     };
+    //fetching all countries
     const getAllCountries = async() => {
         try {
             const response = await instance.get(`Countries`);
@@ -43,6 +53,7 @@ function Reset() {
             console.log(err);
           }
     };
+    //fetching all bets
     const getAllBets = async() => {
         try {
             const response = await instance.get(`Bets`);
@@ -55,7 +66,7 @@ function Reset() {
         setLoading(false);  
         
     };
-
+    //checking if user has admin authority
     const getAdmin = async() => {
       const instance = axios.create({ baseURL: server });
         const userId = localStorage.getItem("user_id");
@@ -80,10 +91,12 @@ function Reset() {
     
     return { loading, gamesArray, betsArray, countryArray, usersArray, isAdmin};
   };
+
+  
   const { loading, gamesArray, betsArray , countryArray, usersArray, isAdmin} = useGetGames()
  
  
-  
+  // function for resetting all data
   function resetEvent2016() {
 
   if(!loading) {
@@ -97,6 +110,8 @@ function Reset() {
       const quarter = []
       const semi = []
       const final = []
+
+      //message for admin to see when the function is still running and when he can leave the window
       const msg = "EM 2016 ÄR ÅTERSTÄLLT"
       setMessage("EM blir återställt... Vänligen lämna inte detta fönster!")
       //reset user score
@@ -130,7 +145,7 @@ function Reset() {
         
         
       }
-      
+      //resetting elimination date 
       for(let i =0; i<eventIdArray.length;i++) {
         const date = new Date(2021,10,20,16,44,i,0 )
           const resetEvents = async ()=> {
@@ -158,6 +173,7 @@ function Reset() {
         }
         resetRoundOf16()
     }
+    //reset quarter games
     for(let i = 0; i<quarter.length; i++) {
       const resetQuarter = async ()=> {
         await instance.put(`Euro_events/${quarter[i]}`, {
@@ -168,6 +184,7 @@ function Reset() {
       }
       resetQuarter()
     }
+    //reset semi games
     for(let i = 0; i<semi.length; i++) {
       const resetSemi = async ()=> {
         await instance.put(`Euro_events/${semi[i]}`, {
@@ -178,6 +195,7 @@ function Reset() {
       }
       resetSemi()
     }
+    //reset final game
     for(let i = 0; i<final.length; i++) {
       const resetFinal = async ()=> {
         await instance.put(`Euro_events/${final[i]}`, {
@@ -223,6 +241,7 @@ function Reset() {
   }
 }
     return (
+      /*Visuals and buttons for admin to be able to reset the event and see when he can continue (leave window/ reset finished) */
       <>
       <div style={{ height: "auto", color:'black'}} className="min-vh-100">
       {isAdmin ? (

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import server from "../Global/config";
 
+// a manual for the administrator of the games on how he should proceed with the event.
 function AdminManual() {
   const [isAdmin, setIsAdmin] = useState(false);
 
+  //checking if user has admin authority
   useEffect(() => {
     const instance = axios.create({ baseURL: server });
     const userId = localStorage.getItem("user_id");
@@ -18,6 +20,7 @@ function AdminManual() {
   }, []);
 
   return (
+    /* Steps for the admin to follow when administrating the event */
     <>
       <div style={{ height: "auto", color: "black" }} className="min-vh-100">
         {isAdmin ? (
