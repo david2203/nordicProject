@@ -27,3 +27,5 @@ Styling av olika komponenter, utvecklande funktioner till existerande komponente
 Allt i allt : 135 hr var = 270 hr
 
 Estimat: 200 hr först ( utan styling/ felsök ) sedan 240 med 
+Började: 12.10.2021
+Fördiga: 16.11.2021

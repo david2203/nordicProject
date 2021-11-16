@@ -3,11 +3,11 @@ import emailjs from "emailjs-com";
 
 
 function Contact() {
-  
+  const removeThisInOrderToWork = "s"
   function sendMessage(e) {
     e.preventDefault();
 
-    emailjs.sendForm('service_z8sqxi9', 'template_y03d36e', e.target, 'user_wnDYkMS4bE8n5c5pygE8r')
+    emailjs.sendForm(`service_z8sqxi9${removeThisInOrderToWork}`, 'template_y03d36e', e.target, 'user_wnDYkMS4bE8n5c5pygE8r')
       .then((result) => {
           console.log(result.text);
       }, (error) => {
