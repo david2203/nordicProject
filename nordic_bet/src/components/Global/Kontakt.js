@@ -1,41 +1,64 @@
-import React, {useState, useEffect} from 'react'
+import React, {  useRef } from "react";
+import emailjs from "emailjs-com";
 
-function Hjälp() {
-    const userId = localStorage.getItem("user_id")
-    const username = localStorage.getItem("username")
-    const [response, setResponse] = useState("")
-    const initialValues = {
-        user:userId,
-        username:username,
-        message:""
-    }
-    
-    const [formValues, setFormValues] = useState(initialValues)
-    function handleOnChange(e) {
-        setFormValues({ ...formValues, [e.target.name]: e.target.value });
+
+function Kontakt() {
+  
+  function sendMessage(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('service_z8sqxi9', 'template_y03d36e', e.target, 'user_wnDYkMS4bE8n5c5pygE8r')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+    e.target.reset()
+  }
+  return (
+    <div style={{ height: "auto" }} className="min-vh-100 bg-dark">
+      <br />
+      <div className="container">
+        <form
+          onSubmit={sendMessage}
+          className="header bg-light w-75 border mx-auto mt-3"
+          style={{ opacity: "70%" }}
+        >
+          <h2 className="mt-5">
+            <u> Medelande: </u>
+          </h2>
+          <div className="row pt-5 mx-auto">
+              <div className="col-8 form-group mx-auto">
+                  <input type="text" className="form-control" placeholder="Namn" name="name"></input>
+              </div>
+              <div className="col-8 form-group pt-2 mx-auto">
+                  <input type="text" className="form-control" placeholder="Email Adress" name="email"></input>
+              </div>
+              <div className="col-8 form-group pt-2 mx-auto">
+                  <input type="text" className="form-control" placeholder="Ämne" name="subject"></input>
+              </div>
+              <div className="col-8 form-group pt-2 mx-auto">
+              <textarea
+                    placeholder="Skriv ditt medelande här!"
+                    name="message"
+                    cols="30"
+                    rows="8"
+                    className="form-control"
+                ></textarea>
+              </div>
+              <div className="col-8 form-group pt-2 mx-auto">
+            <input type="submit" className="btn btn-info" values="  ">
+              
+            </input>
+            </div>
+          </div>
+          
+          <br />
         
-        
-    }
-    function sendMessage() {
-        console.log(formValues.message, "From user", formValues.user, formValues.username)
-        setResponse("Tack för ditt medelande. Vi kommer att höre av oss så snart som möjligt!")
-    }
-    return (
-        <div style={{ height: "auto" }} className="min-vh-100 bg-dark">
-
-    <br/>
-<div className="header bg-light w-75 border mx-auto mt-3" style={{opacity: '70%'}}> <h2 className="mt-5"><u>  Medelande: </u></h2> 
- <textarea onChange={handleOnChange} type="text" name="message" cols="40" rows="5" className="m-5" ></textarea><br/>
-
- {response === "" ? 
- <button className="m-5" onClick={sendMessage} >Skicka </button> :
- <div className="m-5">{response}</div>
- }
- 
-
-</div>
-</div>
-    )
+        </form>
+      </div>
+    </div>
+  );
 }
 
-export default Hjälp
+export default Kontakt;

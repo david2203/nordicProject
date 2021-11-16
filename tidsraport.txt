@@ -20,3 +20,10 @@ registrerar sig. - 4h.....
 
 Styling av olika komponenter, utvecklande funktioner till existerande komponenter, kod formatering, förbättringar av existent kod.
 4 dagar (28 hr var) - 4 x 2 var (helg dag) : 24 hr
+
+5 Veckan
+4 dagar ( 28 hr var)
+
+Allt i allt : 135 hr var = 270 hr
+
+Estimat: 200 hr först ( utan styling/ felsök ) sedan 240 med 
