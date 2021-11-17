@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../Brackets.css";
+import "../Game/Brackets.css";
 import server from "../Global/config";
 import axios from "axios";
 
