@@ -17,6 +17,8 @@ import axios from "axios";
 import server from "../Global/config";
 import { useHistory } from "react-router-dom";
 
+
+//function for putting copyright sign
 function Copyright(props) {
   return (
     <Typography
@@ -28,9 +30,8 @@ function Copyright(props) {
       {"Copyright © "}
       <Link color="inherit" href="https://nordicbet.se/rights">
         Nordic Bet
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -38,6 +39,7 @@ function Copyright(props) {
 const theme = createTheme();
 const instance = axios.create({ baseURL: server });
 
+//function for registering a user 
 export default function SignUp() {
   const history = useHistory();
   const [error, setError] = useState(false);
@@ -66,7 +68,7 @@ export default function SignUp() {
   function showError(e) {
     setError(true);
   }
-
+//function for letting the user see or hide their password
   const [visibility, setVisibility] = useState(false)
   function handleToggle() {
     
@@ -79,6 +81,8 @@ export default function SignUp() {
       setVisibility(false)
     }
   }
+
+  //visuals for the regestration page
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

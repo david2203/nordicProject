@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../Brackets.css";
+import "./Brackets.css";
 import server from "../Global/config";
 import axios from "axios";
 import Flags from "country-flag-icons/react/3x2";

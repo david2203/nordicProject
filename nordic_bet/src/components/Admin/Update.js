@@ -4,15 +4,18 @@ import server from "../Global/config";
 import axios from "axios";
 
 import { Parallax } from "react-parallax";
-
+// uppdatefunction for admin to calculate the current standings and if possible qualify, disqualify or send teams to the next bracket.
 function Update() {
+  // arrays for accessing all the games and countries for calculations later
   const chunkedGames = [];
   const chunkedCountries = [];
+
+  //messages that change when the button in question is pressed
   const [elimMessage, setElimMessage] = useState("Uppdatera från gruppspel till eliminering")
   const [quarterMessage, setQuarterMessage] = useState("Uppdatera från Åttondelsfinal till Kvartsfinal")
   const [semiMessage, setSemiMessage] = useState("Uppdatera från Kvartsfinal till Semifinal")
   const [finalMessage, setFinalMessage] = useState("Uppdatera från Semifinal till Final")
-
+  //function for getting all the data(games etc) and then set loading to false in order to have the data ready when other functions are called
   const useGetGames = () => {
     const [gamesArray, setGamesArray] = useState([]);
     const [array16, setArray16] = useState([]);
@@ -123,14 +126,20 @@ function Update() {
     arraySemi,
     isAdmin
   } = useGetGames();
+
+  //uppdate function for when group stage games have been played. This checks if any group is finished in order to send the winners to the elimination phase. 
+  //If all groups are finished it also calculates which thirdplaces are qualified for elimination
   function uppdateElim() {
     if (!loading) {
-      
+      //timeout for admin so that he doesnt leave the page before the update is finished
     setElimMessage("Updateras, Vänligen vänta")
     setTimeout(() => {
       setElimMessage("Uppdateringen har slutförts")
   }, 8000);
       // All data should be available
+
+      //looping through the games and countries in multiple nested loops to acces the right data. 
+      //games array are all 36 group games, chunked is an array with all the groups seperated and finished it to check if all are finished for later qualification of thirdplace group teams 
       const finishedArray = [];
       const thirdPlaceArray = [];
       const instance = axios.create({ baseURL: server });
@@ -180,6 +189,7 @@ function Update() {
           };
           teamArray.push(team1, team2, team3, team4);
           let returnValue;
+          //sorting function to have a sorted array to determine the winner
           teamArray.sort(function (a, b) {
             returnValue = b.score - a.score;
             if (b.score === a.score) {
@@ -211,6 +221,7 @@ function Update() {
           thirdPlaceArray.push(thirdPlace);
 
           const qualifiedOne = [];
+          //fucntions for setting all countries in a group to qualified, disqualified or to be anounced
           const fetchCountriesWinner = async () => {
             try {
               for (let i = 0; i < 4; i++) {
@@ -318,6 +329,8 @@ function Update() {
               console.log(err);
             }
           };
+
+          //object that is later used to send the winners, secondplaces etc to the right elimination bracket
           const groupsObject = {
             "EURO Grp. A": {
               games: ["1A-3CDE", "2A-2C"],
@@ -351,7 +364,7 @@ function Update() {
             },
           };
           const groupname = teamArray[0].grp;
-
+          // functions for fetching the right id and then putting the teams into the right euroevent 
           if (groupsObject.hasOwnProperty(groupname)) {
             const fetchGame1a = async (gamename) => {
               try {
@@ -366,8 +379,7 @@ function Update() {
                 console.log(err);
               }
             };
-            //Add team to event.
-            //fetchGame1a().then((resp) => putWinner(resp))
+           
             const putWinner = async (id, side, place) => {
               if (side === "home") {
                 await instance.put(`euro_events/${id}`, {
@@ -398,8 +410,12 @@ function Update() {
           }
         }
       }
+
+      // checking if all thirdplaces are determined in order to sort them and see who wins. 
       if (thirdPlaceArray.length === 6) {
         const letterArray = [];
+
+        //lineup that depens on which thirdplaces qualified. (eg. if A3,B3,C3,D3 qualify, then  the line up is the value to the ABCD key in the lineup 16 object)
         const lineup16 = {
           ABCD: {
             games: ["1A-3C", "1B-3D", "1C-3A", "1D-3B"],
@@ -464,6 +480,8 @@ function Update() {
         const joined = letterArray.join("");
 
         const idThird = [];
+
+        //functions for sending the thridplaces to the right bracket
         const fetchCountries = async () => {
           try {
             for (let i = 0; i < thirdPlaceArray.length; i++) {
@@ -613,6 +631,7 @@ function Update() {
     
   }
 
+  //same as the uppdateElim function above, but simpler because there is only to compare which team won and then send it to the right bracket
   function updateElim16() {
     
     setQuarterMessage("Updateras, Vänligen vänta")
@@ -704,7 +723,7 @@ function Update() {
       }
     }
   }
-
+//same as uppdateElim16 but for the finished quarterfinal games
   function updateQuarter() {
     setSemiMessage("Updateras, Vänligen vänta")
     setTimeout(() => {
@@ -778,6 +797,7 @@ function Update() {
       }
     }
   }
+  // same as uppdateQuarter but for the finished semi final games
   function updateSemi() {
     setFinalMessage("Updateras, Vänligen vänta")
     setTimeout(() => {
@@ -848,6 +868,7 @@ function Update() {
     "https://images.unsplash.com/photo-1570221622224-3bb8f08f166c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1460&q=80";
 
   return (
+    /* Visuals for the uppdate function buttons with message of what is currently happening */
     <>
     <div style={{ height: "auto", color:'black'}} className="min-vh-100">
     {isAdmin ? ( 

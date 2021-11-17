@@ -1,5 +1,5 @@
 import React from "react";
-
+//terms and conditions for the user to read(should not be deployed )
 function TermsConditions() {
   return (
     <div style={{ height: "auto" }} className="min-vh-100 bg-dark">

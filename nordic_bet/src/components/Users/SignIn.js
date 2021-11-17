@@ -38,6 +38,7 @@ function Copyright(props) {
 const theme = createTheme();
 const instance = axios.create({ baseURL: server });
 
+//function for signing in a user and setting all necessary localstorage values
 export default function SignIn() {
   const history = useHistory();
   const [jwt, setJwt] = useState();
@@ -72,6 +73,8 @@ export default function SignIn() {
   }, []);
 
   const [visibility, setVisibility] = useState(false)
+
+  //function for changing between visable password and hidden for the user
 function handleToggle() {
   
   var x = document.getElementById("password");
@@ -83,6 +86,8 @@ function handleToggle() {
     setVisibility(false)
   }
 }
+
+//visuals for the login page
   return (
     <>
       {jwt ? (

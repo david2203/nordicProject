@@ -1,3 +1,5 @@
+
+//importing all the diffrent components that have an own page or that are global.(header footer)
 import React from "react";
 import Games from "../Game/Games";
 import Header from "./Header";
@@ -24,8 +26,9 @@ import Timegame from "../Game/Timegame"
 import TermsConditions from "./TermsConditions";
 import Contact from "./Contact"
 import AdminManual from '../Admin/AdminManual';
-
 import Manual from "../Global/Manual"
+
+//routing all the imported components and also external page links
 function AppRoute() {
       return (
         <>
@@ -53,15 +56,6 @@ function AppRoute() {
           <Route path="/Manual" exact component={Manual} />
           <Route path="/Contact" exact component={Contact} />
           <Route path="/AdminManual" exact component={AdminManual} />
-
-
-
-
-
-
-
-
-
           <Route path='/facebook' component={() => { 
               window.location.href = 'https://facebook.com'; 
               return null;
@@ -90,10 +84,6 @@ function AppRoute() {
               window.location.href = 'https://www.stodlinjen.se/#!/'; 
               return null;
           }}/>
-          
-
-
-
         <Footer/>
         </Router>
         </>

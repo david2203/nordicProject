@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import gif from "./img/confetti.gif";
 import { Parallax } from "react-parallax";
 
+
+//top list component that fetches the users and sorts them by score 
 function Scoreboard() {
  
   const userId = Number(localStorage.getItem("user_id"));
@@ -52,6 +54,8 @@ function Scoreboard() {
   const image1 =
     "https://images.unsplash.com/photo-1590764258299-0f91fa7f95e8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80";
 
+    
+  //visuals of the toplist
   return (
     <>
       <Parallax key="" bgImage={image1} strength={150}>

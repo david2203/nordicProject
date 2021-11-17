@@ -17,9 +17,10 @@ import Styled from "styled-components";
   }
 
   `;
-
+//header that is visible on all sites
 function Header() {
   const history = useHistory();
+  //not so pretty function for underlining the currently renderd component in the header
   const [isAdmin, setIsAdmin] = useState(false);
   const [activeBets, setActiveBets] = useState(false);
   const [activeBrackets, setActiveBrackets] = useState(false);
@@ -106,7 +107,7 @@ function Header() {
     setActiveManual(true);
   }
 
-  
+  //header visuals with conditionals if the components are active
   return (
     <>
       <Navbar

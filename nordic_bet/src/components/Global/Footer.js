@@ -6,14 +6,14 @@ import mastercard from "../img/mastercard.png"
 import skrill from "../img/skrill.png"
 import trustly from "../img/trustly.png"
 
-
+//function to transport the user to the top of the page when the user clickes on a link in the header or footer 
 function scrollToTop() {
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
 }
-
+// footer that is visibale on every page
 function Footer() {
     return (
         <>

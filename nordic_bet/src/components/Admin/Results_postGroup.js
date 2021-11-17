@@ -156,6 +156,7 @@ const dataFinal = [
     }
     },
 ]
+//function for posting the results into the database (round of 16 games)
 // eslint-disable-next-line
     function post16Results() {
         for(let i = 0; i< data16.length; i++){
@@ -181,7 +182,7 @@ const dataFinal = [
         }
     }
 
-    //function
+    //function for posting the results into the database (quarter games)
     // eslint-disable-next-line
     function postQuarter() {
         for(let i = 0; i< dataQuarter.length; i++){
@@ -206,6 +207,7 @@ const dataFinal = [
             putQuarter()
         }
     }
+    //function for posting the results into the database (semi games)
     // eslint-disable-next-line
     function postSemi() {
         for(let i = 0; i< dataSemi.length; i++){
@@ -230,6 +232,7 @@ const dataFinal = [
             putSemi()
         }
     }
+    //function for posting the results into the database (final)
      // eslint-disable-next-line
     function postFinal() {
         for(let i = 0; i< dataFinal.length; i++){
@@ -259,6 +262,7 @@ const dataFinal = [
     
     
     return (
+        /*These are buttons for posting the results once, dont press them twice or you will have duplicate data */
         <div>
             already posted
             This only needs to be posted once into the admins database :)

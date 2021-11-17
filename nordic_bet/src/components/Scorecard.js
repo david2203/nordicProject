@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import server from "./Global/config";
 // import axios from "axios";
 
+
+//component that is looped by scoreboard to write out every line in the table with unique looks for first second and third palce
 function Scorecard({ id, username, score, avatar, row }) {
   const [url, setUrl] = useState(
     "https://gravatar.com/avatar/a0310ba74bcd933a1f4a3cb00de31fea?s=400&d=mp&r=x"
@@ -16,6 +18,8 @@ function Scorecard({ id, username, score, avatar, row }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
+
+    //icons for first second and third place
     <>
       <tr>
         <th scope="row">

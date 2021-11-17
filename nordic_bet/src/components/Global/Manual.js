@@ -1,5 +1,5 @@
 import React from 'react'
-
+//manual for the users how the site works
 function Manual() {
     return (
         
