@@ -71,7 +71,6 @@ export default function SignUp() {
 //function for letting the user see or hide their password
   const [visibility, setVisibility] = useState(false)
   function handleToggle() {
-    
     var x = document.getElementById("password");
     if (x.type === "password") {
       x.type = "text";
